@@ -156,36 +156,36 @@ export default function App() {
   ];
 
   const portfolioProjects = [
-    { name: '190 Piccadilly Square', cat: 'Kitchen Renovation', hash: '#project-kitchens', img: '/project_images/piccadilly/1.png' },
-    { name: 'McNamara Bathrooms', cat: 'Bespoke Bathroom Retreat', hash: '#project-bathrooms', img: '/project_images/mcnamara/1.png' },
-    { name: '23 Paisley Heights', cat: 'Architectural Living Space', hash: '#project-living-spaces', img: '/project_images/paisley/10.png' },
-    { name: 'Kuntz House', cat: 'Main Floor Addition & ADU', hash: '#project-additions', img: '/project_images/kuntz/3.jpg' },
-    { name: 'Verhoeve House', cat: 'Premium Finished Basement', hash: '#project-basements', img: '/project_images/verhoeve/6.jpg' },
-    { name: 'Borkhoff Garage', cat: 'Detached Workshop & Garage', hash: '#project-garages', img: '/project_images/borkhoff/10.png' },
+    { name: '190 Piccadilly Square', cat: 'Kitchen Renovation', hash: '#project-kitchens', img: 'project_images/piccadilly/1.png' },
+    { name: 'McNamara Bathrooms', cat: 'Bespoke Bathroom Retreat', hash: '#project-bathrooms', img: 'project_images/mcnamara/1.png' },
+    { name: '23 Paisley Heights', cat: 'Architectural Living Space', hash: '#project-living-spaces', img: 'project_images/paisley/10.png' },
+    { name: 'Kuntz House', cat: 'Main Floor Addition & ADU', hash: '#project-additions', img: 'project_images/kuntz/3.jpg' },
+    { name: 'Verhoeve House', cat: 'Premium Finished Basement', hash: '#project-basements', img: 'project_images/verhoeve/6.jpg' },
+    { name: 'Borkhoff Garage', cat: 'Detached Workshop & Garage', hash: '#project-garages', img: 'project_images/borkhoff/10.png' },
   ];
 
     const inspirationItems = [
-    { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: '/project_images/mcnamara/2.png', link: '#project-bathrooms' },
-    { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: '/project_images/piccadilly/2.png', link: '#project-kitchens' },
-    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: '/project_images/paisley/11.png', link: '#project-living-spaces' },
-    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: '/project_images/kuntz/4.jpg', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: '/project_images/verhoeve/16.jpg', link: '#project-basements' },
-    { title: 'GARAGES', subtitle: 'Executive Workshops & Storage Lofts', img: '/project_images/borkhoff/11.png', link: '#project-garages' },
-    { title: 'BATHROOMS', subtitle: 'Double Showers & Soaking Tubs', img: '/project_images/ouellette/2.png', link: '#project-bathrooms' },
-    { title: 'KITCHENS', subtitle: 'Open-Concept Culinary Hubs', img: '/project_images/piccadilly/3.png', link: '#project-kitchens' },
-    { title: 'LIVING SPACES', subtitle: 'Open Family Living Layouts', img: '/project_images/paisley/12.png', link: '#project-living-spaces' },
-    { title: 'ADDITIONS', subtitle: 'Sunrooms & Garden Suites', img: '/project_images/kuntz/19.jpg', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Private Gyms & Guest Suites', img: '/project_images/verhoeve/24.jpg', link: '#project-basements' },
-    { title: 'GARAGES', subtitle: 'Automotive Storage & Workshop Loft', img: '/project_images/borkhoff/12.png', link: '#project-garages' }
+    { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: 'project_images/mcnamara/2.png', link: '#project-bathrooms' },
+    { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/piccadilly/2.png', link: '#project-kitchens' },
+    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/paisley/11.png', link: '#project-living-spaces' },
+    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/kuntz/4.jpg', link: '#project-additions' },
+    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/verhoeve/16.jpg', link: '#project-basements' },
+    { title: 'GARAGES', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/borkhoff/11.png', link: '#project-garages' },
+    { title: 'BATHROOMS', subtitle: 'Double Showers & Soaking Tubs', img: 'project_images/ouellette/2.png', link: '#project-bathrooms' },
+    { title: 'KITCHENS', subtitle: 'Open-Concept Culinary Hubs', img: 'project_images/piccadilly/3.png', link: '#project-kitchens' },
+    { title: 'LIVING SPACES', subtitle: 'Open Family Living Layouts', img: 'project_images/paisley/12.png', link: '#project-living-spaces' },
+    { title: 'ADDITIONS', subtitle: 'Sunrooms & Garden Suites', img: 'project_images/kuntz/19.jpg', link: '#project-additions' },
+    { title: 'BASEMENTS', subtitle: 'Private Gyms & Guest Suites', img: 'project_images/verhoeve/24.jpg', link: '#project-basements' },
+    { title: 'GARAGES', subtitle: 'Automotive Storage & Workshop Loft', img: 'project_images/borkhoff/12.png', link: '#project-garages' }
   ];
 
   const galleryCategories = [
-    { title: 'BATHROOMS', hash: '#project-bathrooms', img: '/project_images/mcnamara/1.png' },
-    { title: 'KITCHENS', hash: '#project-kitchens', img: '/project_images/piccadilly/1.png' },
-    { title: 'LIVING SPACES', hash: '#project-living-spaces', img: '/project_images/paisley/10.png' },
-    { title: 'ADDITIONS', hash: '#project-additions', img: '/project_images/kuntz/3.jpg' },
-    { title: 'BASEMENTS', hash: '#project-basements', img: '/project_images/verhoeve/6.jpg' },
-    { title: 'GARAGES', hash: '#project-garages', img: '/project_images/borkhoff/10.png' },
+    { title: 'BATHROOMS', hash: '#project-bathrooms', img: 'project_images/mcnamara/1.png' },
+    { title: 'KITCHENS', hash: '#project-kitchens', img: 'project_images/piccadilly/1.png' },
+    { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/paisley/10.png' },
+    { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/kuntz/3.jpg' },
+    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/verhoeve/6.jpg' },
+    { title: 'GARAGES', hash: '#project-garages', img: 'project_images/borkhoff/10.png' },
   ];
 
   // Project pages details configuration (Cass Construction Editorial style layout)
@@ -298,7 +298,7 @@ export default function App() {
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
           <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <a href="#home" className="flex items-center">
-              <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
             </a>
             <a href="#projects-page" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" /> BACK TO PROJECTS
@@ -398,7 +398,7 @@ export default function App() {
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
           <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <a href="#home" className="flex items-center">
-              <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
             </a>
             <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" /> BACK TO HOME
@@ -408,8 +408,8 @@ export default function App() {
 
         {/* HERO SPLIT IMAGE BANNER (CASS STYLE) */}
         <section className="grid grid-cols-2 gap-2 h-[250px] sm:h-[350px] overflow-hidden bg-[#0B2638]">
-          <img src="/project_images/piccadilly/1.png" alt="Kitchen highlight" className="w-full h-full object-cover opacity-80" />
-          <img src="/project_images/mcnamara/1.png" alt="Bathroom highlight" className="w-full h-full object-cover opacity-80" />
+          <img src="project_images/piccadilly/1.png" alt="Kitchen highlight" className="w-full h-full object-cover opacity-80" />
+          <img src="project_images/mcnamara/1.png" alt="Bathroom highlight" className="w-full h-full object-cover opacity-80" />
         </section>
 
         {/* HERO TITLE SECTION ON LIGHT BACKGROUND (CASS STYLE) */}
@@ -542,7 +542,7 @@ export default function App() {
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
           <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <a href="#home" className="flex items-center">
-              <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
             </a>
             <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" /> BACK TO HOME
@@ -623,7 +623,7 @@ export default function App() {
               {/* Michael Smith */}
               <div className="space-y-6 text-left bg-white p-8 rounded-sm shadow-md">
                 <div className="aspect-[4/5] overflow-hidden bg-[#0B2638]/10 shadow-sm rounded-sm">
-                  <img src="/michael_smith.jpg" alt="Michael Smith - Founder & General Contractor" className="w-full h-full object-cover" />
+                  <img src="michael_smith.jpg" alt="Michael Smith - Founder & General Contractor" className="w-full h-full object-cover" />
                 </div>
                 <div className="space-y-2">
                   <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase">FOUNDER & GENERAL CONTRACTOR</span>
@@ -637,7 +637,7 @@ export default function App() {
               {/* David Woo */}
               <div className="space-y-6 text-left bg-white p-8 rounded-sm shadow-md">
                 <div className="aspect-[4/5] overflow-hidden bg-[#0B2638]/10 shadow-sm rounded-sm">
-                  <img src="/david_woo.jpg" alt="David Woo - Site Supervisor" className="w-full h-full object-cover" />
+                  <img src="david_woo.jpg" alt="David Woo - Site Supervisor" className="w-full h-full object-cover" />
                 </div>
                 <div className="space-y-2">
                   <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase">SITE SUPERVISOR</span>
@@ -691,7 +691,7 @@ export default function App() {
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
           <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <a href="#home" className="flex items-center">
-              <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
             </a>
             <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" /> BACK TO HOME
@@ -855,7 +855,7 @@ export default function App() {
       <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
         <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
           <a href="#home" className="flex items-center group">
-            <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+            <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
           </a>
 
           {/* Nav list with dropdowns */}
@@ -1195,8 +1195,8 @@ export default function App() {
           <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Youtube">
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.107C19.525 3.545 12 3.545 12 3.545s-7.525 0-9.388.511a3.003 3.003 0 00-2.11 2.107C0 8.029 0 12 0 12s0 3.971.502 5.837a3.003 3.003 0 002.11 2.107c1.863.514 9.388.514 9.388.514s7.525 0 9.388-.514a3.003 3.003 0 002.11-2.107C24 15.971 24 12 24 12s0-3.971-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
           </a>
-          <a href="https://houzz.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Houzz"><img src="/houzz.avif" className="w-5 h-5 object-contain" alt="Houzz" /></a>
-          <a href="https://yelp.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Yelp"><img src="/yelp.avif" className="w-5 h-5 object-contain" alt="Yelp" /></a>
+          <a href="https://houzz.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Houzz"><img src="houzz.avif" className="w-5 h-5 object-contain" alt="Houzz" /></a>
+          <a href="https://yelp.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Yelp"><img src="yelp.avif" className="w-5 h-5 object-contain" alt="Yelp" /></a>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 pt-2 flex flex-col md:flex-row justify-between items-center text-[11px] font-sans text-white/40 gap-2">

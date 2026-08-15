@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --primary: #0B2638;
+    --secondary: #17365D;
+    --accent: #CDAE72;
+    --accent-blue: #2D68B2;
+    --bg: #F4F2EE;
+    --text: #24313A;
+  }
+
+  body {
+    background-color: #F4F2EE;
+    color: #24313A;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cinzel', serif;
+  }
+}
+
+.font-cinzel {
+  font-family: 'Cinzel', serif;
+}
+
+.font-drama {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+}
+
+.font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.font-sans {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.glass-pill {
+  background: rgba(11, 38, 56, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B2638;
+}
+::-webkit-scrollbar-thumb {
+  background: #CDAE72;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E5CD9B;
+}

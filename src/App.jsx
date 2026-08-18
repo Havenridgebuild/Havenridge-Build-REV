@@ -34,12 +34,16 @@ export default function App() {
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash || '#home';
-      const sectionAnchors = ['#services', '#about', '#process-section', '#testimonials', '#projects', '#partners', '#inspiration-section'];
+      const sectionAnchors = ['#services', '#about', '#process', '#process-section', '#our-process', '#testimonials', '#projects', '#partners', '#inspiration-section'];
       
       if (sectionAnchors.includes(hash)) {
         setCurrentPath('#home');
         setTimeout(() => {
-          const el = document.querySelector(hash);
+          let targetHash = hash;
+          if (['#about', '#process', '#our-process'].includes(hash)) {
+            targetHash = '#process-section';
+          }
+          const el = document.querySelector(targetHash);
           if (el) {
             const yOffset = -100; // Offset for sticky 80px header + breathing room
             const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -843,7 +847,7 @@ export default function App() {
               {/* Desktop Nav */}
               <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase text-white/90">
                 <a href="#services" className="hover:text-[#CDAE72] transition-colors">Services</a>
-                <a href="#about" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
                 <a href="#projects-page" className="hover:text-[#CDAE72] transition-colors">Our Work</a>
                 <a href="#about-page" className="text-[#CDAE72] font-bold border-b border-[#CDAE72] pb-0.5">About</a>
                 <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
@@ -1250,7 +1254,7 @@ export default function App() {
                 </div>
 
                 {/* 2. Our Process */}
-                <a href="#about" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
@@ -1787,7 +1791,7 @@ export default function App() {
             </div>
 
             {/* 2. Our Process */}
-            <a href="#about" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+            <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
 
             {/* 3. Our Work Dropdown */}
             <div className="relative group">

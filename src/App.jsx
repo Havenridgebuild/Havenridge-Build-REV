@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CheckCircle2, ArrowLeft, ChevronDown } from 'lucide-react';
+import { CheckCircle2, ArrowLeft, ChevronDown, ChevronLeft, ChevronRight, Star, MessageSquare, Ruler, ClipboardCheck, Smartphone, ShieldCheck, Laptop } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -17,19 +17,33 @@ export default function App() {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [isAppliedSubmitted, setIsAppliedSubmitted] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState('');
+  const [applicantFileName, setApplicantFileName] = useState('');
+  const inspirationRef = useRef(null);
+  const testimonialRef = useRef(null);
+
+  const scrollSlider = (ref, direction) => {
+    if (ref.current) {
+      const scrollAmount = direction === 'left' ? -380 : 380;
+      ref.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
   const [currentPath, setCurrentPath] = useState(window.location.hash || '#home');
+  const [selectedBlogArticle, setSelectedBlogArticle] = useState(null);
 
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash || '#home';
-      const sectionAnchors = ['#services', '#about', '#testimonials', '#projects', '#partners'];
+      const sectionAnchors = ['#services', '#about', '#process-section', '#testimonials', '#projects', '#partners', '#inspiration-section'];
       
       if (sectionAnchors.includes(hash)) {
         setCurrentPath('#home');
         setTimeout(() => {
           const el = document.querySelector(hash);
           if (el) {
-            el.scrollIntoView({ behavior: 'smooth' });
+            const yOffset = -100; // Offset for sticky 80px header + breathing room
+            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
           }
         }, 50);
       } else {
@@ -118,6 +132,102 @@ export default function App() {
       desc: 'Starting from scratch allows you to design a unique living space centered around your family’s needs and tailored to your design style.',
       img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1000',
       hash: '#project-living-spaces'
+    },
+    {
+      title: 'Accessible & Barrier-Free',
+      headline: 'AODA-compliant zero-threshold showers, solid backing & widened entries.',
+      desc: 'Creating luxurious, independent living environments with zero-threshold curbless showers, solid wood wall backing, widened 36"+ doorways, and custom roll-under vanities.',
+      img: 'project_images/ouellette/2.png',
+      hash: '#project-accessibility'
+    }
+  ];
+
+  const blogPosts = [
+    {
+      id: 'luxury-bathroom-trends-2026',
+      title: '2026 Luxury Bathroom Renovation Trends in Kitchener-Waterloo',
+      subtitle: 'Curbless Showers, Custom Oak Vanities & Heated Flooring',
+      category: 'DESIGN TRENDS',
+      date: 'August 12, 2026',
+      readTime: '5 min read',
+      img: 'project_images/mcnamara/2.png',
+      excerpt: 'Discover how curbless walk-in showers, custom white oak double vanities, and heated herringbone tile transform daily routines into spa-like home retreats.',
+      author: 'Micheal Smith',
+      content: [
+        'Luxury bathroom renovations in Kitchener, Waterloo, and Cambridge have evolved far beyond basic utility. Today’s homeowners prioritize daily wellness, architectural elegance, and low-maintenance materials that stand the test of time.',
+        'Zero-Threshold Curbless Showers: Eliminating traditional shower curbs creates a seamless visual floor plane, expanding perceived bathroom space while offering future-proof accessibility. Paired with integrated linear drains, non-slip textured porcelain, and frameless 10mm glass, curbless showers represent the pinnacle of modern ensuite design.',
+        'Custom White Oak Vanities: Factory-built particleboard cabinetry is rapidly being replaced by custom solid white oak millwork. Master carpenters build vanities with soft-close dovetail drawers, integrated electrical outlets for hair styling tools, and custom quartz undermount sinks.',
+        'Radiant Floor Heating & Heated Towel Bars: Programmable underfloor heating ensures warmth underfoot on cold Ontario winter mornings, while architectural towel warmers provide clean, dry towels year-round.'
+      ]
+    },
+    {
+      id: 'adu-permits-cambridge-waterloo',
+      title: 'Navigating Permits for ADUs & Secondary Suites in Cambridge & Waterloo',
+      subtitle: 'Zoning Bylaws, Egress Windows & Fire Separation Rules',
+      category: 'PERMITS & ADUS',
+      date: 'August 05, 2026',
+      readTime: '7 min read',
+      img: 'project_images/verhoeve/16.jpg',
+      excerpt: 'A complete guide to municipal zoning bylaws, permit submission timelines, ceiling height minimums, and fire-separation requirements for secondary basement suites.',
+      author: 'Micheal Smith',
+      content: [
+        'Adding an Additional Dwelling Unit (ADU) or secondary basement suite in Cambridge, Kitchener, or Waterloo is one of the most effective ways to increase property value and generate rental income.',
+        'Zoning & Municipal Requirements: Under Bill 23, Ontario municipalities permit up to three residential units per urban lot. However, each municipality enforces specific parking offsets, setback limits, and utility capacity guidelines.',
+        'Fire & Sound Separation: Secondary suites require 45-minute fire-rated drywall assemblies between units, resilient channels, and acoustic mineral wool insulation (Roxul Safe ’n’ Sound) to meet building code decibel targets.',
+        'Egress Windows & Headroom: Bedrooms in secondary suites must feature egress windows with an unobstructed opening area of at least 3.8 sq. ft. Minimum ceiling height under the Ontario Building Code is 6ft 11in over at least 75% of the floor area.'
+      ]
+    },
+    {
+      id: 'custom-white-oak-millwork-vs-factory',
+      title: 'Custom White Oak Millwork vs. Factory Cabinetry: What Kitchener Homeowners Need to Know',
+      subtitle: 'Master Carpentry, Grain Matching & Tailored Storage',
+      category: 'MILLWORK',
+      date: 'July 28, 2026',
+      readTime: '6 min read',
+      img: 'project_images/piccadilly/2.png',
+      excerpt: 'Why master carpentry, solid wood mortise-and-tenon joints, and custom storage solutions offer unmatched durability and character over mass-produced cabinetry.',
+      author: 'Micheal Smith',
+      content: [
+        'When planning a whole-home kitchen or living room remodel, the debate between pre-fabricated factory cabinetry and custom bench-built millwork is critical.',
+        'Precision Fit Without Fillers: Factory cabinets come in fixed 3-inch increments, requiring wide filler strips that waste valuable space. Custom millwork is built precisely to your wall dimensions, maximizing every square inch of kitchen storage.',
+        'Solid Wood Joinery: Factory cabinets frequently rely on stapled particleboard boxes that swell when exposed to moisture. Bench-crafted cabinets utilize 3/4-inch furniture-grade plywood boxes, solid hardwood face frames, and mortise-and-tenon joints built for generations.',
+        'Custom Appliance Integration: Integrated panel-ready refrigerators, hidden pantry doors, pull-out spice racks, and custom range hoods can only be seamlessly executed through bespoke carpentry.'
+      ]
+    },
+    {
+      id: 'whole-home-renovation-timelines',
+      title: 'Whole-Home Renovation Timelines in Guelph & Cambridge: Scope to Handover',
+      subtitle: 'A Transparent Week-by-Week Construction Roadmap',
+      category: 'BUILDING PROCESS',
+      date: 'July 15, 2026',
+      readTime: '8 min read',
+      img: 'project_images/paisley/11.png',
+      excerpt: 'From initial 3D scope consultations to permit approvals, material lead times, and final quality audits—here is what to expect during a major renovation.',
+      author: 'Micheal Smith',
+      content: [
+        'Embarking on a whole-home renovation requires clear planning, transparent milestones, and open communication. Here is a realistic timeline breakdown for a major residential project in Waterloo Region.',
+        'Weeks 1–4 (Feasibility & Design): On-site structural inspections, 3D floor plan development, fixed-cost budgeting, and material selections.',
+        'Weeks 5–8 (Permitting & Procurement): Submitting architectural drawings to municipal building departments while pre-ordering long-lead items like custom windows, structural steel beams, and custom oak millwork.',
+        'Weeks 9–16 (Structural Demolition & Framing): Site protection setup, structural wall removal, steel beam installation, rough plumbing, electrical upgrades, and HVAC duct rerouting.',
+        'Weeks 17–24 (Finishes & Handover): Insulation, drywall taping, custom tile installation, cabinetry fitting, trim carpentry, painting, 100-point quality inspection, and 5-year warranty handover.'
+      ]
+    },
+    {
+      id: 'barrier-free-accessibility-waterloo',
+      title: 'Barrier-Free & Accessible Washrooms in Waterloo Region: AODA & Aging-in-Place',
+      subtitle: 'Zero-Threshold Entry, Grab Bar Backing & Roll-Under Vanities',
+      category: 'ACCESSIBILITY',
+      date: 'July 02, 2026',
+      readTime: '6 min read',
+      img: 'project_images/ouellette/2.png',
+      excerpt: 'Essential architectural guidelines for curbless showers, solid wood wall backing, 36"+ widened doorways, and stylish barrier-free fixtures.',
+      author: 'Micheal Smith',
+      content: [
+        'Creating an accessible bathroom does not mean sacrificing high-end luxury aesthetics. With thoughtful design, barrier-free washrooms provide independent living without looking institutional.',
+        'Solid Wood Wall Backing: Before drywall is installed, 2x10 solid lumber backing is fitted inside shower and toilet walls. This allows grab bars to be securely anchored anywhere required, now or in the future.',
+        'Widened Doorways & Zero-Threshold Transfers: Doorways are widened to 36 inches with pocket or barn door hardware, eliminating swing obstructions for wheelchairs or walkers.',
+        'Custom Roll-Under Vanities: Floating wall-hung vanities designed with open lower clearance allow comfortable wheel-in access while concealing plumbing pipes inside decorative wooden shrouds.'
+      ]
     }
   ];
 
@@ -136,24 +246,64 @@ export default function App() {
     }
   ];
 
+  const stillInspirationGallery = [
+    { title: 'McNamara Suite', subtitle: 'Spa-Like Double Vanity Retreat', img: 'project_images/mcnamara/2.png', cat: 'BATHROOMS' },
+    { title: '190 Piccadilly', subtitle: 'Master Oak Cabinetry & Island', img: 'project_images/piccadilly/2.png', cat: 'KITCHENS' },
+    { title: '23 Paisley Heights', subtitle: 'Fireplace & Custom Bookshelves', img: 'project_images/paisley/11.png', cat: 'LIVING SPACES' },
+    { title: 'Kuntz Extension', subtitle: 'Sunroom & Multi-Story Addition', img: 'project_images/kuntz/4.jpg', cat: 'ADDITIONS' },
+    { title: 'Verhoeve Lounge', subtitle: 'Lower-Level Bar & Media Suite', img: 'project_images/verhoeve/16.jpg', cat: 'BASEMENTS' },
+    { title: 'Borkhoff Workshop', subtitle: 'Executive Workshop & Storage Loft', img: 'project_images/borkhoff/11.png', cat: 'GARAGES' },
+    { title: 'Ouellette Ensuite', subtitle: 'Herringbone Tile & Soaker Tub', img: 'project_images/ouellette/2.png', cat: 'BATHROOMS' },
+    { title: 'Piccadilly Culinary', subtitle: 'Open-Concept Family Hub', img: 'project_images/piccadilly/3.png', cat: 'KITCHENS' },
+    { title: 'Paisley Living Suite', subtitle: 'Open Family Living Layouts', img: 'project_images/paisley/12.png', cat: 'LIVING SPACES' }
+  ];
+
+  const processSteps = [
+    { step: '01', title: 'Initial Consultation & Feasibility', desc: 'We meet on-site to review your vision, inspect structural conditions, discuss investment expectations, and establish initial feasibility goals.' },
+    { step: '02', title: 'Architectural Scope & Detailed Costing', desc: 'Developing comprehensive 3D layouts, exact scope clarification, material selections, and a fixed-price transparent quote with zero hidden surprises.' },
+    { step: '03', title: 'Municipal Permits & Sourcing', desc: 'We handle all building permit submissions, engineering approvals, and pre-order long-lead custom millwork and stone before site work begins.' },
+    { step: '04', title: 'Master Craftsmanship & Build', desc: 'Clean daily job sites, active communication from Micheal Smith, and precision construction executed by Red Seal master carpenters.' },
+    { step: '05', title: 'Quality Audit & Handover Guarantee', desc: 'Thorough 100-point quality audit, final client walkthrough, detailed care manuals, and our signature 5-year workmanship warranty.' }
+  ];
+
   const testimonials = [
     {
-      quote: "Renovating your house is not an easy process, but working with Havenridge Build made it feel relatively painless. We are so happy with our finished space and will definitely hire Havenridge again for our future plans.",
-      author: "KELLY S."
+      name: 'Sarah & David M.',
+      location: 'Kitchener Homeowner',
+      project: 'Whole-Home Renovation & Custom Kitchen',
+      quote: 'We are just thrilled with everything done thus far and look forward to the work yet to come. Micheal Smith and team, thank you most sincerely. You guys really are the best!',
+      rating: 5
     },
     {
-      quote: "We are just thrilled with everything done thus far and look forward to the work yet to come. Micheal Smith and team, thank you most sincerely. You guys really are the best and we can honestly say you have made our house a home.",
-      author: "PAULA & KEVIN D."
+      name: 'Robert & Clara K.',
+      location: 'Waterloo Resident',
+      project: 'Ensuite Bathroom & Bedroom Expansion',
+      quote: 'The Havenridge team was efficient, worked hard and were here when they said they would be. When they left every day the worksite was clean and ready for us. The daily communication Micheal provided was amazing.',
+      rating: 5
     },
     {
-      quote: "The Havenridge team was efficient, worked hard and were here when they said they would be. When they left every day the worksite was clean and ready for us. The daily communication Micheal provided was amazing.",
-      author: "DAN & JULIE G."
+      name: 'Elena & Marcus P.',
+      location: 'Cambridge Client',
+      project: 'Secondary Suite & Main Floor Remodel',
+      quote: 'From initial scope clarity to final handover, the craftsmanship is unmatched. They transformed our main floor and kitchen effortlessly. Fixed budget, no hidden surprises.',
+      rating: 5
     },
     {
-      quote: "What separates Havenridge Build from other companies is the last 10%. Every detail is attended to, with no loose ends at the finish! In thirty years of dealing with contractors, this is rare. We highly recommend their services.",
-      author: "LORI & GEORGE R."
+      name: 'Mark & Jennifer T.',
+      location: 'Guelph Homeowner',
+      project: 'Custom Main Floor Addition & Sunroom',
+      quote: 'Exceptional attention to detail and scope clarity. Their red-seal carpenters were professional, punctual, and delivered a beautiful extension ahead of schedule.',
+      rating: 5
+    },
+    {
+      name: 'Greg & Amanda S.',
+      location: 'Puslinch Resident',
+      project: 'Detached Executive Workshop & Garage',
+      quote: 'High quality finishings, clear communication, and outstanding carpentry. We could not be happier with our new workshop space!',
+      rating: 5
     }
   ];
+
 
   const portfolioProjects = [
     { name: '190 Piccadilly Square', cat: 'Kitchen Renovation', hash: '#project-kitchens', img: 'project_images/piccadilly/1.png' },
@@ -171,12 +321,8 @@ export default function App() {
     { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/kuntz/4.jpg', link: '#project-additions' },
     { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/verhoeve/16.jpg', link: '#project-basements' },
     { title: 'GARAGES', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/borkhoff/11.png', link: '#project-garages' },
-    { title: 'BATHROOMS', subtitle: 'Double Showers & Soaking Tubs', img: 'project_images/ouellette/2.png', link: '#project-bathrooms' },
-    { title: 'KITCHENS', subtitle: 'Open-Concept Culinary Hubs', img: 'project_images/piccadilly/3.png', link: '#project-kitchens' },
-    { title: 'LIVING SPACES', subtitle: 'Open Family Living Layouts', img: 'project_images/paisley/12.png', link: '#project-living-spaces' },
-    { title: 'ADDITIONS', subtitle: 'Sunrooms & Garden Suites', img: 'project_images/kuntz/19.jpg', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Private Gyms & Guest Suites', img: 'project_images/verhoeve/24.jpg', link: '#project-basements' },
-    { title: 'GARAGES', subtitle: 'Automotive Storage & Workshop Loft', img: 'project_images/borkhoff/12.png', link: '#project-garages' }
+    { title: 'CUSTOM MILLWORK', subtitle: 'Bespoke Architectural Trim & Cabinetry', img: 'project_images/piccadilly/3.png', link: '#project-kitchens' },
+    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/kuntz/19.jpg', link: '#project-additions' }
   ];
 
   const galleryCategories = [
@@ -190,6 +336,22 @@ export default function App() {
 
   // Project pages details configuration (Cass Construction Editorial style layout)
   const projectDetails = {
+        '#project-accessibility': {
+      title: 'Waterloo Barrier-Free & Accessible Washroom Suite',
+      cat: 'Accessible & Barrier-Free Construction',
+      leadDesc: 'Creating luxurious, independent living environments with zero-threshold curbless showers, solid wall backing, and widened entries.',
+      desc1: 'Creating an accessible bathroom or living suite does not mean sacrificing high-end luxury aesthetics. With thoughtful design, barrier-free washrooms provide independent living without looking institutional.',
+      desc2: 'Before drywall is installed, 2x10 solid lumber backing is fitted inside shower and toilet walls for grab bar anchoring. Doorways are widened to 36"+ with zero-threshold transfers and custom roll-under floating vanities.',
+      img1: 'project_images/ouellette/2.png',
+      img2: 'project_images/mcnamara/2.png',
+      prevHash: '#project-garages',
+      nextHash: '#project-bathrooms',
+      gallery: [
+        'project_images/ouellette/2.png',
+        'project_images/mcnamara/2.png',
+        'project_images/piccadilly/1.png'
+      ]
+    },
     '#project-bathrooms': {
       title: 'John Street Bathroom Retreat',
       cat: 'Bespoke Bathroom Retreat',
@@ -379,10 +541,15 @@ export default function App() {
           </div>
         </section>
 
+  
+            {/* FOOTER */}
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/40 py-10 text-center text-xs font-sans">
-          <p className="text-[#CDAE72] mb-2">DESIGN · BUILD · RENOVATE</p>
-          <p>© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-4xl mx-auto px-6 space-y-2">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
+            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+          </div>
         </footer>
 
       </div>
@@ -460,59 +627,36 @@ export default function App() {
           </div>
         </section>
 
-        {/* INSPIRATION GALLERY ANIMATED CAROUSEL SECTION */}
-        <section id="inspiration-section" className="py-24 bg-[#0B2638] text-white overflow-hidden relative border-t border-[#CDAE72]/20">
+                {/* INSPIRATION GALLERY GRID SECTION */}
+        <section id="inspiration-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] text-[#24313A] overflow-hidden relative border-t border-[#0B2638]/10 font-sans">
           <div className="max-w-7xl mx-auto px-6 mb-12 text-center space-y-3">
             <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold tracking-wider text-white">Inspiration Gallery</h2>
-            <p className="text-white/70 text-sm font-light max-w-xl mx-auto">
-              Explore bespoke designs and specifications. Hover over any image to pause the carousel and expand the preview.
+            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider">INSPIRATION GALLERY</h2>
+            <p className="text-[#24313A]/70 text-sm font-light max-w-xl mx-auto leading-relaxed">
+              Click on any photo below to explore bespoke designs and specifications from real Havenridge Build projects.
             </p>
           </div>
 
-          {/* INFINITE ANIMATED MARQUEE ROW */}
-          <div className="relative w-full overflow-hidden py-4">
-            <div className="flex space-x-6 w-max animate-marquee hover:[animation-play-state:paused]">
+          {/* 4-COLUMN GRID OF ROUNDED CARDS */}
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
               {inspirationItems.map((item, idx) => (
                 <a 
                   key={idx} 
                   href={item.link} 
-                  className="relative w-72 sm:w-80 h-[440px] shrink-0 overflow-hidden rounded-md group transition-all duration-500 hover:scale-105 hover:z-20 cursor-pointer shadow-2xl border border-white/10"
+                  className="relative w-full h-[420px] overflow-hidden rounded-2xl group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-lg border border-[#0B2638]/10 bg-[#0B2638]"
                 >
                   <img 
                     src={item.img} 
                     alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638] via-[#0B2638]/40 to-transparent flex flex-col justify-end p-6 text-left transition-opacity duration-300">
-                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase">INSPIRATION</span>
-                    <h3 className="text-white font-cinzel text-xl font-bold tracking-wide mt-1 group-hover:text-[#CDAE72] transition-colors">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638]/90 via-[#0B2638]/40 to-transparent flex flex-col justify-end p-6 text-left transition-opacity duration-300">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block mb-1">INSPIRATION</span>
+                    <h3 className={`font-cinzel text-xl font-bold tracking-wide ${item.title === 'KITCHENS' ? 'text-[#CDAE72]' : 'text-white'}`}>
                       {item.title}
                     </h3>
-                    <p className="text-white/80 text-xs font-drama italic mt-1 opacity-80 group-hover:opacity-100">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                </a>
-              ))}
-              {/* DUPLICATE ARRAY FOR SEAMLESS INFINITE LOOP */}
-              {inspirationItems.map((item, idx) => (
-                <a 
-                  key={`dup-${idx}`} 
-                  href={item.link} 
-                  className="relative w-72 sm:w-80 h-[440px] shrink-0 overflow-hidden rounded-md group transition-all duration-500 hover:scale-105 hover:z-20 cursor-pointer shadow-2xl border border-white/10"
-                >
-                  <img 
-                    src={item.img} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638] via-[#0B2638]/40 to-transparent flex flex-col justify-end p-6 text-left transition-opacity duration-300">
-                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase">INSPIRATION</span>
-                    <h3 className="text-white font-cinzel text-xl font-bold tracking-wide mt-1 group-hover:text-[#CDAE72] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-white/80 text-xs font-drama italic mt-1 opacity-80 group-hover:opacity-100">
+                    <p className="text-white/80 text-xs font-light italic mt-1 leading-normal">
                       {item.subtitle}
                     </p>
                   </div>
@@ -521,168 +665,897 @@ export default function App() {
             </div>
           </div>
         </section>
+
+  
+      {/* WORK WITH US CAREERS SECTION */}
+          <section id="work-with-us" className="py-20 bg-[#0B2638] text-white text-center">
+            <div className="max-w-4xl mx-auto px-6 space-y-6">
+              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
+              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">WORK WITH US</h2>
+              <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
+                We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
+              </p>
+              <div className="pt-2">
+                <button 
+                  onClick={() => setIsApplyModalOpen(true)} 
+                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                >
+                  APPLY NOW
+                </button>
+              </div>
+            </div>
+          </section>
 
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/40 py-10 text-center text-xs font-sans border-t border-white/10">
-          <p className="text-[#CDAE72] mb-2">DESIGN · BUILD · RENOVATE</p>
-          <p>© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-          <p className="text-white/40 text-[11px] mt-2 font-sans">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] hover:underline font-semibold">BoostMyLeads</a></p>
+        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-4xl mx-auto px-6 space-y-2">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
+            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+          </div>
         </footer>
 
-      </div>
-    );
-  }
-
-  // Render dedicated About page (CASS STYLE WITH SEO VALUES & CAREERS MODAL)
-  if (currentPath === '#about-page') {
-    return (
-      <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
-        
-        {/* NAV HEADER */}
-        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
-          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#home" className="flex items-center">
-              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
-            </a>
-            <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
-              <ArrowLeft className="w-4 h-4" /> BACK TO HOME
-            </a>
-          </div>
-        </nav>
-
-        {/* HERO TITLE SECTION */}
-        <section className="bg-[#0B2638] text-white py-24 text-center">
-          <div className="max-w-4xl mx-auto px-6 space-y-4">
-            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">ABOUT HAVENRIDGE BUILD</span>
-            <h1 className="font-cinzel text-4xl sm:text-5xl font-bold tracking-wider text-white">Our Story & Core Values</h1>
-            <p className="text-white/80 text-base font-light max-w-2xl mx-auto leading-relaxed pt-2">
-              Premier residential renovation and custom construction general contractor serving Kitchener-Waterloo, Cambridge, and surrounding regions.
-            </p>
-          </div>
-        </section>
-
-        {/* SEO-OPTIMIZED COMPANY VALUES SECTION (BEFORE TEAM PROFILES) */}
-        <section id="company-values" className="py-20 bg-white border-b border-[#0B2638]/10">
-          <div className="max-w-6xl mx-auto px-6 space-y-12">
-            <div className="text-center max-w-3xl mx-auto space-y-3">
-              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">BUILDING STANDARDS</span>
-              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Why Homeowners Trust Havenridge</h2>
-              <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                We combine personal owner-level accountability with disciplined project management systems. As a leading general contractor serving Kitchener-Waterloo, Cambridge, and Oxford County, here is how we deliver a superior residential renovation experience.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
-              
-              <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left">
-                <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">01 / PRE-CONSTRUCTION</span>
-                <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Disciplined Planning & Scope Clarity</h3>
-                <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                  Every successful residential renovation begins with clear pre-construction planning. By establishing detailed scope documents, selection schedules, and fixed permit layouts early, we eliminate mid-project surprises and budget creep.
-                </p>
-              </div>
-
-              <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left">
-                <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">02 / CRAFTSMANSHIP</span>
-                <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Uncompromising Quality & Millwork</h3>
-                <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                  From structural timber roof additions to custom white-oak cabinetry, heated bathroom floors, and quartz island installations, we hold every trade phase to exact Ontario Building Code and high-end finish standards.
-                </p>
-              </div>
-
-              <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left">
-                <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">03 / ACCOUNTABILITY</span>
-                <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Transparent Client Portal Communication</h3>
-                <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                  Through our Buildern client portal, homeowners enjoy 24/7 access to daily job logs, site photos, selection approvals, and real-time schedules. Communication is direct, documented, and proactive.
-                </p>
-              </div>
-
-              <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left">
-                <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">04 / RESPECT & WARRANTY</span>
-                <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Clean Job Sites & Warranty Defense</h3>
-                <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                  We respect your sanctuary. Our teams enforce strict dust containment, daily jobsite cleanup, and courteous site management—standing behind all completed work with dedicated homeowner warranty support.
-                </p>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* TEAM MEMBERS GRID */}
-        <section id="team" className="py-24 bg-[#F4F2EE]">
-          <div className="max-w-6xl mx-auto px-6 space-y-12">
-            <div className="text-center max-w-2xl mx-auto space-y-2">
-              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">LEADERSHIP & TRADES</span>
-              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Meet Our Team</h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
-              
-              {/* Michael Smith */}
-              <div className="space-y-6 text-left bg-white p-8 rounded-sm shadow-md">
-                <div className="aspect-[4/5] overflow-hidden bg-[#0B2638]/10 shadow-sm rounded-sm">
-                  <img src="michael_smith.jpg" alt="Michael Smith - Founder & General Contractor" className="w-full h-full object-cover" />
-                </div>
-                <div className="space-y-2">
-                  <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase">FOUNDER & GENERAL CONTRACTOR</span>
-                  <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Michael Smith</h3>
-                  <p className="text-sm text-[#24313A]/80 leading-relaxed pt-2">
-                    Michael leads Havenridge Build with over 15 years of residential construction expertise. His hands-on leadership ensures every custom build, main floor addition, and whole-home renovation is executed with disciplined project management and finish quality.
-                  </p>
+      
+      {/* GLOBAL CAREERS POPUP MODAL */}
+      {isApplyModalOpen && (
+        <div className="fixed inset-0 z-[9999] bg-[#0B2638]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div className="bg-white text-[#24313A] max-w-xl w-full rounded-sm shadow-2xl overflow-hidden relative my-8">
+            
+            {/* MODAL HEADER */}
+            <div className="bg-[#0B2638] text-white p-6 flex justify-between items-center border-b border-[#CDAE72]/20">
+              <div className="flex items-center gap-4">
+                <img src="logo_mark_h_only.svg" alt="Havenridge Build Logo" className="h-8 sm:h-9 w-auto object-contain" />
+                <div className="border-l border-white/20 pl-4">
+                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block">JOIN HAVENRIDGE BUILD</span>
+                  <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white">Work With Us Application</h3>
                 </div>
               </div>
-
-              {/* David Woo */}
-              <div className="space-y-6 text-left bg-white p-8 rounded-sm shadow-md">
-                <div className="aspect-[4/5] overflow-hidden bg-[#0B2638]/10 shadow-sm rounded-sm">
-                  <img src="david_woo.jpg" alt="David Woo - Site Supervisor" className="w-full h-full object-cover" />
-                </div>
-                <div className="space-y-2">
-                  <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase">SITE SUPERVISOR</span>
-                  <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">David Woo</h3>
-                  <p className="text-sm text-[#24313A]/80 leading-relaxed pt-2">
-                    I started my career as a framer and went back to school at Conestoga College for the pre-apprenticeship program and am a second year apprentice.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </section>
-
-        {/* WORK WITH US SECTION */}
-        <section id="work-with-us" className="py-20 bg-[#0B2638] text-white text-center">
-          <div className="max-w-4xl mx-auto px-6 space-y-6">
-            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white">Work With Us</h2>
-            <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
-              We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
-            </p>
-            <div>
               <button 
-                onClick={() => setIsApplyModalOpen(true)} 
-                className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                onClick={() => { setIsApplyModalOpen(false); setIsAppliedSubmitted(false); }} 
+                className="text-white/70 hover:text-[#CDAE72] text-2xl font-bold transition-colors p-2 cursor-pointer"
               >
-                APPLY NOW
+                ✕
               </button>
             </div>
-          </div>
-        </section>
 
-        {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/40 py-10 text-center text-xs font-sans border-t border-white/10">
-          <p className="text-[#CDAE72] mb-2">DESIGN · BUILD · RENOVATE</p>
-          <p>© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-          <p className="text-white/40 text-[11px] mt-2 font-sans">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] hover:underline font-semibold">BoostMyLeads</a></p>
-        </footer>
+            {/* MODAL BODY */}
+            <div className="p-6 sm:p-8 space-y-6 text-left">
+              {isAppliedSubmitted ? (
+                <div className="text-center py-12 space-y-4">
+                  <div className="w-16 h-16 bg-[#CDAE72]/20 text-[#CDAE72] rounded-full flex items-center justify-center mx-auto text-3xl font-bold">✓</div>
+                  <h4 className="font-cinzel text-2xl font-bold text-[#0B2638]">Application Received!</h4>
+                  <p className="text-sm text-[#24313A]/80 max-w-md mx-auto leading-relaxed">
+                    Thank you for your interest in joining Havenridge Build. Our hiring team will review your resume and reach out to qualified candidates.
+                  </p>
+                  <div className="pt-4">
+                    <button 
+                      onClick={() => { setIsApplyModalOpen(false); setIsAppliedSubmitted(false); }} 
+                      className="bg-[#0B2638] text-white hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all"
+                    >
+                      CLOSE WINDOW
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={(e) => { e.preventDefault(); setIsAppliedSubmitted(true); }} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Full Name *</label>
+                    <input type="text" required placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Email Address *</label>
+                      <input type="email" required placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Phone Number *</label>
+                      <input type="tel" required placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
+                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                        <option value="">Select Position...</option>
+                        <option value="journeyman">Journeyman Carpenter</option>
+                        <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
+                        <option value="supervisor">Site Supervisor</option>
+                        <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
+                        <option value="general">General Application</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Years of Experience *</label>
+                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                        <option value="">Select Experience...</option>
+                        <option value="1-3">1 - 3 Years</option>
+                        <option value="3-5">3 - 5 Years</option>
+                        <option value="5+">5+ Years</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Upload Resume (PDF, DOC, DOCX) *</label>
+                    <div className="border-2 border-dashed border-gray-300 hover:border-[#CDAE72] p-4 text-center rounded-sm bg-gray-50 cursor-pointer relative">
+                      <input 
+                        type="file" 
+                        required 
+                        accept=".pdf,.doc,.docx" 
+                        onChange={(e) => setApplicantFileName(e.target.files[0]?.name || '')}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                      />
+                      <p className="text-xs text-[#24313A]/70">
+                        {applicantFileName ? (
+                          <span className="font-bold text-[#0B2638]">{applicantFileName}</span>
+                        ) : (
+                          'Click or drag your resume file here to attach'
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Brief Introduction / Message</label>
+                    <textarea rows="3" placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
+                  </div>
+
+                  <div className="pt-2 flex justify-between items-center">
+                    <button 
+                      type="button" 
+                      onClick={() => setIsApplyModalOpen(false)} 
+                      className="text-xs font-bold uppercase tracking-wider text-[#24313A]/70 hover:text-[#0B2638]"
+                    >
+                      CANCEL
+                    </button>
+                    <button 
+                      type="submit" 
+                      className="bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all shadow-md"
+                    >
+                      SUBMIT APPLICATION
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       </div>
     );
   }
 
-  // Render contact page
+  // Render dedicated About page (NEW HERO + RESTORED ORIGINAL LAYOUT + AWARDS)
+  if (currentPath === '#about-page') {
+    return (
+      <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased flex flex-col justify-between">
+        <div>
+          {/* NAV HEADER */}
+          <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              </a>
+
+              {/* Desktop Nav */}
+              <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase text-white/90">
+                <a href="#services" className="hover:text-[#CDAE72] transition-colors">Services</a>
+                <a href="#about" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+                <a href="#projects-page" className="hover:text-[#CDAE72] transition-colors">Our Work</a>
+                <a href="#about-page" className="text-[#CDAE72] font-bold border-b border-[#CDAE72] pb-0.5">About</a>
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+                <a href="#blog-page" className="hover:text-[#CDAE72] transition-colors">Blog</a>
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors"
+                >
+                  Client Portal
+                </a>
+              </div>
+              <div className="w-12 hidden md:block"></div>
+            </div>
+          </nav>
+
+          {/* NEW HERO SECTION (USER LIKED) */}
+          <section className="relative bg-[#0B2638] text-white py-24 px-6 overflow-hidden border-b border-[#CDAE72]/20">
+            <div className="absolute inset-0 z-0">
+              <img 
+                src="project_images/paisley/11.png" 
+                alt="Havenridge Craftsmanship" 
+                className="w-full h-full object-cover opacity-15"
+              />
+            </div>
+
+            <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
+              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.3em] uppercase block">SINCE 2014 · WATERLOO REGION</span>
+              <h1 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold tracking-wider text-white leading-tight">
+                Master Craftsmanship &<br />Accountable Leadership
+              </h1>
+              <p className="font-drama text-lg sm:text-xl text-white/85 italic max-w-2xl mx-auto leading-relaxed">
+                Full-service design-build general contracting serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities with uncompromising building standards.
+              </p>
+              
+              <div className="pt-4 flex flex-wrap justify-center gap-4 text-xs font-sans font-bold tracking-wider uppercase text-[#CDAE72]">
+                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">15+ Years Experience</span>
+                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Baeumler Approved</span>
+                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">RenoMark Certified</span>
+                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Warranty Guarantee</span>
+              </div>
+            </div>
+          </section>
+
+          {/* RESTORED ORIGINAL COMPANY VALUES SECTION WITH MERGED COPY */}
+          <section id="company-values" className="py-20 bg-white border-b border-[#0B2638]/10">
+            <div className="max-w-6xl mx-auto px-6 space-y-12">
+              <div className="max-w-6xl mx-auto text-center space-y-4">
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">BUILDING STANDARDS</span>
+                <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] leading-tight">
+                  Professional Building Standards & Code-Compliant Construction
+                </h2>
+                <p className="text-sm sm:text-base text-[#24313A]/85 font-light leading-relaxed">
+                  Havenridge Build is a full-service design-build general contractor serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities. Since 2014, we have helped homeowners improve their homes through carefully planned kitchens, bathrooms, basements, additions, and complete home renovations. Led by owner <strong>Micheal Smith</strong>, our team coordinates the entire renovation process with clear communication, organized project updates through the <strong>Buildern client portal</strong>, and one accountable team. As a <strong>Baeumler Approved</strong> and <strong>RenoMark</strong> renovator, our work is backed by a two-year structural warranty plus a one-year workmanship warranty.
+                </p>
+              </div>
+
+              {/* ORIGINAL 4 GRID CARDS */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+                <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
+                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">01 / PRE-CONSTRUCTION</span>
+                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Disciplined Planning & Scope Clarity</h3>
+                  <p className="text-sm text-[#24313A]/80 leading-relaxed">
+                    Every successful residential renovation begins with clear pre-construction planning. By establishing detailed scope documents, selection schedules, and fixed permit layouts early, we eliminate mid-project surprises and budget creep.
+                  </p>
+                </div>
+
+                <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
+                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">02 / CRAFTSMANSHIP</span>
+                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Uncompromising Quality & Millwork</h3>
+                  <p className="text-sm text-[#24313A]/80 leading-relaxed">
+                    From structural timber roof additions to custom white-oak cabinetry, heated bathroom floors, and quartz island installations, we hold every trade phase to exact Ontario Building Code and high-end finish standards.
+                  </p>
+                </div>
+
+                <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
+                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">03 / ACCOUNTABILITY</span>
+                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Transparent Client Portal Communication</h3>
+                  <p className="text-sm text-[#24313A]/80 leading-relaxed">
+                    Through our Buildern client portal, homeowners enjoy 24/7 access to daily job logs, site photos, selection approvals, and real-time schedules. Communication is direct, documented, and proactive.
+                  </p>
+                </div>
+
+                <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
+                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">04 / RESPECT & WARRANTY</span>
+                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Clean Job Sites & Warranty Defense</h3>
+                  <p className="text-sm text-[#24313A]/80 leading-relaxed">
+                    We respect your sanctuary. Our teams enforce strict dust containment, daily jobsite cleanup, and courteous site management—standing behind all completed work with dedicated homeowner warranty support.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* RESTORED ORIGINAL 2-COLUMN TEAM MEMBERS GRID */}
+          <section id="team" className="py-24 bg-[#F4F2EE]">
+            <div className="max-w-6xl mx-auto px-6 space-y-12">
+              <div className="text-center max-w-2xl mx-auto space-y-2">
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">LEADERSHIP & TRADES</span>
+                <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Meet Our Team</h2>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                {/* Micheal Smith */}
+                <div className="space-y-6 text-left bg-white p-8 rounded-sm shadow-md border border-[#0B2638]/10 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="aspect-[4/5] overflow-hidden bg-[#0B2638]/10 shadow-sm rounded-sm">
+                      <img src="michael_smith.jpg" alt="Micheal Smith - Owner & General Contractor" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">OWNER & GENERAL CONTRACTOR</span>
+                      <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Micheal Smith</h3>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
+                      Micheal leads Havenridge Build with over 15 years of residential construction expertise. His hands-on leadership ensures every custom build, main floor addition, and whole-home renovation is executed with disciplined project management and finish quality.
+                    </p>
+                  </div>
+                </div>
+
+                {/* David Woo */}
+                <div className="space-y-6 text-left bg-white p-8 rounded-sm shadow-md border border-[#0B2638]/10 flex flex-col justify-between">
+                  <div className="space-y-4">
+                    <div className="aspect-[4/5] overflow-hidden bg-[#0B2638]/10 shadow-sm rounded-sm">
+                      <img src="david_woo.jpg" alt="David Woo - Site Supervisor" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">SITE SUPERVISOR</span>
+                      <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">David Woo</h3>
+                    </div>
+                    <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
+                      I started my career as a framer and went back to school at Conestoga College for the pre-apprenticeship program and am a second year apprentice.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* AWARDS & COMMUNITY RECOGNITION SECTION (MATCHES DESIGN MOCKUP) */}
+          <section className="bg-[#F4F2EE] py-20 px-6 border-t border-[#0B2638]/10 text-center">
+            <div className="max-w-6xl mx-auto space-y-10">
+              <div className="space-y-3 max-w-3xl mx-auto">
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">
+                  RECOGNITION
+                </span>
+                <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider leading-snug">
+                  AWARDS & COMMUNITY RECOGNITION
+                </h2>
+              </div>
+
+              {/* 4 WHITE CARDS GRID */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                {/* Card 1 */}
+                <div className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 rounded-full bg-[#F7F3EB] flex items-center justify-center text-[#B8975A]">
+                    <Star className="w-5 h-5 fill-[#B8975A]" />
+                  </div>
+                  <div className="space-y-2 flex-1 flex flex-col justify-center">
+                    <h3 className="font-cinzel text-sm font-bold text-[#0B2638] leading-tight uppercase">
+                      2025 Community Votes Winner
+                    </h3>
+                    <p className="text-[10px] font-sans font-bold tracking-widest text-[#24313A]/60 uppercase">
+                      Cambridge
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 2 */}
+                <div className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 rounded-full bg-[#F7F3EB] flex items-center justify-center text-[#B8975A]">
+                    <Star className="w-5 h-5 fill-[#B8975A]" />
+                  </div>
+                  <div className="space-y-2 flex-1 flex flex-col justify-center">
+                    <h3 className="font-cinzel text-sm font-bold text-[#0B2638] leading-tight uppercase">
+                      2024 Community Votes Winner
+                    </h3>
+                    <p className="text-[10px] font-sans font-bold tracking-widest text-[#24313A]/60 uppercase">
+                      Cambridge
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 3 */}
+                <div className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 rounded-full bg-[#F7F3EB] flex items-center justify-center text-[#B8975A]">
+                    <Star className="w-5 h-5 fill-[#B8975A]" />
+                  </div>
+                  <div className="space-y-2 flex-1 flex flex-col justify-center">
+                    <h3 className="font-cinzel text-sm font-bold text-[#0B2638] leading-tight uppercase">
+                      Readers Choice 2025 Winner
+                    </h3>
+                    <p className="text-[10px] font-sans font-bold tracking-widest text-[#24313A]/60 uppercase">
+                      Best General Contracting Services — Waterloo Region
+                    </p>
+                  </div>
+                </div>
+
+                {/* Card 4 */}
+                <div className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
+                  <div className="w-12 h-12 rounded-full bg-[#F7F3EB] flex items-center justify-center text-[#B8975A]">
+                    <Star className="w-5 h-5 fill-[#B8975A]" />
+                  </div>
+                  <div className="space-y-2 flex-1 flex flex-col justify-center">
+                    <h3 className="font-cinzel text-sm font-bold text-[#0B2638] leading-tight uppercase">
+                      Readers Choice 2022 Gold Winner
+                    </h3>
+                    <p className="text-[10px] font-sans font-bold tracking-widest text-[#24313A]/60 uppercase">
+                      The Record
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* WORK WITH US CAREERS SECTION */}
+          <section id="work-with-us" className="py-20 bg-[#0B2638] text-white text-center">
+            <div className="max-w-4xl mx-auto px-6 space-y-6">
+              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
+              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">WORK WITH US</h2>
+              <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
+                We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
+              </p>
+              <div className="pt-2">
+                <button 
+                  onClick={() => setIsApplyModalOpen(true)} 
+                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                >
+                  APPLY NOW
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* FOOTER */}
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-4xl mx-auto px-6 space-y-2">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
+            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+          </div>
+        </footer>
+      
+      {/* GLOBAL CAREERS POPUP MODAL */}
+      {isApplyModalOpen && (
+        <div className="fixed inset-0 z-[9999] bg-[#0B2638]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div className="bg-white text-[#24313A] max-w-xl w-full rounded-sm shadow-2xl overflow-hidden relative my-8">
+            
+            {/* MODAL HEADER */}
+            <div className="bg-[#0B2638] text-white p-6 flex justify-between items-center border-b border-[#CDAE72]/20">
+              <div className="flex items-center gap-4">
+                <img src="logo_mark_h_only.svg" alt="Havenridge Build Logo" className="h-8 sm:h-9 w-auto object-contain" />
+                <div className="border-l border-white/20 pl-4">
+                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block">JOIN HAVENRIDGE BUILD</span>
+                  <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white">Work With Us Application</h3>
+                </div>
+              </div>
+              <button 
+                onClick={() => { setIsApplyModalOpen(false); setIsAppliedSubmitted(false); }} 
+                className="text-white/70 hover:text-[#CDAE72] text-2xl font-bold transition-colors p-2 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* MODAL BODY */}
+            <div className="p-6 sm:p-8 space-y-6 text-left">
+              {isAppliedSubmitted ? (
+                <div className="text-center py-12 space-y-4">
+                  <div className="w-16 h-16 bg-[#CDAE72]/20 text-[#CDAE72] rounded-full flex items-center justify-center mx-auto text-3xl font-bold">✓</div>
+                  <h4 className="font-cinzel text-2xl font-bold text-[#0B2638]">Application Received!</h4>
+                  <p className="text-sm text-[#24313A]/80 max-w-md mx-auto leading-relaxed">
+                    Thank you for your interest in joining Havenridge Build. Our hiring team will review your resume and reach out to qualified candidates.
+                  </p>
+                  <div className="pt-4">
+                    <button 
+                      onClick={() => { setIsApplyModalOpen(false); setIsAppliedSubmitted(false); }} 
+                      className="bg-[#0B2638] text-white hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all"
+                    >
+                      CLOSE WINDOW
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={(e) => { e.preventDefault(); setIsAppliedSubmitted(true); }} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Full Name *</label>
+                    <input type="text" required placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Email Address *</label>
+                      <input type="email" required placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Phone Number *</label>
+                      <input type="tel" required placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
+                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                        <option value="">Select Position...</option>
+                        <option value="journeyman">Journeyman Carpenter</option>
+                        <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
+                        <option value="supervisor">Site Supervisor</option>
+                        <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
+                        <option value="general">General Application</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Years of Experience *</label>
+                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                        <option value="">Select Experience...</option>
+                        <option value="1-3">1 - 3 Years</option>
+                        <option value="3-5">3 - 5 Years</option>
+                        <option value="5+">5+ Years</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Upload Resume (PDF, DOC, DOCX) *</label>
+                    <div className="border-2 border-dashed border-gray-300 hover:border-[#CDAE72] p-4 text-center rounded-sm bg-gray-50 cursor-pointer relative">
+                      <input 
+                        type="file" 
+                        required 
+                        accept=".pdf,.doc,.docx" 
+                        onChange={(e) => setApplicantFileName(e.target.files[0]?.name || '')}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                      />
+                      <p className="text-xs text-[#24313A]/70">
+                        {applicantFileName ? (
+                          <span className="font-bold text-[#0B2638]">{applicantFileName}</span>
+                        ) : (
+                          'Click or drag your resume file here to attach'
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Brief Introduction / Message</label>
+                    <textarea rows="3" placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
+                  </div>
+
+                  <div className="pt-2 flex justify-between items-center">
+                    <button 
+                      type="button" 
+                      onClick={() => setIsApplyModalOpen(false)} 
+                      className="text-xs font-bold uppercase tracking-wider text-[#24313A]/70 hover:text-[#0B2638]"
+                    >
+                      CANCEL
+                    </button>
+                    <button 
+                      type="submit" 
+                      className="bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all shadow-md"
+                    >
+                      SUBMIT APPLICATION
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      </div>
+    );
+  }
+
+
+  if (currentPath === '#blog-page') {
+    return (
+      <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
+        <div>
+          {/* HEADER NAV */}
+          <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              </a>
+
+              {/* Nav list with dropdowns */}
+              <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase text-white/90">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADU's</a>
+                    <a href="#project-kitchens" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-living-spaces" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Barrier-Free</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#about" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Blog */}
+                <a href="#blog-page" className="text-[#CDAE72] font-bold border-b border-[#CDAE72] pb-0.5">Blog</a>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              <div className="w-12 hidden md:block"></div>
+            </div>
+          </nav>
+
+          {/* HERO BANNER */}
+          <section className="bg-[#0B2638] text-white py-20 px-6 text-center border-b border-[#CDAE72]/20">
+            <div className="max-w-4xl mx-auto space-y-4">
+              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">INSIGHTS & JOURNAL</span>
+              <h1 className="font-cinzel text-4xl sm:text-5xl font-bold tracking-wider text-white">Renovation Guides & Trends</h1>
+              <p className="text-sm font-light text-white/80 max-w-2xl mx-auto leading-relaxed">
+                Expert advice on residential construction, municipal permits, custom millwork, and luxury interior design across Kitchener, Waterloo, Cambridge & Guelph.
+              </p>
+            </div>
+          </section>
+
+          {/* BLOG POSTS GRID */}
+          <section className="max-w-7xl mx-auto px-6 py-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {blogPosts.map((post) => (
+                <div 
+                  key={post.id} 
+                  onClick={() => setSelectedBlogArticle(post)}
+                  className="bg-white border border-[#0B2638]/10 shadow-sm flex flex-col justify-between overflow-hidden cursor-pointer group hover:shadow-xl hover:border-[#CDAE72]/50 transition-all duration-300"
+                >
+                  <div className="relative h-56 overflow-hidden">
+                    <img 
+                      src={post.img} 
+                      alt={post.title} 
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                    />
+                    <span className="absolute top-4 left-4 bg-[#0B2638] text-[#CDAE72] text-[10px] font-sans font-bold px-3 py-1 uppercase tracking-widest shadow-md">
+                      {post.category}
+                    </span>
+                  </div>
+
+                  <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
+                    <div className="space-y-2">
+                      <div className="flex justify-between items-center text-[11px] text-[#CDAE72] font-semibold">
+                        <span>{post.date}</span>
+                        <span>{post.readTime}</span>
+                      </div>
+                      <h3 className="font-cinzel text-lg font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors leading-snug">
+                        {post.title}
+                      </h3>
+                      <p className="text-xs text-[#24313A]/80 font-light leading-relaxed line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t border-[#0B2638]/10 flex items-center justify-between text-xs font-bold text-[#0B2638] group-hover:text-[#CDAE72]">
+                      <span>READ FULL ARTICLE</span>
+                      <span>→</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </div>
+
+        {/* ARTICLE READER MODAL */}
+        {selectedBlogArticle && (
+          <div className="fixed inset-0 z-50 bg-[#061622]/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+            <div className="bg-white max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-[#CDAE72]/30 shadow-2xl space-y-6 p-6 sm:p-8 relative">
+              <button 
+                onClick={() => setSelectedBlogArticle(null)}
+                className="absolute top-6 right-6 text-[#0B2638] hover:text-[#CDAE72] font-bold text-xl"
+              >
+                ✕
+              </button>
+
+              <div className="space-y-3">
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">{selectedBlogArticle.category}</span>
+                <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-[#0B2638]">{selectedBlogArticle.title}</h2>
+                <p className="text-xs text-[#CDAE72] font-bold">{selectedBlogArticle.subtitle}</p>
+                <div className="flex items-center gap-4 text-xs text-[#24313A]/70 border-b border-[#0B2638]/10 pb-4">
+                  <span>By {selectedBlogArticle.author}</span>
+                  <span>•</span>
+                  <span>{selectedBlogArticle.date}</span>
+                  <span>•</span>
+                  <span>{selectedBlogArticle.readTime}</span>
+                </div>
+              </div>
+
+              <img src={selectedBlogArticle.img} alt={selectedBlogArticle.title} className="w-full h-72 object-cover border border-[#0B2638]/10 shadow-md" />
+
+              <div className="space-y-4 text-xs sm:text-sm font-light text-[#24313A]/90 leading-relaxed">
+                {selectedBlogArticle.content.map((paragraph, pIdx) => (
+                  <p key={pIdx}>{paragraph}</p>
+                ))}
+              </div>
+
+              <div className="pt-6 border-t border-[#0B2638]/10 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <a 
+                  href="#contact-page" 
+                  onClick={() => setSelectedBlogArticle(null)}
+                  className="w-full sm:w-auto bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all text-center shadow-md"
+                >
+                  Book a Consultation for Your Project
+                </a>
+                <button 
+                  onClick={() => setSelectedBlogArticle(null)}
+                  className="text-xs font-bold text-[#0B2638] hover:text-[#CDAE72] uppercase tracking-wider"
+                >
+                  Close Article
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* FOOTER */}
+                  {/* WORK WITH US CAREERS SECTION */}
+          <section id="work-with-us" className="py-20 bg-[#0B2638] text-white text-center">
+            <div className="max-w-4xl mx-auto px-6 space-y-6">
+              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
+              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">WORK WITH US</h2>
+              <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
+                We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
+              </p>
+              <div className="pt-2">
+                <button 
+                  onClick={() => setIsApplyModalOpen(true)} 
+                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                >
+                  APPLY NOW
+                </button>
+              </div>
+            </div>
+          </section>
+
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-4xl mx-auto px-6 space-y-2">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
+            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+          </div>
+        </footer>
+      
+      {/* GLOBAL CAREERS POPUP MODAL */}
+      {isApplyModalOpen && (
+        <div className="fixed inset-0 z-[9999] bg-[#0B2638]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+          <div className="bg-white text-[#24313A] max-w-xl w-full rounded-sm shadow-2xl overflow-hidden relative my-8">
+            
+            {/* MODAL HEADER */}
+            <div className="bg-[#0B2638] text-white p-6 flex justify-between items-center border-b border-[#CDAE72]/20">
+              <div className="flex items-center gap-4">
+                <img src="logo_mark_h_only.svg" alt="Havenridge Build Logo" className="h-8 sm:h-9 w-auto object-contain" />
+                <div className="border-l border-white/20 pl-4">
+                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block">JOIN HAVENRIDGE BUILD</span>
+                  <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white">Work With Us Application</h3>
+                </div>
+              </div>
+              <button 
+                onClick={() => { setIsApplyModalOpen(false); setIsAppliedSubmitted(false); }} 
+                className="text-white/70 hover:text-[#CDAE72] text-2xl font-bold transition-colors p-2 cursor-pointer"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* MODAL BODY */}
+            <div className="p-6 sm:p-8 space-y-6 text-left">
+              {isAppliedSubmitted ? (
+                <div className="text-center py-12 space-y-4">
+                  <div className="w-16 h-16 bg-[#CDAE72]/20 text-[#CDAE72] rounded-full flex items-center justify-center mx-auto text-3xl font-bold">✓</div>
+                  <h4 className="font-cinzel text-2xl font-bold text-[#0B2638]">Application Received!</h4>
+                  <p className="text-sm text-[#24313A]/80 max-w-md mx-auto leading-relaxed">
+                    Thank you for your interest in joining Havenridge Build. Our hiring team will review your resume and reach out to qualified candidates.
+                  </p>
+                  <div className="pt-4">
+                    <button 
+                      onClick={() => { setIsApplyModalOpen(false); setIsAppliedSubmitted(false); }} 
+                      className="bg-[#0B2638] text-white hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all"
+                    >
+                      CLOSE WINDOW
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={(e) => { e.preventDefault(); setIsAppliedSubmitted(true); }} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Full Name *</label>
+                    <input type="text" required placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Email Address *</label>
+                      <input type="email" required placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Phone Number *</label>
+                      <input type="tel" required placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
+                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                        <option value="">Select Position...</option>
+                        <option value="journeyman">Journeyman Carpenter</option>
+                        <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
+                        <option value="supervisor">Site Supervisor</option>
+                        <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
+                        <option value="general">General Application</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Years of Experience *</label>
+                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                        <option value="">Select Experience...</option>
+                        <option value="1-3">1 - 3 Years</option>
+                        <option value="3-5">3 - 5 Years</option>
+                        <option value="5+">5+ Years</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Upload Resume (PDF, DOC, DOCX) *</label>
+                    <div className="border-2 border-dashed border-gray-300 hover:border-[#CDAE72] p-4 text-center rounded-sm bg-gray-50 cursor-pointer relative">
+                      <input 
+                        type="file" 
+                        required 
+                        accept=".pdf,.doc,.docx" 
+                        onChange={(e) => setApplicantFileName(e.target.files[0]?.name || '')}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                      />
+                      <p className="text-xs text-[#24313A]/70">
+                        {applicantFileName ? (
+                          <span className="font-bold text-[#0B2638]">{applicantFileName}</span>
+                        ) : (
+                          'Click or drag your resume file here to attach'
+                        )}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Brief Introduction / Message</label>
+                    <textarea rows="3" placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
+                  </div>
+
+                  <div className="pt-2 flex justify-between items-center">
+                    <button 
+                      type="button" 
+                      onClick={() => setIsApplyModalOpen(false)} 
+                      className="text-xs font-bold uppercase tracking-wider text-[#24313A]/70 hover:text-[#0B2638]"
+                    >
+                      CANCEL
+                    </button>
+                    <button 
+                      type="submit" 
+                      className="bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all shadow-md"
+                    >
+                      SUBMIT APPLICATION
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
+      </div>
+    );
+  }
+
+
   if (currentPath === '#contact-page') {
     return (
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
@@ -726,21 +1599,40 @@ export default function App() {
                   <strong>Office Phone:</strong> <span className="text-[#0B2638] font-bold">(519) 635-0963</span>
                 </p>
                 <p>
-                  <strong>Email Address:</strong> <a href="mailto:info@havenridgebuild.ca" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">info@havenridgebuild.ca</a>
+                  <strong>Email Address:</strong> <a href="mailto:Info@havenridgebuild.ca" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">Info@havenridgebuild.ca</a>
                 </p>
                 <p>
                   <strong>Service Area:</strong> Serving Kitchener, Waterloo, Cambridge, and surrounding Oxford County communities.
                 </p>
               </div>
 
-              <div className="pt-6 border-t border-[#0B2638]/10 space-y-3">
-                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">CERTIFICATIONS</span>
-                <div className="flex flex-wrap gap-4 text-xs font-sans font-bold text-[#0B2638] uppercase">
-                  <span>RENOMARK CERTIFIED</span>
-                  <span className="text-white/20">|</span>
-                  <span>BAEUMLER APPROVED</span>
-                  <span className="text-white/20">|</span>
-                  <span>WRHBA MEMBER</span>
+                            <div className="pt-6 border-t border-[#0B2638]/10 space-y-4">
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">CERTIFICATIONS & ACCREDITATIONS</span>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs font-sans font-bold text-[#0B2638]">
+                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
+                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">WATERPROOFING</span>
+                    <span>WEDI CERTIFIED</span>
+                  </div>
+                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
+                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">TILE SYSTEMS</span>
+                    <span>SCHLUTER CERTIFIED</span>
+                  </div>
+                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
+                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">AODA STANDARDS</span>
+                    <span>ACCESSIBILITY CERTIFIED</span>
+                  </div>
+                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
+                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">QUALITY STANDARDS</span>
+                    <span>RENOMARK CERTIFIED</span>
+                  </div>
+                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
+                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">TRUSTED PRO</span>
+                    <span>BAEUMLER APPROVED</span>
+                  </div>
+                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
+                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">INDUSTRY MEMBER</span>
+                    <span>WRHBA MEMBER</span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -828,11 +1720,33 @@ export default function App() {
           </div>
         </section>
 
+  
+      {/* WORK WITH US CAREERS SECTION */}
+          <section id="work-with-us" className="py-20 bg-[#0B2638] text-white text-center">
+            <div className="max-w-4xl mx-auto px-6 space-y-6">
+              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
+              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">WORK WITH US</h2>
+              <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
+                We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
+              </p>
+              <div className="pt-2">
+                <button 
+                  onClick={() => setIsApplyModalOpen(true)} 
+                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                >
+                  APPLY NOW
+                </button>
+              </div>
+            </div>
+          </section>
+
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/40 py-10 text-center text-xs font-sans border-t border-white/10">
-          <p className="text-[#CDAE72] mb-2">DESIGN · BUILD · RENOVATE</p>
-          <p>© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-          <p className="text-white/40 text-[11px] mt-2 font-sans">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] hover:underline font-semibold">BoostMyLeads</a></p>
+        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-4xl mx-auto px-6 space-y-2">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
+            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+          </div>
         </footer>
 
       </div>
@@ -892,6 +1806,9 @@ export default function App() {
             {/* 5. Contact */}
             <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
 
+            {/* 6. Blog */}
+            <a href="#blog-page" className="hover:text-[#CDAE72] transition-colors">Blog</a>
+
             {/* 6. Client Portal */}
             <a 
               href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
@@ -944,18 +1861,18 @@ export default function App() {
       </section>
 
       {/* SERVICES PILLARS */}
-      <section id="services" className="py-24 bg-[#F4F2EE]">
+      <section id="services" className="scroll-mt-28 py-24 bg-[#F4F2EE]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16 cass-reveal text-center">
             <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-2">SERVICES</span>
             <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Havenridge Build's Residential Renovation and Construction Services</h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {servicePillars.map((s, idx) => (
               <div key={idx} className="cass-reveal flex flex-col items-center text-center space-y-4 group">
                 <div className="space-y-2 max-w-sm px-2">
-                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638] uppercase tracking-wider whitespace-nowrap">{s.title}</h3>
+                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-[#0B2638] uppercase tracking-wide leading-snug min-h-[52px] flex items-center justify-center text-center">{s.title}</h3>
                   <p className="text-xs text-[#24313A]/90 font-medium leading-relaxed min-h-[40px]">{s.headline}</p>
                 </div>
                 
@@ -1004,207 +1921,306 @@ export default function App() {
       </section>
 
 
-      {/* ABOUT US / OUR PROCESS */}
-      <section id="about" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-16 text-center">
-            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-2">OUR PROCESS</span>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Crafting Spaces Made To Last</h2>
+                  {/* THE HAVENRIDGE PROCESS SECTION */}
+      <section id="process-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] font-sans text-[#24313A] border-t border-[#0B2638]/10">
+        <div className="max-w-7xl mx-auto px-6 space-y-12">
+          
+          {/* SECTION HEADER WITH 2-LINE TITLE */}
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">THE HAVENRIDGE PROCESS</span>
+            <h2 className="font-cinzel text-3xl sm:text-4xl lg:text-5xl font-bold text-[#0B2638] leading-tight">
+              A Better Renovation Experience<br className="hidden sm:block" /> From Start To Finish
+            </h2>
+            <div className="w-24 h-0.5 bg-[#CDAE72]/60 mx-auto my-3"></div>
+            <p className="text-sm sm:text-base font-light text-[#24313A]/80 leading-relaxed max-w-2xl mx-auto">
+              A proven 5-step process designed to deliver exceptional results, clear communication and a renovation experience you can trust.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {valuePillars.map((v, idx) => (
-              <div key={idx} className="cass-reveal space-y-3">
-                <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">{v.title}</h3>
-                <p className="text-xs text-[#24313A]/75 leading-relaxed">{v.desc}</p>
+          {/* MAIN CONTENT GRID: 5-STEP VERTICAL TIMELINE WITH ICONS + FEATURED PROJECT & COMPUTER/PHONE MOCKUP */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6">
+            
+            {/* LEFT COLUMN: 5-STEP VERTICAL TIMELINE WITH NUMBER + ICON BADGES (5 COLS) */}
+            <div className="lg:col-span-5 space-y-8 relative pl-2 sm:pl-0">
+              
+              {/* VERTICAL CONNECTING LINE */}
+              <div className="absolute left-6 sm:left-6 top-6 bottom-6 w-0.5 bg-[#CDAE72]/40 -z-0 hidden sm:block"></div>
+
+              {/* STEP 01 */}
+              <div className="flex gap-4 sm:gap-5 relative z-10 items-start">
+                <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
+                  01
+                </div>
+                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                  <MessageSquare className="w-5 h-5 text-[#CDAE72]" />
+                </div>
+                <div className="space-y-1.5 pt-0.5">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">CONSULT & DISCOVER</span>
+                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
+                    We start by understanding your home, your goals and what you want to achieve.
+                  </p>
+                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
+                    We meet with you to discuss your renovation, priorities, ideas, budget expectations and the possibilities for your space.
+                  </p>
+                </div>
               </div>
-            ))}
+
+              {/* STEP 02 */}
+              <div className="flex gap-4 sm:gap-5 relative z-10 items-start">
+                <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
+                  02
+                </div>
+                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                  <Ruler className="w-5 h-5 text-[#CDAE72]" />
+                </div>
+                <div className="space-y-1.5 pt-0.5">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">DESIGN & PLAN</span>
+                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
+                    We turn the vision into a clear plan before construction begins.
+                  </p>
+                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
+                    We work through the project details, design, scope, materials, selections and required planning so everyone understands what is being built.
+                  </p>
+                </div>
+              </div>
+
+              {/* STEP 03 */}
+              <div className="flex gap-4 sm:gap-5 relative z-10 items-start">
+                <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
+                  03
+                </div>
+                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                  <ClipboardCheck className="w-5 h-5 text-[#CDAE72]" />
+                </div>
+                <div className="space-y-1.5 pt-0.5">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">APPROVE & PREPARE</span>
+                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
+                    The details are finalized before we begin construction.
+                  </p>
+                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
+                    We confirm pricing, selections, scheduling, permits and long-lead materials so the project is properly prepared before work starts.
+                  </p>
+                </div>
+              </div>
+
+              {/* STEP 04 */}
+              <div className="flex gap-4 sm:gap-5 relative z-10 items-start">
+                <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
+                  04
+                </div>
+                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                  <Smartphone className="w-5 h-5 text-[#CDAE72]" />
+                </div>
+                <div className="space-y-1.5 pt-0.5">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">BUILD & STAY CONNECTED</span>
+                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
+                    Expert craftsmanship backed by organized project management and clear communication.
+                  </p>
+                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
+                    Our skilled team brings the plan to life while keeping the jobsite organized and the homeowner informed. Clients have <strong>24/7 online access</strong> to progress photos, updates, selections and important project information—making it easy to follow your renovation from anywhere.
+                  </p>
+                </div>
+              </div>
+
+              {/* STEP 05 */}
+              <div className="flex gap-4 sm:gap-5 relative z-10 items-start">
+                <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
+                  05
+                </div>
+                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
+                  <ShieldCheck className="w-5 h-5 text-[#CDAE72]" />
+                </div>
+                <div className="space-y-1.5 pt-0.5">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">REVIEW & PROTECT</span>
+                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
+                    We finish with the same attention to detail we started with.
+                  </p>
+                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
+                    We walk through every detail with you and ensure complete satisfaction. Our work is backed by a <strong>two-year warranty</strong> covering structural defects and water penetration, plus a <strong>one-year workmanship warranty</strong>.
+                  </p>
+                </div>
+              </div>
+
+            </div>
+
+            {/* RIGHT COLUMN: FEATURED PROJECT PHOTO + LAPTOP/SMARTPHONE PORTAL MOCKUP + TRUST BADGES (7 COLS) */}
+            <div className="lg:col-span-7 space-y-6">
+              
+              {/* RECENT PROJECT PHOTO CONTAINER */}
+              <div className="relative rounded-2xl overflow-hidden shadow-xl h-[340px] sm:h-[380px] border border-[#0B2638]/10 group">
+                <img 
+                  src="project_images/piccadilly/1.png" 
+                  alt="Wellington Street North Kitchen Renovation" 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638]/90 via-transparent to-transparent flex flex-col justify-end p-6">
+                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.25em] uppercase block mb-1">RECENT PROJECT</span>
+                  <h4 className="font-cinzel text-lg sm:text-xl font-bold text-white tracking-wide">
+                    WELLINGTON STREET NORTH · KITCHENER, ON
+                  </h4>
+                </div>
+              </div>
+
+                                          {/* BUILDERN CLIENT PORTAL LAPTOP & PHONE MOCKUP (TRANSPARENT / NO BACKGROUND BOX) */}
+              <div className="pt-4 flex flex-col md:flex-row items-center gap-8">
+                
+                {/* COMPUTER AND PHONE HARDWARE MOCKUP */}
+                <div className="w-full md:w-3/5 flex items-center justify-center">
+                  <img 
+                    src="buildern_portal_mockup_transparent.png" 
+                    alt="Buildern Client Portal Laptop and Phone Mockup" 
+                    className="w-full h-auto object-contain max-h-[380px] drop-shadow-2xl" 
+                  />
+                </div>
+
+                {/* RIGHT COPY */}
+                <div className="w-full md:w-2/5 space-y-3 text-left">
+                  <h4 className="font-cinzel text-lg sm:text-xl font-bold text-[#0B2638] leading-snug">
+                    YOUR RENOVATION.<br />ALWAYS WITHIN REACH.
+                  </h4>
+                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
+                    Follow progress, view photos, review selections and stay connected to your project from anywhere.
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
+
         </div>
       </section>
 
+      {/* SINGLE-ROW CLIENT REVIEWS SLIDER — BRAND BLUE DARK THEME WITH BEIGE CARDS & UNCROPPED SHADOWS */}
+      <section id="testimonials" className="scroll-mt-28 py-20 sm:py-24 bg-[#0B2638] font-sans text-white border-t border-[#CDAE72]/20 relative">
+        <div className="max-w-7xl mx-auto px-6 space-y-8">
+          
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+            <div className="space-y-2">
+              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CLIENT REVIEWS</span>
+              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">What Our Clients Say</h2>
+              <p className="text-sm font-light text-white/70">Real feedback from homeowners across Kitchener, Waterloo, Cambridge, Guelph & Puslinch.</p>
+            </div>
 
-      {/* TESTIMONIALS */}
-      <section id="testimonials" className="py-24 bg-[#F4F2EE]">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex justify-between items-end mb-16 cass-reveal">
-            <div>
-              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-2">FROM OUR CLIENTS</span>
-              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Client Experiences</h2>
+            {/* SLIDE CONTROL BUTTONS */}
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => scrollSlider(testimonialRef, 'left')}
+                className="w-11 h-11 bg-[#17365D] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all flex items-center justify-center shadow-md border border-[#CDAE72]/40 rounded-sm cursor-pointer"
+                aria-label="Previous Reviews"
+              >
+                <ChevronLeft className="w-5 h-5" />
+              </button>
+              <button 
+                onClick={() => scrollSlider(testimonialRef, 'right')}
+                className="w-11 h-11 bg-[#17365D] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all flex items-center justify-center shadow-md border border-[#CDAE72]/40 rounded-sm cursor-pointer"
+                aria-label="Next Reviews"
+              >
+                <ChevronRight className="w-5 h-5" />
+              </button>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* SINGLE HORIZONTAL ROW SLIDER WITH BEIGE CARDS & UNCROPPED HOVER SHADOW CLEARANCE */}
+          <div 
+            ref={testimonialRef}
+            className="flex overflow-x-auto gap-8 pt-6 pb-16 px-4 -mx-4 scroll-smooth scrollbar-none"
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+          >
             {testimonials.map((t, idx) => (
-              <div key={idx} className="cass-reveal space-y-4">
-                <p className="text-xs text-[#24313A]/80 leading-relaxed font-light">"{t.quote}"</p>
-                <div className="text-xs font-sans font-bold text-[#0B2638] uppercase">
-                  \ - {t.author}
+              <div 
+                key={idx} 
+                className="w-[320px] sm:w-[380px] shrink-0 bg-[#F4F2EE] text-[#24313A] p-8 rounded-2xl border border-[#CDAE72]/30 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between space-y-6 relative group cursor-pointer"
+              >
+                <div className="space-y-4">
+                  <div className="flex gap-1 text-[#CDAE72] text-sm tracking-widest font-bold">
+                    ★★★★★
+                  </div>
+                  <p className="font-drama text-base sm:text-lg text-[#24313A]/90 italic leading-relaxed">
+                    "{t.quote}"
+                  </p>
+                </div>
+                <div className="pt-4 border-t border-[#0B2638]/10">
+                  <h3 className="font-cinzel text-sm font-bold text-[#0B2638] uppercase tracking-wide">{t.name}</h3>
+                  <p className="text-[11px] text-[#CDAE72] font-sans font-semibold mt-0.5">{t.location} · {t.project}</p>
                 </div>
               </div>
             ))}
           </div>
+
         </div>
       </section>
 
-      {/* ANIMATED INSPIRATION GALLERY SECTION (ANCHOR) */}
-      <section id="inspiration-section" className="py-24 bg-[#0B2638] text-white overflow-hidden relative border-t border-[#CDAE72]/20">
-        <div className="max-w-7xl mx-auto px-6 mb-12 text-center space-y-3">
-          <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
-          <h2 className="font-cinzel text-3xl sm:text-4xl font-bold tracking-wider text-white">Inspiration Gallery</h2>
-          <p className="text-white/70 text-sm font-light max-w-xl mx-auto">
-            Click on any project type below to explore bespoke designs and specifications. Hover over any image to pause the carousel and expand the preview.
-          </p>
-        </div>
-
-        {/* INFINITE ANIMATED MARQUEE ROW */}
-        <div className="relative w-full overflow-hidden py-4">
-          <div className="flex space-x-6 w-max animate-marquee hover:[animation-play-state:paused]">
-            {inspirationItems.map((item, idx) => (
-              <a 
-                key={idx} 
-                href={item.link} 
-                className="relative w-72 sm:w-80 h-[440px] shrink-0 overflow-hidden rounded-md group transition-all duration-500 hover:scale-105 hover:z-20 cursor-pointer shadow-2xl border border-white/10"
-              >
-                <img 
-                  src={item.img} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638] via-[#0B2638]/40 to-transparent flex flex-col justify-end p-6 text-left transition-opacity duration-300">
-                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase">INSPIRATION</span>
-                  <h3 className="text-white font-cinzel text-xl font-bold tracking-wide mt-1 group-hover:text-[#CDAE72] transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-white/80 text-xs font-drama italic mt-1 opacity-80 group-hover:opacity-100">
-                    {item.subtitle}
-                  </p>
-                </div>
-              </a>
-            ))}
-            {/* DUPLICATE ARRAY FOR SEAMLESS INFINITE LOOP */}
-            {inspirationItems.map((item, idx) => (
-              <a 
-                key={`dup-${idx}`} 
-                href={item.link} 
-                className="relative w-72 sm:w-80 h-[440px] shrink-0 overflow-hidden rounded-md group transition-all duration-500 hover:scale-105 hover:z-20 cursor-pointer shadow-2xl border border-white/10"
-              >
-                <img 
-                  src={item.img} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638] via-[#0B2638]/40 to-transparent flex flex-col justify-end p-6 text-left transition-opacity duration-300">
-                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase">INSPIRATION</span>
-                  <h3 className="text-white font-cinzel text-xl font-bold tracking-wide mt-1 group-hover:text-[#CDAE72] transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-white/80 text-xs font-drama italic mt-1 opacity-80 group-hover:opacity-100">
-                    {item.subtitle}
-                  </p>
-                </div>
-              </a>
-            ))}
+              {/* INSPIRATION GALLERY GRID SECTION */}
+        <section id="inspiration-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] text-[#24313A] overflow-hidden relative border-t border-[#0B2638]/10 font-sans">
+          <div className="max-w-7xl mx-auto px-6 mb-12 text-center space-y-3">
+            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
+            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider">INSPIRATION GALLERY</h2>
+            <p className="text-[#24313A]/70 text-sm font-light max-w-xl mx-auto leading-relaxed">
+              Click on any photo below to explore bespoke designs and specifications from real Havenridge Build projects.
+            </p>
           </div>
-        </div>
-      </section>
+
+          {/* 4-COLUMN GRID OF ROUNDED CARDS */}
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+              {inspirationItems.map((item, idx) => (
+                <a 
+                  key={idx} 
+                  href={item.link} 
+                  className="relative w-full h-[420px] overflow-hidden rounded-2xl group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-lg border border-[#0B2638]/10 bg-[#0B2638]"
+                >
+                  <img 
+                    src={item.img} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638]/90 via-[#0B2638]/40 to-transparent flex flex-col justify-end p-6 text-left transition-opacity duration-300">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block mb-1">INSPIRATION</span>
+                    <h3 className={`font-cinzel text-xl font-bold tracking-wide ${item.title === 'KITCHENS' ? 'text-[#CDAE72]' : 'text-white'}`}>
+                      {item.title}
+                    </h3>
+                    <p className="text-white/80 text-xs font-light italic mt-1 leading-normal">
+                      {item.subtitle}
+                    </p>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
 
       {/* TRUSTED PARTNERS (LOGOS SIZED UP BY 30% AGAIN - cell h-36, logos h-26/h-24) */}
-      <section id="partners" className="py-16 md:py-20 bg-[#0B2638] text-white">
+      <section id="partners" className="scroll-mt-28 py-16 md:py-20 bg-[#0B2638] text-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-10">TRUSTED PARTNERS</span>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12 justify-items-center max-w-4xl mx-auto opacity-95">
             <div className="h-36 flex items-center justify-center w-full">
-              <img src="/renomark.png" alt="RenoMark Certified" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="renomark.png" alt="RenoMark Certified" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
             </div>
             <div className="h-36 flex items-center justify-center w-full">
-              <img src="/baumler.png" alt="Baeumler Approved" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="baumler.png" alt="Baeumler Approved" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
             </div>
             <div className="h-36 flex items-center justify-center w-full">
-              <img src="/wrhba.png" alt="WRHBA Member" className="h-24 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="wrhba.png" alt="WRHBA Member" className="h-24 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
             </div>
             <div className="h-36 flex items-center justify-center w-full">
-              <img src="/cambridge_chamber.png" alt="Cambridge Chamber of Commerce" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="cambridge_chamber.png" alt="Cambridge Chamber of Commerce" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
             </div>
           </div>
         </div>
       </section>
 
       {/* FOOTER (WITH SOCIAL ICONS) */}
-      <footer className="bg-[#0B2638] text-white pt-20 pb-12">
-        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-          <div className="space-y-3">
-            <span className="font-cinzel text-xl font-bold tracking-widest text-white block">HAVENRIDGE BUILD</span>
-            <span className="text-[#CDAE72] text-xs font-sans tracking-widest uppercase block">DESIGN · BUILD · RENOVATE</span>
-            <p className="text-xs text-white/70 leading-relaxed pt-2">
-              Serving Kitchener, Waterloo, Cambridge, and Oxford County with exceptional craftsmanship.
-            </p>
+      {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-4xl mx-auto px-6 space-y-2">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
+            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
           </div>
-
-          <div>
-            <h5 className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase mb-4">Navigation</h5>
-            <ul className="space-y-2 text-xs font-sans text-white/70">
-              <li><a href="#services" className="hover:text-[#CDAE72]">Services</a></li>
-              <li><a href="#about" className="hover:text-[#CDAE72]">Our Process</a></li>
-              <li><a href="#projects" className="hover:text-[#CDAE72]">Our Work</a></li>
-              <li><a href="#contact-page" className="hover:text-[#CDAE72]">Contact</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h5 className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase mb-4">Services</h5>
-            <ul className="space-y-2 text-xs font-sans text-white/70">
-              <li>Additions and ADU's</li>
-              <li>Whole Home Renovations</li>
-              <li>Multi-Unit Conversions</li>
-            </ul>
-          </div>
-
-          <div>
-            <h5 className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase mb-4">Stay Connected</h5>
-            {newsletterSubmitted ? (
-              <p className="text-xs font-sans text-[#CDAE72]">Subscribed successfully!</p>
-            ) : (
-              <form onSubmit={handleNewsletterSubmit} className="space-y-3">
-                <p className="text-[11px] text-white/70">Subscribe to our newsletter for project highlights & inspiration.</p>
-                <input 
-                  type="email" 
-                  required 
-                  placeholder="Email Address" 
-                  className="w-full bg-[#17365D] border-b border-[#CDAE72]/50 px-3 py-2 text-xs text-white placeholder-white/50 outline-none focus:border-[#CDAE72]" 
-                />
-                <button type="submit" className="w-full bg-[#CDAE72] text-[#0B2638] font-bold py-2 text-xs font-sans tracking-widest uppercase hover:bg-white transition-all">
-                  SUBSCRIBE
-                </button>
-              </form>
-            )}
-          </div>
-        </div>
-
-        {/* SOCIAL LINKS ROW */}
-        <div className="max-w-7xl mx-auto px-6 mb-8 border-t border-white/5 pt-8 flex justify-center space-x-6 text-[#CDAE72] opacity-80">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Facebook">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8H7v3h2v9h4v-9h3.6l.4-3H13V6c0-.5.5-1 1-1h2V1H13c-3 0-4 2-4 4v3z"/></svg>
-          </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Instagram">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051c-.058 1.28-.072 1.688-.072 4.948s.014 3.667.072 4.947c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.26-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Linkedin">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-          </a>
-          <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" title="Youtube">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.107C19.525 3.545 12 3.545 12 3.545s-7.525 0-9.388.511a3.003 3.003 0 00-2.11 2.107C0 8.029 0 12 0 12s0 3.971.502 5.837a3.003 3.003 0 002.11 2.107c1.863.514 9.388.514 9.388.514s7.525 0 9.388-.514a3.003 3.003 0 002.11-2.107C24 15.971 24 12 24 12s0-3.971-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          </a>
-          <a href="https://houzz.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Houzz"><img src="houzz.avif" className="w-5 h-5 object-contain" alt="Houzz" /></a>
-          <a href="https://yelp.com" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Yelp"><img src="yelp.avif" className="w-5 h-5 object-contain" alt="Yelp" /></a>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-6 pt-2 flex flex-col md:flex-row justify-between items-center text-[11px] font-sans text-white/40 gap-2">
-          <span>DESIGN · BUILD · RENOVATE</span>
-          <span>© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</span>
-          <span className="text-white/40 font-sans">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] hover:underline font-semibold">BoostMyLeads</a></span>
-        </div>
-      </footer>
+        </footer>
 
 
       {/* GLOBAL CAREERS POPUP MODAL */}
@@ -1213,10 +2229,13 @@ export default function App() {
           <div className="bg-white text-[#24313A] max-w-xl w-full rounded-sm shadow-2xl overflow-hidden relative my-8">
             
             {/* MODAL HEADER */}
-            <div className="bg-[#0B2638] text-white p-6 flex justify-between items-center">
-              <div>
-                <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block">JOIN HAVENRIDGE BUILD</span>
-                <h3 className="font-cinzel text-xl font-bold">Work With Us Application</h3>
+            <div className="bg-[#0B2638] text-white p-6 flex justify-between items-center border-b border-[#CDAE72]/20">
+              <div className="flex items-center gap-4">
+                <img src="logo_mark_h_only.svg" alt="Havenridge Build Logo" className="h-8 sm:h-9 w-auto object-contain" />
+                <div className="border-l border-white/20 pl-4">
+                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block">JOIN HAVENRIDGE BUILD</span>
+                  <h3 className="font-cinzel text-lg sm:text-xl font-bold text-white">Work With Us Application</h3>
+                </div>
               </div>
               <button 
                 onClick={() => { setIsApplyModalOpen(false); setIsAppliedSubmitted(false); }} 

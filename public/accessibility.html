@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Havenridge Build | Accessible & Barrier-Free Construction</title>
+  <link rel="icon" type="image/png" href="logo_social_profile_navy.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: { DEFAULT: '#0B2638', light: '#17365D', dark: '#061622' },
+            gold: { DEFAULT: '#CDAE72', light: '#E5CD9B', dark: '#B8975A' },
+            ink: '#24313A', canvas: '#F4F2EE'
+          },
+          fontFamily: {
+            cinzel: ['Cinzel', 'serif'],
+            cormorant: ['Cormorant Garamond', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: #F4F2EE;
+      color: #24313A;
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+    .font-drama {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
+
+  <!-- NAVIGATION -->
+  <nav class="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex justify-between items-center">
+      <a href="index.html" class="flex items-center">
+        <img src="logo_horizontal_dark.svg" class="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+      </a>
+      <a href="projects.html" class="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
+        ← BACK TO PROJECTS
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="relative bg-[#0B2638] text-white py-20 px-6 overflow-hidden">
+    <div className="max-w-5xl mx-auto text-center space-y-4 relative z-10">
+      <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">AODA-COMPLIANT & AGING-IN-PLACE</span>
+      <h1 className="font-cinzel text-3xl sm:text-5xl font-bold tracking-wider text-white">ACCESSIBLE & BARRIER-FREE SERVICES</h1>
+      <p className="text-sm sm:text-base font-light text-white/80 max-w-2xl mx-auto leading-relaxed">
+        Luxurious, independent living environments engineered with zero-threshold curbless showers, solid wall backing, and widened entries across Kitchener, Waterloo, Cambridge & Guelph.
+      </p>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="max-w-6xl mx-auto px-6 py-16 space-y-16">
+    
+    {/* EDITORIAL GRID */}
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <span class="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">INDEPENDENT LIVING</span>
+        <h2 class="font-cinzel text-2xl sm:text-3xl font-bold text-[#0B2638]">Zero-Threshold Showers & Wall Backing</h2>
+        <p class="text-sm text-[#24313A]/80 font-light leading-relaxed">
+          Creating an accessible bathroom or living suite does not mean sacrificing high-end luxury aesthetics. With thoughtful design, barrier-free washrooms provide independent living without looking institutional.
+        </p>
+        <p class="text-sm text-[#24313A]/80 font-light leading-relaxed">
+          Before drywall is installed, 2x10 solid lumber backing is fitted inside shower and toilet walls for grab bar anchoring. Doorways are widened to 36"+ with zero-threshold transfers and custom roll-under floating vanities.
+        </p>
+      </div>
+
+      <div class="rounded-2xl overflow-hidden shadow-2xl border border-[#0B2638]/10 h-[380px]">
+        <img src="project_images/ouellette/2.png" alt="Accessible Ensuite" class="w-full h-full object-cover" />
+      </div>
+    </div>
+
+    {/* CARDS GRID */}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-[#0B2638]/10">
+      <div class="bg-white p-8 rounded-2xl border border-[#0B2638]/10 shadow-lg space-y-3">
+        <h3 class="font-cinzel text-lg font-bold text-[#0B2638]">Solid Wood Wall Backing</h3>
+        <p class="text-xs text-[#24313A]/80 font-light leading-relaxed">
+          2x10 solid lumber installed behind drywall allows grab bars and floating seats to be securely anchored anywhere required, now or in the future.
+        </p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl border border-[#0B2638]/10 shadow-lg space-y-3">
+        <h3 class="font-cinzel text-lg font-bold text-[#0B2638]">Zero-Threshold Transfers</h3>
+        <p class="text-xs text-[#24313A]/80 font-light leading-relaxed">
+          Curbless walk-in showers and flush doorway transitions eliminate trip hazards and accommodate wheelchairs or mobility walkers seamlessly.
+        </p>
+      </div>
+      <div class="bg-white p-8 rounded-2xl border border-[#0B2638]/10 shadow-lg space-y-3">
+        <h3 class="font-cinzel text-lg font-bold text-[#0B2638]">Custom Roll-Under Vanities</h3>
+        <p class="text-xs text-[#24313A]/80 font-light leading-relaxed">
+          Floating wall-hung vanities designed with open lower clearance allow comfortable wheel-in access while concealing plumbing inside decorative shrouds.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-[#0B2638] text-white py-12 text-center border-t border-[#CDAE72]/20 font-sans">
+    <div class="max-w-7xl mx-auto px-6 space-y-4">
+      <p class="text-xs text-[#CDAE72] uppercase tracking-[0.25em]">DESIGN · BUILD · RENOVATE</p>
+      <p class="text-xs text-white/60">© 2026 Havenridge Build. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

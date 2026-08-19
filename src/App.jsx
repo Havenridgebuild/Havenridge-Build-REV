@@ -477,27 +477,78 @@ export default function App() {
           <img src={proj.img1} alt={proj.title} className="w-full h-full object-cover opacity-90" />
         </section>
 
-        {/* EDITORIAL BLOCKS (CASS-STYLE INLINE LAYOUT) */}
+        {/* EDITORIAL CONTENT + PROJECT SPECIFICATIONS CARD LAYOUT */}
         <section className="py-16 md:py-24 bg-white">
-          <div className="max-w-4xl mx-auto px-6 space-y-12">
-            <div className="space-y-4">
-              <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block">PROJECT PROFILE</span>
-              <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B2638] leading-tight">{proj.title}</h1>
-              <p className="font-drama text-2xl text-[#24313A]/70 italic leading-relaxed pt-2">{proj.leadDesc}</p>
-            </div>
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
             
-            <div className="text-sm text-[#24313A]/80 leading-relaxed space-y-6 font-light">
-              <p>{proj.desc1}</p>
+            {/* LEFT COLUMN: EDITORIAL STORY & IMAGERY (2 COLS) */}
+            <div className="lg:col-span-2 space-y-10">
+              <div className="space-y-4">
+                <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block">PROJECT PROFILE</span>
+                <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B2638] leading-tight">{proj.title}</h1>
+                <p className="font-drama text-2xl text-[#24313A]/70 italic leading-relaxed pt-2">{proj.leadDesc}</p>
+              </div>
+              
+              <div className="text-sm text-[#24313A]/80 leading-relaxed space-y-6 font-light">
+                <p>{proj.desc1}</p>
+              </div>
+
+              {/* In-feed large detail image */}
+              <div className="w-full aspect-[16/10] overflow-hidden shadow-md rounded-lg">
+                <img src={proj.img2} alt="Project detail visual" className="w-full h-full object-cover" />
+              </div>
+
+              <div className="text-sm text-[#24313A]/80 leading-relaxed space-y-6 font-light">
+                <p>{proj.desc2}</p>
+              </div>
             </div>
 
-            {/* In-feed large detail image */}
-            <div className="w-full aspect-[16/10] overflow-hidden shadow-md py-4">
-              <img src={proj.img2} alt="Project detail visual" className="w-full h-full object-cover" />
+            {/* RIGHT COLUMN: PROJECT SPECIFICATIONS CARD (1 COL) */}
+            <div className="lg:col-span-1 sticky top-28">
+              <div className="bg-[#0B2638] text-white p-8 rounded-2xl border border-[#CDAE72]/30 shadow-xl space-y-6">
+                <div className="border-b border-white/10 pb-4">
+                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.25em] uppercase block mb-1">PROJECT SPECIFICATIONS</span>
+                  <h3 className="font-cinzel text-xl font-bold text-white tracking-wide">{proj.title}</h3>
+                </div>
+
+                <div className="space-y-4 text-xs font-sans">
+                  <div className="flex justify-between items-start border-b border-white/10 pb-3">
+                    <span className="text-[#CDAE72] font-bold uppercase tracking-wider">LOCATION</span>
+                    <span className="text-white/90 font-medium text-right">{proj.location || 'Waterloo Region, ON'}</span>
+                  </div>
+
+                  <div className="flex justify-between items-start border-b border-white/10 pb-3">
+                    <span className="text-[#CDAE72] font-bold uppercase tracking-wider">CATEGORY</span>
+                    <span className="text-white/90 font-medium text-right max-w-[180px]">{proj.cat}</span>
+                  </div>
+
+                  <div className="flex justify-between items-start border-b border-white/10 pb-3">
+                    <span className="text-[#CDAE72] font-bold uppercase tracking-wider">TIMELINE</span>
+                    <span className="text-white/90 font-medium text-right">{proj.timeline || '6 – 10 Weeks'}</span>
+                  </div>
+
+                  <div className="space-y-1 border-b border-white/10 pb-3">
+                    <span className="text-[#CDAE72] font-bold uppercase tracking-wider block mb-1">SCOPE OF WORK</span>
+                    <p className="text-white/80 font-light leading-relaxed">{proj.scope || 'Custom Cabinetry, Architectural Trim & Structural Reconfiguration'}</p>
+                  </div>
+
+                  <div className="space-y-1 pb-2">
+                    <span className="text-[#CDAE72] font-bold uppercase tracking-wider block mb-1">STANDARDS & WARRANTY</span>
+                    <p className="text-white/80 font-light leading-relaxed">{proj.certifications || 'WEDI Certified, 2-Year Structural Warranty'}</p>
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <a 
+                    href="#contact-page" 
+                    className="w-full bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 px-4 text-xs font-sans tracking-widest uppercase block text-center rounded-sm hover:bg-white transition-all shadow-md"
+                  >
+                    REQUEST CONSULTATION →
+                  </a>
+                </div>
+              </div>
             </div>
 
-            <div className="text-sm text-[#24313A]/80 leading-relaxed space-y-6 font-light">
-              <p>{proj.desc2}</p>
-            </div>
           </div>
         </section>
 
@@ -1946,10 +1997,10 @@ export default function App() {
           </div>
 
           {/* MAIN CONTENT GRID: 5-STEP VERTICAL TIMELINE WITH ICONS + FEATURED PROJECT & COMPUTER/PHONE MOCKUP */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start pt-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start pt-6">
             
-            {/* LEFT COLUMN: 5-STEP VERTICAL TIMELINE WITH NUMBER + ICON BADGES (5 COLS) */}
-            <div className="lg:col-span-5 space-y-8 relative pl-2 sm:pl-0">
+            {/* LEFT COLUMN: 5-STEP VERTICAL TIMELINE WITH NUMBER + ICON BADGES (6 COLS) */}
+            <div className="lg:col-span-6 space-y-8 relative pl-2 sm:pl-0">
               
               {/* VERTICAL CONNECTING LINE */}
               <div className="absolute left-6 sm:left-6 top-6 bottom-6 w-0.5 bg-[#CDAE72]/40 -z-0 hidden sm:block"></div>
@@ -2051,11 +2102,11 @@ export default function App() {
 
             </div>
 
-            {/* RIGHT COLUMN: FEATURED PROJECT PHOTO + LAPTOP/SMARTPHONE PORTAL MOCKUP + TRUST BADGES (7 COLS) */}
-            <div className="lg:col-span-7 space-y-6">
+            {/* RIGHT COLUMN: FEATURED PROJECT PHOTO + LAPTOP/SMARTPHONE PORTAL MOCKUP + TRUST BADGES (6 COLS) */}
+            <div className="lg:col-span-6 space-y-6">
               
               {/* RECENT PROJECT PHOTO CONTAINER */}
-              <div className="relative rounded-2xl overflow-hidden shadow-xl h-[340px] sm:h-[380px] border border-[#0B2638]/10 group">
+              <div className="relative rounded-2xl overflow-hidden shadow-lg h-[250px] sm:h-[280px] border border-[#0B2638]/10 group max-w-lg mx-auto lg:max-w-none">
                 <img 
                   src="wellington_recent.jpg" 
                   alt="Wellington Street North Kitchen Renovation" 

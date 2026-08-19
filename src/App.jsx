@@ -648,7 +648,7 @@ export default function App() {
                 <a 
                   key={idx} 
                   href={item.link} 
-                  className="relative w-full h-[420px] overflow-hidden rounded-2xl group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-lg border border-[#0B2638]/10 bg-[#0B2638]"
+                  className="relative w-full aspect-square overflow-hidden rounded-2xl group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-lg border border-[#0B2638]/10 bg-[#0B2638]"
                 >
                   <img 
                     src={item.img} 
@@ -2177,7 +2177,7 @@ export default function App() {
                 <a 
                   key={idx} 
                   href={item.link} 
-                  className="relative w-full h-[420px] overflow-hidden rounded-2xl group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-lg border border-[#0B2638]/10 bg-[#0B2638]"
+                  className="relative w-full aspect-square overflow-hidden rounded-2xl group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-lg border border-[#0B2638]/10 bg-[#0B2638]"
                 >
                   <img 
                     src={item.img} 

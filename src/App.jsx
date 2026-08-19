@@ -1787,6 +1787,7 @@ export default function App() {
                 <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADU's</a>
                 <a href="#project-kitchens" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
                 <a href="#project-living-spaces" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Barrier-Free</a>
               </div>
             </div>
 
@@ -1874,9 +1875,13 @@ export default function App() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {servicePillars.map((s, idx) => (
-              <div key={idx} className="cass-reveal flex flex-col items-center text-center space-y-4 group">
+              <a 
+                key={idx} 
+                href={s.hash} 
+                className="cass-reveal flex flex-col items-center text-center space-y-4 group cursor-pointer block no-underline text-inherit"
+              >
                 <div className="space-y-2 max-w-sm px-2">
-                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-[#0B2638] uppercase tracking-wide leading-snug min-h-[52px] flex items-center justify-center text-center">{s.title}</h3>
+                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-[#0B2638] uppercase tracking-wide leading-snug min-h-[52px] flex items-center justify-center text-center group-hover:text-[#CDAE72] transition-colors">{s.title}</h3>
                   <p className="text-xs text-[#24313A]/90 font-medium leading-relaxed min-h-[40px]">{s.headline}</p>
                 </div>
                 
@@ -1890,17 +1895,16 @@ export default function App() {
                     <p className="text-sm sm:text-base md:text-lg text-white leading-relaxed font-normal max-w-xs">
                       {s.desc}
                     </p>
-                    <a 
-                      href={s.hash} 
-                      className="flex items-center justify-center space-x-4 text-xs font-sans tracking-widest text-[#CDAE72] uppercase mt-10 hover:text-white transition-colors"
+                    <span 
+                      className="flex items-center justify-center space-x-4 text-xs font-sans tracking-widest text-[#CDAE72] uppercase mt-10 group-hover:text-white transition-colors"
                     >
                       <span className="w-12 h-px bg-[#CDAE72]/50"></span>
                       <span>LEARN MORE</span>
                       <span className="w-12 h-px bg-[#CDAE72]/50"></span>
-                    </a>
+                    </span>
                   </div>
                 </div>
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -2053,7 +2057,7 @@ export default function App() {
               {/* RECENT PROJECT PHOTO CONTAINER */}
               <div className="relative rounded-2xl overflow-hidden shadow-xl h-[340px] sm:h-[380px] border border-[#0B2638]/10 group">
                 <img 
-                  src="project_images/piccadilly/1.png" 
+                  src="wellington_recent.jpg" 
                   alt="Wellington Street North Kitchen Renovation" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 />

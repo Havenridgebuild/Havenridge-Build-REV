@@ -56,120 +56,148 @@
     </div>
   </nav>
 
-  <!-- HERO SECTION -->
-  <section class="relative bg-[#0B2638] text-white py-24 text-center overflow-hidden">
-    <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-4">
-      <h1 class="font-cinzel text-4xl sm:text-5xl font-bold tracking-wider text-white">Get In Touch</h1>
-      <p class="text-sm font-light text-white/80 max-w-xl mx-auto leading-relaxed">
-        We look forward to hearing about your project goals. Please contact us to coordinate a phone consultation.
-      </p>
-    </div>
-  </section>
-
-  <!-- CONTACT CONTENT SECTION (CASS-STYLE TWO COLUMN) -->
-  <section class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
-      
-      <!-- Left Column: Contact details -->
-      <div class="space-y-8">
-        <div class="space-y-2">
-          <span class="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase">CONTACT INFO</span>
-          <h2 class="font-cinzel text-3xl font-bold text-[#0B2638]">Havenridge Build</h2>
-        </div>
-        
-        <div class="space-y-4 text-sm leading-relaxed text-[#24313A]/80 font-sans">
-          <p>
-            <strong>Founder & Lead builder:</strong> Micheal Smith
-          </p>
-          <p>
-            <strong>Office Phone:</strong> <a href="tel:5196350963" class="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">(519) 635-0963</a>
-          </p>
-          <p>
-            <strong>Email Address:</strong> <a href="mailto:Info@havenridgebuild.ca" class="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">Info@havenridgebuild.ca</a>
-          </p>
-          <p>
-            <strong>Service Area:</strong> Serving Kitchener, Waterloo, Cambridge, and surrounding Oxford County communities.
-          </p>
-        </div>
-
-                <div class="pt-6 border-t border-[#0B2638]/10 space-y-4">
-          <span class="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">CERTIFICATIONS & ACCREDITATIONS</span>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs font-sans font-bold text-[#0B2638]">
-            <div class="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-              <span class="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">WATERPROOFING</span>
-              <span>WEDI CERTIFIED</span>
-            </div>
-            <div class="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-              <span class="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">TILE SYSTEMS</span>
-              <span>SCHLUTER CERTIFIED</span>
-            </div>
-            <div class="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-              <span class="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">AODA STANDARDS</span>
-              <span>ACCESSIBILITY CERTIFIED</span>
-            </div>
-            <div class="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-              <span class="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">QUALITY STANDARDS</span>
-              <span>RENOMARK CERTIFIED</span>
-            </div>
-            <div class="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-              <span class="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">TRUSTED PRO</span>
-              <span>BAEUMLER APPROVED</span>
-            </div>
-            <div class="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-              <span class="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">INDUSTRY MEMBER</span>
-              <span>WRHBA MEMBER</span>
-            </div>
+          {/* HERO SECTION */}
+        <section className="relative bg-[#0B2638] text-white py-20 text-center overflow-hidden">
+          <div className="max-w-4xl mx-auto px-6 space-y-4">
+            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.3em] uppercase block">HAVENRIDGE BUILD</span>
+            <h1 className="font-cinzel text-4xl sm:text-5xl font-bold tracking-wider text-white">START YOUR PROJECT</h1>
+            <p className="text-sm sm:text-base font-light text-white/85 max-w-2xl mx-auto leading-relaxed">
+              Tell us about your home, your goals and where you are in the planning process.<br className="hidden sm:inline" />
+              We review every inquiry before arranging an initial phone consultation.
+            </p>
           </div>
-        </div>
-      </div>
-      </div>
+        </section>
 
-      {/* Right Column: Form */}
-      <div class="bg-[#F4F2EE] p-8 border border-[#0B2638]/10">
-        <form id="contact-form" class="space-y-6">
-          <h3 class="font-cinzel text-xl font-bold text-[#0B2638] uppercase tracking-wider mb-6">Send an Inquiry</h3>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">First Name *</label>
-              <input type="text" required placeholder="John" class="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm" />
+        {/* CONTACT & QUALIFICATION FORM SECTION */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            {/* LEFT SIDEBAR: CONTACT INFO & INVESTMENT GUIDELINES */}
+            <div className="lg:col-span-4 space-y-8">
+              <div className="space-y-3">
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase">CONTACT INFO</span>
+                <h2 className="font-cinzel text-3xl font-bold text-[#0B2638]">HAVENRIDGE BUILD</h2>
+                <div className="h-1 w-12 bg-[#CDAE72]"></div>
+              </div>
+              
+              <div className="space-y-4 text-sm leading-relaxed text-[#24313A]/80 font-sans border-b border-[#0B2638]/10 pb-6">
+                <p className="flex items-center gap-3">
+                  <span className="font-bold text-[#0B2638] min-w-[70px]">Office</span>
+                  <a href="tel:5196350963" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">(519) 635-0963</a>
+                </p>
+                <p className="flex items-center gap-3">
+                  <span className="font-bold text-[#0B2638] min-w-[70px]">Email</span>
+                  <a href="mailto:info@havenridgebuild.com" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">info@havenridgebuild.com</a>
+                </p>
+                <div className="pt-2">
+                  <span className="font-bold text-[#0B2638] block mb-1">Service area</span>
+                  <p className="text-xs text-[#24313A]/80">Cambridge · Kitchener · Waterloo · Guelph</p>
+                </div>
+              </div>
+
+              {/* PROJECT INVESTMENT NOTICE */}
+              <div className="space-y-2 border-b border-[#0B2638]/10 pb-6">
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#0B2638]">PROJECT INVESTMENT</h3>
+                <p className="text-xs text-[#24313A]/80 leading-relaxed font-light">
+                  Professionally managed renovation projects generally begin at $20,000.
+                </p>
+              </div>
+
+              {/* WHAT HAPPENS NEXT CARD */}
+              <div className="bg-[#F4F2EE] p-6 rounded-sm space-y-4 border-l-4 border-[#0B2638]">
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#0B2638]">WHAT HAPPENS NEXT</h3>
+                <ol className="space-y-3 text-xs text-[#24313A]/85 font-light">
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-[#0B2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">1</span>
+                    <span>We review your project details.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-[#0B2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">2</span>
+                    <span>We confirm fit, location and timing.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-[#0B2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">3</span>
+                    <span>Qualified projects move to a phone consultation.</span>
+                  </li>
+                </ol>
+              </div>
             </div>
-            <div>
-              <label class="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">Last Name *</label>
-              <input type="text" required placeholder="Smith" class="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm" />
+
+            {/* RIGHT COLUMN: MULTI-STEP QUALIFICATION FORM CONTAINER */}
+            <div className="lg:col-span-8 bg-[#F4F2EE] p-6 sm:p-10 border border-[#0B2638]/10 rounded-sm shadow-sm">
+              <form className="space-y-8">
+                
+                {/* FORM HEADER & PROGRESS BAR */}
+                <div className="space-y-4 border-b border-[#0B2638]/10 pb-6">
+                  <h3 className="font-cinzel text-2xl font-bold text-[#0B2638] uppercase tracking-wider">TELL US ABOUT YOUR PROJECT</h3>
+                  <div className="flex justify-between items-center text-xs font-bold tracking-wider uppercase text-[#0B2638]/70">
+                    <span>STEP 1 OF 3 · CONTACT &amp; LOCATION</span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 pt-1">
+                    <div className="h-1.5 rounded-full bg-[#0B2638]"></div>
+                    <div className="h-1.5 rounded-full bg-gray-300"></div>
+                    <div className="h-1.5 rounded-full bg-gray-300"></div>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">First Name *</label>
+                      <input type="text" required placeholder="John" className="w-full border border-gray-300 p-3 text-sm rounded-sm bg-white" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Last Name *</label>
+                      <input type="text" required placeholder="Smith" className="w-full border border-gray-300 p-3 text-sm rounded-sm bg-white" />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Email Address *</label>
+                      <input type="email" required placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm bg-white" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Phone Number *</label>
+                      <input type="tel" required placeholder="(519) 000-0000" className="w-full border border-gray-300 p-3 text-sm rounded-sm bg-white" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Project Address *</label>
+                    <input type="text" required placeholder="Street address of the property to be renovated" className="w-full border border-gray-300 p-3 text-sm rounded-sm bg-white" />
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Project City *</label>
+                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm bg-white">
+                        <option value="Cambridge">Cambridge</option>
+                        <option value="Kitchener">Kitchener</option>
+                        <option value="Waterloo">Waterloo</option>
+                        <option value="Guelph">Guelph</option>
+                        <option value="Other">Other Surrounding Area</option>
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Postal Code *</label>
+                      <input type="text" required placeholder="N2H 2B5" className="w-full border border-gray-300 p-3 text-sm rounded-sm bg-white" />
+                    </div>
+                  </div>
+
+                  <div className="pt-4 text-right">
+                    <a href="#contact-page" className="inline-block bg-[#0B2638] text-white font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-md">
+                      CONTINUE TO INVESTMENT →
+                    </a>
+                  </div>
+                </div>
+              </form>
             </div>
+
           </div>
+        </section>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">Phone Number *</label>
-              <input type="tel" required placeholder="(519) 000-0000" class="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm" />
-            </div>
-            <div>
-              <label class="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">Email Address *</label>
-              <input type="email" required placeholder="john@example.com" class="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm" />
-            </div>
-          </div>
-
-          <div>
-            <label class="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">Project Details</label>
-            <textarea rows="4" placeholder="Tell us about your home and project goals..." class="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm"></textarea>
-          </div>
-
-          <button type="submit" class="w-full bg-[#0B2638] text-white hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold py-4 text-xs font-sans tracking-widest uppercase transition-all">
-            SEND MESSAGE →
-          </button>
-        </form>
-
-        <div id="form-success" class="hidden py-12 space-y-4 text-center">
-          <h3 class="font-cinzel text-2xl font-bold text-[#0B2638]">Message Sent</h3>
-          <p class="text-xs text-[#24313A]/80">Micheal Smith or a senior project manager will contact you within 24 business hours.</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- FOOTER -->
+        <!-- FOOTER -->
   <footer class="bg-[#0B2638] text-white/40 py-10 text-center text-xs font-sans border-t border-white/10">
     <p class="text-[#CDAE72] mb-2">DESIGN · BUILD · RENOVATE</p>
     <p>© 2026 Havenridge Build. All rights reserved.</p>

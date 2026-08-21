@@ -6,6 +6,50 @@ import { CheckCircle2, ArrowLeft, ChevronDown, ChevronLeft, ChevronRight, Star, 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function App() {
+  // Form qualification state
+  const [formStep, setFormStep] = useState(1);
+  const [formQualified, setFormQualified] = useState(true);
+  
+  // Lead fields
+  const [formFirstName, setFormFirstName] = useState('');
+  const [formLastName, setFormLastName] = useState('');
+  const [formEmail, setFormEmail] = useState('');
+  const [formPhone, setFormPhone] = useState('');
+  const [formAddress, setFormAddress] = useState('');
+  const [formCity, setFormCity] = useState('Cambridge');
+  const [formPostalCode, setFormPostalCode] = useState('');
+  
+  const [formInvestment, setFormInvestment] = useState('$50,000–$99,999');
+  const [formDesignStatus, setFormDesignStatus] = useState('I need Havenridge to provide or coordinate design');
+  const [formTiming, setFormTiming] = useState('3–6 months');
+  const [formDecisionMakers, setFormDecisionMakers] = useState('Yes, all decision-makers are aligned');
+  
+  const [formProjectTypes, setFormProjectTypes] = useState(['Kitchen']);
+  const [formDescription, setFormDescription] = useState('');
+  const [formHomeOccupied, setFormHomeOccupied] = useState('Yes');
+  const [formUploadedFile, setFormUploadedFile] = useState('');
+  const [formSource, setFormSource] = useState('Google');
+  const [formSourceDetail, setFormSourceDetail] = useState('');
+  const [formConsent, setFormConsent] = useState(false);
+
+  const toggleProjectType = (type) => {
+    if (formProjectTypes.includes(type)) {
+      setFormProjectTypes(formProjectTypes.filter(t => t !== type));
+    } else {
+      setFormProjectTypes([...formProjectTypes, type]);
+    }
+  };
+
+  const handleLeadSubmit = (e) => {
+    e.preventDefault();
+    if (formInvestment === 'Under $20,000') {
+      setFormQualified(false);
+    } else {
+      setFormQualified(true);
+    }
+    setFormSubmitted(true);
+  };
+
   const compRef = useRef(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -65,9 +109,9 @@ export default function App() {
   // Hero Slideshow State
   const [heroIndex, setHeroIndex] = useState(0);
   const heroImages = [
-    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1920',
-    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1920',
-    'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=1920'
+    'project_images/hero_living_room_fireplace.jpg',
+    'project_images/piccadilly/1.png',
+    'project_images/d_costa/exterior_facade_stone_driveway.jpg'
   ];
 
   useEffect(() => {
@@ -117,30 +161,30 @@ export default function App() {
 
   const servicePillars = [
     {
-      title: "Additions and ADU's",
-      headline: 'Expand your footprint with modern guest suites and home additions.',
-      desc: 'Additions allow you to update and expand your existing house to make your dream home without the time, expense, and complexity of a move or a new build.',
+      title: "Additions and ADUs",
+      headline: 'Add space without leaving the home and neighbourhood you love.',
+      desc: 'We coordinate design, engineering, permits and construction for carefully integrated additions and accessory dwelling units.',
       img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000',
       hash: '#project-additions'
     },
     {
       title: 'Whole Home Renovations',
-      headline: 'Transform your interior layout with open concept high-end updates.',
-      desc: 'If you love the home you are in, but it just needs some updates, our renovation service can help you enhance or even create charm and character.',
+      headline: 'Rework the layout, function and finishes of your home through one process.',
+      desc: 'Rework the layout, function and finishes of your home through one coordinated design-build process, from early planning and selections through construction and final walkthrough.',
       img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1000',
       hash: '#project-kitchens'
     },
     {
       title: 'Multi-Unit Conversions',
-      headline: 'Convert and optimize layouts for secondary suites and multi-unit living.',
-      desc: 'Starting from scratch allows you to design a unique living space centered around your family’s needs and tailored to your design style.',
+      headline: 'Convert and optimize space for secondary suites or multi-unit living.',
+      desc: 'Convert and optimize existing space for secondary suites or multi-unit living with coordinated design, code review, permits and construction.',
       img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1000',
       hash: '#project-living-spaces'
     },
     {
       title: 'Accessible & Barrier-Free',
-      headline: 'AODA-compliant zero-threshold showers, solid backing & widened entries.',
-      desc: 'Creating luxurious, independent living environments with zero-threshold curbless showers, solid wood wall backing, widened 36"+ doorways, and custom roll-under vanities.',
+      headline: 'Accessible & aging-in-place renovations for safer independent living.',
+      desc: 'Accessible and aging-in-place renovations designed around safer movement, greater independence and comfortable long-term living.',
       img: 'project_images/ouellette/2.png',
       hash: '#project-accessibility'
     }
@@ -195,7 +239,7 @@ export default function App() {
         'When planning a whole-home kitchen or living room remodel, the debate between pre-fabricated factory cabinetry and custom bench-built millwork is critical.',
         'Precision Fit Without Fillers: Factory cabinets come in fixed 3-inch increments, requiring wide filler strips that waste valuable space. Custom millwork is built precisely to your wall dimensions, maximizing every square inch of kitchen storage.',
         'Solid Wood Joinery: Factory cabinets frequently rely on stapled particleboard boxes that swell when exposed to moisture. Bench-crafted cabinets utilize 3/4-inch furniture-grade plywood boxes, solid hardwood face frames, and mortise-and-tenon joints built for generations.',
-        'Custom Appliance Integration: Integrated panel-ready refrigerators, hidden pantry doors, pull-out spice racks, and custom range hoods can only be seamlessly executed through bespoke carpentry.'
+        'Custom Appliance Integration: Integrated panel-ready refrigerators, hidden pantry doors, pull-out spice racks, and custom range hoods can only be seamlessly executed through custom carpentry.'
       ]
     },
     {
@@ -213,12 +257,12 @@ export default function App() {
         'Weeks 1–4 (Feasibility & Design): On-site structural inspections, 3D floor plan development, fixed-cost budgeting, and material selections.',
         'Weeks 5–8 (Permitting & Procurement): Submitting architectural drawings to municipal building departments while pre-ordering long-lead items like custom windows, structural steel beams, and custom oak millwork.',
         'Weeks 9–16 (Structural Demolition & Framing): Site protection setup, structural wall removal, steel beam installation, rough plumbing, electrical upgrades, and HVAC duct rerouting.',
-        'Weeks 17–24 (Finishes & Handover): Insulation, drywall taping, custom tile installation, cabinetry fitting, trim carpentry, painting, 100-point quality inspection, and 5-year warranty handover.'
+        'Weeks 17–24 (Finishes & Handover): Insulation, drywall taping, custom tile installation, cabinetry fitting, trim carpentry, painting, 100-point quality inspection, and written warranty handover.'
       ]
     },
     {
       id: 'barrier-free-accessibility-waterloo',
-      title: 'Barrier-Free & Accessible Washrooms in Waterloo Region: AODA & Aging-in-Place',
+      title: 'Barrier-Free & Accessible Washrooms in Waterloo Region: Barrier-Free & Aging-in-Place',
       subtitle: 'Zero-Threshold Entry, Grab Bar Backing & Roll-Under Vanities',
       category: 'ACCESSIBILITY',
       date: 'July 02, 2026',
@@ -251,23 +295,23 @@ export default function App() {
   ];
 
   const stillInspirationGallery = [
-    { title: 'McNamara Suite', subtitle: 'Spa-Like Double Vanity Retreat', img: 'project_images/mcnamara/2.png', cat: 'BATHROOMS' },
-    { title: '190 Piccadilly', subtitle: 'Master Oak Cabinetry & Island', img: 'project_images/piccadilly/2.png', cat: 'KITCHENS' },
-    { title: '23 Paisley Heights', subtitle: 'Fireplace & Custom Bookshelves', img: 'project_images/paisley/11.png', cat: 'LIVING SPACES' },
-    { title: 'Kuntz Extension', subtitle: 'Sunroom & Multi-Story Addition', img: 'project_images/kuntz/4.jpg', cat: 'ADDITIONS' },
-    { title: 'Verhoeve Lounge', subtitle: 'Lower-Level Bar & Media Suite', img: 'project_images/verhoeve/16.jpg', cat: 'BASEMENTS' },
-    { title: 'Borkhoff Workshop', subtitle: 'Executive Workshop & Storage Loft', img: 'project_images/borkhoff/11.png', cat: 'GARAGES' },
+    { title: 'John Street Ensuite', subtitle: 'Spa-Like Double Vanity Retreat', img: 'project_images/mcnamara/1.png', cat: 'BATHROOMS' },
+    { title: 'West Forest Trail Kitchen', subtitle: 'Master Oak Cabinetry & Island', img: 'project_images/piccadilly/1.png', cat: 'KITCHENS' },
+    { title: 'Alderview Living Space', subtitle: 'Fireplace & Custom Bookshelves', img: 'project_images/paisley/living_room_wood_beam.jpg', cat: 'LIVING SPACES' },
+    { title: 'Joan Lane Sunroom Addition', subtitle: 'Sunroom & Multi-Story Addition', img: 'project_images/kuntz/3.jpg', cat: 'ADDITIONS' },
+    { title: 'Courtland Basement Suite', subtitle: 'Lower-Level Bar & Media Suite', img: 'project_images/verhoeve/basement_media_lounge.jpg', cat: 'BASEMENTS' },
+    { title: 'Young Street Executive Workshop', subtitle: 'Executive Workshop & Storage Loft', img: 'project_images/borkhoff/10.png', cat: 'GARAGES' },
     { title: 'Ouellette Ensuite', subtitle: 'Herringbone Tile & Soaker Tub', img: 'project_images/ouellette/2.png', cat: 'BATHROOMS' },
-    { title: 'Piccadilly Culinary', subtitle: 'Open-Concept Family Hub', img: 'project_images/piccadilly/3.png', cat: 'KITCHENS' },
-    { title: 'Paisley Living Suite', subtitle: 'Open Family Living Layouts', img: 'project_images/paisley/12.png', cat: 'LIVING SPACES' }
+    { title: 'West Forest Trail Kitchen', subtitle: 'Open-Concept Family Hub', img: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png', cat: 'KITCHENS' },
+    { title: 'Alderview Family Suite', subtitle: 'Open Family Living Layouts', img: 'project_images/paisley/11.png', cat: 'LIVING SPACES' }
   ];
 
   const processSteps = [
     { step: '01', title: 'Initial Consultation & Feasibility', desc: 'We meet on-site to review your vision, inspect structural conditions, discuss investment expectations, and establish initial feasibility goals.' },
-    { step: '02', title: 'Architectural Scope & Detailed Costing', desc: 'Developing comprehensive 3D layouts, exact scope clarification, material selections, and a fixed-price transparent quote with zero hidden surprises.' },
+    { step: '02', title: 'Architectural Scope & Detailed Costing', desc: 'Developing comprehensive 3D layouts, exact scope clarification, material selections, and a fixed-price transparent quote ' },
     { step: '03', title: 'Municipal Permits & Sourcing', desc: 'We handle all building permit submissions, engineering approvals, and pre-order long-lead custom millwork and stone before site work begins.' },
-    { step: '04', title: 'Master Craftsmanship & Build', desc: 'Clean daily job sites, active communication from Micheal Smith, and precision construction executed by Red Seal master carpenters.' },
-    { step: '05', title: 'Quality Audit & Handover Guarantee', desc: 'Thorough 100-point quality audit, final client walkthrough, detailed care manuals, and our signature 5-year workmanship warranty.' }
+    { step: '04', title: 'Quality Craftsmanship & Skilled Trades', desc: 'Clean daily job sites, active communication from Micheal Smith, and precision construction executed by Red Seal master carpenters.' },
+    { step: '05', title: 'Quality Audit & Handover Guarantee', desc: 'Thorough 100-point quality audit, final client walkthrough, detailed care manuals, and our Havenridge written warranty.' }
   ];
 
   const testimonials = [
@@ -289,14 +333,14 @@ export default function App() {
       name: 'Elena & Marcus P.',
       location: 'Cambridge Client',
       project: 'Secondary Suite & Main Floor Remodel',
-      quote: 'From initial scope clarity to final handover, the craftsmanship is unmatched. They transformed our main floor and kitchen effortlessly. Fixed budget, no hidden surprises.',
+      quote: 'From initial scope clarity to final handover, the craftsmanship is unmatched. They transformed our main floor and kitchen effortlessly. ',
       rating: 5
     },
     {
       name: 'Mark & Jennifer T.',
       location: 'Guelph Homeowner',
       project: 'Custom Main Floor Addition & Sunroom',
-      quote: 'Exceptional attention to detail and scope clarity. Their red-seal carpenters were professional, punctual, and delivered a beautiful extension ahead of schedule.',
+      quote: 'Exceptional attention to detail and scope clarity. Their red-seal carpenters were professional, punctual, and delivered a beautiful extension ',
       rating: 5
     },
     {
@@ -310,31 +354,31 @@ export default function App() {
 
 
   const portfolioProjects = [
-    { name: '190 Piccadilly Square', cat: 'Kitchen Renovation', hash: '#project-kitchens', img: 'project_images/piccadilly/1.png' },
-    { name: 'McNamara Bathrooms', cat: 'Bespoke Bathroom Retreat', hash: '#project-bathrooms', img: 'project_images/mcnamara/1.png' },
-    { name: '23 Paisley Heights', cat: 'Architectural Living Space', hash: '#project-living-spaces', img: 'project_images/paisley/10.png' },
-    { name: 'Kuntz House', cat: 'Main Floor Addition & ADU', hash: '#project-additions', img: 'project_images/kuntz/3.jpg' },
-    { name: 'Verhoeve House', cat: 'Premium Finished Basement', hash: '#project-basements', img: 'project_images/verhoeve/6.jpg' },
-    { name: 'Borkhoff Garage', cat: 'Detached Workshop & Garage', hash: '#project-garages', img: 'project_images/borkhoff/10.png' },
+    { name: 'West Forest Trail Whole Home Renovation', cat: 'Kitchen & Whole Home', hash: '#project-kitchens', img: 'project_images/piccadilly/1.png' },
+    { name: 'John Street Bathroom Retreat', cat: 'Custom Bathroom Renovation', hash: '#project-bathrooms', img: 'project_images/mcnamara/1.png' },
+    { name: 'Alderview Living Space', cat: 'Architectural Living Space', hash: '#project-living-spaces', img: 'project_images/paisley/living_room_wood_beam.jpg' },
+    { name: 'Joan Lane Main Floor Addition', cat: 'Main Floor Addition & ADU', hash: '#project-additions', img: 'project_images/kuntz/3.jpg' },
+    { name: 'Courtland Basement Renovation', cat: 'Finished Basement Suite', hash: '#project-basements', img: 'project_images/verhoeve/basement_media_lounge.jpg' },
+    { name: 'Young Street Workshop', cat: 'Detached Workshop & Garage', hash: '#project-garages', img: 'project_images/borkhoff/10.png' },
   ];
 
     const inspirationItems = [
-    { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: 'project_images/mcnamara/2.png', link: '#project-bathrooms' },
-    { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/piccadilly/2.png', link: '#project-kitchens' },
-    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/paisley/11.png', link: '#project-living-spaces' },
-    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/kuntz/4.jpg', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/verhoeve/16.jpg', link: '#project-basements' },
-    { title: 'GARAGES', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/borkhoff/11.png', link: '#project-garages' },
-    { title: 'CUSTOM MILLWORK', subtitle: 'Bespoke Architectural Trim & Cabinetry', img: 'project_images/piccadilly/3.png', link: '#project-kitchens' },
-    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/kuntz/19.jpg', link: '#project-additions' }
+    { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: 'project_images/mcnamara/1.png', link: '#project-bathrooms' },
+    { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/piccadilly/1.png', link: '#project-kitchens' },
+    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/paisley/living_room_wood_beam.jpg', link: '#project-living-spaces' },
+    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/kuntz/3.jpg', link: '#project-additions' },
+    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/verhoeve/basement_media_lounge.jpg', link: '#project-basements' },
+    { title: 'GARAGES', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/borkhoff/10.png', link: '#project-garages' },
+    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png', link: '#project-kitchens' },
+    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#project-additions' }
   ];
 
   const galleryCategories = [
     { title: 'BATHROOMS', hash: '#project-bathrooms', img: 'project_images/mcnamara/1.png' },
     { title: 'KITCHENS', hash: '#project-kitchens', img: 'project_images/piccadilly/1.png' },
-    { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/paisley/10.png' },
+    { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/paisley/living_room_wood_beam.jpg' },
     { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/kuntz/3.jpg' },
-    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/verhoeve/6.jpg' },
+    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/verhoeve/basement_media_lounge.jpg' },
     { title: 'GARAGES', hash: '#project-garages', img: 'project_images/borkhoff/10.png' },
   ];
 
@@ -352,24 +396,30 @@ export default function App() {
       nextHash: '#project-bathrooms',
       gallery: [
         'project_images/ouellette/2.png',
+        'project_images/ouellette/1.png',
+        'project_images/ouellette/3.png',
+        'project_images/ouellette/4.png',
         'project_images/mcnamara/2.png',
-        'project_images/piccadilly/1.png'
+        'project_images/erbach/ChatGPT_Image_Aug_11__2026__10_07_06_AM.png'
       ]
     },
     '#project-bathrooms': {
       title: 'John Street Bathroom Retreat',
-      cat: 'Bespoke Bathroom Retreat',
-      leadDesc: 'Transform your daily routine into a spa-like experience with our bespoke bathroom renovations.',
+      cat: 'Custom Bathroom Renovation',
+      leadDesc: 'Transform your daily routine into a spa-like experience with our tailored bathroom renovations.',
       desc1: 'We create calming, luxurious bathrooms that serve as personal sanctuaries. From custom walk-in double showers and freestanding soaking tubs to premium stone vanities and heated flooring, every detail is engineered for luxury and longevity.',
       desc2: 'Next came the ensuite, reimagined as a true spa retreat with a freestanding soaker tub, oversized glass shower, herringbone tile floors, and a double vanity bathed in natural light. We coordinate all municipal permit layouts and layout phases, making the build experience completely hands-free for you.',
-      img1: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1920',
-      img2: 'https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&q=80&w=1920',
+      img1: 'project_images/mcnamara/1.png',
+      img2: 'project_images/mcnamara/2.png',
       prevHash: '#projects-page',
       nextHash: '#project-kitchens',
       gallery: [
-        'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1604014237800-1c9102c219da?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&q=80&w=800'
+        'project_images/mcnamara/1.png',
+        'project_images/mcnamara/2.png',
+        'project_images/mcnamara/3.png',
+        'project_images/mcnamara/4.png',
+        'project_images/mcnamara/5.png',
+        'project_images/mcnamara/6.png'
       ]
     },
     '#project-kitchens': {
@@ -378,14 +428,17 @@ export default function App() {
       leadDesc: 'The culinary heart of the home, crafted with master millwork and premium materials.',
       desc1: 'Our kitchens combine high-performance culinary workspace design with open-concept family styling. We focus on master cabinetry, custom range hoods, integrated smart appliances, and expansive islands finished with high-durability stone.',
       desc2: 'We began with the main floor, transforming the kitchen with updated cabinetry, a textured tile backsplash, two-tone island, and glass-front built-ins, all flowing into a refreshed living room anchored by a classic fireplace. We coordinate all custom trim matching.',
-      img1: 'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=1920',
-      img2: 'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=1920',
+      img1: 'project_images/piccadilly/1.png',
+      img2: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png',
       prevHash: '#project-bathrooms',
       nextHash: '#project-living-spaces',
       gallery: [
-        'https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1565538810844-1e119412e8d6?auto=format&fit=crop&q=80&w=800'
+        'project_images/piccadilly/1.png',
+        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png',
+        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png',
+        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_32_40_AM.png',
+        'project_images/piccadilly/2.png',
+        'project_images/piccadilly/3.png'
       ]
     },
     '#project-living-spaces': {
@@ -394,14 +447,17 @@ export default function App() {
       leadDesc: 'Convert and optimize layouts for secondary suites and multi-unit living.',
       desc1: 'Starting from scratch allows you to design a unique living space centered around your family’s needs and tailored to your design style. We create warm, open-concept family environments.',
       desc2: 'Custom white-oak built-in bookshelving, custom gas fireplace surrounds detailed with cast stone, and hidden wire management channels complete this minimal aesthetic.',
-      img1: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1920',
-      img2: 'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=1920',
+      img1: 'project_images/paisley/living_room_wood_beam.jpg',
+      img2: 'project_images/paisley/11.png',
       prevHash: '#project-kitchens',
       nextHash: '#project-additions',
       gallery: [
-        'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&q=80&w=800'
+        'project_images/paisley/living_room_wood_beam.jpg',
+        'project_images/paisley/10.png',
+        'project_images/paisley/11.png',
+        'project_images/paisley/12.png',
+        'project_images/paisley/1.png',
+        'project_images/paisley/2.png'
       ]
     },
     '#project-additions': {
@@ -410,30 +466,36 @@ export default function App() {
       leadDesc: 'Expand your footprint with seamless structural extensions that match your home\'s original lines.',
       desc1: 'Additions demand absolute engineering precision. We construct master suites, multi-story additions, sunrooms, and garage-top extensions that flow perfectly from your existing layout.',
       desc2: 'We began with foundation tie-ins, timber roof framing, and matched external profiles perfectly to create an expanded main floor kitchen and adjacent garden suite ADU.',
-      img1: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1920',
-      img2: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1920',
+      img1: 'project_images/kuntz/3.jpg',
+      img2: 'project_images/kuntz/Kuntz-House-IMG_3686-Edited.jpg',
       prevHash: '#project-living-spaces',
       nextHash: '#project-basements',
       gallery: [
-        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800'
+        'project_images/kuntz/3.jpg',
+        'project_images/kuntz/Kuntz-House-IMG_3686-Edited.jpg',
+        'project_images/kuntz/Kuntz-House-IMG_3702-Edited.jpg',
+        'project_images/kuntz/Kuntz-House-IMG_3697-Edited.jpg',
+        'project_images/kuntz/Kuntz-House-IMG_3724-Edited.jpg',
+        'project_images/kuntz/5.jpg'
       ]
     },
     '#project-basements': {
       title: 'Courtland Basement Renovation',
-      cat: 'Premium Finished Basement',
+      cat: 'Finished Basement Suite',
       leadDesc: 'Unlock the potential of your lower level with luxury family suites, bars, and theaters.',
       desc1: 'We convert dark, underutilized basements into premium, dry, and warm living areas. By emphasizing insulation breaks, custom acoustic framing, waterproofing seals, and premium lighting layouts.',
       desc2: 'The basement became the finishing touch — a dedicated workout space, a sleek entertainment lounge, a wet bar, and enough room for the grandkids to run wild, with built-in storage to match.',
-      img1: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=1920',
-      img2: 'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&q=80&w=1920',
+      img1: 'project_images/verhoeve/basement_media_lounge.jpg',
+      img2: 'project_images/verhoeve/Verhoeve-House-IMG_2682-Edited.jpg',
       prevHash: '#project-additions',
       nextHash: '#project-garages',
       gallery: [
-        'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1595428774223-ef52624120d2?auto=format&fit=crop&q=80&w=800'
+        'project_images/verhoeve/basement_media_lounge.jpg',
+        'project_images/verhoeve/6.jpg',
+        'project_images/verhoeve/Verhoeve-House-IMG_2682-Edited.jpg',
+        'project_images/verhoeve/Verhoeve-House-IMG_2675-Edited.jpg',
+        'project_images/verhoeve/Verhoeve-House-IMG_2670-Edited.jpg',
+        'project_images/verhoeve/16.jpg'
       ]
     },
     '#project-garages': {
@@ -442,14 +504,17 @@ export default function App() {
       leadDesc: 'Custom built workshop structures, loft garden suites, and high-end automotive storage.',
       desc1: 'Garages should match the architectural precision of the main home. We build custom hobby workshops, garage-top executive offices, and luxury storage structures matching your home’s existing layout.',
       desc2: 'We constructed this multi-functional workspace complete with dust collection ports, a custom timber stairwell to a storage loft, and double insulated overhead carriage doors.',
-      img1: 'https://images.unsplash.com/photo-1591825729269-caeb344f6df2?auto=format&fit=crop&q=80&w=1920',
-      img2: 'https://images.unsplash.com/photo-1617806118233-18e1db207f62?auto=format&fit=crop&q=80&w=1920',
+      img1: 'project_images/borkhoff/10.png',
+      img2: 'project_images/borkhoff/11.png',
       prevHash: '#project-basements',
       nextHash: '#projects-page',
       gallery: [
-        'https://images.unsplash.com/photo-1591825729269-caeb344f6df2?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1617806118233-18e1db207f62?auto=format&fit=crop&q=80&w=800',
-        'https://images.unsplash.com/photo-1527030280862-64139fbe04ca?auto=format&fit=crop&q=80&w=800'
+        'project_images/borkhoff/10.png',
+        'project_images/borkhoff/11.png',
+        'project_images/borkhoff/12.png',
+        'project_images/borkhoff/13.png',
+        'project_images/borkhoff/14.png',
+        'project_images/borkhoff/15.png'
       ]
     }
   };
@@ -534,7 +599,7 @@ export default function App() {
 
                   <div className="space-y-1 pb-2">
                     <span className="text-[#CDAE72] font-bold uppercase tracking-wider block mb-1">STANDARDS & WARRANTY</span>
-                    <p className="text-white/80 font-light leading-relaxed">{proj.certifications || 'WEDI Certified, 2-Year Structural Warranty'}</p>
+                    <p className="text-white/80 font-light leading-relaxed">{proj.certifications || 'WEDI Certified, Havenridge Written Warranty'}</p>
                   </div>
                 </div>
 
@@ -543,7 +608,7 @@ export default function App() {
                     href="#contact-page" 
                     className="w-full bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 px-4 text-xs font-sans tracking-widest uppercase block text-center rounded-sm hover:bg-white transition-all shadow-md"
                   >
-                    REQUEST CONSULTATION →
+                    START A SIMILAR PROJECT →
                   </a>
                 </div>
               </div>
@@ -586,7 +651,7 @@ export default function App() {
           <div className="max-w-3xl mx-auto px-6 space-y-6">
             <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-[#CDAE72]">CONTACT US</h2>
             <p className="text-sm font-light text-white/80 max-w-lg mx-auto leading-relaxed">
-              We would love to chat with you about your project. Please fill out our contact form to tell us about your project and to get the process started.
+              Planning a similar renovation? Complete our project inquiry form with your goals, location, expected investment, timing and design status. We will review the details and recommend the right next step.
             </p>
             <div className="pt-4">
               <a href="#contact-page" className="bg-[#CDAE72] text-[#0B2638] font-bold px-10 py-4 text-xs font-sans tracking-widest uppercase hover:bg-white transition-all shadow-lg">
@@ -599,11 +664,27 @@ export default function App() {
   
             {/* FOOTER */}
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
-          <div className="max-w-4xl mx-auto px-6 space-y-2">
-            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
-            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="#projects-page" className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
           </div>
         </footer>
 
@@ -631,7 +712,7 @@ export default function App() {
         {/* HERO SPLIT IMAGE BANNER (CASS STYLE) */}
         <section className="grid grid-cols-2 gap-2 h-[250px] sm:h-[350px] overflow-hidden bg-[#0B2638]">
           <img src="project_images/piccadilly/1.png" alt="Kitchen highlight" className="w-full h-full object-cover opacity-80" />
-          <img src="project_images/mcnamara/1.png" alt="Bathroom highlight" className="w-full h-full object-cover opacity-80" />
+          <img src="project_images/hero_living_room_fireplace.jpg" alt="Living Room highlight" className="w-full h-full object-cover opacity-80" />
         </section>
 
         {/* HERO TITLE SECTION ON LIGHT BACKGROUND (CASS STYLE) */}
@@ -640,8 +721,7 @@ export default function App() {
             <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">FULL PROJECTS</span>
             <h1 className="font-cinzel text-4xl sm:text-5xl font-bold tracking-wider text-[#0B2638]">View our work</h1>
             <p className="text-sm font-light text-[#24313A]/80 max-w-xl mx-auto leading-relaxed pt-2">
-              Here is a collection of some of our favourite projects. Check back soon to see new work.<br />
-              Contact us to see what is possible in your home.
+              Explore completed Havenridge renovations and additions across Waterloo Region and Guelph. Each project highlights the homeowner’s goals, the work completed and the details that shaped the final result.
             </p>
             <div className="pt-4">
               <a href="#contact-page" className="inline-block bg-[#0B2638] text-white hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all shadow-md">
@@ -673,7 +753,7 @@ export default function App() {
                   </div>
                   <div className="flex items-center justify-center space-x-3 text-xs font-sans tracking-[0.2em] text-[#CDAE72] uppercase font-bold">
                     <span className="w-6 h-px bg-[#CDAE72]/60"></span>
-                    <span>LEARN MORE</span>
+                    <span>VIEW PROJECT DETAILS</span>
                     <span className="w-6 h-px bg-[#CDAE72]/60"></span>
                   </div>
                 </div>
@@ -688,7 +768,7 @@ export default function App() {
             <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
             <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider">INSPIRATION GALLERY</h2>
             <p className="text-[#24313A]/70 text-sm font-light max-w-xl mx-auto leading-relaxed">
-              Click on any photo below to explore bespoke designs and specifications from real Havenridge Build projects.
+              Click on any photo below to explore custom designs and specifications from real Havenridge Build projects.
             </p>
           </div>
 
@@ -699,7 +779,7 @@ export default function App() {
                 <a 
                   key={idx} 
                   href={item.link} 
-                  className="relative w-full aspect-square overflow-hidden rounded-2xl group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-lg border border-[#0B2638]/10 bg-[#0B2638]"
+                  className="relative w-full aspect-[2/3] overflow-hidden group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-md bg-[#0B2638] font-sans"
                 >
                   <img 
                     src={item.img} 
@@ -728,12 +808,12 @@ export default function App() {
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
               <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">WORK WITH US</h2>
               <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
-                We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
+                Interested in working with Havenridge Build? We welcome applications from skilled carpenters, site supervisors, apprentices and qualified trade partners who value craftsmanship, communication, organization and accountability.
               </p>
               <div className="pt-2">
                 <button 
                   onClick={() => setIsApplyModalOpen(true)} 
-                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                  className="inline-block bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
                 >
                   APPLY NOW
                 </button>
@@ -742,11 +822,27 @@ export default function App() {
           </section>
 
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
-          <div className="max-w-4xl mx-auto px-6 space-y-2">
-            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
-            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="#projects-page" className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
           </div>
         </footer>
 
@@ -932,7 +1028,7 @@ export default function App() {
                 Master Craftsmanship &<br />Accountable Leadership
               </h1>
               <p className="font-drama text-lg sm:text-xl text-white/85 italic max-w-2xl mx-auto leading-relaxed">
-                Full-service design-build general contracting serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities with uncompromising building standards.
+                Full-service design-build general contracting serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities with detailed building standards.
               </p>
               
               <div className="pt-4 flex flex-wrap justify-center gap-4 text-xs font-sans font-bold tracking-wider uppercase text-[#CDAE72]">
@@ -952,9 +1048,17 @@ export default function App() {
                 <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] leading-tight">
                   Professional Building Standards & Code-Compliant Construction
                 </h2>
-                <p className="text-sm sm:text-base text-[#24313A]/85 font-light leading-relaxed">
-                  Havenridge Build is a full-service design-build general contractor serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities. Since 2014, we have helped homeowners improve their homes through carefully planned kitchens, bathrooms, basements, additions, and complete home renovations. Led by owner <strong>Micheal Smith</strong>, our team coordinates the entire renovation process with clear communication, organized project updates through the <strong>Buildern client portal</strong>, and one accountable team. As a <strong>Baeumler Approved</strong> and <strong>RenoMark</strong> renovator, our work is backed by a two-year structural warranty plus a one-year workmanship warranty.
-                </p>
+                <div className="space-y-4 text-sm sm:text-base text-[#24313A]/85 font-light leading-relaxed max-w-4xl mx-auto text-left sm:text-center">
+                  <p>
+                    Havenridge Build is a full-service design-build general contractor serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities. Since 2014, we’ve helped homeowners transform their homes through thoughtfully planned kitchens, bathrooms, basements, additions, and complete home renovations.
+                  </p>
+                  <p>
+                    Led by owner <strong>Micheal Smith</strong>, Havenridge Build provides one accountable team to guide your renovation from initial planning and design through construction and completion. We believe a great renovation is about more than quality craftsmanship - it’s about clear communication, organized project management, realistic expectations, and making the entire experience easier for the homeowner.
+                  </p>
+                  <p>
+                    Our clients stay informed throughout their project with regular updates and access to their project information through our online client portal. As a <strong>Baeumler Approved</strong> and <strong>RenoMark</strong> renovator, we stand behind our work with a two-year structural warranty and one-year workmanship warranty.
+                  </p>
+                </div>
               </div>
 
               {/* ORIGINAL 4 GRID CARDS */}
@@ -1121,12 +1225,12 @@ export default function App() {
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
               <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">WORK WITH US</h2>
               <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
-                We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
+                Interested in working with Havenridge Build? We welcome applications from skilled carpenters, site supervisors, apprentices and qualified trade partners who value craftsmanship, communication, organization and accountability.
               </p>
               <div className="pt-2">
                 <button 
                   onClick={() => setIsApplyModalOpen(true)} 
-                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                  className="inline-block bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
                 >
                   APPLY NOW
                 </button>
@@ -1137,11 +1241,27 @@ export default function App() {
 
         {/* FOOTER */}
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
-          <div className="max-w-4xl mx-auto px-6 space-y-2">
-            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
-            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="#projects-page" className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
           </div>
         </footer>
       
@@ -1297,7 +1417,7 @@ export default function App() {
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
-                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADU's</a>
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
                     <a href="#project-kitchens" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
                     <a href="#project-living-spaces" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
                     <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Barrier-Free</a>
@@ -1456,12 +1576,12 @@ export default function App() {
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
               <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">WORK WITH US</h2>
               <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
-                We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
+                Interested in working with Havenridge Build? We welcome applications from skilled carpenters, site supervisors, apprentices and qualified trade partners who value craftsmanship, communication, organization and accountability.
               </p>
               <div className="pt-2">
                 <button 
                   onClick={() => setIsApplyModalOpen(true)} 
-                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                  className="inline-block bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
                 >
                   APPLY NOW
                 </button>
@@ -1470,11 +1590,27 @@ export default function App() {
           </section>
 
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
-          <div className="max-w-4xl mx-auto px-6 space-y-2">
-            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
-            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="#projects-page" className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
           </div>
         </footer>
       
@@ -1627,198 +1763,529 @@ export default function App() {
           </div>
         </nav>
 
-        {/* HERO SECTION */}
-        <section className="relative bg-[#0B2638] text-white py-24 text-center overflow-hidden">
+        {/* HERO SECTION MATCHING SPEC & MOCKUP */}
+        <section className="relative bg-[#0B2638] text-white py-20 text-center overflow-hidden">
           <div className="max-w-4xl mx-auto px-6 space-y-4">
-            <h1 className="font-cinzel text-4xl sm:text-5xl font-bold tracking-wider text-white">Get In Touch</h1>
-            <p className="text-sm font-light text-white/80 max-w-xl mx-auto leading-relaxed">
-              We look forward to hearing about your project goals. Please contact us to coordinate a phone consultation.
+            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.3em] uppercase block">HAVENRIDGE BUILD</span>
+            <h1 className="font-cinzel text-4xl sm:text-5xl font-bold tracking-wider text-white">START YOUR PROJECT</h1>
+            <p className="text-sm sm:text-base font-light text-white/85 max-w-2xl mx-auto leading-relaxed">
+              Tell us about your home, your goals and where you are in the planning process.<br className="hidden sm:inline" />
+              We review every inquiry before arranging an initial phone consultation.
             </p>
           </div>
         </section>
 
-        {/* CONTACT CONTENT SECTION */}
-        <section className="py-20 bg-white">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div className="space-y-8">
-              <div className="space-y-2">
+        {/* CONTACT & QUALIFICATION FORM SECTION */}
+        <section className="py-16 bg-white">
+          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12">
+            
+            {/* LEFT SIDEBAR: CONTACT INFO & INVESTMENT GUIDELINES (4 COLS) */}
+            <div className="lg:col-span-4 space-y-8">
+              <div className="space-y-3">
                 <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase">CONTACT INFO</span>
-                <h2 className="font-cinzel text-3xl font-bold text-[#0B2638]">Havenridge Build</h2>
+                <h2 className="font-cinzel text-3xl font-bold text-[#0B2638]">HAVENRIDGE BUILD</h2>
+                <div className="h-1 w-12 bg-[#CDAE72]"></div>
               </div>
               
-              <div className="space-y-4 text-sm leading-relaxed text-[#24313A]/80 font-sans">
-                <p>
-                  <strong>Founder & Lead builder:</strong> Micheal Smith
+              <div className="space-y-4 text-sm leading-relaxed text-[#24313A]/80 font-sans border-b border-[#0B2638]/10 pb-6">
+                <p className="flex items-center gap-3">
+                  <span className="font-bold text-[#0B2638] min-w-[70px]">Office</span>
+                  <a href="tel:5196350963" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">(519) 635-0963</a>
                 </p>
-                <p>
-                  <strong>Office Phone:</strong> <span className="text-[#0B2638] font-bold">(519) 635-0963</span>
+                <p className="flex items-center gap-3">
+                  <span className="font-bold text-[#0B2638] min-w-[70px]">Email</span>
+                  <a href="mailto:info@havenridgebuild.com" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">info@havenridgebuild.com</a>
                 </p>
-                <p>
-                  <strong>Email Address:</strong> <a href="mailto:Info@havenridgebuild.ca" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">Info@havenridgebuild.ca</a>
-                </p>
-                <p>
-                  <strong>Service Area:</strong> Serving Kitchener, Waterloo, Cambridge, and surrounding Oxford County communities.
+                <div className="pt-2">
+                  <span className="font-bold text-[#0B2638] block mb-1">Service area</span>
+                  <p className="text-xs text-[#24313A]/80">Cambridge · Kitchener · Waterloo · Guelph</p>
+                </div>
+              </div>
+
+              {/* PROJECT INVESTMENT NOTICE */}
+              <div className="space-y-2 border-b border-[#0B2638]/10 pb-6">
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#0B2638]">PROJECT INVESTMENT</h3>
+                <p className="text-xs text-[#24313A]/80 leading-relaxed font-light">
+                  Professionally managed renovation projects generally begin at $20,000.
                 </p>
               </div>
 
-                            <div className="pt-6 border-t border-[#0B2638]/10 space-y-4">
-                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">CERTIFICATIONS & ACCREDITATIONS</span>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs font-sans font-bold text-[#0B2638]">
-                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">WATERPROOFING</span>
-                    <span>WEDI CERTIFIED</span>
-                  </div>
-                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">TILE SYSTEMS</span>
-                    <span>SCHLUTER CERTIFIED</span>
-                  </div>
-                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">AODA STANDARDS</span>
-                    <span>ACCESSIBILITY CERTIFIED</span>
-                  </div>
-                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">QUALITY STANDARDS</span>
-                    <span>RENOMARK CERTIFIED</span>
-                  </div>
-                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">TRUSTED PRO</span>
-                    <span>BAEUMLER APPROVED</span>
-                  </div>
-                  <div className="bg-[#F4F2EE] p-3 rounded-lg border border-[#0B2638]/10 text-center shadow-2xs">
-                    <span className="text-[#CDAE72] block text-[9px] uppercase font-bold tracking-wider mb-0.5">INDUSTRY MEMBER</span>
-                    <span>WRHBA MEMBER</span>
-                  </div>
-                </div>
+              {/* WHAT HAPPENS NEXT CARD MATCHING MOCKUP */}
+              <div className="bg-[#F4F2EE] p-6 rounded-sm space-y-4 border-l-4 border-[#0B2638]">
+                <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#0B2638]">WHAT HAPPENS NEXT</h3>
+                <ol className="space-y-3 text-xs text-[#24313A]/85 font-light">
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-[#0B2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">1</span>
+                    <span>We review your project details.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-[#0B2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">2</span>
+                    <span>We confirm fit, location and timing.</span>
+                  </li>
+                  <li className="flex items-start gap-2.5">
+                    <span className="w-5 h-5 rounded-full bg-[#0B2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">3</span>
+                    <span>Qualified projects move to a phone consultation.</span>
+                  </li>
+                </ol>
               </div>
             </div>
 
-            <div className="bg-[#F4F2EE] p-8 border border-[#0B2638]/10 font-sans">
+            {/* RIGHT COLUMN: MULTI-STEP QUALIFICATION FORM (8 COLS) */}
+            <div className="lg:col-span-8 bg-[#F4F2EE] p-6 sm:p-10 border border-[#0B2638]/10 rounded-sm shadow-sm">
               {formSubmitted ? (
-                <div className="py-12 space-y-4 text-center">
-                  <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto" />
-                  <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Message Sent</h3>
-                  <p className="text-xs text-[#24313A]/80">Micheal Smith or a senior project manager will contact you within 24 business hours.</p>
+                <div className="py-12 space-y-6 text-center">
+                  {formQualified ? (
+                    <div className="space-y-4 max-w-lg mx-auto">
+                      <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto" />
+                      <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Project Inquiry Received</h3>
+                      <p className="text-sm text-[#24313A]/90 leading-relaxed font-light">
+                        Thank you for telling us about your project. We have received your information and will review it to confirm whether the scope, location, investment and timing align with Havenridge Build. If it appears to be a good fit, we will contact you to arrange an initial phone consultation and explain the next steps.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="space-y-4 max-w-lg mx-auto">
+                      <CheckCircle2 className="w-16 h-16 text-[#CDAE72] mx-auto" />
+                      <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Thank You For Reaching Out</h3>
+                      <p className="text-sm text-[#24313A]/90 leading-relaxed font-light">
+                        Thank you for considering Havenridge Build. We currently focus on professionally managed renovation projects with construction investments beginning around $20,000. Based on the information provided, your project may be below our present service range. We appreciate the opportunity and wish you the best with your project.
+                      </p>
+                    </div>
+                  )}
+                  
+                  <div className="pt-4">
+                    <button 
+                      onClick={() => { setFormSubmitted(false); setFormStep(1); }} 
+                      className="text-xs font-bold uppercase tracking-widest text-[#0B2638] underline hover:text-[#CDAE72]"
+                    >
+                      Submit Another Inquiry
+                    </button>
+                  </div>
                 </div>
               ) : (
-                <form onSubmit={handleFormSubmit} className="space-y-6">
-                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638] uppercase tracking-wider mb-6">Send an Inquiry</h3>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">First Name *</label>
-                      <input 
-                        type="text" 
-                        required
-                        value={formData.firstName}
-                        onChange={e => setFormData({...formData, firstName: e.target.value})}
-                        placeholder="John" 
-                        className="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm"
-                      />
+                <form onSubmit={handleLeadSubmit} className="space-y-8">
+                  
+                  {/* FORM HEADER & PROGRESS BAR */}
+                  <div className="space-y-4 border-b border-[#0B2638]/10 pb-6">
+                    <h3 className="font-cinzel text-2xl font-bold text-[#0B2638] uppercase tracking-wider">TELL US ABOUT YOUR PROJECT</h3>
+                    
+                    <div className="flex justify-between items-center text-xs font-bold tracking-wider uppercase text-[#0B2638]/70">
+                      <span>STEP {formStep} OF 3 · {formStep === 1 ? 'CONTACT & LOCATION' : formStep === 2 ? 'INVESTMENT AND TIMING' : 'PROJECT DETAILS'}</span>
                     </div>
-                    <div>
-                      <label className="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">Last Name *</label>
-                      <input 
-                        type="text" 
-                        required
-                        value={formData.lastName}
-                        onChange={e => setFormData({...formData, lastName: e.target.value})}
-                        placeholder="Smith" 
-                        className="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm"
-                      />
+
+                    {/* SEGMENTED PROGRESS BARS MATCHING MOCKUP */}
+                    <div className="grid grid-cols-3 gap-2 pt-1">
+                      <div className={`h-1.5 rounded-full transition-colors ${formStep >= 1 ? 'bg-[#0B2638]' : 'bg-gray-300'}`}></div>
+                      <div className={`h-1.5 rounded-full transition-colors ${formStep >= 2 ? 'bg-[#0B2638]' : 'bg-gray-300'}`}></div>
+                      <div className={`h-1.5 rounded-full transition-colors ${formStep >= 3 ? 'bg-[#0B2638]' : 'bg-gray-300'}`}></div>
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">Phone Number *</label>
-                      <input 
-                        type="tel" 
-                        required
-                        value={formData.phone}
-                        onChange={e => setFormData({...formData, phone: e.target.value})}
-                        placeholder="(519) 000-0000" 
-                        className="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">Email Address *</label>
-                      <input 
-                        type="email" 
-                        required
-                        value={formData.email}
-                        onChange={e => setFormData({...formData, email: e.target.value})}
-                        placeholder="john@example.com" 
-                        className="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm"
-                      />
-                    </div>
-                  </div>
+                  {/* STEP 1: CONTACT & LOCATION */}
+                  {formStep === 1 && (
+                    <div className="space-y-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">First Name *</label>
+                          <input 
+                            type="text" 
+                            required 
+                            value={formFirstName}
+                            onChange={(e) => setFormFirstName(e.target.value)}
+                            placeholder="John" 
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white" 
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Last Name *</label>
+                          <input 
+                            type="text" 
+                            required 
+                            value={formLastName}
+                            onChange={(e) => setFormLastName(e.target.value)}
+                            placeholder="Smith" 
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white" 
+                          />
+                        </div>
+                      </div>
 
-                  <div>
-                    <label className="block text-[10px] font-sans font-bold uppercase text-[#0B2638] mb-1">Project Details</label>
-                    <textarea 
-                      rows="4" 
-                      value={formData.notes}
-                      onChange={e => setFormData({...formData, notes: e.target.value})}
-                      placeholder="Tell us about your home and project goals..." 
-                      className="w-full bg-transparent border-b border-[#0B2638]/40 focus:border-[#CDAE72] outline-none py-2 text-sm"
-                    ></textarea>
-                  </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Email Address *</label>
+                          <input 
+                            type="email" 
+                            required 
+                            value={formEmail}
+                            onChange={(e) => setFormEmail(e.target.value)}
+                            placeholder="john@example.com" 
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white" 
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Phone Number *</label>
+                          <input 
+                            type="tel" 
+                            required 
+                            value={formPhone}
+                            onChange={(e) => setFormPhone(e.target.value)}
+                            placeholder="(519) 000-0000" 
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white" 
+                          />
+                        </div>
+                      </div>
 
-                  <button 
-                    type="submit" 
-                    className="w-full bg-[#0B2638] text-white hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold py-4 text-xs font-sans tracking-widest uppercase transition-all"
-                  >
-                    SEND MESSAGE →
-                  </button>
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Project Address *</label>
+                        <input 
+                          type="text" 
+                          required 
+                          value={formAddress}
+                          onChange={(e) => setFormAddress(e.target.value)}
+                          placeholder="Street address of the property to be renovated" 
+                          className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white" 
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Project City *</label>
+                          <select 
+                            required 
+                            value={formCity} 
+                            onChange={(e) => setFormCity(e.target.value)}
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white"
+                          >
+                            <option value="Cambridge">Cambridge</option>
+                            <option value="Kitchener">Kitchener</option>
+                            <option value="Waterloo">Waterloo</option>
+                            <option value="Guelph">Guelph</option>
+                            <option value="Other">Other Surrounding Area</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Postal Code *</label>
+                          <input 
+                            type="text" 
+                            required 
+                            value={formPostalCode}
+                            onChange={(e) => setFormPostalCode(e.target.value)}
+                            placeholder="N2H 2B5" 
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white" 
+                          />
+                        </div>
+                      </div>
+
+                      <div className="pt-4 text-right">
+                        <button 
+                          type="button" 
+                          onClick={() => {
+                            if (formFirstName && formLastName && formEmail && formPhone && formAddress && formPostalCode) {
+                              setFormStep(2);
+                            } else {
+                              alert('Please complete all required contact fields before continuing.');
+                            }
+                          }}
+                          className="bg-[#0B2638] text-white hover:bg-[#17365D] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-md cursor-pointer"
+                        >
+                          CONTINUE →
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* STEP 2: INVESTMENT AND TIMING MATCHING SCREENSHOT */}
+                  {formStep === 2 && (
+                    <div className="space-y-6">
+                      
+                      {/* PLANNED CONSTRUCTION INVESTMENT DROPDOWN & PILLS */}
+                      <div className="space-y-3">
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638]">PLANNED CONSTRUCTION INVESTMENT *</label>
+                        <select 
+                          required 
+                          value={formInvestment} 
+                          onChange={(e) => setFormInvestment(e.target.value)}
+                          className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white font-medium"
+                        >
+                          <option value="Under $20,000">Under $20,000</option>
+                          <option value="$20,000–$49,999">$20,000–$49,999</option>
+                          <option value="$50,000–$99,999">$50,000–$99,999</option>
+                          <option value="$100,000–$249,999">$100,000–$249,999</option>
+                          <option value="$250,000–$499,999">$250,000–$499,999</option>
+                          <option value="$500,000+">$500,000+</option>
+                          <option value="Not sure—need guidance">Not sure—need guidance</option>
+                        </select>
+
+                        <div className="pt-2">
+                          <span className="text-[10px] font-bold uppercase tracking-widest text-[#0B2638]/70 block mb-2">AVAILABLE INVESTMENT RANGES</span>
+                          <div className="grid grid-cols-2 gap-3">
+                            {[
+                              'Under $20,000',
+                              '$20,000–$49,999',
+                              '$50,000–$99,999',
+                              '$100,000–$249,999',
+                              '$250,000–$499,999',
+                              '$500,000+'
+                            ].map((rng) => (
+                              <button
+                                key={rng}
+                                type="button"
+                                onClick={() => setFormInvestment(rng)}
+                                className={`py-3 px-4 text-xs font-medium rounded-full border transition-all text-center ${
+                                  formInvestment === rng
+                                    ? 'bg-[#0B2638] text-white border-[#0B2638] shadow-sm font-bold'
+                                    : 'bg-white/80 text-[#0B2638] border-gray-200 hover:border-[#0B2638]'
+                                }`}
+                              >
+                                {rng}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* DESIGN AND PLANS STATUS */}
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">DESIGN AND PLANS STATUS *</label>
+                        <select 
+                          required 
+                          value={formDesignStatus} 
+                          onChange={(e) => setFormDesignStatus(e.target.value)}
+                          className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white font-medium"
+                        >
+                          <option value="I need Havenridge to provide or coordinate design">I need Havenridge to provide or coordinate design</option>
+                          <option value="I have a designer/architect and preliminary plans">I have a designer/architect and preliminary plans</option>
+                          <option value="I have permit-ready plans">I have permit-ready plans</option>
+                          <option value="Permits submitted/approved">Permits submitted/approved</option>
+                          <option value="Not sure—need guidance">Not sure—need guidance</option>
+                        </select>
+                      </div>
+
+                      {/* START TIMING */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">CONSTRUCTION START TIMING *</label>
+                          <select 
+                            required 
+                            value={formTiming} 
+                            onChange={(e) => setFormTiming(e.target.value)}
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white"
+                          >
+                            <option value="0–3 months">0 – 3 months</option>
+                            <option value="3–6 months">3 – 6 months</option>
+                            <option value="6–12 months">6 – 12 months</option>
+                            <option value="12–24 months">12 – 24 months</option>
+                            <option value="Flexible/not sure">Flexible / not sure</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">DECISION-MAKERS ALIGNED? *</label>
+                          <select 
+                            required 
+                            value={formDecisionMakers} 
+                            onChange={(e) => setFormDecisionMakers(e.target.value)}
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white"
+                          >
+                            <option value="Yes, all decision-makers are aligned">Yes, all decision-makers are aligned</option>
+                            <option value="Not yet">Not yet</option>
+                            <option value="I am the sole decision-maker">I am the sole decision-maker</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="pt-4 flex justify-between items-center">
+                        <button 
+                          type="button" 
+                          onClick={() => setFormStep(1)}
+                          className="text-xs font-bold uppercase tracking-wider text-[#0B2638] hover:underline"
+                        >
+                          ← BACK
+                        </button>
+                        <button 
+                          type="button" 
+                          onClick={() => setFormStep(3)}
+                          className="bg-[#0B2638] text-white hover:bg-[#17365D] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-md cursor-pointer"
+                        >
+                          CONTINUE →
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* STEP 3: PROJECT DETAILS & CONSENT */}
+                  {formStep === 3 && (
+                    <div className="space-y-6">
+                      
+                      {/* MULTI-SELECT PROJECT TYPES */}
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-2">WHAT TYPE OF PROJECT ARE YOU PLANNING? *</label>
+                        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                          {[
+                            'Kitchen',
+                            'Bathroom',
+                            'Basement',
+                            'Whole-home',
+                            'Addition',
+                            'ADU / In-Law',
+                            'Design Only',
+                            'Other'
+                          ].map((t) => (
+                            <button
+                              key={t}
+                              type="button"
+                              onClick={() => toggleProjectType(t)}
+                              className={`py-2.5 px-3 text-xs font-bold rounded-sm border transition-all text-center ${
+                                formProjectTypes.includes(t)
+                                  ? 'bg-[#0B2638] text-white border-[#0B2638]'
+                                  : 'bg-white text-[#0B2638] border-gray-300 hover:border-[#0B2638]'
+                              }`}
+                            >
+                              {t}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* PROJECT DESCRIPTION */}
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">PROJECT DESCRIPTION & GOALS *</label>
+                        <textarea 
+                          required 
+                          rows="4" 
+                          value={formDescription}
+                          onChange={(e) => setFormDescription(e.target.value)}
+                          placeholder="What would you like to change, what problems should the project solve, and what result are you hoping to achieve?" 
+                          className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white"
+                        ></textarea>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">HOME OCCUPIED DURING BUILD?</label>
+                          <select 
+                            value={formHomeOccupied} 
+                            onChange={(e) => setFormHomeOccupied(e.target.value)}
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white"
+                          >
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                            <option value="Not sure">Not sure</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">HOW DID YOU HEAR ABOUT US? *</label>
+                          <select 
+                            required 
+                            value={formSource} 
+                            onChange={(e) => setFormSource(e.target.value)}
+                            className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white"
+                          >
+                            <option value="Referral">Referral</option>
+                            <option value="Google">Google Search</option>
+                            <option value="Social media">Social Media</option>
+                            <option value="Sign/vehicle">Sign / Job Site Vehicle</option>
+                            <option value="Baeumler Approved">Baeumler Approved</option>
+                            <option value="RenoMark">RenoMark</option>
+                            <option value="Chamber">Chamber of Commerce</option>
+                            <option value="Returning client">Returning Client</option>
+                            <option value="Other">Other</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      {/* UPLOAD FILE ATTACHMENT */}
+                      <div>
+                        <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">UPLOAD PHOTOS, SKETCHES OR PLANS (OPTIONAL)</label>
+                        <div className="border-2 border-dashed border-gray-300 hover:border-[#0B2638] p-4 text-center rounded-sm bg-white cursor-pointer relative">
+                          <input 
+                            type="file" 
+                            accept=".jpg,.jpeg,.png,.pdf" 
+                            onChange={(e) => setFormUploadedFile(e.target.files[0]?.name || '')}
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                          />
+                          <p className="text-xs text-[#24313A]/70">
+                            {formUploadedFile ? (
+                              <span className="font-bold text-[#0B2638]">{formUploadedFile}</span>
+                            ) : (
+                              'Click or drag photos, sketches or drawing PDFs here to upload (max 10MB)'
+                            )}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* CONSENT CHECKBOX & PRIVACY ACKNOWLEDGEMENT */}
+                      <div className="space-y-3 pt-2">
+                        <label className="flex items-start gap-3 cursor-pointer">
+                          <input 
+                            type="checkbox" 
+                            required 
+                            checked={formConsent} 
+                            onChange={(e) => setFormConsent(e.target.checked)}
+                            className="mt-1 h-4 w-4 text-[#0B2638] focus:ring-[#CDAE72] border-gray-300 rounded" 
+                          />
+                          <span className="text-xs text-[#24313A]/80 leading-relaxed font-light">
+                            I agree to allow Havenridge Build to contact me regarding my project inquiry in accordance with the <a href="#privacy-page" className="text-[#0B2638] font-bold underline hover:text-[#CDAE72]">Privacy Policy</a>.
+                          </span>
+                        </label>
+                      </div>
+
+                      <div className="pt-4 flex justify-between items-center">
+                        <button 
+                          type="button" 
+                          onClick={() => setFormStep(2)}
+                          className="text-xs font-bold uppercase tracking-wider text-[#0B2638] hover:underline"
+                        >
+                          ← BACK
+                        </button>
+                        <button 
+                          type="submit" 
+                          className="bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                        >
+                          SUBMIT YOUR PROJECT →
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
                 </form>
               )}
             </div>
+
           </div>
         </section>
 
-  
-      {/* WORK WITH US CAREERS SECTION */}
-          <section id="work-with-us" className="py-20 bg-[#0B2638] text-white text-center">
-            <div className="max-w-4xl mx-auto px-6 space-y-6">
-              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CAREERS & TRADES</span>
-              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">WORK WITH US</h2>
-              <p className="text-white/80 text-sm font-light max-w-xl mx-auto leading-relaxed">
-                We are expanding our team of skilled carpenters, site supervisors, apprentices, and licensed trade partners. If you take pride in craftsmanship and accountability, apply today.
-              </p>
-              <div className="pt-2">
-                <button 
-                  onClick={() => setIsApplyModalOpen(true)} 
-                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
-                >
-                  APPLY NOW
-                </button>
-              </div>
-            </div>
-          </section>
-
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
-          <div className="max-w-4xl mx-auto px-6 space-y-2">
-            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
-            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="#projects-page" className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
           </div>
         </footer>
 
       </div>
     );
-  }
-
-  // Home Page View
+  }  // Home Page View
   return (
     <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
       
-      {/* TOP ANNOUNCEMENT BAR */}
-      <div className="bg-[#17365D] text-white text-[11px] font-sans font-medium tracking-[0.15em] py-2.5 px-6 uppercase flex justify-center items-center">
-        <div className="flex items-center space-x-2 text-center">
-          <span className="w-2 h-2 bg-[#CDAE72] rounded-full animate-pulse"></span>
-          <span>SERVING KITCHENER, WATERLOO, CAMBRIDGE & OXFORD COUNTY</span>
-        </div>
-      </div>
+{/* TOP ANNOUNCEMENT BAR REMOVED */}
 
       {/* MAIN NAVIGATION */}
       <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
@@ -1835,7 +2302,7 @@ export default function App() {
                 Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
               </a>
               <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
-                <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADU's</a>
+                <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
                 <a href="#project-kitchens" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
                 <a href="#project-living-spaces" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
                 <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Barrier-Free</a>
@@ -1899,17 +2366,16 @@ export default function App() {
         <div className="relative z-20 max-w-7xl mx-auto px-6 w-full text-left">
           <div className="max-w-3xl">
             <h1 className="cass-hero-fade font-cinzel text-3xl sm:text-5xl lg:text-6xl font-bold leading-[1.2] text-white mb-4 drop-shadow-lg">
-              Residential Renovations<br />
-              & Custom Homes
+              Professionally Planned Renovations, Built to Last
             </h1>
 
-            <p className="cass-hero-fade text-sm sm:text-base md:text-lg font-light text-white mb-8 max-w-xl leading-relaxed drop-shadow-md">
-              We craft spaces that you will fall in love with. Serving Kitchener, Waterloo, and Cambridge.
+            <p className="cass-hero-fade text-sm sm:text-base md:text-lg font-light text-white mb-8 max-w-2xl leading-relaxed drop-shadow-md">
+              Havenridge Build provides design-build renovations, additions and custom residential construction with clear planning, accountable project management and quality craftsmanship.
             </p>
 
             <div className="cass-hero-fade">
               <a href="#contact-page" className="bg-[#CDAE72] text-[#0B2638] font-bold px-10 py-4 text-xs font-sans tracking-widest uppercase hover:bg-white transition-all shadow-lg">
-                CONTACT US
+                START YOUR PROJECT
               </a>
             </div>
           </div>
@@ -1921,7 +2387,7 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16 cass-reveal text-center">
             <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-2">SERVICES</span>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Havenridge Build's Residential Renovation and Construction Services</h2>
+            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Design-Build Renovation Services for Waterloo Region and Guelph</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -1950,7 +2416,7 @@ export default function App() {
                       className="flex items-center justify-center space-x-4 text-xs font-sans tracking-widest text-[#CDAE72] uppercase mt-10 group-hover:text-white transition-colors"
                     >
                       <span className="w-12 h-px bg-[#CDAE72]/50"></span>
-                      <span>LEARN MORE</span>
+                      <span>VIEW PROJECT DETAILS</span>
                       <span className="w-12 h-px bg-[#CDAE72]/50"></span>
                     </span>
                   </div>
@@ -1971,10 +2437,9 @@ export default function App() {
           />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 cass-reveal space-y-3">
-          <p className="text-sm font-sans font-light text-white/80 tracking-wide">At Havenridge we build so you can</p>
-          <h2 className="font-drama text-6xl sm:text-8xl text-[#CDAE72] font-normal tracking-wider">
-            FEEL AT HOME
+        <div className="relative z-10 max-w-4xl mx-auto px-6 cass-reveal">
+          <h2 className="font-cinzel text-2xl sm:text-4xl text-[#CDAE72] font-bold tracking-wider leading-relaxed">
+            Thoughtfully planned. Carefully built.<br className="hidden sm:block" /> Made to feel like home.
           </h2>
         </div>
       </section>
@@ -1992,7 +2457,7 @@ export default function App() {
             </h2>
             <div className="w-24 h-0.5 bg-[#CDAE72]/60 mx-auto my-3"></div>
             <p className="text-sm sm:text-base font-light text-[#24313A]/80 leading-relaxed max-w-2xl mx-auto">
-              A proven 5-step process designed to deliver exceptional results, clear communication and a renovation experience you can trust.
+              Our five-step design-build process establishes the scope, design, selections, pricing and schedule before construction begins, then keeps you informed through the Buildern client portal.
             </p>
           </div>
 
@@ -2095,7 +2560,7 @@ export default function App() {
                     We finish with the same attention to detail we started with.
                   </p>
                   <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
-                    We walk through every detail with you and ensure complete satisfaction. Our work is backed by a <strong>two-year warranty</strong> covering structural defects and water penetration, plus a <strong>one-year workmanship warranty</strong>.
+                    We walk through every detail with you and ensure complete satisfaction. Our completed work is supported by Havenridge’s written warranty and closeout process. Final warranty wording and coverage should match the signed contract and applicable requirements.
                   </p>
                 </div>
               </div>
@@ -2158,7 +2623,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
             <div className="space-y-2">
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CLIENT REVIEWS</span>
-              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">What Our Clients Say</h2>
+              <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">Verified Feedback From Havenridge Homeowners</h2>
               <p className="text-sm font-light text-white/70">Real feedback from homeowners across Kitchener, Waterloo, Cambridge, Guelph & Puslinch.</p>
             </div>
 
@@ -2217,7 +2682,7 @@ export default function App() {
             <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
             <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider">INSPIRATION GALLERY</h2>
             <p className="text-[#24313A]/70 text-sm font-light max-w-xl mx-auto leading-relaxed">
-              Click on any photo below to explore bespoke designs and specifications from real Havenridge Build projects.
+              Click on any photo below to explore custom designs and specifications from real Havenridge Build projects.
             </p>
           </div>
 
@@ -2228,7 +2693,7 @@ export default function App() {
                 <a 
                   key={idx} 
                   href={item.link} 
-                  className="relative w-full aspect-square overflow-hidden rounded-2xl group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-lg border border-[#0B2638]/10 bg-[#0B2638]"
+                  className="relative w-full aspect-[2/3] overflow-hidden group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-md bg-[#0B2638] font-sans"
                 >
                   <img 
                     src={item.img} 
@@ -2273,11 +2738,27 @@ export default function App() {
 
       {/* FOOTER (WITH SOCIAL ICONS) */}
       {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-10 border-t border-white/10 font-sans text-xs text-center">
-          <div className="max-w-4xl mx-auto px-6 space-y-2">
-            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase">DESIGN · BUILD · RENOVATE</p>
-            <p className="text-white/60 text-xs">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
-            <p className="text-white/50 text-xs">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="#projects-page" className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
           </div>
         </footer>
 

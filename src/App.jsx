@@ -164,22 +164,22 @@ export default function App() {
       title: "Additions and ADUs",
       headline: 'Add space without leaving the home and neighbourhood you love.',
       desc: 'We coordinate design, engineering, permits and construction for carefully integrated additions and accessory dwelling units.',
-      img: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1000',
+      img: 'project_images/kuntz/3.jpg',
       hash: '#project-additions'
     },
     {
       title: 'Whole Home Renovations',
       headline: 'Rework the layout, function and finishes of your home through one process.',
       desc: 'Rework the layout, function and finishes of your home through one coordinated design-build process, from early planning and selections through construction and final walkthrough.',
-      img: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=1000',
-      hash: '#project-kitchens'
+      img: 'project_images/piccadilly/1.png',
+      hash: '#project-whole-home'
     },
     {
       title: 'Multi-Unit Conversions',
       headline: 'Convert and optimize space for secondary suites or multi-unit living.',
       desc: 'Convert and optimize existing space for secondary suites or multi-unit living with coordinated design, code review, permits and construction.',
-      img: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=1000',
-      hash: '#project-living-spaces'
+      img: 'project_images/verhoeve/basement_media_lounge.jpg',
+      hash: '#project-multi-unit'
     },
     {
       title: 'Accessible & Barrier-Free',
@@ -369,7 +369,7 @@ export default function App() {
     { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/kuntz/3.jpg', link: '#project-additions' },
     { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/verhoeve/basement_media_lounge.jpg', link: '#project-basements' },
     { title: 'GARAGES', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/borkhoff/10.png', link: '#project-garages' },
-    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png', link: '#project-kitchens' },
+    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png', link: '#project-millwork' },
     { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#project-additions' }
   ];
 
@@ -384,6 +384,72 @@ export default function App() {
 
   // Project pages details configuration (Cass Construction Editorial style layout)
   const projectDetails = {
+    '#project-whole-home': {
+      title: 'West Forest Trail Whole-Home Transformation',
+      cat: 'Whole-Home Design-Build Renovation',
+      leadDesc: 'Reworking the entire layout, structural flow, and interior finishes of a residence through one unified design-build process.',
+      desc1: 'A whole-home renovation requires disciplined project management, engineering foresight, and seamless trade coordination. From re-framing structural load-bearing walls to upgrading plumbing, electrical, and HVAC infrastructure, we rebuild homes from the studs up.',
+      desc2: 'This comprehensive transformation integrated an open-concept kitchen, custom white-oak millwork, updated flooring, continuous crown molding, and bespoke bathroom retreats while maintaining full municipal permit compliance.',
+      img1: 'project_images/piccadilly/1.png',
+      img2: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png',
+      location: 'Waterloo Region, ON',
+      timeline: '8 – 14 Weeks',
+      scope: 'Structural Wall Removal, Custom Cabinetry, HVAC Upgrade & Architectural Trim',
+      prevHash: '#project-kitchens',
+      nextHash: '#project-multi-unit',
+      gallery: [
+        'project_images/piccadilly/1.png',
+        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png',
+        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png',
+        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_32_40_AM.png',
+        'project_images/paisley/living_room_wood_beam.jpg',
+        'project_images/mcnamara/1.png'
+      ]
+    },
+    '#project-multi-unit': {
+      title: 'Courtland & Water Secondary Suite & Multi-Unit Conversion',
+      cat: 'Multi-Unit & Legal Secondary Suite Conversion',
+      leadDesc: 'Converting underutilized residential spaces into code-compliant, income-generating secondary suites and multi-unit residences.',
+      desc1: 'Converting single-family homes or lower levels into legal multi-unit residences demands strict adherence to municipal zoning bylaws, OBC fire separations, soundproofing, and independent utility metering.',
+      desc2: 'We engineered full sound resilient channels, fire-rated drywall assemblies, dedicated HVAC ducting, egress window expansions, and custom kitchenettes to deliver high-yielding, luxury multi-unit living quarters.',
+      img1: 'project_images/verhoeve/basement_media_lounge.jpg',
+      img2: 'project_images/verhoeve/Verhoeve-House-IMG_2682-Edited.jpg',
+      location: 'Kitchener-Waterloo, ON',
+      timeline: '6 – 10 Weeks',
+      scope: 'OBC Fire Separations, Egress Windows, Acoustic Insulation & Secondary Kitchen',
+      prevHash: '#project-whole-home',
+      nextHash: '#project-millwork',
+      gallery: [
+        'project_images/verhoeve/basement_media_lounge.jpg',
+        'project_images/verhoeve/6.jpg',
+        'project_images/verhoeve/Verhoeve-House-IMG_2682-Edited.jpg',
+        'project_images/verhoeve/Verhoeve-House-IMG_2675-Edited.jpg',
+        'project_images/verhoeve/16.jpg',
+        'project_images/borkhoff/10.png'
+      ]
+    },
+    '#project-millwork': {
+      title: 'Waterloo Architectural Trim & Bench-Built Millwork',
+      cat: 'Custom Architectural Millwork & Cabinetry',
+      leadDesc: 'Custom solid white-oak vanities, integrated pantry storage, coffered ceilings, and bench-built architectural cabinetry.',
+      desc1: 'Master millwork elevates a residential renovation from standard to extraordinary. Unlike pre-fabricated modular cabinets that rely on wide filler strips, our red-seal carpenters craft precision millwork fitted flush to wall dimensions.',
+      desc2: 'Featuring solid wood dovetail drawers, soft-close hardware, integrated accent lighting, custom range hoods, and book-matched oak veneers, our millwork is built for a lifetime of daily beauty and durability.',
+      img1: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png',
+      img2: 'project_images/paisley/10.png',
+      location: 'Waterloo & Guelph, ON',
+      timeline: '4 – 6 Weeks',
+      scope: 'Bench-Built Cabinetry, White-Oak Vanities, Wall Paneling & Fluted Wood Accents',
+      prevHash: '#project-multi-unit',
+      nextHash: '#project-accessibility',
+      gallery: [
+        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png',
+        'project_images/paisley/10.png',
+        'project_images/piccadilly/1.png',
+        'project_images/mcnamara/1.png',
+        'project_images/paisley/living_room_wood_beam.jpg',
+        'project_images/erbach/ChatGPT_Image_Aug_11__2026__10_07_06_AM.png'
+      ]
+    },
         '#project-accessibility': {
       title: 'Waterloo Barrier-Free & Accessible Washroom Suite',
       cat: 'Accessible & Barrier-Free Construction',
@@ -1025,17 +1091,17 @@ export default function App() {
             <div className="relative z-10 max-w-4xl mx-auto text-center space-y-6">
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.3em] uppercase block">SINCE 2014 · WATERLOO REGION</span>
               <h1 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold tracking-wider text-white leading-tight">
-                Master Craftsmanship &<br />Accountable Leadership
+                Experienced Craftsmanship.<br />Accountable Project Leadership.
               </h1>
               <p className="font-drama text-lg sm:text-xl text-white/85 italic max-w-2xl mx-auto leading-relaxed">
                 Full-service design-build general contracting serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities with detailed building standards.
               </p>
               
               <div className="pt-4 flex flex-wrap justify-center gap-4 text-xs font-sans font-bold tracking-wider uppercase text-[#CDAE72]">
-                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">15+ Years Experience</span>
+                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Serving Homeowners Since 2014</span>
                 <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Baeumler Approved</span>
                 <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">RenoMark Certified</span>
-                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Warranty Guarantee</span>
+                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Written Warranty & Aftercare</span>
               </div>
             </div>
           </section>
@@ -1043,17 +1109,28 @@ export default function App() {
           {/* RESTORED ORIGINAL COMPANY VALUES SECTION WITH MERGED COPY */}
           <section id="company-values" className="py-20 bg-white border-b border-[#0B2638]/10">
             <div className="max-w-6xl mx-auto px-6 space-y-12">
-              <div className="max-w-6xl mx-auto text-center space-y-4">
+              {/* BRAND TRANSITION NOTICE (SECTION 7 OF MIGRATION BRIEF) */}
+              <div className="max-w-4xl mx-auto p-6 sm:p-8 bg-[#0B2638] text-white rounded-lg border border-[#CDAE72]/40 shadow-lg text-center space-y-3">
+                <span className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.25em] uppercase block">BRAND TRANSITION NOTICE</span>
+                <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-white">
+                  Carpenters On The Go is becoming Havenridge Build
+                </h3>
+                <p className="text-sm text-white/90 font-light leading-relaxed max-w-3xl mx-auto">
+                  Havenridge Build is the next chapter of Carpenters On The Go. Founded and led by Micheal Smith, the company has served homeowners in Waterloo Region and surrounding communities since 2014. Our new name better reflects the full-service design-build renovation company we have become, while the ownership, commitment to our clients and craftsmanship behind the company remain the same.
+                </p>
+              </div>
+
+              <div className="max-w-6xl mx-auto text-center space-y-4 pt-4">
                 <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">BUILDING STANDARDS</span>
                 <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] leading-tight">
                   Professional Building Standards & Code-Compliant Construction
                 </h2>
                 <div className="space-y-4 text-sm sm:text-base text-[#24313A]/85 font-light leading-relaxed max-w-4xl mx-auto text-left sm:text-center">
                   <p>
-                    Havenridge Build is a full-service design-build general contractor serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities. Since 2014, we’ve helped homeowners transform their homes through thoughtfully planned kitchens, bathrooms, basements, additions, and complete home renovations.
+                    Havenridge Build — serving homeowners since 2014 across Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities with full-service design-build renovations, additions, and whole-home transformations.
                   </p>
                   <p>
-                    Led by owner <strong>Micheal Smith</strong>, Havenridge Build provides one accountable team to guide your renovation from initial planning and design through construction and completion. We believe a great renovation is about more than quality craftsmanship - it’s about clear communication, organized project management, realistic expectations, and making the entire experience easier for the homeowner.
+                    Led by <strong>Micheal Smith</strong> with over 15 years of residential construction experience, Havenridge Build provides one accountable team to guide your renovation from initial planning and design through construction and completion. We believe a great renovation is about more than quality craftsmanship — it’s about clear communication, organized project management, realistic expectations, and making the entire experience easier for the homeowner.
                   </p>
                   <p>
                     Our clients stay informed throughout their project with regular updates and access to their project information through our online client portal. As a <strong>Baeumler Approved</strong> and <strong>RenoMark</strong> renovator, we stand behind our work with a two-year structural warranty and one-year workmanship warranty.
@@ -1118,7 +1195,7 @@ export default function App() {
                       <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Micheal Smith</h3>
                     </div>
                     <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
-                      Micheal leads Havenridge Build with over 15 years of residential construction expertise. His hands-on leadership ensures every custom build, main floor addition, and whole-home renovation is executed with disciplined project management and finish quality.
+                      Micheal leads Havenridge Build with over 15 years of residential construction expertise. His hands-on leadership ensures every design-build addition, main floor extension, and whole-home renovation is executed with disciplined project management and finish quality.
                     </p>
                   </div>
                 </div>
@@ -1134,7 +1211,7 @@ export default function App() {
                       <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">David Woo</h3>
                     </div>
                     <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
-                      I started my career as a framer and went back to school at Conestoga College for the pre-apprenticeship program and am a second year apprentice.
+                      David brings hands-on framing experience and formal construction training from Conestoga College’s Pre-Apprenticeship Program. As Havenridge Build’s Site Supervisor and a second-year carpentry apprentice, he helps coordinate daily jobsite activities, maintain quality standards and keep projects organized.
                     </p>
                   </div>
                 </div>
@@ -1835,11 +1912,46 @@ export default function App() {
               {formSubmitted ? (
                 <div className="py-12 space-y-6 text-center">
                   {formQualified ? (
-                    <div className="space-y-4 max-w-lg mx-auto">
-                      <CheckCircle2 className="w-16 h-16 text-emerald-600 mx-auto" />
-                      <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Project Inquiry Received</h3>
-                      <p className="text-sm text-[#24313A]/90 leading-relaxed font-light">
-                        Thank you for telling us about your project. We have received your information and will review it to confirm whether the scope, location, investment and timing align with Havenridge Build. If it appears to be a good fit, we will contact you to arrange an initial phone consultation and explain the next steps.
+                    <div className="space-y-6 max-w-xl mx-auto text-left bg-white p-6 sm:p-8 rounded-sm shadow-md border border-[#CDAE72]/30">
+                      <div className="text-center space-y-2">
+                        <CheckCircle2 className="w-14 h-14 text-emerald-600 mx-auto" />
+                        <span className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">INQUIRY RECEIVED</span>
+                        <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Project Inquiry Received</h3>
+                      </div>
+
+                      <div className="space-y-4 text-xs sm:text-sm text-[#24313A]/90 font-light leading-relaxed border-t border-b border-[#0B2638]/10 py-5">
+                        <p className="font-semibold text-[#0B2638] text-center sm:text-left">
+                          What happens next (Initial Review & Consultation Process):
+                        </p>
+                        <div className="space-y-3">
+                          <div className="flex items-start gap-3">
+                            <span className="w-6 h-6 rounded-full bg-[#0B2638] text-[#CDAE72] font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">1</span>
+                            <div>
+                              <strong className="text-[#0B2638] block font-semibold">Initial Scope & Feasibility Review (1–2 Business Days)</strong>
+                              <span>Micheal Smith and our team review your project details, location, zoning requirements, and target timeline to confirm alignment.</span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-start gap-3">
+                            <span className="w-6 h-6 rounded-full bg-[#0B2638] text-[#CDAE72] font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">2</span>
+                            <div>
+                              <strong className="text-[#0B2638] block font-semibold">Initial Phone Discovery Call (15–20 Mins)</strong>
+                              <span>If your project aligns with our service capacity, we will reach out via phone/email to schedule an initial consultation to discuss your vision, preliminary budget expectations, and process.</span>
+                            </div>
+                          </div>
+
+                          <div className="flex items-start gap-3">
+                            <span className="w-6 h-6 rounded-full bg-[#0B2638] text-[#CDAE72] font-bold flex items-center justify-center text-xs shrink-0 mt-0.5">3</span>
+                            <div>
+                              <strong className="text-[#0B2638] block font-semibold">On-Site Consultation & Scope Scoping</strong>
+                              <span>Following a successful initial phone call, we arrange an on-site consultation to inspect structural conditions, discuss design goals, and outline pre-construction planning.</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className="text-xs text-[#24313A]/70 text-center italic">
+                        Need immediate assistance? Call us directly at <a href="tel:5196350963" className="font-bold text-[#0B2638] underline hover:text-[#CDAE72]">519-635-0963</a>.
                       </p>
                     </div>
                   ) : (
@@ -2125,7 +2237,9 @@ export default function App() {
                             'Basement',
                             'Whole-home',
                             'Addition',
-                            'ADU / In-Law',
+                            'ADU / In-Law Suite',
+                            'Multi-Unit Conversion',
+                            'Accessible / Barrier-Free',
                             'Design Only',
                             'Other'
                           ].map((t) => (
@@ -2362,6 +2476,9 @@ export default function App() {
             />
           ))}
         </div>
+
+        {/* Subtle Dark Gradient Overlay for Maximum Text Contrast & Legibility */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#0B2638]/75 via-[#0B2638]/40 to-[#0B2638]/10 pointer-events-none" />
 
         <div className="relative z-20 max-w-7xl mx-auto px-6 w-full text-left">
           <div className="max-w-3xl">
@@ -2724,7 +2841,7 @@ export default function App() {
               <img src="renomark.png" alt="RenoMark Certified" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
             </div>
             <div className="h-36 flex items-center justify-center w-full">
-              <img src="baumler.png" alt="Baeumler Approved" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
+              <img src="baumler.png" alt="Baeumler Approved" className="h-26 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity" />
             </div>
             <div className="h-36 flex items-center justify-center w-full">
               <img src="wrhba.png" alt="WRHBA Member" className="h-24 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />

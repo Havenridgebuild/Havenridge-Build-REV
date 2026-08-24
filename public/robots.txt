@@ -1,0 +1,5 @@
+# Havenridge Build Robots.txt
+User-agent: *
+Allow: /
+
+Sitemap: https://havenridgebuild.com/sitemap.xml

@@ -366,23 +366,23 @@ export default function App() {
   ];
 
     const inspirationItems = [
-    { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: 'project_images/mcnamara/1.png', link: '#project-bathrooms' },
-    { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/piccadilly/1.png', link: '#project-kitchens' },
-    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/paisley/living_room_wood_beam.jpg', link: '#project-living-spaces' },
-    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/kuntz/3.jpg', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/verhoeve/basement_media_lounge.jpg', link: '#project-basements' },
-    { title: 'GARAGES', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/borkhoff/10.png', link: '#project-garages' },
-    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png', link: '#project-millwork' },
-    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#project-additions' }
+    { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: 'project_images/paisley/1.png', link: '#project-bathrooms' },
+    { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/wellington/1.png', link: '#project-kitchens' },
+    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/huntingwood/1.png', link: '#project-living-spaces' },
+    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/mcdougall/1.png', link: '#project-additions' },
+    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/moore/1.png', link: '#project-basements' },
+    { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/moore/2.png', link: '#project-garages' },
+    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/appledale/1.png', link: '#project-millwork' },
+    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/morningdale/1.png', link: '#project-additions' }
   ];
 
   const galleryCategories = [
-    { title: 'BATHROOMS', hash: '#project-bathrooms', img: 'project_images/mcnamara/1.png' },
-    { title: 'KITCHENS', hash: '#project-kitchens', img: 'project_images/piccadilly/1.png' },
-    { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/paisley/living_room_wood_beam.jpg' },
-    { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/kuntz/3.jpg' },
-    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/verhoeve/basement_media_lounge.jpg' },
-    { title: 'GARAGES', hash: '#project-garages', img: 'project_images/borkhoff/10.png' },
+    { title: 'BATHROOMS', hash: '#project-bathrooms', img: 'project_images/paisley/1.png' },
+    { title: 'KITCHENS', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
+    { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/huntingwood/1.png' },
+    { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/mcdougall/1.png' },
+    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/moore/1.png' },
+    { title: 'GARAGES', hash: '#project-garages', img: 'project_images/moore/2.png' },
   ];
 
   // Project pages details configuration (Cass Construction Editorial style layout)
@@ -481,6 +481,30 @@ export default function App() {
       img3: "project_images/isherwood/3.png",
       overview: "This bathroom renovation focused on reducing barriers and making everyday use easier. The project included a widened doorway, an accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
       prevHash: "#project-basements",
+      nextHash: "#project-living-spaces"
+    },
+    '#project-living-spaces': {
+      title: "Huntingwood Court — Living Spaces & Built-Ins",
+      category: "Living space renovation + custom millwork",
+      location: "Vaughan, ON",
+      subtitle: "A multi-level renovation combining custom built-in cabinetry, library storage and fireplace feature wall.",
+      img1: "project_images/huntingwood/1.png",
+      img2: "project_images/huntingwood/2.png",
+      img3: "project_images/huntingwood/3.png",
+      overview: "The living room and main-floor gathering spaces were transformed with custom architectural millwork, a stone fireplace surround and integrated oak library shelving.",
+      prevHash: "#project-accessibility",
+      nextHash: "#project-garages"
+    },
+    '#project-garages': {
+      title: "Moore Street — Detached Workshop & Garages",
+      category: "Outbuilding & workshop renovation",
+      location: "Cambridge, ON",
+      subtitle: "Executive workshop, garage storage and outbuilding construction.",
+      img1: "project_images/moore/2.png",
+      img2: "project_images/moore/3.png",
+      img3: "project_images/moore/4.png",
+      overview: "Havenridge completed a dedicated workshop and custom garage storage space with durable interior finishes, heavy-duty electrical infrastructure and custom storage solutions.",
+      prevHash: "#project-living-spaces",
       nextHash: "#project-whole-home"
     },
   };
@@ -1651,8 +1675,8 @@ export default function App() {
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
                     <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
-                    <a href="#project-kitchens" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
-                    <a href="#project-living-spaces" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
                     <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Barrier-Free</a>
                   </div>
                 </div>
@@ -2629,8 +2653,8 @@ export default function App() {
               </a>
               <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
                 <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
-                <a href="#project-kitchens" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
-                <a href="#project-living-spaces" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
                 <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Barrier-Free</a>
               </div>
             </div>

@@ -2927,7 +2927,7 @@ export default function App() {
               {/* RECENT PROJECT PHOTO CONTAINER */}
               <div className="relative rounded-2xl overflow-hidden shadow-lg h-[250px] sm:h-[280px] border border-[#0B2638]/10 group max-w-lg mx-auto lg:max-w-none">
                 <img 
-                  src="project_images/wellington/1.png" 
+                  src="wellington_process_kitchen.jpg" 
                   alt="Wellington Street North Kitchen Renovation" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 />

@@ -166,7 +166,7 @@ export default function App() {
     {
       title: "Additions & ADUs",
       headline: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
-      desc: "This project transformed the existing home through major structural reconfiguration and a new upper level. Havenridge coordinated the construction sequence, framing, exterior finishes and trade work so the addition connected naturally with the original home in both appearance and function.",
+      desc: "This project transformed the home through structural reconfiguration and a new upper level. Havenridge coordinated framing, masonry and trade work so the addition connected naturally in appearance and function.",
       img: "project_images/mcdougall/1.png",
       hash: "#project-additions"
     },
@@ -455,7 +455,7 @@ export default function App() {
       img1: "project_images/mcdougall/1.png",
       img2: "project_images/mcdougall/2.png",
       img3: "project_images/mcdougall/3.png",
-      overview: "This project transformed the existing home through major structural reconfiguration and a new upper level. Havenridge coordinated the construction sequence, framing, exterior finishes and trade work so the addition connected naturally with the original home in both appearance and function.",
+      overview: "This project transformed the home through structural reconfiguration and a new upper level. Havenridge coordinated framing, masonry and trade work so the addition connected naturally in appearance and function.",
       prevHash: "#project-bathrooms",
       nextHash: "#project-basements"
     },
@@ -2927,7 +2927,7 @@ export default function App() {
               {/* RECENT PROJECT PHOTO CONTAINER */}
               <div className="relative rounded-2xl overflow-hidden shadow-lg h-[250px] sm:h-[280px] border border-[#0B2638]/10 group max-w-lg mx-auto lg:max-w-none">
                 <img 
-                  src="wellington_recent.jpg" 
+                  src="project_images/wellington/1.png" 
                   alt="Wellington Street North Kitchen Renovation" 
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
                 />

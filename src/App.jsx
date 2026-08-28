@@ -164,32 +164,32 @@ export default function App() {
 
   const servicePillars = [
     {
-      title: "Additions and ADUs",
-      headline: 'Add space without leaving the home and neighbourhood you love.',
-      desc: 'We coordinate design, engineering, permits and construction for carefully integrated additions and accessory dwelling units.',
-      img: 'project_images/kuntz/3.jpg',
-      hash: '#project-additions'
+      title: "Additions & ADUs",
+      headline: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
+      desc: "This project transformed the existing home through major structural reconfiguration and a new upper level. Havenridge coordinated the construction sequence, framing, exterior finishes and trade work so the addition connected naturally with the original home in both appearance and function.",
+      img: "project_images/mcdougall/1.png",
+      hash: "#project-additions"
     },
     {
-      title: 'Whole Home Renovations',
-      headline: 'Rework the layout, function and finishes of your home through one process.',
-      desc: 'Rework the layout, function and finishes of your home through one coordinated design-build process, from early planning and selections through construction and final walkthrough.',
-      img: 'project_images/piccadilly/1.png',
-      hash: '#project-whole-home'
+      title: "Whole Home Renovations",
+      headline: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
+      desc: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level with family-focused spaces.",
+      img: "project_images/knox/1.png",
+      hash: "#project-whole-home"
     },
     {
-      title: 'Multi-Unit Conversions',
-      headline: 'Convert and optimize space for secondary suites or multi-unit living.',
-      desc: 'Convert and optimize existing space for secondary suites or multi-unit living with coordinated design, code review, permits and construction.',
-      img: 'project_images/verhoeve/basement_media_lounge.jpg',
-      hash: '#project-multi-unit'
+      title: "Multi-Unit Conversions",
+      headline: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
+      desc: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Life-safety, egress, and code compliance were fully coordinated throughout construction.",
+      img: "project_images/natchez/1.png",
+      hash: "#project-multi-unit"
     },
     {
-      title: 'Accessible & Barrier-Free',
-      headline: 'Accessible & aging-in-place renovations for safer independent living.',
-      desc: 'Accessible and aging-in-place renovations designed around safer movement, greater independence and comfortable long-term living.',
-      img: 'project_images/ouellette/2.png',
-      hash: '#project-accessibility'
+      title: "Accessible & Barrier-Free",
+      headline: "Improving safety, comfort and independence through thoughtful accessible design.",
+      desc: "This bathroom renovation focused on reducing barriers and making everyday use easier. The project included a widened doorway, an accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
+      img: "project_images/isherwood/1.png",
+      hash: "#project-accessibility"
     }
   ];
 
@@ -388,204 +388,101 @@ export default function App() {
   // Project pages details configuration (Cass Construction Editorial style layout)
   const projectDetails = {
     '#project-whole-home': {
-      title: 'West Forest Trail Whole-Home Transformation',
-      cat: 'Whole-Home Design-Build Renovation',
-      leadDesc: 'Reworking the entire layout, structural flow, and interior finishes of a residence through one unified design-build process.',
-      desc1: 'A whole-home renovation requires disciplined project management, engineering foresight, and seamless trade coordination. From re-framing structural load-bearing walls to upgrading plumbing, electrical, and HVAC infrastructure, we rebuild homes from the studs up.',
-      desc2: 'This comprehensive transformation integrated an open-concept kitchen, custom white-oak millwork, updated flooring, continuous crown molding, and bespoke bathroom retreats while maintaining full municipal permit compliance.',
-      img1: 'project_images/piccadilly/1.png',
-      img2: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png',
-      location: 'Waterloo Region, ON',
-      timeline: '8 – 14 Weeks',
-      scope: 'Structural Wall Removal, Custom Cabinetry, HVAC Upgrade & Architectural Trim',
-      prevHash: '#project-kitchens',
-      nextHash: '#project-multi-unit',
-      gallery: [
-        'project_images/piccadilly/1.png',
-        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png',
-        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png',
-        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_32_40_AM.png',
-        'project_images/paisley/living_room_wood_beam.jpg',
-        'project_images/mcnamara/1.png'
-      ]
+      title: "Knox Court — Whole-Home Transformation",
+      category: "Whole-home multi-level renovation",
+      location: "Kitchener, ON",
+      subtitle: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
+      img1: "project_images/knox/1.png",
+      img2: "project_images/knox/2.png",
+      img3: "project_images/knox/3.png",
+      overview: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level with family-focused spaces.",
+      prevHash: "#project-millwork",
+      nextHash: "#project-multi-unit"
     },
     '#project-multi-unit': {
-      title: 'Courtland & Water Secondary Suite & Multi-Unit Conversion',
-      cat: 'Multi-Unit & Legal Secondary Suite Conversion',
-      leadDesc: 'Converting underutilized residential spaces into code-compliant, income-generating secondary suites and multi-unit residences.',
-      desc1: 'Converting single-family homes or lower levels into legal multi-unit residences demands strict adherence to municipal zoning bylaws, OBC fire separations, soundproofing, and independent utility metering.',
-      desc2: 'We engineered full sound resilient channels, fire-rated drywall assemblies, dedicated HVAC ducting, egress window expansions, and custom kitchenettes to deliver high-yielding, luxury multi-unit living quarters.',
-      img1: 'project_images/verhoeve/basement_media_lounge.jpg',
-      img2: 'project_images/verhoeve/Verhoeve-House-IMG_2682-Edited.jpg',
-      location: 'Kitchener-Waterloo, ON',
-      timeline: '6 – 10 Weeks',
-      scope: 'OBC Fire Separations, Egress Windows, Acoustic Insulation & Secondary Kitchen',
-      prevHash: '#project-whole-home',
-      nextHash: '#project-millwork',
-      gallery: [
-        'project_images/verhoeve/basement_media_lounge.jpg',
-        'project_images/verhoeve/6.jpg',
-        'project_images/verhoeve/Verhoeve-House-IMG_2682-Edited.jpg',
-        'project_images/verhoeve/Verhoeve-House-IMG_2675-Edited.jpg',
-        'project_images/verhoeve/16.jpg',
-        'project_images/borkhoff/10.png'
-      ]
+      title: "Natchez Road — Secondary Suite Conversion",
+      category: "Secondary-suite / multi-unit conversion",
+      location: "Kitchener, ON",
+      subtitle: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
+      img1: "project_images/natchez/1.png",
+      img2: "project_images/natchez/2.png",
+      img3: "project_images/natchez/3.png",
+      overview: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Life-safety, egress, and code compliance were fully coordinated throughout construction.",
+      prevHash: "#project-whole-home",
+      nextHash: "#project-millwork"
     },
     '#project-millwork': {
-      title: 'Waterloo Architectural Trim & Bench-Built Millwork',
-      cat: 'Custom Architectural Millwork & Cabinetry',
-      leadDesc: 'Custom solid white-oak vanities, integrated pantry storage, coffered ceilings, and bench-built architectural cabinetry.',
-      desc1: 'Master millwork elevates a residential renovation from standard to extraordinary. Unlike pre-fabricated modular cabinets that rely on wide filler strips, our red-seal carpenters craft precision millwork fitted flush to wall dimensions.',
-      desc2: 'Featuring solid wood dovetail drawers, soft-close hardware, integrated accent lighting, custom range hoods, and book-matched oak veneers, our millwork is built for a lifetime of daily beauty and durability.',
-      img1: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png',
-      img2: 'project_images/paisley/10.png',
-      location: 'Waterloo & Guelph, ON',
-      timeline: '4 – 6 Weeks',
-      scope: 'Bench-Built Cabinetry, White-Oak Vanities, Wall Paneling & Fluted Wood Accents',
-      prevHash: '#project-multi-unit',
-      nextHash: '#project-accessibility',
-      gallery: [
-        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png',
-        'project_images/paisley/10.png',
-        'project_images/piccadilly/1.png',
-        'project_images/mcnamara/1.png',
-        'project_images/paisley/living_room_wood_beam.jpg',
-        'project_images/erbach/ChatGPT_Image_Aug_11__2026__10_07_06_AM.png'
-      ]
-    },
-        '#project-accessibility': {
-      title: 'Waterloo Barrier-Free & Accessible Washroom Suite',
-      cat: 'Accessible & Barrier-Free Construction',
-      leadDesc: 'Creating luxurious, independent living environments with zero-threshold curbless showers, solid wall backing, and widened entries.',
-      desc1: 'Creating an accessible bathroom or living suite does not mean sacrificing high-end luxury aesthetics. With thoughtful design, barrier-free washrooms provide independent living without looking institutional.',
-      desc2: 'Before drywall is installed, 2x10 solid lumber backing is fitted inside shower and toilet walls for grab bar anchoring. Doorways are widened to 36"+ with zero-threshold transfers and custom roll-under floating vanities.',
-      img1: 'project_images/ouellette/2.png',
-      img2: 'project_images/mcnamara/2.png',
-      prevHash: '#project-garages',
-      nextHash: '#project-bathrooms',
-      gallery: [
-        'project_images/ouellette/2.png',
-        'project_images/ouellette/1.png',
-        'project_images/ouellette/3.png',
-        'project_images/ouellette/4.png',
-        'project_images/mcnamara/2.png',
-        'project_images/erbach/ChatGPT_Image_Aug_11__2026__10_07_06_AM.png'
-      ]
-    },
-    '#project-bathrooms': {
-      title: 'John Street Bathroom Retreat',
-      cat: 'Custom Bathroom Renovation',
-      leadDesc: 'Transform your daily routine into a spa-like experience with our tailored bathroom renovations.',
-      desc1: 'We create calming, luxurious bathrooms that serve as personal sanctuaries. From custom walk-in double showers and freestanding soaking tubs to premium stone vanities and heated flooring, every detail is engineered for luxury and longevity.',
-      desc2: 'Next came the ensuite, reimagined as a true spa retreat with a freestanding soaker tub, oversized glass shower, herringbone tile floors, and a double vanity bathed in natural light. We coordinate all municipal permit layouts and layout phases, making the build experience completely hands-free for you.',
-      img1: 'project_images/mcnamara/1.png',
-      img2: 'project_images/mcnamara/2.png',
-      prevHash: '#projects-page',
-      nextHash: '#project-kitchens',
-      gallery: [
-        'project_images/mcnamara/1.png',
-        'project_images/mcnamara/2.png',
-        'project_images/mcnamara/3.png',
-        'project_images/mcnamara/4.png',
-        'project_images/mcnamara/5.png',
-        'project_images/mcnamara/6.png'
-      ]
+      title: "Appledale Crescent — Custom Millwork & Whole Home",
+      category: "Whole-home transformation + custom millwork",
+      location: "Waterloo, ON",
+      subtitle: "A coordinated multi-level renovation focused on better flow, storage and finish consistency.",
+      img1: "project_images/appledale/1.png",
+      img2: "project_images/appledale/2.png",
+      img3: "project_images/appledale/3.png",
+      overview: "The main floor was opened and refreshed around a custom kitchen and dedicated coffee storage, while bathroom and lower-level improvements carried the same design language through the home.",
+      prevHash: "#project-multi-unit",
+      nextHash: "#project-kitchens"
     },
     '#project-kitchens': {
-      title: 'West Forest Trail Whole Home Renovation',
-      cat: 'Whole Home Renovation',
-      leadDesc: 'The culinary heart of the home, crafted with master millwork and premium materials.',
-      desc1: 'Our kitchens combine high-performance culinary workspace design with open-concept family styling. We focus on master cabinetry, custom range hoods, integrated smart appliances, and expansive islands finished with high-durability stone.',
-      desc2: 'We began with the main floor, transforming the kitchen with updated cabinetry, a textured tile backsplash, two-tone island, and glass-front built-ins, all flowing into a refreshed living room anchored by a classic fireplace. We coordinate all custom trim matching.',
-      img1: 'project_images/piccadilly/1.png',
-      img2: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png',
-      prevHash: '#project-bathrooms',
-      nextHash: '#project-living-spaces',
-      gallery: [
-        'project_images/piccadilly/1.png',
-        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png',
-        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_34_48_AM.png',
-        'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_32_40_AM.png',
-        'project_images/piccadilly/2.png',
-        'project_images/piccadilly/3.png'
-      ]
+      title: "Wellington Street — Main-Floor Transformation",
+      category: "Main-floor renovation + structural reconfiguration",
+      location: "Kitchener, ON",
+      subtitle: "Improving circulation and creating a more functional kitchen and gathering space.",
+      img1: "project_images/wellington/1.png",
+      img2: "project_images/wellington/2.png",
+      img3: "project_images/wellington/3.png",
+      overview: "Working with the project design, Havenridge coordinated the layout changes, cabinetry, finishes, building systems and restoration details required to bring the older home forward without losing its character.",
+      prevHash: "#project-millwork",
+      nextHash: "#project-bathrooms"
     },
-    '#project-living-spaces': {
-      title: 'Alderview Living Space',
-      cat: 'Architectural Living Space',
-      leadDesc: 'Convert and optimize layouts for secondary suites and multi-unit living.',
-      desc1: 'Starting from scratch allows you to design a unique living space centered around your family’s needs and tailored to your design style. We create warm, open-concept family environments.',
-      desc2: 'Custom white-oak built-in bookshelving, custom gas fireplace surrounds detailed with cast stone, and hidden wire management channels complete this minimal aesthetic.',
-      img1: 'project_images/paisley/living_room_wood_beam.jpg',
-      img2: 'project_images/paisley/11.png',
-      prevHash: '#project-kitchens',
-      nextHash: '#project-additions',
-      gallery: [
-        'project_images/paisley/living_room_wood_beam.jpg',
-        'project_images/paisley/10.png',
-        'project_images/paisley/11.png',
-        'project_images/paisley/12.png',
-        'project_images/paisley/1.png',
-        'project_images/paisley/2.png'
-      ]
+    '#project-bathrooms': {
+      title: "Paisley Heights — Heritage Bathroom & Interior",
+      category: "Heritage-sensitive whole-home renovation",
+      location: "Cambridge, ON",
+      subtitle: "A renovation that balanced updates with the character of an older home.",
+      img1: "project_images/paisley/1.png",
+      img2: "project_images/paisley/2.png",
+      img3: "project_images/paisley/3.png",
+      overview: "The project included a rebuilt staircase, new kitchen and bathroom, wall repairs and new finishes while retaining important original details such as stained glass and woodwork.",
+      prevHash: "#project-kitchens",
+      nextHash: "#project-additions"
     },
     '#project-additions': {
-      title: "Joan Lane Main Floor Addition",
-      cat: 'Main Floor Addition & ADU',
-      leadDesc: 'Expand your footprint with seamless structural extensions that match your home\'s original lines.',
-      desc1: 'Additions demand absolute engineering precision. We construct master suites, multi-story additions, sunrooms, and garage-top extensions that flow perfectly from your existing layout.',
-      desc2: 'We began with foundation tie-ins, timber roof framing, and matched external profiles perfectly to create an expanded main floor kitchen and adjacent garden suite ADU.',
-      img1: 'project_images/kuntz/3.jpg',
-      img2: 'project_images/kuntz/Kuntz-House-IMG_3686-Edited.jpg',
-      prevHash: '#project-living-spaces',
-      nextHash: '#project-basements',
-      gallery: [
-        'project_images/kuntz/3.jpg',
-        'project_images/kuntz/Kuntz-House-IMG_3686-Edited.jpg',
-        'project_images/kuntz/Kuntz-House-IMG_3702-Edited.jpg',
-        'project_images/kuntz/Kuntz-House-IMG_3697-Edited.jpg',
-        'project_images/kuntz/Kuntz-House-IMG_3724-Edited.jpg',
-        'project_images/kuntz/5.jpg'
-      ]
+      title: "McDougall Road — Second-Storey Addition",
+      category: "Whole-home reconstruction + second-storey addition",
+      location: "Waterloo, ON",
+      subtitle: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
+      img1: "project_images/mcdougall/1.png",
+      img2: "project_images/mcdougall/2.png",
+      img3: "project_images/mcdougall/3.png",
+      overview: "This project transformed the existing home through major structural reconfiguration and a new upper level. Havenridge coordinated the construction sequence, framing, exterior finishes and trade work so the addition connected naturally with the original home in both appearance and function.",
+      prevHash: "#project-bathrooms",
+      nextHash: "#project-basements"
     },
     '#project-basements': {
-      title: 'Courtland Basement Renovation',
-      cat: 'Finished Basement Suite',
-      leadDesc: 'Unlock the potential of your lower level with luxury family suites, bars, and theaters.',
-      desc1: 'We convert dark, underutilized basements into premium, dry, and warm living areas. By emphasizing insulation breaks, custom acoustic framing, waterproofing seals, and premium lighting layouts.',
-      desc2: 'The basement became the finishing touch — a dedicated workout space, a sleek entertainment lounge, a wet bar, and enough room for the grandkids to run wild, with built-in storage to match.',
-      img1: 'project_images/verhoeve/basement_media_lounge.jpg',
-      img2: 'project_images/verhoeve/Verhoeve-House-IMG_2682-Edited.jpg',
-      prevHash: '#project-additions',
-      nextHash: '#project-garages',
-      gallery: [
-        'project_images/verhoeve/basement_media_lounge.jpg',
-        'project_images/verhoeve/6.jpg',
-        'project_images/verhoeve/Verhoeve-House-IMG_2682-Edited.jpg',
-        'project_images/verhoeve/Verhoeve-House-IMG_2675-Edited.jpg',
-        'project_images/verhoeve/Verhoeve-House-IMG_2670-Edited.jpg',
-        'project_images/verhoeve/16.jpg'
-      ]
+      title: "Huntingwood Court — Structural & Lower Level",
+      category: "Whole-home transformation + structural reconfiguration",
+      location: "Vaughan, ON",
+      subtitle: "A large multi-level renovation combining layout changes with highly customized interior details.",
+      img1: "project_images/huntingwood/1.png",
+      img2: "project_images/huntingwood/2.png",
+      img3: "project_images/huntingwood/3.png",
+      overview: "The finished home includes a new kitchen, built-in library, feature fireplace, staircase improvements and a lower level planned for fitness and entertaining.",
+      prevHash: "#project-additions",
+      nextHash: "#project-accessibility"
     },
-    '#project-garages': {
-      title: 'Young Street Workshop',
-      cat: 'Detached Workshop & Garage',
-      leadDesc: 'Custom built workshop structures, loft garden suites, and high-end automotive storage.',
-      desc1: 'Garages should match the architectural precision of the main home. We build custom hobby workshops, garage-top executive offices, and luxury storage structures matching your home’s existing layout.',
-      desc2: 'We constructed this multi-functional workspace complete with dust collection ports, a custom timber stairwell to a storage loft, and double insulated overhead carriage doors.',
-      img1: 'project_images/borkhoff/10.png',
-      img2: 'project_images/borkhoff/11.png',
-      prevHash: '#project-basements',
-      nextHash: '#projects-page',
-      gallery: [
-        'project_images/borkhoff/10.png',
-        'project_images/borkhoff/11.png',
-        'project_images/borkhoff/12.png',
-        'project_images/borkhoff/13.png',
-        'project_images/borkhoff/14.png',
-        'project_images/borkhoff/15.png'
-      ]
-    }
+    '#project-accessibility': {
+      title: "Isherwood Ave — Accessible & Barrier-Free Washroom",
+      category: "Accessible / aging-in-place bathroom renovation",
+      location: "Cambridge, ON",
+      subtitle: "Improving safety, comfort and independence through thoughtful accessible design.",
+      img1: "project_images/isherwood/1.png",
+      img2: "project_images/isherwood/2.png",
+      img3: "project_images/isherwood/3.png",
+      overview: "This bathroom renovation focused on reducing barriers and making everyday use easier. The project included a widened doorway, an accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
+      prevHash: "#project-basements",
+      nextHash: "#project-whole-home"
+    },
   };
 
   // Render individual project detail sub-pages (CASS STYLE)
@@ -656,7 +553,7 @@ export default function App() {
 
               <div className="pt-6 border-t border-white/10 text-center space-y-1 text-xs text-white/70">
                 <p className="font-semibold text-white">Havenridge Build | Cambridge & Waterloo Region</p>
-                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | info@havenridgebuild.com</p>
+                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | Info@HavenridgeBuild.com</p>
               </div>
             </div>
           )}
@@ -792,7 +689,7 @@ export default function App() {
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
@@ -818,6 +715,150 @@ export default function App() {
   }
 
   // Render projects-page (CASS PROJECTS DIRECTORY)
+  // Dedicated Reviews Page (#reviews-page)
+  if (currentPath === '#reviews-page') {
+    return (
+      <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
+        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#home" className="flex items-center">
+              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+            </a>
+            <div className="flex items-center gap-4">
+              <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> BACK TO HOME
+              </a>
+              <button 
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden p-2 text-[#CDAE72] hover:text-white transition-colors cursor-pointer"
+                aria-label="Toggle Navigation Menu"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
+            </div>
+          </div>
+        </nav>
+
+        <section className="bg-[#0B2638] text-white py-16 text-center border-b border-[#CDAE72]/20">
+          <div className="max-w-4xl mx-auto px-6 space-y-3">
+            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CLIENT TESTIMONIALS</span>
+            <h1 className="font-cinzel text-3xl sm:text-4xl font-bold text-white">What Our Clients Say</h1>
+            <p className="text-sm font-light text-white/80 max-w-2xl mx-auto leading-relaxed">
+              Feedback from homeowners across Waterloo Region, Guelph and surrounding communities.
+            </p>
+          </div>
+        </section>
+
+        <section className="py-16 bg-[#F4F2EE]">
+          <div className="max-w-6xl mx-auto px-6">
+            <div className="bg-white p-6 sm:p-10 rounded-sm shadow-md border border-[#0B2638]/10 min-h-[450px]">
+              <div className="nj-stories"></div>
+            </div>
+          </div>
+        </section>
+
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="#projects-page" className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
+  // Dedicated Privacy Policy Page (#privacy-page)
+  if (currentPath === '#privacy-page') {
+    return (
+      <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
+        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#home" className="flex items-center">
+              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+            </a>
+            <div className="flex items-center gap-4">
+              <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
+                <ArrowLeft className="w-4 h-4" /> BACK TO HOME
+              </a>
+            </div>
+          </div>
+        </nav>
+
+        <section className="bg-[#0B2638] text-white py-16 text-center border-b border-[#CDAE72]/20">
+          <div className="max-w-4xl mx-auto px-6 space-y-3">
+            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">LEGAL & PRIVACY</span>
+            <h1 className="font-cinzel text-3xl sm:text-4xl font-bold text-white">Privacy Policy</h1>
+            <p className="text-xs font-light text-white/70">Effective Date: August 26, 2026</p>
+          </div>
+        </section>
+
+        <section className="py-16 bg-white border-b border-[#0B2638]/10">
+          <div className="max-w-4xl mx-auto px-6 space-y-8 text-sm text-[#24313A]/90 font-light leading-relaxed">
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">1. Information We Collect</h2>
+              <p>When you contact Havenridge Build, submit a project inquiry, apply for a position, or otherwise interact with our website, we may collect information you provide such as your name, email address, phone number, project address or service area, project details, budget information, preferred timing, referral source, uploaded information and any message you send us. We may also receive basic technical information about website use through cookies, analytics or similar technologies where enabled.</p>
+            </div>
+
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">2. How We Use Information</h2>
+              <p>We use information to respond to inquiries, assess project fit, arrange consultations, prepare and manage prospective client relationships, communicate about projects, improve our website and services, maintain business records, recruit team members or trade partners, protect our systems, and meet legal or regulatory requirements.</p>
+            </div>
+
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">3. Service Providers</h2>
+              <p>We may use trusted service providers to operate our website and business systems, including website hosting, email, customer relationship management, project management/client portal, analytics and other administrative tools. Information may be processed by these providers only as needed to provide their services to Havenridge Build.</p>
+            </div>
+
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">4. Sharing of Information</h2>
+              <p>Havenridge Build does not sell personal information. We may share information with service providers, professional advisors, consultants or trade partners where reasonably necessary for an inquiry or project, or where required or permitted by law.</p>
+            </div>
+
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">5. Retention and Security</h2>
+              <p>We retain personal information only as long as reasonably necessary for the purposes for which it was collected, our business and record-keeping needs, and applicable legal requirements. We use reasonable administrative, technical and physical safeguards appropriate to the information we hold.</p>
+            </div>
+
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">6. Cookies and Analytics</h2>
+              <p>Our website may use cookies or analytics tools to understand site performance and visitor activity. If advertising, remarketing or additional tracking tools are added, this policy and any consent tools should be updated accordingly.</p>
+            </div>
+
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">7. Your Choices</h2>
+              <p>You may contact us to ask questions about your personal information or request access or correction where applicable. You may also ask us to stop sending non-essential marketing communications.</p>
+            </div>
+
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">8. Contact</h2>
+              <p>Questions about this Privacy Policy or Havenridge Build's privacy practices can be directed to <a href="mailto:Info@HavenridgeBuild.com" className="font-bold text-[#0B2638] underline">Info@HavenridgeBuild.com</a>.</p>
+            </div>
+
+            <div>
+              <h2 className="font-cinzel text-xl font-bold text-[#0B2638] mb-2">9. Updates</h2>
+              <p>We may update this Privacy Policy from time to time. The website displays the effective date of the current version.</p>
+            </div>
+          </div>
+        </section>
+
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
   if (currentPath === '#projects-page') {
     return (
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
@@ -884,7 +925,7 @@ export default function App() {
 
               <div className="pt-6 border-t border-white/10 text-center space-y-1 text-xs text-white/70">
                 <p className="font-semibold text-white">Havenridge Build | Cambridge & Waterloo Region</p>
-                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | info@havenridgebuild.com</p>
+                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | Info@HavenridgeBuild.com</p>
               </div>
             </div>
           )}
@@ -1006,7 +1047,7 @@ export default function App() {
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
@@ -1253,21 +1294,21 @@ export default function App() {
                 </div>
               </div>
 
-              {/* ORIGINAL 4 GRID CARDS */}
+              {/* REVISED 4 GRID CARDS */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
                 <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
                   <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">01 / PRE-CONSTRUCTION</span>
                   <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Disciplined Planning & Scope Clarity</h3>
                   <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    Every successful residential renovation begins with clear pre-construction planning. By establishing detailed scope documents, selection schedules, and fixed permit layouts early, we eliminate mid-project surprises and budget creep.
+                    Detailed scopes, selection schedules and construction planning help reduce uncertainty, manage allowances and identify important decisions before construction begins.
                   </p>
                 </div>
 
                 <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
                   <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">02 / CRAFTSMANSHIP</span>
-                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Uncompromising Quality & Millwork</h3>
+                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Quality & Code Compliance</h3>
                   <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    From structural timber roof additions to custom white-oak cabinetry, heated bathroom floors, and quartz island installations, we hold every trade phase to exact Ontario Building Code and high-end finish standards.
+                    Our team coordinates each phase of construction to meet applicable Ontario Building Code requirements and Havenridge Build's quality standards.
                   </p>
                 </div>
 
@@ -1275,15 +1316,15 @@ export default function App() {
                   <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">03 / ACCOUNTABILITY</span>
                   <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Transparent Client Portal Communication</h3>
                   <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    Through our Buildern client portal, homeowners enjoy 24/7 access to daily job logs, site photos, selection approvals, and real-time schedules. Communication is direct, documented, and proactive.
+                    Homeowners enjoy 24/7 access to daily job logs, site photos, selection approvals, and real-time schedules through transparent client portal communication.
                   </p>
                 </div>
 
                 <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
-                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">04 / RESPECT & WARRANTY</span>
-                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Clean Job Sites & Warranty Defense</h3>
+                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">04 / RESPECT & AFTERCARE</span>
+                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Respectful Job Sites & Dependable Aftercare</h3>
                   <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    We respect your sanctuary. Our teams enforce strict dust containment, daily jobsite cleanup, and courteous site management—standing behind all completed work with dedicated homeowner warranty support.
+                    We use practical dust-control measures, regular cleanup and courteous site practices, then complete an organized closeout and provide the warranty information applicable to the project.
                   </p>
                 </div>
               </div>
@@ -1436,7 +1477,7 @@ export default function App() {
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
@@ -1785,7 +1826,7 @@ export default function App() {
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
@@ -2005,7 +2046,7 @@ export default function App() {
 
               <div className="pt-6 border-t border-white/10 text-center space-y-1 text-xs text-white/70">
                 <p className="font-semibold text-white">Havenridge Build | Cambridge & Waterloo Region</p>
-                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | info@havenridgebuild.com</p>
+                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | Info@HavenridgeBuild.com</p>
               </div>
             </div>
           )}
@@ -2042,7 +2083,7 @@ export default function App() {
                 </p>
                 <p className="flex items-center gap-3">
                   <span className="font-bold text-[#0B2638] min-w-[70px]">Email</span>
-                  <a href="mailto:info@havenridgebuild.com" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">info@havenridgebuild.com</a>
+                  <a href="mailto:Info@HavenridgeBuild.com" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a>
                 </p>
                 <div className="pt-2">
                   <span className="font-bold text-[#0B2638] block mb-1">Service area</span>
@@ -2543,7 +2584,7 @@ export default function App() {
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>
@@ -2681,7 +2722,7 @@ export default function App() {
 
             <div className="pt-6 border-t border-white/10 text-center space-y-1 text-xs text-white/70">
               <p className="font-semibold text-white">Havenridge Build | Cambridge & Waterloo Region</p>
-              <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | info@havenridgebuild.com</p>
+              <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | Info@HavenridgeBuild.com</p>
             </div>
           </div>
         )}
@@ -2804,10 +2845,10 @@ export default function App() {
             </p>
           </div>
 
-          {/* MAIN CONTENT GRID: 5-STEP VERTICAL TIMELINE WITH ICONS + FEATURED PROJECT & COMPUTER/PHONE MOCKUP */}
+          {/* MAIN CONTENT GRID: 5-STEP VERTICAL TIMELINE + FEATURED PROJECT & MOCKUP */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start pt-6">
             
-            {/* LEFT COLUMN: 5-STEP VERTICAL TIMELINE WITH NUMBER + ICON BADGES (6 COLS) */}
+            {/* LEFT COLUMN: 5-STEP VERTICAL TIMELINE WITH NUMBERS AS VISUAL ANCHORS */}
             <div className="lg:col-span-6 space-y-8 relative pl-2 sm:pl-0">
               
               {/* VERTICAL CONNECTING LINE */}
@@ -2818,16 +2859,10 @@ export default function App() {
                 <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
                   01
                 </div>
-                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                  <MessageSquare className="w-5 h-5 text-[#CDAE72]" />
-                </div>
-                <div className="space-y-1.5 pt-0.5">
-                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">CONSULT & DISCOVER</span>
-                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
-                    We start by understanding your home, your goals and what you want to achieve.
-                  </p>
-                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
-                    We meet with you to discuss your renovation, priorities, ideas, budget expectations and the possibilities for your space.
+                <div className="space-y-1.5 pt-1">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">CONNECT & DISCOVER</span>
+                  <p className="text-xs text-[#24313A]/90 font-light leading-relaxed">
+                    Understand goals, priorities, property and budget range through initial consultation and discovery.
                   </p>
                 </div>
               </div>
@@ -2837,16 +2872,10 @@ export default function App() {
                 <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
                   02
                 </div>
-                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                  <Ruler className="w-5 h-5 text-[#CDAE72]" />
-                </div>
-                <div className="space-y-1.5 pt-0.5">
+                <div className="space-y-1.5 pt-1">
                   <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">DESIGN & PLAN</span>
-                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
-                    We turn the vision into a clear plan before construction begins.
-                  </p>
-                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
-                    We work through the project details, design, scope, materials, selections and required planning so everyone understands what is being built.
+                  <p className="text-xs text-[#24313A]/90 font-light leading-relaxed">
+                    Develop layout direction, design details and required professional/permit coordination before construction.
                   </p>
                 </div>
               </div>
@@ -2856,16 +2885,10 @@ export default function App() {
                 <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
                   03
                 </div>
-                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                  <ClipboardCheck className="w-5 h-5 text-[#CDAE72]" />
-                </div>
-                <div className="space-y-1.5 pt-0.5">
-                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">APPROVE & PREPARE</span>
-                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
-                    The details are finalized before we begin construction.
-                  </p>
-                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
-                    We confirm pricing, selections, scheduling, permits and long-lead materials so the project is properly prepared before work starts.
+                <div className="space-y-1.5 pt-1">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">SCOPE & PREPARE</span>
+                  <p className="text-xs text-[#24313A]/90 font-light leading-relaxed">
+                    Finalize selections, scope, pricing, schedule and construction readiness prior to starting work.
                   </p>
                 </div>
               </div>
@@ -2875,16 +2898,10 @@ export default function App() {
                 <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
                   04
                 </div>
-                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                  <Smartphone className="w-5 h-5 text-[#CDAE72]" />
-                </div>
-                <div className="space-y-1.5 pt-0.5">
-                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">BUILD & STAY CONNECTED</span>
-                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
-                    Expert craftsmanship backed by organized project management and clear communication.
-                  </p>
-                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
-                    Our skilled team brings the plan to life while keeping the jobsite organized and the homeowner informed. Clients have <strong>24/7 online access</strong> to progress photos, updates, selections and important project information—making it easy to follow your renovation from anywhere.
+                <div className="space-y-1.5 pt-1">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">BUILD & COMMUNICATE</span>
+                  <p className="text-xs text-[#24313A]/90 font-light leading-relaxed">
+                    Manage trades, site activity, updates, decisions and project information through transparent client portal communication.
                   </p>
                 </div>
               </div>
@@ -2894,16 +2911,10 @@ export default function App() {
                 <div className="w-12 h-12 rounded-full bg-[#0B2638] text-[#CDAE72] font-cinzel text-base font-bold flex items-center justify-center shrink-0 shadow-md border-2 border-[#CDAE72]">
                   05
                 </div>
-                <div className="w-11 h-11 rounded-full bg-white border border-[#CDAE72] flex items-center justify-center shrink-0 shadow-sm mt-0.5">
-                  <ShieldCheck className="w-5 h-5 text-[#CDAE72]" />
-                </div>
-                <div className="space-y-1.5 pt-0.5">
-                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">REVIEW & PROTECT</span>
-                  <p className="text-sm font-semibold text-[#CDAE72] leading-snug">
-                    We finish with the same attention to detail we started with.
-                  </p>
-                  <p className="text-xs text-[#24313A]/80 font-light leading-relaxed">
-                    We walk through every detail with you and ensure complete satisfaction. Our completed work is supported by Havenridge’s written warranty and closeout process. Final warranty wording and coverage should match the signed contract and applicable requirements.
+                <div className="space-y-1.5 pt-1">
+                  <span className="text-[#0B2638] font-bold text-xs font-sans tracking-widest uppercase block">FINAL WALKTHROUGH & AFTERCARE</span>
+                  <p className="text-xs text-[#24313A]/90 font-light leading-relaxed">
+                    Complete closeout, outstanding items and project-specific written warranty information.
                   </p>
                 </div>
               </div>
@@ -3084,7 +3095,7 @@ export default function App() {
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | info@havenridgebuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="#contact-page" className="hover:text-white transition-colors">Start Your Project</a>

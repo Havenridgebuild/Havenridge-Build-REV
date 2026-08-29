@@ -396,14 +396,11 @@ export default function App() {
 
 
   const portfolioProjects = [
-    { name: 'Knox Court — Whole Home Transformation', cat: 'Multi-Level Renovation', hash: '#project-whole-home', img: 'project_images/knox/whole_home_white_kitchen.jpg' },
+    { name: 'Appledale Crescent — Total Transformation', cat: 'Whole-Home & Custom Millwork', hash: '#project-millwork', img: 'project_images/appledale/1.png' },
+    { name: 'Huntingwood Court — Total Estate Reconstruction', cat: 'Whole-Home & Basement Retreat', hash: '#project-basements', img: 'project_images/huntingwood/1.png' },
+    { name: 'Morningdale Crescent — Total Property Overhaul', cat: 'Whole-Home Interior & Exterior', hash: '#project-living-spaces', img: 'project_images/morningdale/1.png' },
     { name: 'Wellington Street — Designer Main Floor Reconstruction', cat: 'Main-Floor Transformation', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
-    { name: 'McDougall Road — Second-Storey Addition', cat: 'Addition & ADU', hash: '#project-additions', img: 'project_images/mcdougall/1.png' },
-    { name: 'Natchez Road — Secondary Suite Conversion', cat: 'Multi-Unit Conversion', hash: '#project-multi-unit', img: 'project_images/natchez/1.png' },
     { name: 'Paisley Heights — Heritage Restoration & Modernization', cat: 'Heritage Restoration', hash: '#project-bathrooms', img: 'project_images/paisley/1.png' },
-    { name: 'Isherwood Ave — Barrier-Free Washroom', cat: 'Accessible Renovation', hash: '#project-accessibility', img: 'project_images/isherwood/1.png' },
-    { name: 'Huntingwood Court — Structural & Basement', cat: 'Finished Lower Level', hash: '#project-basements', img: 'project_images/huntingwood/1.png' },
-    { name: 'Appledale Crescent — Custom Millwork', cat: 'Custom Millwork & Whole Home', hash: '#project-millwork', img: 'project_images/appledale/1.png' },
     { name: 'The Moore Street Estate — 1908 Flagship Restoration', cat: 'Flagship Heritage Restoration', hash: '#project-garages', img: 'project_images/moore/1.png' },
   ];
 
@@ -505,23 +502,31 @@ export default function App() {
       prevHash: "#project-whole-home",
       nextHash: "#project-millwork"
     },
-    '#project-millwork': {
-      title: "Appledale Crescent — Custom Architectural Millwork",
-      category: "Custom cabinetry & kitchen millwork",
-      cat: "Custom cabinetry & kitchen millwork",
-      location: "Waterloo, ON",
-      timeline: "4 – 6 Weeks",
-      subtitle: "Built-ins, cabinetry, trim, storage and architectural details tailored to the home.",
-      leadDesc: "Built-ins, cabinetry, trim, storage and architectural details tailored to the home.",
-      scope: "Custom kitchen cabinetry, built-in coffee cupboard, architectural trim & quartz countertops",
-      standards: "Havenridge Written Workmanship & Hardware Warranty",
-      certifications: "Havenridge Written Workmanship & Hardware Warranty",
+        '#project-millwork': {
+      title: "APPLEDALE CRESCENT TOTAL TRANSFORMATION",
+      category: "Whole-Home Transformation & Custom Millwork",
+      cat: "Whole-Home Transformation & Custom Millwork",
+      location: "Waterloo, ON (Appledale Crescent)",
+      timeline: "1 - 2 Months",
+      subtitle: "A masterclass in modernizing multi-level living through structural flow, high-end custom millwork, and cohesive architectural finishes.",
+      leadDesc: "A masterclass in modernizing multi-level living through structural flow, high-end custom millwork, and cohesive architectural finishes.",
+      scope: "Open-Concept Kitchen Reconfiguration, Custom Coffee Station, Multi-Level Flooring & Feature Walls, Custom Laundry Suite & Premium Tile Bathrooms",
+      standards: "WEDI Certified, Havenridge Written Warranty",
+      certifications: "WEDI Certified, Havenridge Written Warranty",
       img1: "project_images/appledale/1.png",
       img2: "project_images/appledale/2.png",
       img3: "project_images/appledale/3.png",
-      overview: "Custom cabinetry, coffee cupboard built-ins, practical storage and architectural trim details tailored to everyday living.",
-      desc1: "Custom cabinetry, coffee cupboard built-ins, practical storage and architectural trim details tailored to everyday living.",
-      desc2: "Precision joinery and custom finishes enhance both functionality and visual appeal across the living areas.",
+      overview: `This extensive whole-house renovation on Appledale Crescent showcases a seamless blend of spatial re-engineering and highly specialized finish carpentry. On the main floor, we removed dividing barriers to open up a gourmet chef's kitchen, anchored by a massive quartz waterfall-edge island, integrated full-height pantry walls, and a dedicated custom coffee cupboard. Premium engineered flooring runs continuously across the entire level, tying into a striking architectural feature wall and freshly painted main and upper levels.
+
+Upstairs, the main washroom was completely reimagined with a modern tub-to-shower conversion featuring precision herringbone subway tile layouts and contrasting matte black plumbing fixtures. The sub-grade transformation features a brilliant dual-purpose layout optimization: a high-end custom bathroom that transitions seamlessly via space-saving pocket doors into a luxury laundry suite. This mechanical space features elevated washer and dryer platforms with integrated structural roll-out bins for maximum ergonomic utility.
+
+From the frameless glass shower enclosures to the final architectural trim, this project is defined by smart utility and tailored luxury.`,
+      desc1: `This extensive whole-house renovation on Appledale Crescent showcases a seamless blend of spatial re-engineering and highly specialized finish carpentry. On the main floor, we removed dividing barriers to open up a gourmet chef's kitchen, anchored by a massive quartz waterfall-edge island, integrated full-height pantry walls, and a dedicated custom coffee cupboard. Premium engineered flooring runs continuously across the entire level, tying into a striking architectural feature wall and freshly painted main and upper levels.
+
+Upstairs, the main washroom was completely reimagined with a modern tub-to-shower conversion featuring precision herringbone subway tile layouts and contrasting matte black plumbing fixtures. The sub-grade transformation features a brilliant dual-purpose layout optimization: a high-end custom bathroom that transitions seamlessly via space-saving pocket doors into a luxury laundry suite. This mechanical space features elevated washer and dryer platforms with integrated structural roll-out bins for maximum ergonomic utility.
+
+From the frameless glass shower enclosures to the final architectural trim, this project is defined by smart utility and tailored luxury.`,
+      desc2: "This complete multi-level overhaul integrated custom floor-to-ceiling kitchen millwork, a specialized coffee cupboard, premium continuous flooring, and a highly engineered basement washroom/laundry suite combination with pocket doors and elevated appliance roll-outs.",
       prevHash: "#project-multi-unit",
       nextHash: "#project-kitchens",
       gallery: [
@@ -618,10 +623,7 @@ The main level expands into a custom-built gourmet kitchen designed to maximize 
         "project_images/paisley/9.png",
         "project_images/paisley/10.png",
         "project_images/paisley/11.png",
-        "project_images/paisley/12.png",
-        "project_images/paisley/13.png",
-        "project_images/paisley/14.png",
-        "project_images/paisley/15.png"
+        "project_images/paisley/12.png"
       ]
     },
     '#project-additions': {
@@ -661,23 +663,35 @@ The main level expands into a custom-built gourmet kitchen designed to maximize 
       prevHash: "#project-bathrooms",
       nextHash: "#project-basements"
     },
-    '#project-basements': {
-      title: "Huntingwood Court — Finished Lower Level & Lounge",
-      category: "Basement renovation & entertainment space",
-      cat: "Basement renovation & entertainment space",
-      location: "Vaughan, ON",
-      timeline: "8 – 10 Weeks",
-      subtitle: "Comfortable lower levels for family living, fitness, entertaining, laundry and flexible use.",
-      leadDesc: "Comfortable lower levels for family living, fitness, entertaining, laundry and flexible use.",
-      scope: "Finished basement lounge, custom built-in library cabinetry, stone fireplace surround & staircase details",
-      standards: "Havenridge 2-Year Written Warranty",
-      certifications: "Havenridge 2-Year Written Warranty",
+        '#project-basements': {
+      title: "HUNTINGWOOD COURT TOTAL ESTATE RECONSTRUCTION",
+      category: "Whole-Home Transformation & Structural Reconfiguration",
+      cat: "Whole-Home Transformation & Structural Reconfiguration",
+      location: "Vaughan, ON (Huntingwood Court)",
+      timeline: "2-3 Months",
+      subtitle: "An uncompromising top-to-bottom transformation merging bold architectural character, complex structural engineering, and elite functional zones.",
+      leadDesc: "An uncompromising top-to-bottom transformation merging bold architectural character, complex structural engineering, and elite functional zones.",
+      scope: "Load-Bearing Wall Removal, Custom Kitchen Millwork & Dry Bar, Floor-to-Ceiling Fireplace Media Wall, Bespoke Library Bookcase & Sliding Ladder, Custom Powder Room, Grand Staircase Reconstruction, Engineered Hardwood & Aria Flush Vent Integration, Sub-Grade Basement Gym & Kitchenette",
+      standards: "WEDI Certified, Havenridge Written Warranty",
+      certifications: "WEDI Certified, Havenridge Written Warranty",
       img1: "project_images/huntingwood/1.png",
       img2: "project_images/huntingwood/2.png",
       img3: "project_images/huntingwood/3.png",
-      overview: "The finished home includes a new kitchen, built-in library, feature fireplace, staircase improvements and a lower level planned for fitness and entertaining.",
-      desc1: "The finished home includes a new kitchen, built-in library, feature fireplace, staircase improvements and a lower level planned for fitness and entertaining.",
-      desc2: "Moisture management, subfloor insulation, and acoustic dampening create a warm, comfortable lower-level environment.",
+      overview: `The Huntingwood Court estate stands as a definitive showcase of complex multi-level design-build execution. On the main floor, we executed a major structural reconfiguration by removing a principal load-bearing wall, entirely opening the floor plan into a sprawling chef's kitchen. This gourmet culinary space is anchored by custom forest green shaker-style millwork, a massive central quartz-capped island, a bespoke custom-built range hood enclosure, an integrated dry bar, and a dedicated roll-out coffee cupboard station. Seamlessly flowing from the kitchen is the expansive living room, centered around an ultra-sleek, built-in three-sided linear fireplace media unit flanked by minimalist architectural shelving.
+
+No detail was spared in the structural or visual continuity of the home; we installed premium wide-plank engineered hardwood flooring across both upper levels, seamlessly integrating modern flush-mount Aria vents. Off the main foyer, a sophisticated private library features a custom floor-to-ceiling stained oak bookcase equipped with an authentic rolling library ladder system. Nearby, a show-stopping powder room makes a bold statement with deep, dramatic wainscoting topped by a vibrant botanical wallcovering and a luxury marble vanity. Structural transitions were completely elevated by fully replacing the main architectural staircase and professionally capping the secondary staircase to match the premium floor finishes.
+
+Upstairs, all bedrooms were completely modernized, including a fully customized, walk-in closet dressing room and completely revitalized, high-end bathroom suites. Below grade, the lower level was fully optimized into a high-performance basement retreat. This multi-functional sub-grade footprint includes a luxury wellness zone featuring a custom home fitness gym with commercial-grade rubber flooring, an advanced glass-enclosed training area, a private lower-level bathroom, and a sleek modern entertainment kitchenette complete with under-counter beverage cooling, open mosaic-tile floating shelves, and integrated ambient LED strip accent lighting.
+
+The entire estate was brought together with a flawless whole-home professional paint package and tailored architectural trim.`,
+      desc1: `The Huntingwood Court estate stands as a definitive showcase of complex multi-level design-build execution. On the main floor, we executed a major structural reconfiguration by removing a principal load-bearing wall, entirely opening the floor plan into a sprawling chef's kitchen. This gourmet culinary space is anchored by custom forest green shaker-style millwork, a massive central quartz-capped island, a bespoke custom-built range hood enclosure, an integrated dry bar, and a dedicated roll-out coffee cupboard station. Seamlessly flowing from the kitchen is the expansive living room, centered around an ultra-sleek, built-in three-sided linear fireplace media unit flanked by minimalist architectural shelving.
+
+No detail was spared in the structural or visual continuity of the home; we installed premium wide-plank engineered hardwood flooring across both upper levels, seamlessly integrating modern flush-mount Aria vents. Off the main foyer, a sophisticated private library features a custom floor-to-ceiling stained oak bookcase equipped with an authentic rolling library ladder system. Nearby, a show-stopping powder room makes a bold statement with deep, dramatic wainscoting topped by a vibrant botanical wallcovering and a luxury marble vanity. Structural transitions were completely elevated by fully replacing the main architectural staircase and professionally capping the secondary staircase to match the premium floor finishes.
+
+Upstairs, all bedrooms were completely modernized, including a fully customized, walk-in closet dressing room and completely revitalized, high-end bathroom suites. Below grade, the lower level was fully optimized into a high-performance basement retreat. This multi-functional sub-grade footprint includes a luxury wellness zone featuring a custom home fitness gym with commercial-grade rubber flooring, an advanced glass-enclosed training area, a private lower-level bathroom, and a sleek modern entertainment kitchenette complete with under-counter beverage cooling, open mosaic-tile floating shelves, and integrated ambient LED strip accent lighting.
+
+The entire estate was brought together with a flawless whole-home professional paint package and tailored architectural trim.`,
+      desc2: "This masterful estate transformation integrated a massive open-concept structural layout, premium engineered flooring with flush Aria vents, an elegant custom library with a rolling ladder, a striking designer powder room, a high-performance sub-grade home fitness gym, and a custom entertainment kitchenette.",
       prevHash: "#project-additions",
       nextHash: "#project-accessibility",
       gallery: [
@@ -718,16 +732,7 @@ The main level expands into a custom-built gourmet kitchen designed to maximize 
         "project_images/isherwood/3.png",
         "project_images/isherwood/4.png",
         "project_images/isherwood/5.png",
-        "project_images/isherwood/accessible_suite_bedroom.jpg",
-        "project_images/isherwood/2.png",
-        "project_images/isherwood/1.png",
-        "project_images/isherwood/accessible_bathroom_shower.jpg",
-        "project_images/isherwood/3.png",
-        "project_images/isherwood/4.png",
-        "project_images/isherwood/5.png",
-        "project_images/isherwood/accessible_suite_bedroom.jpg",
-        "project_images/isherwood/2.png",
-        "project_images/isherwood/1.png"
+        "project_images/isherwood/accessible_suite_bedroom.jpg"
       ],
       overview: "Creating a safe, beautiful, and accessible living space within a retirement community requires a deep understanding of universal design principles and structural adaptability. For this comprehensive bathroom renovation, our primary focus was eliminating physical barriers to maximize safety and independence for independent senior living. We began by structurally widening the doorway framework to comfortably accommodate walkers and mobility aids. The original layout was completely overhauled to feature a zero-threshold, barrier-free roll-in shower complete with a heavy-duty integrated bench for sitting and strategically anchored safety grab bars. Every detail was meticulously planned to balance utility and style—including custom-designed vanity storage positioned for easy reach, a comfort-height toilet, and high-output, shadow-free architectural lighting to drastically improve visibility.",
       desc1: "Creating a safe, beautiful, and accessible living space within a retirement community requires a deep understanding of universal design principles and structural adaptability. For this comprehensive bathroom renovation, our primary focus was eliminating physical barriers to maximize safety and independence for independent senior living. We began by structurally widening the doorway framework to comfortably accommodate walkers and mobility aids. The original layout was completely overhauled to feature a zero-threshold, barrier-free roll-in shower complete with a heavy-duty integrated bench for sitting and strategically anchored safety grab bars. Every detail was meticulously planned to balance utility and style—including custom-designed vanity storage positioned for easy reach, a comfort-height toilet, and high-output, shadow-free architectural lighting to drastically improve visibility.",

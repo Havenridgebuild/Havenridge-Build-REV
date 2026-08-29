@@ -5,6 +5,45 @@ import { CheckCircle2, ArrowLeft, ChevronDown, ChevronLeft, ChevronRight, Star, 
 
 gsap.registerPlugin(ScrollTrigger);
 
+
+
+
+const HouzzIcon = ({ className = "w-4 h-4" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12.6 1.2L1.8 8.4v14.4h6.6v-7.2h7.2v7.2h6.6V8.4L12.6 1.2zm3.6 10.8h-4.8V7.2l4.8 3.2v1.6z"/>
+  </svg>
+);
+
+const YelpIcon = ({ className = "w-4 h-4" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M11.95 2C10.45 2 9.5 3.32 9.77 5.12l.68 4.45c.08.52.48.91.99.91.52 0 .93-.39 1.01-.91l.68-4.45C13.4 3.32 12.45 2 11.95 2zM6.9 10.38c-1.22-.88-2.6-.5-3.08 1.06-.48 1.56.24 2.82 1.46 3.7l4.03 2.91c.42.31.99.21 1.28-.21.29-.42.2-.98-.22-1.29L6.9 10.38zm10.2 0l-3.47 6.17c-.29.42-.2.98.22 1.29.42.31.99.21 1.28-.21l4.03-2.91c1.22-.88 1.94-2.14 1.46-3.7-.48-1.56-1.86-1.94-3.08-1.06zM9.77 17.5l-4.52 2.05c-1.37.62-1.7 1.95-.73 2.97.97 1.02 2.37.91 3.74.29l4.52-2.05c.47-.21.68-.76.47-1.23-.21-.47-.76-.68-1.23-.47l-2.25 1.02zm4.36.42l2.25 1.02c.47.21 1.02 0 1.23-.47.21-.47 0-1.02-.47-1.23l-4.52-2.05c-1.37-.62-2.77-.73-3.74.29-.97 1.02-.64 2.35.73 2.97l4.52-2.05z"/>
+  </svg>
+);
+
+const YoutubeIcon = ({ className = "w-4 h-4" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M23.498 6.163a3.003 3.003 0 00-2.11-2.107C19.525 3.545 12 3.545 12 3.545s-7.525 0-9.388.511a3.003 3.003 0 00-2.11 2.107C0 8.029 0 12 0 12s0 3.971.502 5.837a3.003 3.003 0 002.11 2.107c1.863.514 9.388.514 9.388.514s7.525 0 9.388-.514a3.003 3.003 0 002.11-2.107C24 15.971 24 12 24 12s0-3.971-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+  </svg>
+);
+
+const InstagramIcon = ({ className = "w-4 h-4" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+  </svg>
+);
+
+const FacebookIcon = ({ className = "w-4 h-4" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+  </svg>
+);
+
+const LinkedinIcon = ({ className = "w-4 h-4" }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+  </svg>
+);
+
 export default function App() {
   // Mobile Menu State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -114,7 +153,7 @@ export default function App() {
   const heroImages = [
     'project_images/hero_living_room_fireplace.jpg',
     'project_images/piccadilly/1.png',
-    'project_images/d_costa/exterior_facade_stone_driveway.jpg'
+    'project_images/mcdougall/3.png'
   ];
 
   useEffect(() => {
@@ -167,13 +206,13 @@ export default function App() {
       title: "Additions & ADUs",
       headline: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
       desc: "This project transformed the home through structural reconfiguration and a new upper level. Havenridge coordinated framing, masonry and trade work so the addition connected naturally in appearance and function.",
-      img: "project_images/mcdougall/1.png",
+      img: "project_images/mcdougall/3.png",
       hash: "#project-additions"
     },
     {
       title: "Whole Home Renovations",
       headline: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
-      desc: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level with family-focused spaces.",
+      desc: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level.",
       img: "project_images/knox/1.png",
       hash: "#project-whole-home"
     },
@@ -181,13 +220,13 @@ export default function App() {
       title: "Multi-Unit Conversions",
       headline: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
       desc: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Life-safety, egress, and code compliance were fully coordinated throughout construction.",
-      img: "project_images/natchez/1.png",
+      img: "project_images/natchez/3.png",
       hash: "#project-multi-unit"
     },
     {
       title: "Accessible & Barrier-Free",
-      headline: "Improving safety, comfort and independence through thoughtful accessible design.",
-      desc: "This bathroom renovation focused on reducing barriers and making everyday use easier. The project included a widened doorway, an accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
+      headline: "Improving safety, comfort, movement and independence through thoughtful accessible and aging-in-place design.",
+      desc: "This bathroom renovation focused on reducing barriers and making everyday use easier with a widened doorway, accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
       img: "project_images/isherwood/1.png",
       hash: "#project-accessibility"
     }
@@ -357,156 +396,241 @@ export default function App() {
 
 
   const portfolioProjects = [
-    { name: 'West Forest Trail Whole Home Renovation', cat: 'Kitchen & Whole Home', hash: '#project-kitchens', img: 'project_images/piccadilly/1.png' },
-    { name: 'John Street Bathroom Retreat', cat: 'Custom Bathroom Renovation', hash: '#project-bathrooms', img: 'project_images/mcnamara/1.png' },
-    { name: 'Alderview Living Space', cat: 'Architectural Living Space', hash: '#project-living-spaces', img: 'project_images/paisley/living_room_wood_beam.jpg' },
-    { name: 'Joan Lane Main Floor Addition', cat: 'Main Floor Addition & ADU', hash: '#project-additions', img: 'project_images/kuntz/3.jpg' },
-    { name: 'Courtland Basement Renovation', cat: 'Finished Basement Suite', hash: '#project-basements', img: 'project_images/verhoeve/basement_media_lounge.jpg' },
-    { name: 'Young Street Workshop', cat: 'Detached Workshop & Garage', hash: '#project-garages', img: 'project_images/borkhoff/10.png' },
+    { name: 'Knox Court — Whole Home Transformation', cat: 'Multi-Level Renovation', hash: '#project-whole-home', img: 'project_images/knox/1.png' },
+    { name: 'Wellington Street — Main-Floor & Kitchen', cat: 'Main-Floor Transformation', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
+    { name: 'McDougall Road — Second-Storey Addition', cat: 'Addition & ADU', hash: '#project-additions', img: 'project_images/mcdougall/1.png' },
+    { name: 'Natchez Road — Secondary Suite Conversion', cat: 'Multi-Unit Conversion', hash: '#project-multi-unit', img: 'project_images/natchez/1.png' },
+    { name: 'Paisley Heights — Heritage Bathroom', cat: 'Bathroom Renovation', hash: '#project-bathrooms', img: 'project_images/paisley/1.png' },
+    { name: 'Isherwood Ave — Barrier-Free Washroom', cat: 'Accessible Renovation', hash: '#project-accessibility', img: 'project_images/isherwood/1.png' },
+    { name: 'Huntingwood Court — Structural & Basement', cat: 'Finished Lower Level', hash: '#project-basements', img: 'project_images/huntingwood/1.png' },
+    { name: 'Appledale Crescent — Custom Millwork', cat: 'Custom Millwork & Whole Home', hash: '#project-millwork', img: 'project_images/appledale/1.png' },
+    { name: 'Moore Street — Flagship Transformation', cat: 'Whole-Home Renovation', hash: '#project-garages', img: 'project_images/moore/1.png' },
   ];
 
     const inspirationItems = [
     { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: 'project_images/paisley/1.png', link: '#project-bathrooms' },
     { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/wellington/1.png', link: '#project-kitchens' },
     { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/huntingwood/1.png', link: '#project-living-spaces' },
-    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/mcdougall/1.png', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/moore/1.png', link: '#project-basements' },
-    { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/moore/2.png', link: '#project-garages' },
-    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/appledale/1.png', link: '#project-millwork' },
-    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/morningdale/1.png', link: '#project-additions' }
+    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/mcdougall/2.png', link: '#project-additions' },
+    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/natchez/3.png', link: '#project-basements' },
+    { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/moore/1.png', link: '#project-garages' },
+    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/huntingwood/2.png', link: '#project-millwork' },
+    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#project-additions' }
   ];
 
   const galleryCategories = [
     { title: 'BATHROOMS', hash: '#project-bathrooms', img: 'project_images/paisley/1.png' },
     { title: 'KITCHENS', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
     { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/huntingwood/1.png' },
-    { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/mcdougall/1.png' },
-    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/moore/1.png' },
-    { title: 'GARAGES', hash: '#project-garages', img: 'project_images/moore/2.png' },
+    { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/mcdougall/2.png' },
+    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/natchez/3.png' },
+    { title: 'GARAGES & OUTBUILDINGS', hash: '#project-garages', img: 'project_images/moore/1.png' },
+    { title: 'CUSTOM MILLWORK', hash: '#project-millwork', img: 'project_images/huntingwood/2.png' },
+    { title: 'EXTERIORS', hash: '#project-additions', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg' },
   ];
 
   // Project pages details configuration (Cass Construction Editorial style layout)
   const projectDetails = {
     '#project-whole-home': {
-      title: "Knox Court — Whole-Home Transformation",
+      title: "Knox Court — Whole Home Renovation",
       category: "Whole-home multi-level renovation",
+      cat: "Whole-home multi-level renovation",
       location: "Kitchener, ON",
+      timeline: "10 – 14 Weeks",
       subtitle: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
+      leadDesc: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
+      scope: "Main-floor reconfiguration, kitchen, bathrooms and finished lower level with family-focused spaces",
+      standards: "WEDI Waterproofing System & Havenridge 2-Year Written Warranty",
+      certifications: "WEDI Waterproofing System & Havenridge 2-Year Written Warranty",
       img1: "project_images/knox/1.png",
       img2: "project_images/knox/2.png",
       img3: "project_images/knox/3.png",
       overview: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level with family-focused spaces.",
-      prevHash: "#project-millwork",
+      desc1: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level with family-focused spaces.",
+      desc2: "Havenridge coordinated structural alterations, mechanical updates, and finish selections to deliver a unified design-build transformation.",
+      prevHash: "#project-garages",
       nextHash: "#project-multi-unit"
     },
     '#project-multi-unit': {
       title: "Natchez Road — Secondary Suite Conversion",
       category: "Secondary-suite / multi-unit conversion",
+      cat: "Secondary-suite / multi-unit conversion",
       location: "Kitchener, ON",
+      timeline: "8 – 12 Weeks",
       subtitle: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
+      leadDesc: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
+      scope: "Two-bedroom lower-level suite, egress window, kitchenette, bathroom and required life-safety fire separations",
+      standards: "Municipal Permit Compliance & ESA Electrical Inspection Certified",
+      certifications: "Municipal Permit Compliance & ESA Electrical Inspection Certified",
       img1: "project_images/natchez/1.png",
       img2: "project_images/natchez/2.png",
       img3: "project_images/natchez/3.png",
-      overview: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Life-safety, egress, and code compliance were fully coordinated throughout construction.",
+      overview: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Egress, fire separation, and code compliance were fully coordinated throughout construction.",
+      desc1: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Egress, fire separation, and code compliance were fully coordinated throughout construction.",
+      desc2: "The project required strict adherence to Ontario Building Code secondary suite guidelines, sound separation, and dedicated utility metering.",
       prevHash: "#project-whole-home",
       nextHash: "#project-millwork"
     },
     '#project-millwork': {
-      title: "Appledale Crescent — Custom Millwork & Whole Home",
-      category: "Whole-home transformation + custom millwork",
+      title: "Appledale Crescent — Custom Architectural Millwork",
+      category: "Custom cabinetry & kitchen millwork",
+      cat: "Custom cabinetry & kitchen millwork",
       location: "Waterloo, ON",
-      subtitle: "A coordinated multi-level renovation focused on better flow, storage and finish consistency.",
+      timeline: "4 – 6 Weeks",
+      subtitle: "Built-ins, cabinetry, trim, storage and architectural details tailored to the home.",
+      leadDesc: "Built-ins, cabinetry, trim, storage and architectural details tailored to the home.",
+      scope: "Custom kitchen cabinetry, built-in coffee cupboard, architectural trim & quartz countertops",
+      standards: "Havenridge Written Workmanship & Hardware Warranty",
+      certifications: "Havenridge Written Workmanship & Hardware Warranty",
       img1: "project_images/appledale/1.png",
       img2: "project_images/appledale/2.png",
       img3: "project_images/appledale/3.png",
-      overview: "The main floor was opened and refreshed around a custom kitchen and dedicated coffee storage, while bathroom and lower-level improvements carried the same design language through the home.",
+      overview: "Custom cabinetry, coffee cupboard built-ins, practical storage and architectural trim details tailored to everyday living.",
+      desc1: "Custom cabinetry, coffee cupboard built-ins, practical storage and architectural trim details tailored to everyday living.",
+      desc2: "Precision joinery and custom finishes enhance both functionality and visual appeal across the living areas.",
       prevHash: "#project-multi-unit",
       nextHash: "#project-kitchens"
     },
     '#project-kitchens': {
-      title: "Wellington Street — Main-Floor Transformation",
-      category: "Main-floor renovation + structural reconfiguration",
+      title: "Wellington Street — Kitchen Transformation",
+      category: "Kitchen remodeling & main-floor layout",
+      cat: "Kitchen remodeling & main-floor layout",
       location: "Kitchener, ON",
-      subtitle: "Improving circulation and creating a more functional kitchen and gathering space.",
+      timeline: "5 – 8 Weeks",
+      subtitle: "Custom cabinetry, practical storage, generous islands and layouts designed around everyday living.",
+      leadDesc: "Custom cabinetry, practical storage, generous islands and layouts designed around everyday living.",
+      scope: "Custom kitchen cabinetry, island construction, quartz surfaces, pantry storage & ambient lighting",
+      standards: "Havenridge Written Workmanship Warranty",
+      certifications: "Havenridge Written Workmanship Warranty",
       img1: "project_images/wellington/1.png",
       img2: "project_images/wellington/2.png",
       img3: "project_images/wellington/3.png",
-      overview: "Working with the project design, Havenridge coordinated the layout changes, cabinetry, finishes, building systems and restoration details required to bring the older home forward without losing its character.",
+      overview: "Full kitchen transformation featuring sage green cabinetry, custom quartz island, improved pantry storage and open main-floor transition.",
+      desc1: "Full kitchen transformation featuring sage green cabinetry, custom quartz island, improved pantry storage and open main-floor transition.",
+      desc2: "Layout reconfigurations improved traffic flow and created a seamless connection between cooking, dining, and living areas.",
       prevHash: "#project-millwork",
       nextHash: "#project-bathrooms"
     },
     '#project-bathrooms': {
-      title: "Paisley Heights — Heritage Bathroom & Interior",
-      category: "Heritage-sensitive whole-home renovation",
+      title: "Paisley Heights — Heritage Bathroom & Ensuite",
+      category: "Custom shower & bathroom remodeling",
+      cat: "Custom shower & bathroom remodeling",
       location: "Cambridge, ON",
-      subtitle: "A renovation that balanced updates with the character of an older home.",
+      timeline: "3 – 4 Weeks",
+      subtitle: "Custom showers, thoughtful tile layouts, accessible features and beautifully finished vanities.",
+      leadDesc: "Custom showers, thoughtful tile layouts, accessible features and beautifully finished vanities.",
+      scope: "Custom tile walk-in shower, freestanding bathtub, custom vanity installation & premium brass fixtures",
+      standards: "WEDI Waterproofing System & Havenridge Written Warranty",
+      certifications: "WEDI Waterproofing System & Havenridge Written Warranty",
       img1: "project_images/paisley/1.png",
       img2: "project_images/paisley/2.png",
       img3: "project_images/paisley/3.png",
-      overview: "The project included a rebuilt staircase, new kitchen and bathroom, wall repairs and new finishes while retaining important original details such as stained glass and woodwork.",
+      overview: "Ensuite bathroom remodeling with custom tile walk-in shower, freestanding bathtub, custom vanity and brushed brass fixtures.",
+      desc1: "Ensuite bathroom remodeling with custom tile walk-in shower, freestanding bathtub, custom vanity and brushed brass fixtures.",
+      desc2: "Full waterproof sub-assembly using WEDI shower systems ensures long-term moisture protection and durability.",
       prevHash: "#project-kitchens",
       nextHash: "#project-additions"
     },
     '#project-additions': {
       title: "McDougall Road — Second-Storey Addition",
       category: "Whole-home reconstruction + second-storey addition",
+      cat: "Whole-home reconstruction + second-storey addition",
       location: "Waterloo, ON",
+      timeline: "12 – 16 Weeks",
       subtitle: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
+      leadDesc: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
+      scope: "Structural reconfiguration, second-storey addition, exterior masonry and architectural trim",
+      standards: "Ontario Building Code & Havenridge 2-Year Written Warranty",
+      certifications: "Ontario Building Code & Havenridge 2-Year Written Warranty",
       img1: "project_images/mcdougall/1.png",
       img2: "project_images/mcdougall/2.png",
       img3: "project_images/mcdougall/3.png",
-      overview: "This project transformed the home through structural reconfiguration and a new upper level. Havenridge coordinated framing, masonry and trade work so the addition connected naturally in appearance and function.",
+      overview: "This project transformed the existing home through major structural reconfiguration and a new upper level. Havenridge coordinated the construction sequence, framing, exterior finishes and trade work so the addition connected naturally with the original home in both appearance and function.",
+      desc1: "This project transformed the existing home through major structural reconfiguration and a new upper level. Havenridge coordinated the construction sequence, framing, exterior finishes and trade work so the addition connected naturally with the original home in both appearance and function.",
+      desc2: "Second-storey expansions were engineered to seamlessly tie into existing foundation walls and load-bearing structures.",
       prevHash: "#project-bathrooms",
       nextHash: "#project-basements"
     },
     '#project-basements': {
-      title: "Huntingwood Court — Structural & Lower Level",
-      category: "Whole-home transformation + structural reconfiguration",
+      title: "Huntingwood Court — Finished Lower Level & Lounge",
+      category: "Basement renovation & entertainment space",
+      cat: "Basement renovation & entertainment space",
       location: "Vaughan, ON",
-      subtitle: "A large multi-level renovation combining layout changes with highly customized interior details.",
+      timeline: "8 – 10 Weeks",
+      subtitle: "Comfortable lower levels for family living, fitness, entertaining, laundry and flexible use.",
+      leadDesc: "Comfortable lower levels for family living, fitness, entertaining, laundry and flexible use.",
+      scope: "Finished basement lounge, custom built-in library cabinetry, stone fireplace surround & staircase details",
+      standards: "Havenridge 2-Year Written Warranty",
+      certifications: "Havenridge 2-Year Written Warranty",
       img1: "project_images/huntingwood/1.png",
       img2: "project_images/huntingwood/2.png",
       img3: "project_images/huntingwood/3.png",
       overview: "The finished home includes a new kitchen, built-in library, feature fireplace, staircase improvements and a lower level planned for fitness and entertaining.",
+      desc1: "The finished home includes a new kitchen, built-in library, feature fireplace, staircase improvements and a lower level planned for fitness and entertaining.",
+      desc2: "Moisture management, subfloor insulation, and acoustic dampening create a warm, comfortable lower-level environment.",
       prevHash: "#project-additions",
       nextHash: "#project-accessibility"
     },
     '#project-accessibility': {
       title: "Isherwood Ave — Accessible & Barrier-Free Washroom",
       category: "Accessible / aging-in-place bathroom renovation",
+      cat: "Accessible / aging-in-place bathroom renovation",
       location: "Cambridge, ON",
+      timeline: "2 – 3 Weeks",
       subtitle: "Improving safety, comfort and independence through thoughtful accessible design.",
+      leadDesc: "Improving safety, comfort and independence through thoughtful accessible design.",
+      scope: "Wider doorway, low-threshold shower, seating, grab bars, accessible storage and improved lighting",
+      standards: "Ontario Building Code Accessible Guidelines & Written Warranty",
+      certifications: "Ontario Building Code Accessible Guidelines & Written Warranty",
       img1: "project_images/isherwood/1.png",
       img2: "project_images/isherwood/2.png",
       img3: "project_images/isherwood/3.png",
       overview: "This bathroom renovation focused on reducing barriers and making everyday use easier. The project included a widened doorway, an accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
+      desc1: "This bathroom renovation focused on reducing barriers and making everyday use easier. The project included a widened doorway, an accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
+      desc2: "Carefully placed structural blocking behind wall tiles ensures secure mounting for all grab bars and bath support accessories.",
       prevHash: "#project-basements",
       nextHash: "#project-living-spaces"
     },
     '#project-living-spaces': {
       title: "Huntingwood Court — Living Spaces & Built-Ins",
       category: "Living space renovation + custom millwork",
+      cat: "Living space renovation + custom millwork",
       location: "Vaughan, ON",
-      subtitle: "A multi-level renovation combining custom built-in cabinetry, library storage and fireplace feature wall.",
+      timeline: "6 – 8 Weeks",
+      subtitle: "Open layouts, fireplaces, built-ins, stair details and spaces designed for gathering.",
+      leadDesc: "Open layouts, fireplaces, built-ins, stair details and spaces designed for gathering.",
+      scope: "Gathering space renovation, custom oak library built-ins, stone fireplace surround & staircase detail",
+      standards: "Havenridge Written Workmanship Warranty",
+      certifications: "Havenridge Written Workmanship Warranty",
       img1: "project_images/huntingwood/1.png",
       img2: "project_images/huntingwood/2.png",
       img3: "project_images/huntingwood/3.png",
       overview: "The living room and main-floor gathering spaces were transformed with custom architectural millwork, a stone fireplace surround and integrated oak library shelving.",
+      desc1: "The living room and main-floor gathering spaces were transformed with custom architectural millwork, a stone fireplace surround and integrated oak library shelving.",
+      desc2: "Custom cabinetry and architectural trim provide elegant storage while framing key architectural features.",
       prevHash: "#project-accessibility",
       nextHash: "#project-garages"
     },
     '#project-garages': {
       title: "Moore Street — Detached Workshop & Garages",
-      category: "Outbuilding & workshop renovation",
+      category: "Garages & Outbuildings",
+      cat: "Garages & Outbuildings",
       location: "Cambridge, ON",
-      subtitle: "Executive workshop, garage storage and outbuilding construction.",
-      img1: "project_images/moore/2.png",
-      img2: "project_images/moore/3.png",
-      img3: "project_images/moore/4.png",
+      timeline: "6 – 8 Weeks",
+      subtitle: "Practical workshops, finished offices and upgraded detached spaces.",
+      leadDesc: "Practical workshops, finished offices and upgraded detached spaces.",
+      scope: "Detached garage construction, workshop interior finishes, heavy-duty electrical service & exterior siding",
+      standards: "Municipal Building Permit & Structural Framing Warranty",
+      certifications: "Municipal Building Permit & Structural Framing Warranty",
+      img1: "project_images/moore/1.png",
+      img2: "project_images/moore/2.png",
+      img3: "project_images/moore/3.png",
       overview: "Havenridge completed a dedicated workshop and custom garage storage space with durable interior finishes, heavy-duty electrical infrastructure and custom storage solutions.",
+      desc1: "Havenridge completed a dedicated workshop and custom garage storage space with durable interior finishes, heavy-duty electrical infrastructure and custom storage solutions.",
+      desc2: "Exterior cladding and roofing were selected to complement the main residence's architectural style.",
       prevHash: "#project-living-spaces",
       nextHash: "#project-whole-home"
-    },
+    }
   };
 
   // Render individual project detail sub-pages (CASS STYLE)
@@ -668,7 +792,7 @@ export default function App() {
           <div className="max-w-5xl mx-auto px-6 space-y-10">
             <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block text-center">GALLERY</span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-              {proj.gallery.map((g, i) => (
+              {(proj.gallery || [proj.img1, proj.img2, proj.img3].filter(Boolean)).map((g, i) => (
                 <div key={i} className="aspect-[4/3] overflow-hidden shadow-sm hover:scale-[1.02] transition-transform duration-500">
                   <img src={g} alt="Gallery view" className="w-full h-full object-cover" />
                 </div>
@@ -722,9 +846,81 @@ export default function App() {
               <span className="text-white/30">•</span>
               <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a 
+                href="#reviews-page" 
+                aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
             </div>
 
             <div className="border-t border-white/10 pt-4 space-y-1">
@@ -1080,9 +1276,81 @@ export default function App() {
               <span className="text-white/30">•</span>
               <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a 
+                href="#reviews-page" 
+                aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
             </div>
 
             <div className="border-t border-white/10 pt-4 space-y-1">
@@ -1156,7 +1424,9 @@ export default function App() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
                       <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="journeyman">Journeyman Carpenter</option>
+                        <option value="journeyman">Lead Carpenter / Site Supervisor</option>
+<option value="framing">Framing Carpenter</option>
+<option value="finish">Finish Carpenter</option>
                         <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
                         <option value="supervisor">Site Supervisor</option>
                         <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
@@ -1319,36 +1589,28 @@ export default function App() {
               </div>
 
               {/* REVISED 4 GRID CARDS */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
                   <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">01 / PRE-CONSTRUCTION</span>
-                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Disciplined Planning & Scope Clarity</h3>
+                  <h3 className="font-cinzel text-lg font-bold text-[#0B2638]">PRECISE PLANNING & TRANSPARENT PRICING</h3>
                   <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    Detailed scopes, selection schedules and construction planning help reduce uncertainty, manage allowances and identify important decisions before construction begins.
+                    By establishing detailed scope documents, selection schedules, transparent pricing and clear communication before site work begins.
                   </p>
                 </div>
 
                 <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
                   <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">02 / CRAFTSMANSHIP</span>
-                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Quality & Code Compliance</h3>
+                  <h3 className="font-cinzel text-lg font-bold text-[#0B2638]">ONTARIO BUILDING CODE & PERMIT COMPLIANCE</h3>
                   <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    Our team coordinates each phase of construction to meet applicable Ontario Building Code requirements and Havenridge Build's quality standards.
+                    Our team coordinates each phase of construction to meet applicable Ontario Building Code requirements and municipal inspection milestones.
                   </p>
                 </div>
 
                 <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
-                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">03 / ACCOUNTABILITY</span>
-                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Transparent Client Portal Communication</h3>
+                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">03 / RESPECT & AFTERCARE</span>
+                  <h3 className="font-cinzel text-lg font-bold text-[#0B2638]">RESPECTFUL JOB SITES & DEPENDABLE AFTERCARE</h3>
                   <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    Homeowners enjoy 24/7 access to daily job logs, site photos, selection approvals, and real-time schedules through transparent client portal communication.
-                  </p>
-                </div>
-
-                <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
-                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">04 / RESPECT & AFTERCARE</span>
-                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">Respectful Job Sites & Dependable Aftercare</h3>
-                  <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    We use practical dust-control measures, regular cleanup and courteous site practices, then complete an organized closeout and provide the warranty information applicable to the project.
+                    We use practical site protection, keep active work areas clean, and provide dependable warranty follow-up after project completion.
                   </p>
                 </div>
               </div>
@@ -1375,7 +1637,7 @@ export default function App() {
                       <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Micheal Smith</h3>
                     </div>
                     <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
-                      Micheal leads Havenridge Build with over 15 years of residential construction expertise. His hands-on leadership ensures every design-build addition, main floor extension, and whole-home renovation is executed with disciplined project management and finish quality.
+                      Micheal leads Havenridge Build with more than 15 years of residential construction and renovation experience across Kitchener-Waterloo and surrounding communities. As Managing Partner, he guides projects from initial discovery through design coordination, pricing and final completion, ensuring clear scope clarity and reliable project execution.
                     </p>
                   </div>
                 </div>
@@ -1391,7 +1653,7 @@ export default function App() {
                       <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">David Woo</h3>
                     </div>
                     <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
-                      David brings hands-on framing experience and formal construction training from Conestoga College’s Pre-Apprenticeship Program. As Havenridge Build’s Site Supervisor and a second-year carpentry apprentice, he helps coordinate daily jobsite activities, maintain quality standards and keep projects organized.
+                      David brings hands-on framing experience and formal construction training from Conestoga College's Pre-Apprenticeship Program. As Site Supervisor, he coordinates daily site activities, supports quality control and helps keep projects organized and moving forward.
                     </p>
                   </div>
                 </div>
@@ -1510,9 +1772,81 @@ export default function App() {
               <span className="text-white/30">•</span>
               <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a 
+                href="#reviews-page" 
+                aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
             </div>
 
             <div className="border-t border-white/10 pt-4 space-y-1">
@@ -1585,7 +1919,9 @@ export default function App() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
                       <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="journeyman">Journeyman Carpenter</option>
+                        <option value="journeyman">Lead Carpenter / Site Supervisor</option>
+<option value="framing">Framing Carpenter</option>
+<option value="finish">Finish Carpenter</option>
                         <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
                         <option value="supervisor">Site Supervisor</option>
                         <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
@@ -1802,7 +2138,7 @@ export default function App() {
               <img src={selectedBlogArticle.img} alt={selectedBlogArticle.title} className="w-full h-72 object-cover border border-[#0B2638]/10 shadow-md" />
 
               <div className="space-y-4 text-xs sm:text-sm font-light text-[#24313A]/90 leading-relaxed">
-                {selectedBlogArticle.content.map((paragraph, pIdx) => (
+                {(selectedBlogArticle?.content || []).map((paragraph, pIdx) => (
                   <p key={pIdx}>{paragraph}</p>
                 ))}
               </div>
@@ -1859,9 +2195,81 @@ export default function App() {
               <span className="text-white/30">•</span>
               <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a 
+                href="#reviews-page" 
+                aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
             </div>
 
             <div className="border-t border-white/10 pt-4 space-y-1">
@@ -1934,7 +2342,9 @@ export default function App() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
                       <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="journeyman">Journeyman Carpenter</option>
+                        <option value="journeyman">Lead Carpenter / Site Supervisor</option>
+<option value="framing">Framing Carpenter</option>
+<option value="finish">Finish Carpenter</option>
                         <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
                         <option value="supervisor">Site Supervisor</option>
                         <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
@@ -2119,7 +2529,7 @@ export default function App() {
               <div className="space-y-2 border-b border-[#0B2638]/10 pb-6">
                 <h3 className="font-sans text-xs font-bold uppercase tracking-wider text-[#0B2638]">PROJECT INVESTMENT</h3>
                 <p className="text-xs text-[#24313A]/80 leading-relaxed font-light">
-                  Professionally managed renovation projects generally begin at $20,000.
+                  Havenridge Build specializes in professionally planned and managed design-build renovations and additions, with projects generally starting at $20,000.
                 </p>
               </div>
 
@@ -2137,7 +2547,7 @@ export default function App() {
                   </li>
                   <li className="flex items-start gap-2.5">
                     <span className="w-5 h-5 rounded-full bg-[#0B2638] text-white flex items-center justify-center text-[10px] font-bold shrink-0">3</span>
-                    <span>Qualified projects move to a phone consultation.</span>
+                    <span>If the project appears to be a good fit, we'll contact you to arrange an initial phone consultation.</span>
                   </li>
                 </ol>
               </div>
@@ -2587,12 +2997,17 @@ export default function App() {
                         >
                           ← BACK
                         </button>
-                        <button 
-                          type="submit" 
-                          className="bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
-                        >
-                          SUBMIT YOUR PROJECT →
-                        </button>
+                        <div className="flex flex-col items-end space-y-2">
+                          <button 
+                            type="submit" 
+                            className="bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                          >
+                            SUBMIT YOUR PROJECT →
+                          </button>
+                          <p className="text-[11px] text-[#24313A]/70 font-light text-right leading-relaxed max-w-sm">
+                            By submitting this form, you agree that Havenridge Build may contact you regarding your project inquiry. We respect your privacy and do not sell your information.
+                          </p>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -2617,9 +3032,81 @@ export default function App() {
               <span className="text-white/30">•</span>
               <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a 
+                href="#reviews-page" 
+                aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
             </div>
 
             <div className="border-t border-white/10 pt-4 space-y-1">
@@ -2805,9 +3292,9 @@ export default function App() {
                 href={s.hash} 
                 className="cass-reveal flex flex-col items-center text-center space-y-4 group cursor-pointer block no-underline text-inherit"
               >
-                <div className="space-y-2 max-w-sm px-2">
-                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-[#0B2638] uppercase tracking-wide leading-snug min-h-[52px] flex items-center justify-center text-center group-hover:text-[#CDAE72] transition-colors">{s.title}</h3>
-                  <p className="text-xs text-[#24313A]/90 font-medium leading-relaxed min-h-[40px]">{s.headline}</p>
+                <div className="flex flex-col justify-end w-full min-h-[120px] px-2 mb-2 space-y-2">
+                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-[#0B2638] uppercase tracking-wide leading-snug text-center group-hover:text-[#CDAE72] transition-colors flex items-center justify-center min-h-[48px]">{s.title}</h3>
+                  <p className="text-xs text-[#24313A]/80 font-normal leading-relaxed text-center flex items-start justify-center min-h-[60px]">{s.headline}</p>
                 </div>
                 
                 <div className="relative w-full aspect-[2/3] overflow-hidden cursor-pointer shadow-md">
@@ -2851,6 +3338,10 @@ export default function App() {
           </h2>
         </div>
       </section>
+
+
+                  
+
 
 
                   {/* THE HAVENRIDGE PROCESS SECTION */}
@@ -2994,15 +3485,24 @@ export default function App() {
         </div>
       </section>
 
-      {/* SINGLE-ROW CLIENT REVIEWS SLIDER — BRAND BLUE DARK THEME WITH BEIGE CARDS & UNCROPPED SHADOWS */}
+      {/* SINGLE-ROW CLIENT REVIEWS SLIDER */}
       <section id="testimonials" className="scroll-mt-28 py-20 sm:py-24 bg-[#0B2638] font-sans text-white border-t border-[#CDAE72]/20 relative">
         <div className="max-w-7xl mx-auto px-6 space-y-8">
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
-            <div className="space-y-2">
+            <div className="space-y-3">
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CLIENT REVIEWS</span>
               <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">Verified Feedback From Havenridge Homeowners</h2>
               <p className="text-sm font-light text-white/70">Real feedback from homeowners across Kitchener, Waterloo, Cambridge, Guelph & Puslinch.</p>
+              <div className="pt-1">
+                <a 
+                  href="#reviews-page" 
+                  className="bg-[#CDAE72] text-[#0B2638] font-bold px-6 py-2.5 text-xs font-sans tracking-widest uppercase hover:bg-white transition-all shadow-md rounded-sm inline-flex items-center gap-2"
+                >
+                  <span>SEE MORE REVIEWS</span>
+                  <ChevronRight className="w-4 h-4" />
+                </a>
+              </div>
             </div>
 
             {/* SLIDE CONTROL BUTTONS */}
@@ -3024,7 +3524,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* SINGLE HORIZONTAL ROW SLIDER WITH BEIGE CARDS & UNCROPPED HOVER SHADOW CLEARANCE */}
+          {/* SINGLE HORIZONTAL ROW SLIDER WITH BEIGE CARDS */}
           <div 
             ref={testimonialRef}
             className="flex overflow-x-auto gap-8 pt-6 pb-16 px-4 -mx-4 scroll-smooth scrollbar-none"
@@ -3033,19 +3533,20 @@ export default function App() {
             {testimonials.map((t, idx) => (
               <div 
                 key={idx} 
-                className="w-[320px] sm:w-[380px] shrink-0 bg-[#F4F2EE] text-[#24313A] p-8 rounded-2xl border border-[#CDAE72]/30 shadow-xl hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between space-y-6 relative group cursor-pointer"
+                className="w-[300px] sm:w-[360px] shrink-0 bg-[#F4F2EE] text-[#24313A] p-6 sm:p-8 rounded-sm shadow-xl border border-[#CDAE72]/30 flex flex-col justify-between space-y-4 transform hover:-translate-y-1 transition-transform"
               >
-                <div className="space-y-4">
-                  <div className="flex gap-1 text-[#CDAE72] text-sm tracking-widest font-bold">
-                    ★★★★★
+                <div className="space-y-3">
+                  <div className="flex items-center gap-1 text-[#CDAE72]">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-[#CDAE72]" />
+                    ))}
                   </div>
-                  <p className="font-drama text-base sm:text-lg text-[#24313A]/90 italic leading-relaxed">
-                    "{t.quote}"
-                  </p>
+                  <h3 className="font-cinzel text-base font-bold text-[#0B2638] tracking-wide">{t.title}</h3>
+                  <p className="text-xs text-[#24313A]/90 font-light leading-relaxed italic">"{t.quote}"</p>
                 </div>
-                <div className="pt-4 border-t border-[#0B2638]/10">
-                  <h3 className="font-cinzel text-sm font-bold text-[#0B2638] uppercase tracking-wide">{t.name}</h3>
-                  <p className="text-[11px] text-[#CDAE72] font-sans font-semibold mt-0.5">{t.location} · {t.project}</p>
+                <div className="border-t border-[#0B2638]/10 pt-3 flex justify-between items-center text-xs">
+                  <span className="font-bold text-[#0B2638]">{t.author}</span>
+                  <span className="text-[#24313A]/60 font-light">{t.location}</span>
                 </div>
               </div>
             ))}
@@ -3054,44 +3555,44 @@ export default function App() {
         </div>
       </section>
 
-              {/* INSPIRATION GALLERY GRID SECTION */}
-        <section id="inspiration-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] text-[#24313A] overflow-hidden relative border-t border-[#0B2638]/10 font-sans">
-          <div className="max-w-7xl mx-auto px-6 mb-12 text-center space-y-3">
-            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider">INSPIRATION GALLERY</h2>
-            <p className="text-[#24313A]/70 text-sm font-light max-w-xl mx-auto leading-relaxed">
-              Click on any photo below to explore custom designs and specifications from real Havenridge Build projects.
-            </p>
-          </div>
+      {/* INSPIRATION GALLERY GRID SECTION */}
+      <section id="inspiration-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] text-[#24313A] overflow-hidden relative border-t border-[#0B2638]/10 font-sans">
+        <div className="max-w-7xl mx-auto px-6 mb-12 text-center space-y-3">
+          <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
+          <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider">INSPIRATION GALLERY</h2>
+          <p className="text-[#24313A]/70 text-sm font-light max-w-xl mx-auto leading-relaxed">
+            Click on any photo below to explore custom designs and specifications from real Havenridge Build projects.
+          </p>
+        </div>
 
-          {/* 4-COLUMN GRID OF ROUNDED CARDS */}
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              {inspirationItems.map((item, idx) => (
-                <a 
-                  key={idx} 
-                  href={item.link} 
-                  className="relative w-full aspect-[2/3] overflow-hidden group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-md bg-[#0B2638] font-sans"
-                >
-                  <img 
-                    src={item.img} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638]/90 via-[#0B2638]/40 to-transparent flex flex-col justify-end p-6 text-left transition-opacity duration-300">
-                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block mb-1">INSPIRATION</span>
-                    <h3 className={`font-cinzel text-xl font-bold tracking-wide ${item.title === 'KITCHENS' ? 'text-[#CDAE72]' : 'text-white'}`}>
-                      {item.title}
-                    </h3>
-                    <p className="text-white/80 text-xs font-light italic mt-1 leading-normal">
-                      {item.subtitle}
-                    </p>
-                  </div>
-                </a>
-              ))}
-            </div>
+        {/* 4-COLUMN GRID OF ROUNDED CARDS */}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {inspirationItems.map((item, idx) => (
+              <a 
+                key={idx} 
+                href={item.link} 
+                className="relative w-full aspect-[2/3] overflow-hidden group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-md bg-[#0B2638] font-sans rounded-2xl"
+              >
+                <img 
+                  src={item.img} 
+                  alt={item.title} 
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638]/90 via-[#0B2638]/40 to-transparent flex flex-col justify-end p-6 text-left transition-opacity duration-300">
+                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block mb-1">INSPIRATION</span>
+                  <h3 className={`font-cinzel text-xl font-bold tracking-wide ${item.title === 'KITCHENS' ? 'text-[#CDAE72]' : 'text-white'}`}>
+                    {item.title}
+                  </h3>
+                  <p className="text-white/80 text-xs font-light italic mt-1 leading-normal">
+                    {item.subtitle}
+                  </p>
+                </div>
+              </a>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
       {/* TRUSTED PARTNERS (LOGOS SIZED UP BY 30% AGAIN - cell h-36, logos h-26/h-24) */}
       <section id="partners" className="scroll-mt-28 py-16 md:py-20 bg-[#0B2638] text-white">
@@ -3128,9 +3629,81 @@ export default function App() {
               <span className="text-white/30">•</span>
               <a href="#process-section" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#contact-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/carpentersonthego" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a 
+                href="#reviews-page" 
+                aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
             </div>
 
             <div className="border-t border-white/10 pt-4 space-y-1">
@@ -3204,7 +3777,9 @@ export default function App() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
                       <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="journeyman">Journeyman Carpenter</option>
+                        <option value="journeyman">Lead Carpenter / Site Supervisor</option>
+<option value="framing">Framing Carpenter</option>
+<option value="finish">Finish Carpenter</option>
                         <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
                         <option value="supervisor">Site Supervisor</option>
                         <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>

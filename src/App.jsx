@@ -595,7 +595,7 @@ export default function App() {
       "inspiration/kitchens/kitchen_custom_1.png",
       "inspiration/kitchens/kitchen_custom_2.png",
       "inspiration/kitchens/kitchen_custom_3.png",
-      "inspiration/kitchens/kitchen_custom_4.png",
+      "inspiration/kitchens/kitchen_custom_4.jpg",
       "inspiration/kitchens/kitchen_custom_5.png",
       "inspiration/kitchens/kitchen_custom_6.jpg",
       "inspiration/kitchens/kitchen_custom_7.jpg",

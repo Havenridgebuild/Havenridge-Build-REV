@@ -484,7 +484,7 @@ export default function App() {
       img3: "project_images/natchez/2.png",
       gallery: [
         "project_images/natchez/secondary_suite_exterior_entrance.jpg",
-        "project_images/natchez/1.png",
+        "project_images/natchez/legal_suite_bathroom_shower.jpg",
         "project_images/natchez/2.png",
         "project_images/natchez/3.png",
         "project_images/natchez/4.png",
@@ -638,7 +638,7 @@ export default function App() {
       img3: "project_images/isherwood/3.png",
       gallery: [
         "project_images/isherwood/1.png",
-        "project_images/isherwood/2.png",
+        "project_images/isherwood/accessible_bathroom_shower.jpg",
         "project_images/isherwood/3.png",
         "project_images/isherwood/4.png",
         "project_images/isherwood/5.png"

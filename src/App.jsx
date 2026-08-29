@@ -224,7 +224,7 @@ export default function App() {
       hash: "#project-multi-unit"
     },
     {
-      title: "ACCESSIBLE & BARRIER-FREE",
+      title: "ACCESSIBLE & AGING-IN-PLACE RENOVATIONS",
       headline: "Improving safety, comfort, movement and independence through thoughtful accessible and aging-in-place design.",
       desc: "This bathroom renovation focused on reducing barriers and making everyday use easier with a widened doorway, accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
       img: "project_images/isherwood/1.png",

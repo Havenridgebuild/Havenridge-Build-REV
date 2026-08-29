@@ -1478,11 +1478,13 @@ export default function App() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
                       <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="journeyman">Lead Carpenter / Site Supervisor</option>
-<option value="framing">Framing Carpenter</option>
-<option value="finish">Finish Carpenter</option>
+                        <option value="lead-carpenter">Lead Carpenter</option>
+                        <option value="framing">Framing Carpenter</option>
+                        <option value="finish">Finish Carpenter</option>
                         <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
-                        <option value="supervisor">Site Supervisor</option>
+                        <option value="project-manager">Project Manager</option>
+                        <option value="architectural-interior-designer">Architectural Designer / Interior Designer</option>
+                        <option value="admin-assistant">Admin / Assistant</option>
                         <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
                         <option value="general">General Application</option>
                       </select>
@@ -1973,11 +1975,13 @@ export default function App() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
                       <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="journeyman">Lead Carpenter / Site Supervisor</option>
-<option value="framing">Framing Carpenter</option>
-<option value="finish">Finish Carpenter</option>
+                        <option value="lead-carpenter">Lead Carpenter</option>
+                        <option value="framing">Framing Carpenter</option>
+                        <option value="finish">Finish Carpenter</option>
                         <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
-                        <option value="supervisor">Site Supervisor</option>
+                        <option value="project-manager">Project Manager</option>
+                        <option value="architectural-interior-designer">Architectural Designer / Interior Designer</option>
+                        <option value="admin-assistant">Admin / Assistant</option>
                         <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
                         <option value="general">General Application</option>
                       </select>
@@ -2396,11 +2400,13 @@ export default function App() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
                       <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="journeyman">Lead Carpenter / Site Supervisor</option>
-<option value="framing">Framing Carpenter</option>
-<option value="finish">Finish Carpenter</option>
+                        <option value="lead-carpenter">Lead Carpenter</option>
+                        <option value="framing">Framing Carpenter</option>
+                        <option value="finish">Finish Carpenter</option>
                         <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
-                        <option value="supervisor">Site Supervisor</option>
+                        <option value="project-manager">Project Manager</option>
+                        <option value="architectural-interior-designer">Architectural Designer / Interior Designer</option>
+                        <option value="admin-assistant">Admin / Assistant</option>
                         <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
                         <option value="general">General Application</option>
                       </select>
@@ -3831,11 +3837,13 @@ export default function App() {
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
                       <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="journeyman">Lead Carpenter / Site Supervisor</option>
-<option value="framing">Framing Carpenter</option>
-<option value="finish">Finish Carpenter</option>
+                        <option value="lead-carpenter">Lead Carpenter</option>
+                        <option value="framing">Framing Carpenter</option>
+                        <option value="finish">Finish Carpenter</option>
                         <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
-                        <option value="supervisor">Site Supervisor</option>
+                        <option value="project-manager">Project Manager</option>
+                        <option value="architectural-interior-designer">Architectural Designer / Interior Designer</option>
+                        <option value="admin-assistant">Admin / Assistant</option>
                         <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
                         <option value="general">General Application</option>
                       </select>

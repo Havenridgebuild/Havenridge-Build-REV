@@ -213,7 +213,7 @@ export default function App() {
       title: "WHOLE HOME RENOVATIONS",
       headline: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
       desc: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level.",
-      img: "project_images/knox/1.png",
+      img: "project_images/knox/whole_home_white_kitchen.jpg",
       hash: "#project-whole-home"
     },
     {
@@ -396,7 +396,7 @@ export default function App() {
 
 
   const portfolioProjects = [
-    { name: 'Knox Court — Whole Home Transformation', cat: 'Multi-Level Renovation', hash: '#project-whole-home', img: 'project_images/knox/1.png' },
+    { name: 'Knox Court — Whole Home Transformation', cat: 'Multi-Level Renovation', hash: '#project-whole-home', img: 'project_images/knox/whole_home_white_kitchen.jpg' },
     { name: 'Wellington Street — Main-Floor & Kitchen', cat: 'Main-Floor Transformation', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
     { name: 'McDougall Road — Second-Storey Addition', cat: 'Addition & ADU', hash: '#project-additions', img: 'project_images/mcdougall/1.png' },
     { name: 'Natchez Road — Secondary Suite Conversion', cat: 'Multi-Unit Conversion', hash: '#project-multi-unit', img: 'project_images/natchez/1.png' },
@@ -442,7 +442,7 @@ export default function App() {
       scope: "Main-floor reconfiguration, kitchen, bathrooms and finished lower level with family-focused spaces",
       standards: "WEDI Waterproofing System & Havenridge 2-Year Written Warranty",
       certifications: "WEDI Waterproofing System & Havenridge 2-Year Written Warranty",
-      img1: "project_images/knox/1.png",
+      img1: "project_images/knox/whole_home_white_kitchen.jpg",
       img2: "project_images/knox/2.png",
       img3: "project_images/knox/3.png",
       overview: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level with family-focused spaces.",

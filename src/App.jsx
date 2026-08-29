@@ -562,15 +562,15 @@ export default function App() {
       heroImg: "project_images/paisley/1.png",
       overview: "At Havenridge, we believe a premium bathroom must perform flawlessly beneath the surface before it can look beautiful on top. Our bathroom division specializes in top-tier transformations, spanning luxurious custom master suites, vintage-inspired restorations, and fully compliant barrier-free accessible walk-in suites. We entirely replace dated mechanical infrastructure, install advanced structural framing subfloors to prevent tile deflection, and utilize 100% certified WEDI and Schluter waterproofing systems to offer a lifetime barrier against moisture.\n\nFrom the layout design to the final architectural trim, our craftsmanship shines through in every detail. We specialize in custom zero-threshold roll-in showers, frame-free sliding glass partitions, niche tile-setting, and complex mosaic layouts including herringbone and classic basketweave styles. Complemented by premium floating vanities, integrated makeup decks, and high-output architectural lighting, we construct spaces that perfectly balance everyday utility with a refined, spa-like aesthetic.",
       grid: [
-        "project_images/paisley/1.png",
-        "project_images/appledale/1.png",
-        "project_images/huntingwood/11.jpg",
-        "project_images/isherwood/1.png",
-        "project_images/moore/10.png",
-        "project_images/wellington/10.jpg",
-        "project_images/knox/10.png",
-        "project_images/d_costa/10.jpg"
-      ],
+      "inspiration/bathrooms/bath_custom_1.jpg",
+      "inspiration/bathrooms/bath_custom_2.jpg",
+      "inspiration/bathrooms/bath_custom_3.jpg",
+      "inspiration/bathrooms/bath_custom_4.jpg",
+      "inspiration/bathrooms/bath_custom_5.jpg",
+      "inspiration/bathrooms/bath_custom_6.jpg",
+      "inspiration/bathrooms/bath_custom_7.jpg",
+      "inspiration/bathrooms/bath_custom_8.jpg"
+    ],
       showcase: [
         { title: "Appledale Crescent Walk-In Shower", caption: "Precision herringbone subway tile layout & custom frameless glass enclosure.", img: "project_images/appledale/1.png", link: "#project-millwork" },
         { title: "Huntingwood Court Basement Suite", caption: "Luxury wellness basement bathroom with custom quartz vanity & deep charcoal wainscoting.", img: "project_images/huntingwood/11.jpg", link: "#project-basements" },

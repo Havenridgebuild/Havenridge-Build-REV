@@ -220,7 +220,7 @@ export default function App() {
       title: "MULTI-UNIT CONVERSIONS",
       headline: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
       desc: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Life-safety, egress, and code compliance were fully coordinated throughout construction.",
-      img: "project_images/natchez/3.png",
+      img: "project_images/natchez/secondary_suite_exterior_entrance.jpg",
       hash: "#project-multi-unit"
     },
     {
@@ -412,7 +412,7 @@ export default function App() {
     { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/wellington/1.png', link: '#project-kitchens' },
     { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/huntingwood/1.png', link: '#project-living-spaces' },
     { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/mcdougall/2.png', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/natchez/3.png', link: '#project-basements' },
+    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/natchez/secondary_suite_exterior_entrance.jpg', link: '#project-basements' },
     { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/moore/1.png', link: '#project-garages' },
     { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/huntingwood/2.png', link: '#project-millwork' },
     { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#project-additions' }
@@ -423,7 +423,7 @@ export default function App() {
     { title: 'KITCHENS', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
     { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/huntingwood/1.png' },
     { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/mcdougall/2.png' },
-    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/natchez/3.png' },
+    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/natchez/secondary_suite_exterior_entrance.jpg' },
     { title: 'GARAGES & OUTBUILDINGS', hash: '#project-garages', img: 'project_images/moore/1.png' },
     { title: 'CUSTOM MILLWORK', hash: '#project-millwork', img: 'project_images/huntingwood/2.png' },
     { title: 'EXTERIORS', hash: '#project-additions', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg' },
@@ -464,7 +464,7 @@ export default function App() {
       certifications: "Municipal Permit Compliance & ESA Electrical Inspection Certified",
       img1: "project_images/natchez/1.png",
       img2: "project_images/natchez/2.png",
-      img3: "project_images/natchez/3.png",
+      img3: "project_images/natchez/secondary_suite_exterior_entrance.jpg",
       overview: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Egress, fire separation, and code compliance were fully coordinated throughout construction.",
       desc1: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Egress, fire separation, and code compliance were fully coordinated throughout construction.",
       desc2: "The project required strict adherence to Ontario Building Code secondary suite guidelines, sound separation, and dedicated utility metering.",

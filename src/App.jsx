@@ -622,15 +622,15 @@ export default function App() {
       heroImg: "project_images/inspiration/inspiration_living_spaces.jpg",
       overview: "Transforming a standard living area into a high-end, cohesive architectural space requires a team that can execute heavy structural engineering and delicate finish details in equal measure. Our living spaces division excels at completely changing the physical atmosphere and scale of your home. We specialize in complex open-concept conversions, safely executing partition wall removals and jacking up settled framing structures to create seamless transitions. From raising ceiling heights to create dramatic, airy vaults to wrapping exposed structural support beams in rich, custom-finished timber, we optimize both the physical space and structural flow.\n\nEvery living space we build features meticulously detailed finish carpentry designed to inject timeless character or clean modern lines. We craft striking media feature walls anchored by built-in multi-sided linear fireplaces, minimalist flush-mount architectural shelving, and seamless LED strip accent lighting. For historical estates and modern studies alike, we engineer custom floor-to-ceiling built-in libraries complete with authentic rolling ladder track assemblies, bold wainscoting, and towering 12-inch historic profile baseboards. We round out these grand living spaces by completely overhauling structural staircases—replacing aged frameworks with solid oak treads, architectural newel posts, modern glass railings, or sleek wrought-iron spindles. Every room is finished with continuous high-end flooring, seamlessly integrated modern flush-mount Aria vents, and a flawless, professional multi-tone paint package.",
       grid: [
-        "project_images/huntingwood/10.png",
-        "project_images/morningdale/1.png",
-        "project_images/moore/2.png",
-        "project_images/wellington/2.png",
-        "project_images/knox/1.png",
-        "project_images/appledale/10.jpg",
-        "project_images/hero_living_room_fireplace.jpg",
-        "project_images/mcdougall/2.png"
-      ],
+      "inspiration/living_spaces/living_custom_1.png",
+      "inspiration/living_spaces/living_custom_2.png",
+      "inspiration/living_spaces/living_custom_3.png",
+      "inspiration/living_spaces/living_custom_4.png",
+      "inspiration/living_spaces/living_custom_5.png",
+      "inspiration/living_spaces/living_custom_6.png",
+      "inspiration/living_spaces/living_custom_7.png",
+      "inspiration/living_spaces/living_custom_8.png"
+    ],
       showcase: [
         { title: "Huntingwood Court Stained Oak Library", caption: "Traditional stained-oak floor-to-ceiling library bookcase with sliding ladder & built-in 3-sided linear fireplace.", img: "project_images/huntingwood/10.png", link: "#project-basements" },
         { title: "Morningdale Crescent Elevated Living Room", caption: "Elevated ceiling volume with custom wrapped structural timber beam.", img: "project_images/morningdale/1.png", link: "#project-living-spaces" },

@@ -203,28 +203,28 @@ export default function App() {
 
   const servicePillars = [
     {
-      title: "Additions & ADUs",
+      title: "ADDITIONS & ADUs",
       headline: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
       desc: "This project transformed the home through structural reconfiguration and a new upper level. Havenridge coordinated framing, masonry and trade work so the addition connected naturally in appearance and function.",
-      img: "project_images/mcdougall/3.png",
+      img: "project_images/mcdougall/addition_adu_stone_facade.jpg",
       hash: "#project-additions"
     },
     {
-      title: "Whole Home Renovations",
+      title: "WHOLE HOME RENOVATIONS",
       headline: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
       desc: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level.",
       img: "project_images/knox/1.png",
       hash: "#project-whole-home"
     },
     {
-      title: "Multi-Unit Conversions",
+      title: "MULTI-UNIT CONVERSIONS",
       headline: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
       desc: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Life-safety, egress, and code compliance were fully coordinated throughout construction.",
       img: "project_images/natchez/3.png",
       hash: "#project-multi-unit"
     },
     {
-      title: "Accessible & Barrier-Free",
+      title: "ACCESSIBLE & BARRIER-FREE",
       headline: "Improving safety, comfort, movement and independence through thoughtful accessible and aging-in-place design.",
       desc: "This bathroom renovation focused on reducing barriers and making everyday use easier with a widened doorway, accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
       img: "project_images/isherwood/1.png",
@@ -3293,7 +3293,7 @@ export default function App() {
                 className="cass-reveal flex flex-col items-center text-center space-y-4 group cursor-pointer block no-underline text-inherit"
               >
                 <div className="flex flex-col justify-end w-full min-h-[120px] px-2 mb-2 space-y-2">
-                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-[#0B2638] uppercase tracking-wide leading-snug text-center group-hover:text-[#CDAE72] transition-colors flex items-center justify-center min-h-[48px]">{s.title}</h3>
+                  <h3 className="font-cinzel text-base sm:text-lg font-bold text-[#0B2638] tracking-wide leading-snug text-center group-hover:text-[#CDAE72] transition-colors flex items-center justify-center min-h-[48px]">{s.title}</h3>
                   <p className="text-xs text-[#24313A]/80 font-normal leading-relaxed text-center flex items-start justify-center min-h-[60px]">{s.headline}</p>
                 </div>
                 
@@ -3301,7 +3301,7 @@ export default function App() {
                   <img 
                     src={s.img} 
                     alt={s.title} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                    className={`w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 ${s.title.toUpperCase().includes('ADDITIONS') ? 'object-left' : ''}`} 
                   />
                   <div className="absolute inset-0 bg-[#0B2638]/85 flex flex-col justify-center items-center p-8 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                     <p className="text-sm sm:text-base md:text-lg text-white leading-relaxed font-normal max-w-xs">

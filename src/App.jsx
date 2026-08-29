@@ -410,22 +410,22 @@ export default function App() {
     const inspirationItems = [
     { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: 'project_images/paisley/1.png', link: '#project-bathrooms' },
     { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/wellington/1.png', link: '#project-kitchens' },
-    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/huntingwood/1.png', link: '#project-living-spaces' },
-    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/mcdougall/2.png', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/natchez/secondary_suite_exterior_entrance.jpg', link: '#project-basements' },
+    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/inspiration/inspiration_living_spaces.jpg', link: '#project-living-spaces' },
+    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/inspiration/inspiration_additions.jpg', link: '#project-additions' },
+    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/inspiration/inspiration_basements.jpg', link: '#project-basements' },
     { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/moore/1.png', link: '#project-garages' },
-    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/huntingwood/2.png', link: '#project-millwork' },
+    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/inspiration/inspiration_custom_millwork.jpg', link: '#project-millwork' },
     { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#project-additions' }
   ];
 
   const galleryCategories = [
     { title: 'BATHROOMS', hash: '#project-bathrooms', img: 'project_images/paisley/1.png' },
     { title: 'KITCHENS', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
-    { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/huntingwood/1.png' },
-    { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/mcdougall/2.png' },
-    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/natchez/secondary_suite_exterior_entrance.jpg' },
+    { title: 'LIVING SPACES', hash: '#project-living-spaces', img: 'project_images/inspiration/inspiration_living_spaces.jpg' },
+    { title: 'ADDITIONS', hash: '#project-additions', img: 'project_images/inspiration/inspiration_additions.jpg' },
+    { title: 'BASEMENTS', hash: '#project-basements', img: 'project_images/inspiration/inspiration_basements.jpg' },
     { title: 'GARAGES & OUTBUILDINGS', hash: '#project-garages', img: 'project_images/moore/1.png' },
-    { title: 'CUSTOM MILLWORK', hash: '#project-millwork', img: 'project_images/huntingwood/2.png' },
+    { title: 'CUSTOM MILLWORK', hash: '#project-millwork', img: 'project_images/inspiration/inspiration_custom_millwork.jpg' },
     { title: 'EXTERIORS', hash: '#project-additions', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg' },
   ];
 

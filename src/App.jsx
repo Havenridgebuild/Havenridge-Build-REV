@@ -592,15 +592,15 @@ export default function App() {
       heroImg: "project_images/wellington/1.png",
       overview: "A true luxury kitchen requires a master-level understanding of both heavy structural re-engineering and fine architectural finish carpentry. Our kitchen division specializes in full-scale space optimization, frequently executing complex load-bearing wall removals and installing engineered support beams to completely open up dated, enclosed floor plans. We coordinate directly with professional interior designers to reposition plumbing and electrical infrastructure, upgrading lines to handle modern high-efficiency chef appliances, double wall-ovens, and integrated under-counter beverage centers.\n\nEvery kitchen we build is characterized by highly tailored, premium millwork features built to fit your home's exact dimensions. From full-height custom shaker cabinets in bold designer colorways to massive 12-foot islands featuring waterfall quartz or butcher-block extensions, we optimize every inch of storage. Our builds integrate clever, high-utility storage systems like hidden toe-kick drawers, slide-out spice racks, overhead refrigerator pull-outs, and custom roll-out coffee cupboard stations. Finished with solid-slab quartz backsplashes, custom architectural hood ranges, and elegant floating shelves, a Havenridge kitchen is engineered for peak utility and built to be a show-stopper.",
       grid: [
-        "project_images/moore/1.png",
-        "project_images/wellington/1.png",
-        "project_images/huntingwood/1.png",
-        "project_images/appledale/1.png",
-        "project_images/knox/whole_home_white_kitchen.jpg",
-        "project_images/mcdougall/10.png",
-        "project_images/endeavour/1.png",
-        "project_images/borkhoff/1.png"
-      ],
+      "inspiration/kitchens/kitchen_custom_1.png",
+      "inspiration/kitchens/kitchen_custom_2.png",
+      "inspiration/kitchens/kitchen_custom_3.png",
+      "inspiration/kitchens/kitchen_custom_4.png",
+      "inspiration/kitchens/kitchen_custom_5.png",
+      "inspiration/kitchens/kitchen_custom_6.jpg",
+      "inspiration/kitchens/kitchen_custom_7.jpg",
+      "inspiration/kitchens/kitchen_custom_8.jpg"
+    ],
       showcase: [
         { title: "The Moore Street Estate Island", caption: "Massive 12-foot central island with waterfall butcher-block top, solid quartz slab backsplash & hidden toe-kick drawers.", img: "project_images/moore/1.png", link: "#project-garages" },
         { title: "Wellington Street Designer Kitchen", caption: "Sage green cabinets with unique dual-level quartz island dining table extension.", img: "project_images/wellington/1.png", link: "#project-kitchens" },

@@ -405,11 +405,11 @@ export default function App() {
   ];
 
     const inspirationItems = [
-    { title: 'BATHROOMS', subtitle: 'Spa-Like Retreats & Custom Vanities', img: 'project_images/paisley/1.png', link: '#project-bathrooms' },
+    { title: 'BATHROOMS', subtitle: 'Spa-Like Wet Rooms, Zero-Clearance Glass & Custom Tile Layouts', img: 'project_images/paisley/1.png', link: '#project-bathrooms' },
     { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/wellington/1.png', link: '#project-kitchens' },
-    { title: 'LIVING SPACES', subtitle: 'Custom Fireplaces & Oak Built-Ins', img: 'project_images/inspiration/inspiration_living_spaces.jpg', link: '#project-living-spaces' },
+    { title: 'LIVING SPACES', subtitle: 'Structural Wall Removals, Linear Fireplaces & Custom Libraries', img: 'project_images/inspiration/inspiration_living_spaces.jpg', link: '#project-living-spaces' },
     { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/inspiration/inspiration_additions.jpg', link: '#project-additions' },
-    { title: 'BASEMENTS', subtitle: 'Lower-Level Bars & Media Lounges', img: 'project_images/inspiration/inspiration_basements.jpg', link: '#project-basements' },
+    { title: 'BASEMENTS', subtitle: 'Sub-Grade Wellness Gyms, Custom Playhouses & Media Lounges', img: 'project_images/inspiration/inspiration_basements.jpg', link: '#project-basements' },
     { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/moore/1.png', link: '#project-garages' },
     { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/inspiration/inspiration_custom_millwork.jpg', link: '#project-millwork' },
     { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#project-additions' }

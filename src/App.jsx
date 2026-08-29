@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CheckCircle2, ArrowLeft, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Star, MessageSquare, Ruler, ClipboardCheck, Smartphone, ShieldCheck, Laptop, Menu, X } from 'lucide-react';
@@ -98,6 +99,124 @@ export default function App() {
     firstName: '', lastName: '', phone: '', email: '', projectType: 'Renovations', notes: ''
   });
   const [newsletterSubmitted, setNewsletterSubmitted] = useState(false);
+
+  // Global Lightbox State & Controls
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [lightboxImages, setLightboxImages] = useState([]);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  const openLightbox = (images, index = 0) => {
+    if (!images || images.length === 0) return;
+    setLightboxImages(images);
+    setLightboxIndex(index);
+    setLightboxOpen(true);
+  };
+
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+  };
+
+  const nextLightboxImage = () => {
+    if (!lightboxImages || lightboxImages.length === 0) return;
+    setLightboxIndex((prev) => (prev + 1) % lightboxImages.length);
+  };
+
+  const prevLightboxImage = () => {
+    if (!lightboxImages || lightboxImages.length === 0) return;
+    setLightboxIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
+  };
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxOpen) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') nextLightboxImage();
+      if (e.key === 'ArrowLeft') prevLightboxImage();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxOpen, lightboxImages]);
+
+  // Global Lightbox Portal Renderer
+  const renderLightbox = () => {
+    if (!lightboxOpen || !lightboxImages || lightboxImages.length === 0) return null;
+    return createPortal(
+      <div 
+        className="fixed inset-0 top-0 left-0 w-screen h-screen z-[999999] bg-black/95 backdrop-blur-md flex flex-col justify-between p-4 sm:p-8"
+        onClick={closeLightbox}
+        style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, width: '100vw', height: '100vh', zIndex: 999999 }}
+      >
+        {/* TOP BAR: COUNTER & CLOSE BUTTON */}
+        <div className="flex justify-between items-center text-white z-[1000000] max-w-7xl mx-auto w-full pt-2" onClick={(e) => e.stopPropagation()}>
+          <div className="flex items-center gap-3">
+            <span className="text-xs font-sans tracking-[0.25em] text-[#CDAE72] uppercase font-bold bg-[#0B2638]/90 px-3.5 py-2 rounded border border-[#CDAE72]/50 shadow-lg">
+              HAVENRIDGE GALLERY • {lightboxIndex + 1} / {lightboxImages.length}
+            </span>
+          </div>
+          <button 
+            type="button"
+            onClick={closeLightbox}
+            className="p-3 text-white/80 hover:text-white bg-white/10 hover:bg-[#CDAE72] hover:text-[#0B2638] rounded-full transition-all cursor-pointer shadow-2xl border border-white/20"
+            aria-label="Close Lightbox"
+          >
+            <X className="w-7 h-7" />
+          </button>
+        </div>
+
+        {/* CENTER IMAGE & NAVIGATION ARROWS */}
+        <div className="relative flex-1 flex items-center justify-center my-4 overflow-hidden" onClick={(e) => e.stopPropagation()}>
+          {/* PREVIOUS BUTTON */}
+          {lightboxImages.length > 1 && (
+            <button 
+              type="button"
+              onClick={prevLightboxImage}
+              className="absolute left-2 sm:left-8 z-[1000001] p-4 bg-[#0B2638]/90 hover:bg-[#CDAE72] text-white hover:text-[#0B2638] border border-white/30 hover:border-[#CDAE72] rounded-full transition-all cursor-pointer shadow-2xl"
+              aria-label="Previous Image"
+            >
+              <ChevronLeft className="w-7 h-7 sm:w-9 sm:h-9" />
+            </button>
+          )}
+
+          {/* MAIN IMAGE DISPLAY */}
+          <div className="relative max-h-[82vh] max-w-[90vw] flex items-center justify-center">
+            <img 
+              src={typeof lightboxImages[lightboxIndex] === 'string' ? lightboxImages[lightboxIndex] : (lightboxImages[lightboxIndex].img || lightboxImages[lightboxIndex].src)} 
+              alt={`Craftsmanship Detail ${lightboxIndex + 1}`}
+              className="max-h-[82vh] max-w-[90vw] object-contain rounded-lg shadow-2xl border border-white/20 select-none" 
+            />
+          </div>
+
+          {/* NEXT BUTTON */}
+          {lightboxImages.length > 1 && (
+            <button 
+              type="button"
+              onClick={nextLightboxImage}
+              className="absolute right-2 sm:right-8 z-[1000001] p-4 bg-[#0B2638]/90 hover:bg-[#CDAE72] text-white hover:text-[#0B2638] border border-white/30 hover:border-[#CDAE72] rounded-full transition-all cursor-pointer shadow-2xl"
+              aria-label="Next Image"
+            >
+              <ChevronRight className="w-7 h-7 sm:w-9 sm:h-9" />
+            </button>
+          )}
+        </div>
+
+        {/* BOTTOM CAPTION BAR */}
+        <div className="text-center text-white/80 text-xs font-light font-sans max-w-2xl mx-auto z-[1000000] pb-2" onClick={(e) => e.stopPropagation()}>
+          {typeof lightboxImages[lightboxIndex] === 'object' && lightboxImages[lightboxIndex].title ? (
+            <div className="space-y-1 bg-[#0B2638]/90 px-6 py-3.5 rounded-xl border border-white/15 shadow-2xl">
+              <span className="text-[#CDAE72] font-bold tracking-widest uppercase block text-sm">{lightboxImages[lightboxIndex].title}</span>
+              {lightboxImages[lightboxIndex].caption && <p className="text-white/90 text-xs leading-relaxed">{lightboxImages[lightboxIndex].caption}</p>}
+            </div>
+          ) : (
+            <p className="text-white/70 bg-[#0B2638]/80 px-5 py-2 rounded-full inline-block border border-white/15 shadow-lg">
+              Click outside image or press ESC to exit. Use left & right arrows to browse gallery.
+            </p>
+          )}
+        </div>
+      </div>,
+      document.body
+    );
+  };
+
 
   // Hash-based Page Router
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
@@ -1215,14 +1334,18 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
                 {item.grid.map((imgSrc, gIdx) => (
-                  <div key={gIdx} className="group relative aspect-[4/3] rounded-lg overflow-hidden shadow-md bg-[#0B2638] border border-[#0B2638]/10 cursor-pointer">
+                  <div 
+                    key={gIdx} 
+                    onClick={() => openLightbox(item.grid, gIdx)}
+                    className="group relative aspect-[4/3] rounded-lg overflow-hidden shadow-md bg-[#0B2638] border border-[#0B2638]/10 cursor-pointer"
+                  >
                     <img 
                       src={imgSrc} 
                       alt={`${item.title} detail ${gIdx + 1}`} 
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                     />
-                    <div className="absolute inset-0 bg-[#0B2638]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <span className="text-xs font-sans font-bold text-white tracking-widest uppercase bg-[#0B2638]/80 px-3 py-1.5 rounded border border-[#CDAE72]/50">
+                    <div className="absolute inset-0 bg-[#0B2638]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <span className="text-xs font-sans font-bold text-white tracking-widest uppercase bg-[#0B2638]/90 px-4 py-2 rounded border border-[#CDAE72]/70 shadow-lg hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all">
                         VIEW DETAIL
                       </span>
                     </div>
@@ -1246,9 +1369,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             <div className={`grid grid-cols-1 ${item.showcase.length === 3 ? 'sm:grid-cols-3' : 'sm:grid-cols-2 lg:grid-cols-4'} gap-6 sm:gap-8`}>
               {item.showcase.map((card, cIdx) => (
-                <a 
+                <div 
                   key={cIdx} 
-                  href={card.link}
+                  onClick={() => openLightbox(item.showcase, cIdx)}
                   className="relative group bg-[#0B2638] rounded-xl overflow-hidden shadow-lg border border-[#0B2638]/20 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden">
@@ -1266,7 +1389,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                     </div>
                   </div>
-                </a>
+                </div>
               ))}
             </div>
           </div>
@@ -1296,7 +1419,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             </div>
           </div>
         </section>
-
+        {renderLightbox()}
       </div>
     );
   }
@@ -1397,8 +1520,16 @@ The exterior envelope and surrounding property were entirely reborn to match the
               </div>
 
               {/* In-feed large detail image */}
-              <div className="w-full aspect-[16/10] overflow-hidden shadow-md rounded-lg">
-                <img src={proj.img2} alt="Project detail visual" className="w-full h-full object-cover" />
+              <div 
+                onClick={() => openLightbox([proj.img1, proj.img2, proj.img3].filter(Boolean), 1)}
+                className="group relative w-full aspect-[16/10] overflow-hidden shadow-md rounded-lg cursor-pointer bg-[#0B2638]"
+              >
+                <img src={proj.img2} alt="Project detail visual" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                <div className="absolute inset-0 bg-[#0B2638]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                  <span className="text-xs font-sans font-bold text-white tracking-widest uppercase bg-[#0B2638]/90 px-4 py-2 rounded border border-[#CDAE72]/60">
+                    CLICK TO ENLARGE
+                  </span>
+                </div>
               </div>
 
               <div className="text-sm text-[#24313A]/80 leading-relaxed space-y-6 font-light">
@@ -1461,8 +1592,17 @@ The exterior envelope and surrounding property were entirely reborn to match the
             <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-widest uppercase block text-center">GALLERY</span>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {(proj.gallery || [proj.img1, proj.img2, proj.img3].filter(Boolean)).map((g, i) => (
-                <div key={i} className="aspect-[4/3] overflow-hidden shadow-sm hover:scale-[1.02] transition-transform duration-500">
-                  <img src={g} alt="Gallery view" className="w-full h-full object-cover" />
+                <div 
+                  key={i} 
+                  onClick={() => openLightbox(proj.gallery || [proj.img1, proj.img2, proj.img3].filter(Boolean), i)}
+                  className="group relative aspect-[4/3] overflow-hidden rounded-lg shadow-sm hover:scale-[1.02] transition-all duration-500 cursor-pointer bg-[#0B2638]"
+                >
+                  <img src={g} alt={`Gallery view ${i + 1}`} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-[#0B2638]/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <span className="text-xs font-sans font-bold text-white tracking-widest uppercase bg-[#0B2638]/90 px-3 py-1.5 rounded border border-[#CDAE72]/60">
+                      ENLARGE IMAGE
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1597,7 +1737,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             </div>
           </div>
         </footer>
-
+        {renderLightbox()}
       </div>
     );
   }
@@ -1659,6 +1799,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             </div>
           </div>
         </footer>
+        {renderLightbox()}
       </div>
     );
   }
@@ -1743,6 +1884,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
           </div>
         </footer>
+        {renderLightbox()}
       </div>
     );
   }
@@ -2029,6 +2171,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
         </footer>
 
       
+      {renderLightbox()}
+
       {/* GLOBAL CAREERS POPUP MODAL */}
       {isApplyModalOpen && (
         <div className="fixed inset-0 z-[9999] bg-[#0B2638]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -2526,6 +2670,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
           </div>
         </footer>
       
+      {renderLightbox()}
+
       {/* GLOBAL CAREERS POPUP MODAL */}
       {isApplyModalOpen && (
         <div className="fixed inset-0 z-[9999] bg-[#0B2638]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -2951,6 +3097,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
           </div>
         </footer>
       
+      {renderLightbox()}
+
       {/* GLOBAL CAREERS POPUP MODAL */}
       {isApplyModalOpen && (
         <div className="fixed inset-0 z-[9999] bg-[#0B2638]/85 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -4387,6 +4535,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
           </div>
         </footer>
 
+
+      {renderLightbox()}
 
       {/* GLOBAL CAREERS POPUP MODAL */}
       {isApplyModalOpen && (

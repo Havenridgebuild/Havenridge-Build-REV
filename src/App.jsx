@@ -551,7 +551,16 @@ export default function App() {
         "project_images/mcdougall/3.png",
         "project_images/mcdougall/4.png",
         "project_images/mcdougall/5.png",
-        "project_images/mcdougall/6.png"
+        "project_images/mcdougall/6.png",
+        "project_images/mcdougall/7.png",
+        "project_images/mcdougall/8.png",
+        "project_images/mcdougall/9.png",
+        "project_images/mcdougall/10.png",
+        "project_images/mcdougall/11.png",
+        "project_images/mcdougall/12.png",
+        "project_images/mcdougall/13.png",
+        "project_images/mcdougall/14.png",
+        "project_images/mcdougall/15.png"
       ],
       overview: "True transformations require flawless structural engineering and uncompromising design vision. For this comprehensive whole-home reconstruction, we stripped the original structure to its core to completely reconfigure the layout, adding an entirely new engineered vertical story with striking A-frame gables. From extensive foundation excavation and advanced modern waterproofing systems to wrapping the exterior in high-end, custom split-face stone masonry, every phase of this build was executed to elevate both structural integrity and architectural aesthetic.",
       desc1: "True transformations require flawless structural engineering and uncompromising design vision. For this comprehensive whole-home reconstruction, we stripped the original structure to its core to completely reconfigure the layout, adding an entirely new engineered vertical story with striking A-frame gables. From extensive foundation excavation and advanced modern waterproofing systems to wrapping the exterior in high-end, custom split-face stone masonry, every phase of this build was executed to elevate both structural integrity and architectural aesthetic.",

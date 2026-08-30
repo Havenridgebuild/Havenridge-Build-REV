@@ -4176,7 +4176,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16 cass-reveal text-center">
             <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-2">SERVICES</span>
-            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Design-Build Renovation Services for Waterloo Region and Guelph</h2>
+            <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638]">Design, Design-Build Renovation Services for Waterloo Region, Guelph, and Surrounding Area</h2>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -4387,7 +4387,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             <div className="space-y-3">
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CLIENT REVIEWS</span>
               <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-white tracking-wider">Verified Feedback From Havenridge Homeowners</h2>
-              <p className="text-sm font-light text-white/70">Real feedback from homeowners across Kitchener, Waterloo, Cambridge, Guelph & Puslinch.</p>
+              <p className="text-sm font-light text-white/70">Real feedback from homeowners across Kitchener, Waterloo, Cambridge, Guelph, and Surrounding Area.</p>
               <div className="pt-1">
                 <a 
                   href="#reviews-page" 

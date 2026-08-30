@@ -261,6 +261,31 @@ export default function App() {
       }
     };
 
+  // Dynamic NiceJob SDK script loader for #reviews-page SPA routing
+  useEffect(() => {
+    if (currentPath === '#reviews-page') {
+      const existingScript = document.getElementById('nicejob-sdk-dynamic');
+      if (existingScript) {
+        existingScript.remove();
+      }
+      const script = document.createElement('script');
+      script.id = 'nicejob-sdk-dynamic';
+      script.type = 'text/javascript';
+      script.src = 'https://cdn.nicejob.co/js/sdk.min.js?id=6309960057618432';
+      script.async = true;
+      document.body.appendChild(script);
+
+      // If NiceJob global object already exists, re-trigger scanning
+      if (window.NiceJob && typeof window.NiceJob.init === 'function') {
+        try {
+          window.NiceJob.init();
+        } catch (e) {
+          console.log('NiceJob init re-trigger:', e);
+        }
+      }
+    }
+  }, [currentPath]);
+
     window.addEventListener('hashchange', handleHashChange);
     handleHashChange();
 

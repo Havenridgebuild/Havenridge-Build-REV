@@ -268,6 +268,12 @@ export default function App() {
       }
     };
 
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
+
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   // Dynamic NiceJob SDK script loader for #reviews-page SPA routing
   useEffect(() => {
     if (currentPath === '#reviews-page') {
@@ -282,7 +288,6 @@ export default function App() {
       script.async = true;
       document.body.appendChild(script);
 
-      // If NiceJob global object already exists, re-trigger scanning
       if (window.NiceJob && typeof window.NiceJob.init === 'function') {
         try {
           window.NiceJob.init();
@@ -292,12 +297,6 @@ export default function App() {
       }
     }
   }, [currentPath]);
-
-    window.addEventListener('hashchange', handleHashChange);
-    handleHashChange();
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
 
   // Hero Slideshow State
   const [heroIndex, setHeroIndex] = useState(0);

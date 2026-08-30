@@ -531,7 +531,7 @@ export default function App() {
     { title: 'BASEMENTS', subtitle: 'Sub-Grade Wellness Gyms, Custom Playhouses & Media Lounges', img: 'project_images/inspiration/inspiration_basements.jpg', link: '#inspiration-basements' },
     { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/moore/1.png', link: '#inspiration-garages' },
     { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/inspiration/inspiration_custom_millwork.jpg', link: '#inspiration-millwork' },
-    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#inspiration-additions' }
+    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '#inspiration-exteriors' }
   ];
 
   const galleryCategories = [
@@ -542,7 +542,7 @@ export default function App() {
     { title: 'BASEMENTS', hash: '#inspiration-basements', img: 'project_images/inspiration/inspiration_basements.jpg' },
     { title: 'GARAGES & OUTBUILDINGS', hash: '#inspiration-garages', img: 'project_images/moore/1.png' },
     { title: 'CUSTOM MILLWORK', hash: '#inspiration-millwork', img: 'project_images/inspiration/inspiration_custom_millwork.jpg' },
-    { title: 'EXTERIORS', hash: '#inspiration-additions', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg' },
+    { title: 'EXTERIORS', hash: '#inspiration-exteriors', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg' },
   ];
 
 

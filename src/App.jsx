@@ -777,7 +777,7 @@ export default function App() {
       "inspiration/exteriors/exteriors_custom_5.png",
       "inspiration/exteriors/exteriors_custom_6.png",
       "inspiration/exteriors/exteriors_custom_7.png",
-      "project_images/Moore_Street_State_Flagship/Moore_1.jpg"
+      "inspiration/exteriors/exteriors_custom_8.png"
     ],
       showcase: [
         { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "project_images/morningdale/1.png", link: "#project-living-spaces" },

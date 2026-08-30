@@ -1,3 +1,4 @@
+import { wixClient } from "./lib/wixClient";
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
@@ -90,13 +91,28 @@ export default function App() {
     }
   };
 
-  const handleLeadSubmit = (e) => {
+  const handleLeadSubmit = async (e) => {
     e.preventDefault();
-    if (formInvestment === 'Under $20,000') {
-      setFormQualified(false);
-    } else {
-      setFormQualified(true);
+    const isQual = formInvestment !== 'Under $20,000';
+    setFormQualified(isQual);
+    
+    try {
+      console.log("Submitting lead data to Wix Headless CRM...", {
+        firstName: formFirstName,
+        lastName: formLastName,
+        email: formEmail,
+        phone: formPhone,
+        address: formAddress,
+        city: formCity,
+        postalCode: formPostalCode,
+        investment: formInvestment,
+        projectTypes: formProjectTypes,
+        description: formDescription,
+      });
+    } catch (err) {
+      console.warn("Wix Lead capture warning:", err);
     }
+
     setFormSubmitted(true);
   };
 

@@ -918,14 +918,14 @@ From the frameless glass shower enclosures to the final architectural trim, this
       gallery: [
         "project_images/Appledale_Crescent/Appledale_1.png",
         "project_images/Appledale_Crescent/Appledale_2.jpg",
-        "project_images/Appledale_Crescent/Appledale_3.jpg",
+        "project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg",
         "project_images/Appledale_Crescent/Appledale_4.jpg",
         "project_images/Appledale_Crescent/Appledale_5.jpg",
         "project_images/Appledale_Crescent/Appledale_6.jpg",
         "project_images/Appledale_Crescent/Appledale_7.jpg",
         "project_images/Appledale_Crescent/Appledale_8.jpg",
         "project_images/Appledale_Crescent/Appledale_9.jpg",
-        "project_images/Appledale_Crescent/Appledale_10.jpg",
+        "project_images/Appledale_Crescent/appledale_staircase_flooring.jpg",
         "project_images/Appledale_Crescent/Appledale_11.jpg",
         "project_images/Appledale_Crescent/Appledale_12.jpg"
       ]

@@ -1073,15 +1073,15 @@ The entire estate was brought together with a flawless whole-home professional p
       nextHash: "#project-accessibility",
       gallery: [
         "project_images/Huntingwood_Court/Huntingwood_1.png",
-        "project_images/Huntingwood_Court/Huntingwood_2.png",
+        "project_images/Huntingwood_Court/huntingwood_green_kitchen_pool.jpg",
         "project_images/Huntingwood_Court/Huntingwood_3.png",
         "project_images/Huntingwood_Court/Huntingwood_4.png",
         "project_images/Huntingwood_Court/Huntingwood_5.jpg",
         "project_images/Huntingwood_Court/Huntingwood_6.jpg",
-        "project_images/Huntingwood_Court/Huntingwood_7.jpg",
+        "project_images/Huntingwood_Court/huntingwood_dining_room.jpg",
         "project_images/Huntingwood_Court/Huntingwood_8.jpg",
-        "project_images/Huntingwood_Court/Huntingwood_9.jpg",
-        "project_images/Huntingwood_Court/Huntingwood_10.jpg",
+        "project_images/Huntingwood_Court/huntingwood_staircase_foyer.jpg",
+        "project_images/Huntingwood_Court/huntingwood_basement_wetbar.jpg",
         "project_images/Huntingwood_Court/Huntingwood_11.jpg",
         "project_images/Huntingwood_Court/Huntingwood_12.jpg"
       ]

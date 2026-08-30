@@ -900,7 +900,7 @@ export default function App() {
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
       img1: "project_images/Appledale_Crescent/Appledale_1.png",
-      img2: "project_images/Appledale_Crescent/Appledale_2.jpg",
+      img2: "project_images/Appledale_Crescent/appledale_coffee_station_cabinet.jpg",
       img3: "project_images/Appledale_Crescent/Appledale_3.jpg",
       overview: `This extensive whole-house renovation on Appledale Crescent showcases a seamless blend of spatial re-engineering and highly specialized finish carpentry. On the main floor, we removed dividing barriers to open up a gourmet chef's kitchen, anchored by a massive quartz waterfall-edge island, integrated full-height pantry walls, and a dedicated custom coffee cupboard. Premium engineered flooring runs continuously across the entire level, tying into a striking architectural feature wall and freshly painted main and upper levels.
 

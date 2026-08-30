@@ -548,7 +548,7 @@ export default function App() {
   const portfolioProjects = [
     { name: 'Appledale Crescent — Total Transformation', cat: 'Whole-Home & Custom Millwork', hash: '#project-millwork', img: 'project_images/appledale/1.png' },
     { name: 'Huntingwood Court — Total Estate Reconstruction', cat: 'Whole-Home & Basement Retreat', hash: '#project-basements', img: 'project_images/huntingwood/1.png' },
-    { name: 'Morningdale Crescent — Total Property Overhaul', cat: 'Whole-Home Interior & Exterior', hash: '#project-living-spaces', img: 'project_images/morningdale/1.png' },
+    { name: 'Morningdale Crescent — Total Property Overhaul', cat: 'Whole-Home Interior & Exterior', hash: '#project-living-spaces', img: 'project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg' },
     { name: 'Wellington Street — Designer Main Floor Reconstruction', cat: 'Main-Floor Transformation', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
     { name: 'Paisley Heights — Heritage Restoration & Modernization', cat: 'Heritage Restoration', hash: '#project-bathrooms', img: 'project_images/paisley/1.png' },
     { name: 'The Moore Street Estate — 1908 Flagship Restoration', cat: 'Flagship Heritage Restoration', hash: '#project-garages', img: 'project_images/moore/1.png' },
@@ -1124,7 +1124,7 @@ The entire estate was brought together with a flawless whole-home professional p
       scope: "Living Room Ceiling Elevation & Exposed Timber Wrap, Custom Kitchen Overhaul with White Shaker Cabinets, Premium Engineered Hardwood Flooring, Bold Mediterranean Graphic Tile Bathroom, Architectural Staircases & Wrought-Iron Spindles, Deep-Tone Finished Basement Rec Room & Custom Gym, Exterior Siding & High-Efficiency Windows, Multi-Tiered Backyard Entertainment Deck & Privacy Fencing, Multi-Level Front Interlock Stone Retaining Driveway with Ambient Lighting",
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
-      img1: "project_images/Morningdale_Crescent/Morningdale_1.png",
+      img1: "project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg",
       img2: "project_images/Morningdale_Crescent/Morningdale_2.png",
       img3: "project_images/Morningdale_Crescent/Morningdale_3.png",
       overview: `The Morningdale Crescent estate stands as a definitive blueprint for an extensive, top-tier interior and exterior renovation. Inside the main living spaces, we structurally raised the ceiling heights into an open architectural vault, perfectly grounded by a massive, rich-toned custom wrapped timber beam. The main level flows seamlessly into a bright, modern gourmet kitchen featuring custom full-height white shaker cabinets, premium concrete-tone countertops, a professional chimney-style stainless hood range, and a geometric tiled backsplash. The entire level is wrapped in premium wide-plank engineered hardwood flooring that runs continuously down a newly overhauled foyer staircase, complete with solid oak handrails, a stately squared newel post, and modern matte black wrought-iron spindles. Every room was further elevated with crisp white solid-core doors, sleek black architectural hardware, and a flawless whole-home professional paint package.

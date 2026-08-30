@@ -942,7 +942,7 @@ From the frameless glass shower enclosures to the final architectural trim, this
       standards: "ESA & OBC Compliant, Havenridge Written Warranty",
       certifications: "ESA & OBC Compliant, Havenridge Written Warranty",
       img1: "project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg",
-      img2: "project_images/Wellington_Street/Wellington_2.png",
+      img2: "project_images/Wellington_Street/wellington_mudroom_alcove_cabinet.jpg",
       img3: "project_images/Wellington_Street/Wellington_3.png",
       overview: `The Wellington Street project is a premier example of balancing advanced hidden engineering with meticulous interior design execution. To modernize the layout and maximize flow, we began by removing a primary load-bearing wall, opening up the entire main level footprint into a spacious, light-filled open-concept environment. Because of the home's age, our team performed comprehensive mechanical remediation, completely replacing old cast-iron plumbing stacks with modern drainage lines and executing a total electrical panel and wiring overhaul. We laid down premium continuous warm-toned flooring across the entire main floor, beautifully completing the structural transitions by capping the lower staircase treads and risers to ensure visual harmony.
 

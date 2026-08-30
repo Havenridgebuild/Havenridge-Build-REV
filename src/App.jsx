@@ -1125,7 +1125,7 @@ The entire estate was brought together with a flawless whole-home professional p
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
       img1: "project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg",
-      img2: "project_images/Morningdale_Crescent/Morningdale_2.png",
+      img2: "project_images/Morningdale_Crescent/morningdale_vaulted_living_room.jpg",
       img3: "project_images/Morningdale_Crescent/Morningdale_3.png",
       overview: `The Morningdale Crescent estate stands as a definitive blueprint for an extensive, top-tier interior and exterior renovation. Inside the main living spaces, we structurally raised the ceiling heights into an open architectural vault, perfectly grounded by a massive, rich-toned custom wrapped timber beam. The main level flows seamlessly into a bright, modern gourmet kitchen featuring custom full-height white shaker cabinets, premium concrete-tone countertops, a professional chimney-style stainless hood range, and a geometric tiled backsplash. The entire level is wrapped in premium wide-plank engineered hardwood flooring that runs continuously down a newly overhauled foyer staircase, complete with solid oak handrails, a stately squared newel post, and modern matte black wrought-iron spindles. Every room was further elevated with crisp white solid-core doors, sleek black architectural hardware, and a flawless whole-home professional paint package.
 

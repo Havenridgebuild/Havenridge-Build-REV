@@ -4493,18 +4493,42 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <div className="max-w-7xl mx-auto px-6 text-center">
           <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-10">TRUSTED PARTNERS</span>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12 justify-items-center max-w-4xl mx-auto opacity-95">
-            <div className="h-36 flex items-center justify-center w-full">
-              <img src="renomark.png" alt="RenoMark Certified" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
-            </div>
-            <div className="h-36 flex items-center justify-center w-full">
-              <img src="baumler.png" alt="Baeumler Approved" className="h-26 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity" />
-            </div>
-            <div className="h-36 flex items-center justify-center w-full">
-              <img src="wrhba.png" alt="WRHBA Member" className="h-24 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
-            </div>
-            <div className="h-36 flex items-center justify-center w-full">
-              <img src="cambridge_chamber.png" alt="Cambridge Chamber of Commerce" className="h-26 w-auto object-contain brightness-0 invert opacity-80 hover:opacity-100 transition-opacity" />
-            </div>
+            <a 
+              href="https://renomark.ca/renovator/carpenters-on-the-go-inc/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="RenoMark Certified Renovator"
+              className="h-36 flex items-center justify-center w-full hover:scale-105 transition-transform cursor-pointer group"
+            >
+              <img src="renomark.png" alt="RenoMark Certified" className="h-26 w-auto object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
+            </a>
+            <a 
+              href="https://www.baeumlerapproved.ca/contractors/carpenters-on-the-go/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="Baeumler Approved Contractor"
+              className="h-36 flex items-center justify-center w-full hover:scale-105 transition-transform cursor-pointer group"
+            >
+              <img src="baumler.png" alt="Baeumler Approved" className="h-26 w-auto object-contain opacity-80 group-hover:opacity-100 transition-opacity" />
+            </a>
+            <a 
+              href="https://wrhba.com/pages/renomark" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="Waterloo Region Home Builders' Association Member"
+              className="h-36 flex items-center justify-center w-full hover:scale-105 transition-transform cursor-pointer group"
+            >
+              <img src="wrhba.png" alt="WRHBA Member" className="h-24 w-auto object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
+            </a>
+            <a 
+              href="https://www.cambridgechamber.com/Business-Directory-Online.htm#/action/Listing/value/20025/searchID/1301714/cid/232/id/1/Havenridge-Build" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              title="Cambridge Chamber of Commerce Member"
+              className="h-36 flex items-center justify-center w-full hover:scale-105 transition-transform cursor-pointer group"
+            >
+              <img src="cambridge_chamber.png" alt="Cambridge Chamber of Commerce" className="h-26 w-auto object-contain brightness-0 invert opacity-80 group-hover:opacity-100 transition-opacity" />
+            </a>
           </div>
         </div>
       </section>

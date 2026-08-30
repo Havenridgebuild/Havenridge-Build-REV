@@ -549,7 +549,7 @@ export default function App() {
     { name: 'Appledale Crescent — Total Transformation', cat: 'Whole-Home & Custom Millwork', hash: '#project-millwork', img: 'project_images/appledale/1.png' },
     { name: 'Huntingwood Court — Total Estate Reconstruction', cat: 'Whole-Home & Basement Retreat', hash: '#project-basements', img: 'project_images/huntingwood/1.png' },
     { name: 'Morningdale Crescent — Total Property Overhaul', cat: 'Whole-Home Interior & Exterior', hash: '#project-living-spaces', img: 'project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg' },
-    { name: 'Wellington Street — Designer Main Floor Reconstruction', cat: 'Main-Floor Transformation', hash: '#project-kitchens', img: 'project_images/wellington/1.png' },
+    { name: 'Wellington Street — Designer Main Floor Reconstruction', cat: 'Main-Floor Transformation', hash: '#project-kitchens', img: 'project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg' },
     { name: 'Paisley Heights — Heritage Restoration & Modernization', cat: 'Heritage Restoration', hash: '#project-bathrooms', img: 'project_images/paisley/1.png' },
     { name: 'The Moore Street Estate — 1908 Flagship Restoration', cat: 'Flagship Heritage Restoration', hash: '#project-garages', img: 'project_images/moore/1.png' },
   ];
@@ -941,7 +941,7 @@ From the frameless glass shower enclosures to the final architectural trim, this
       scope: "Load-Bearing Wall Removal for Open-Concept Living, Gourmet Kitchen Overhaul with Sage Shaker Millwork, Custom Drop-Level Dining Island, Matching Architectural Range Hood, Built-In Storage Mudroom Inset, Re-Engineering Pocket Doors, Cast-Iron Plumbing Remediation & Electrical System Upgrades, Luxury Continuous Flooring & Capped Staircase Transitions",
       standards: "ESA & OBC Compliant, Havenridge Written Warranty",
       certifications: "ESA & OBC Compliant, Havenridge Written Warranty",
-      img1: "project_images/Wellington_Street/Wellington_1.png",
+      img1: "project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg",
       img2: "project_images/Wellington_Street/Wellington_2.png",
       img3: "project_images/Wellington_Street/Wellington_3.png",
       overview: `The Wellington Street project is a premier example of balancing advanced hidden engineering with meticulous interior design execution. To modernize the layout and maximize flow, we began by removing a primary load-bearing wall, opening up the entire main level footprint into a spacious, light-filled open-concept environment. Because of the home's age, our team performed comprehensive mechanical remediation, completely replacing old cast-iron plumbing stacks with modern drainage lines and executing a total electrical panel and wiring overhaul. We laid down premium continuous warm-toned flooring across the entire main floor, beautifully completing the structural transitions by capping the lower staircase treads and risers to ensure visual harmony.

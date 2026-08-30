@@ -243,13 +243,30 @@ export default function App() {
   const [currentPath, setCurrentPath] = useState(window.location.hash || '#home');
   const [selectedBlogArticle, setSelectedBlogArticle] = useState(null);
 
+  // Safari & WebKit cross-browser compatible offset top helper
+  const getElementOffsetTop = (el) => {
+    let top = 0;
+    let curr = el;
+    while (curr) {
+      top += curr.offsetTop;
+      curr = curr.offsetParent;
+    }
+    return top;
+  };
+
   useEffect(() => {
     const handleHashChange = () => {
       const hash = window.location.hash || '#home';
       const sectionAnchors = ['#services', '#about', '#process', '#process-section', '#our-process', '#testimonials', '#projects', '#partners', '#inspiration-section'];
       
       if (sectionAnchors.includes(hash)) {
+        const isAlreadyHome = currentPath === '#home';
         setCurrentPath('#home');
+        
+        if (!isAlreadyHome) {
+          window.scrollTo(0, 0);
+        }
+        
         setTimeout(() => {
           let targetHash = hash;
           if (['#about', '#process', '#our-process'].includes(hash)) {
@@ -257,14 +274,15 @@ export default function App() {
           }
           const el = document.querySelector(targetHash);
           if (el) {
-            const yOffset = -100; // Offset for sticky 80px header + breathing room
-            const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
-            window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+            const yOffset = -100; // Offset for sticky header + breathing room
+            const y = Math.max(0, getElementOffsetTop(el) + yOffset);
+            window.scrollTo({ top: y, behavior: 'smooth' });
           }
-        }, 50);
+        }, isAlreadyHome ? 50 : 120);
       } else {
         setCurrentPath(hash);
         window.scrollTo(0, 0);
+        setTimeout(() => window.scrollTo(0, 0), 10);
       }
     };
 
@@ -272,7 +290,7 @@ export default function App() {
     handleHashChange();
 
     return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
+  }, [currentPath]);
 
   // Dynamic NiceJob SDK script loader for #reviews-page SPA routing
   useEffect(() => {
@@ -328,7 +346,8 @@ export default function App() {
           scrollTrigger: {
             trigger: el,
             start: 'top 88%',
-            toggleActions: 'play none none reverse'
+            once: true,
+            toggleActions: 'play none none none'
           },
           y: 40,
           opacity: 0,
@@ -603,8 +622,8 @@ export default function App() {
       "inspiration/bathrooms/bath_custom_8.jpg"
     ],
       showcase: [
-        { title: "Appledale Crescent Walk-In Shower", caption: "Precision herringbone subway tile layout & custom frameless glass enclosure.", img: "project_images/appledale/1.png", link: "#project-millwork" },
-        { title: "Huntingwood Court Basement Suite", caption: "Luxury wellness basement bathroom with custom quartz vanity & deep charcoal wainscoting.", img: "project_images/huntingwood/11.jpg", link: "#project-basements" },
+        { title: "Appledale Crescent Walk-In Shower", caption: "Precision herringbone subway tile layout & custom frameless glass enclosure.", img: "project_images/Appledale_Crescent/Appledale_3.jpg", link: "#project-millwork" },
+        { title: "Huntingwood Court Basement Suite", caption: "Luxury wellness basement bathroom with custom quartz vanity & deep charcoal wainscoting.", img: "project_images/Huntingwood_Court/Huntingwood_8.jpg", link: "#project-basements" },
         { title: "Paisley Heights Heritage Suite", caption: "Vintage black-and-white basketweave tile floor, sloped-glass tub partition & dark oak vanity.", img: "project_images/paisley/1.png", link: "#project-bathrooms" },
         { title: "Isherwood Ave Universal Suite", caption: "Barrier-free accessible roll-in shower with integrated sitting bench & safety grab bars.", img: "project_images/isherwood/1.png", link: "#project-accessibility" }
       ]
@@ -633,10 +652,10 @@ export default function App() {
       "inspiration/kitchens/kitchen_custom_8.jpg"
     ],
       showcase: [
-        { title: "The Moore Street Estate Island", caption: "Massive 12-foot central island with waterfall butcher-block top, solid quartz slab backsplash & hidden toe-kick drawers.", img: "project_images/moore/1.png", link: "#project-garages" },
-        { title: "Wellington Street Designer Kitchen", caption: "Sage green cabinets with unique dual-level quartz island dining table extension.", img: "project_images/wellington/1.png", link: "#project-kitchens" },
-        { title: "Huntingwood Court Culinary Suite", caption: "Custom forest green cabinets, custom-built hood range box & dedicated dry bar setup.", img: "project_images/huntingwood/1.png", link: "#project-basements" },
-        { title: "Appledale Crescent Open Kitchen", caption: "Crisp open kitchen with quartz waterfall island, seamless flooring & dedicated coffee cupboard station.", img: "project_images/appledale/1.png", link: "#project-millwork" }
+        { title: "The Moore Street Estate Island", caption: "Massive 12-foot central island with waterfall butcher-block top, solid quartz slab backsplash & hidden toe-kick drawers.", img: "project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg", link: "#project-garages" },
+        { title: "Wellington Street Designer Kitchen", caption: "Sage green cabinets with unique dual-level quartz island dining table extension.", img: "project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg", link: "#project-kitchens" },
+        { title: "Huntingwood Court Culinary Suite", caption: "Custom forest green cabinets, custom-built hood range box & dedicated dry bar setup.", img: "project_images/Huntingwood_Court/huntingwood_green_kitchen_pool.jpg", link: "#project-basements" },
+        { title: "Appledale Crescent Open Kitchen", caption: "Crisp open kitchen with quartz waterfall island, seamless flooring & dedicated coffee cupboard station.", img: "project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg", link: "#project-millwork" }
       ]
     },
     '#inspiration-living-spaces': {
@@ -663,10 +682,10 @@ export default function App() {
       "inspiration/living_spaces/living_custom_8.png"
     ],
       showcase: [
-        { title: "Huntingwood Court Stained Oak Library", caption: "Traditional stained-oak floor-to-ceiling library bookcase with sliding ladder & built-in 3-sided linear fireplace.", img: "project_images/huntingwood/10.png", link: "#project-basements" },
-        { title: "Morningdale Crescent Elevated Living Room", caption: "Elevated ceiling volume with custom wrapped structural timber beam.", img: "project_images/morningdale/1.png", link: "#project-living-spaces" },
-        { title: "The Moore Street Estate Heritage Lounge", caption: "Exposed brick feature wall, custom wall paneling & historic 12-inch baseboards.", img: "project_images/moore/2.png", link: "#project-garages" },
-        { title: "Wellington Street Accent Lounge", caption: "Deep forest green accent feature wall & custom glass-paneled double French door entry transitions.", img: "project_images/wellington/2.png", link: "#project-kitchens" }
+        { title: "Huntingwood Court Stained Oak Library", caption: "Traditional stained-oak floor-to-ceiling library bookcase with sliding ladder & built-in 3-sided linear fireplace.", img: "project_images/Huntingwood_Court/huntingwood_stained_oak_library_ladder.jpg", link: "#project-basements" },
+        { title: "Morningdale Crescent Elevated Living Room", caption: "Elevated ceiling volume with custom wrapped structural timber beam.", img: "project_images/Morningdale_Crescent/morningdale_vaulted_living_room.jpg", link: "#project-living-spaces" },
+        { title: "The Moore Street Estate Heritage Lounge", caption: "Exposed brick feature wall, custom wall paneling & historic 12-inch baseboards.", img: "project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg", link: "#project-garages" },
+        { title: "Wellington Street Accent Lounge", caption: "Deep forest green accent feature wall & custom glass-paneled double French door entry transitions.", img: "project_images/Wellington_Street/wellington_lounge_french_doors_view.jpg", link: "#project-kitchens" }
       ]
     },
     '#inspiration-additions': {
@@ -693,9 +712,9 @@ export default function App() {
       "inspiration/additions/addition_custom_8.png"
     ],
       showcase: [
-        { title: "McDougall Road Vertical Addition", caption: "Second-story vertical addition, high-pitched A-frame gables & custom timber-framed front portico.", img: "project_images/mcdougall/1.png", link: "#project-additions" },
-        { title: "Morningdale Crescent Structural Expansion", caption: "Seamless roofline modifications & heavy structural beam integrations.", img: "project_images/morningdale/1.png", link: "#project-living-spaces" },
-        { title: "The Moore Street Estate Framing Shoring", caption: "Leveling & shoring historic home frame before layout expansion.", img: "project_images/moore/1.png", link: "#project-garages" }
+        { title: "McDougall Road Vertical Addition", caption: "Second-story vertical addition, high-pitched A-frame gables & custom timber-framed front portico.", img: "project_images/McDougall_Road/McDougall_1.png", link: "#project-additions" },
+        { title: "Morningdale Crescent Structural Expansion", caption: "Seamless roofline modifications & heavy structural beam integrations.", img: "project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg", link: "#project-living-spaces" },
+        { title: "The Moore Street Estate Framing Shoring", caption: "Leveling & shoring historic home frame before layout expansion.", img: "project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "#project-garages" }
       ]
     },
     '#inspiration-basements': {
@@ -722,10 +741,10 @@ export default function App() {
       "inspiration/basements/basement_custom_8.png"
     ],
       showcase: [
-        { title: "The Moore Street Estate Wellness Retreat", caption: "Custom timber sauna, dedicated cold plunge station, fitness gym & herringbone tile bath.", img: "project_images/moore/10.png", link: "#project-garages" },
-        { title: "Huntingwood Court Lower Level", caption: "Deep charcoal basement retreat with glass-enclosed training gym & entertainment kitchenette.", img: "project_images/huntingwood/1.png", link: "#project-basements" },
-        { title: "Appledale Crescent Laundry Suite", caption: "Basement bathroom & laundry room with elevated washer/dryer platforms & roll-out bins.", img: "project_images/appledale/2.png", link: "#project-millwork" },
-        { title: "Knox Court Finished Basement", caption: "Media family room, linear fireplace wall & custom children's playhouse.", img: "project_images/knox/1.png", link: "#project-whole-home" }
+        { title: "The Moore Street Estate Wellness Retreat", caption: "Custom timber sauna, dedicated cold plunge station, fitness gym & herringbone tile bath.", img: "project_images/Moore_Street_State_Flagship/moore_commercial_home_gym_basement.jpg", link: "#project-garages" },
+        { title: "Huntingwood Court Lower Level", caption: "Deep charcoal basement retreat with glass-enclosed training gym & entertainment kitchenette.", img: "project_images/Huntingwood_Court/huntingwood_basement_wetbar.jpg", link: "#project-basements" },
+        { title: "Appledale Crescent Laundry Suite", caption: "Basement bathroom & laundry room with elevated washer/dryer platforms & roll-out bins.", img: "project_images/Appledale_Crescent/appledale_laundry_suite_pocket_door.jpg", link: "#project-millwork" },
+        { title: "Knox Court Finished Basement", caption: "Media family room, linear fireplace wall & custom children's playhouse.", img: "project_images/Knox_Court/Knox_7.png", link: "#project-whole-home" }
       ]
     },
     '#inspiration-garages': {
@@ -752,9 +771,9 @@ export default function App() {
       "inspiration/garages/garage_custom_8.png"
     ],
       showcase: [
-        { title: "The Moore Street Flagship Office", caption: "Detached garage exterior transformation & premium interior office with custom cabinets, LVP & mini-split.", img: "project_images/moore/3.png", link: "#project-garages" },
-        { title: "McDougall Road Auxiliary Structure", caption: "Detached outbuilding with matching blue-gray siding, roof trim & timber decking.", img: "project_images/mcdougall/3.png", link: "#project-additions" },
-        { title: "Morningdale Crescent Exterior Envelope", caption: "Clean modern garage door installations & weather-resistant siding tie-ins.", img: "project_images/morningdale/2.png", link: "#project-living-spaces" }
+        { title: "The Moore Street Flagship Office", caption: "Detached garage exterior transformation & premium interior office with custom cabinets, LVP & mini-split.", img: "project_images/Moore_Street_State_Flagship/moore_detached_garage_studio.jpg", link: "#project-garages" },
+        { title: "McDougall Road Auxiliary Structure", caption: "Detached outbuilding with matching blue-gray siding, roof trim & timber decking.", img: "project_images/McDougall_Road/McDougall_3.png", link: "#project-additions" },
+        { title: "Morningdale Crescent Exterior Envelope", caption: "Clean modern garage door installations & weather-resistant siding tie-ins.", img: "project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg", link: "#project-living-spaces" }
       ]
     },
     '#inspiration-millwork': {
@@ -781,10 +800,10 @@ export default function App() {
       "inspiration/millwork/millwork_custom_8.png"
     ],
       showcase: [
-        { title: "The Moore Street Historic Millwork", caption: "12-inch historic baseboards, wall paneling, built-in library & hidden kitchen drawers.", img: "project_images/moore/2.png", link: "#project-garages" },
-        { title: "Huntingwood Court Oak Library", caption: "Stained-oak floor-to-ceiling bookcase with authentic sliding rolling ladder.", img: "project_images/huntingwood/10.png", link: "#project-basements" },
-        { title: "Wellington Street Custom Shaker Cabinets", caption: "Sage green shaker cabinets, mudroom storage & drop-level island table extension.", img: "project_images/wellington/1.png", link: "#project-kitchens" },
-        { title: "Appledale Crescent Coffee Station", caption: "Custom coffee station & elevated laundry platforms with structural roll-out bins.", img: "project_images/appledale/1.png", link: "#project-millwork" }
+        { title: "The Moore Street Historic Millwork", caption: "12-inch historic baseboards, wall paneling, built-in library & hidden kitchen drawers.", img: "project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg", link: "#project-garages" },
+        { title: "Huntingwood Court Oak Library", caption: "Stained-oak floor-to-ceiling bookcase with authentic sliding rolling ladder.", img: "project_images/Huntingwood_Court/huntingwood_stained_oak_library_ladder.jpg", link: "#project-basements" },
+        { title: "Wellington Street Custom Shaker Cabinets", caption: "Sage green shaker cabinets, mudroom storage & drop-level island table extension.", img: "project_images/Wellington_Street/wellington_mudroom_alcove_cabinet.jpg", link: "#project-kitchens" },
+        { title: "Appledale Crescent Coffee Station", caption: "Custom coffee station & elevated laundry platforms with structural roll-out bins.", img: "project_images/Appledale_Crescent/appledale_coffee_station_cabinet.jpg", link: "#project-millwork" }
       ]
     },
     '#inspiration-exteriors': {
@@ -811,9 +830,9 @@ export default function App() {
       "inspiration/exteriors/exteriors_custom_8.png"
     ],
       showcase: [
-        { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "project_images/morningdale/1.png", link: "#project-living-spaces" },
-        { title: "The Moore Street Estate Pergola & Envelope", caption: "17'x17' outdoor timber pergola, concrete pad & full exterior siding/window overhaul.", img: "project_images/moore/1.png", link: "#project-garages" },
-        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "project_images/mcdougall/1.png", link: "#project-additions" }
+        { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg", link: "#project-living-spaces" },
+        { title: "The Moore Street Estate Pergola & Envelope", caption: "17'x17' outdoor timber pergola, concrete pad & full exterior siding/window overhaul.", img: "project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "#project-garages" },
+        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "project_images/McDougall_Road/McDougall_1.png", link: "#project-additions" }
       ]
     }
   };
@@ -918,13 +937,13 @@ From the frameless glass shower enclosures to the final architectural trim, this
       gallery: [
         "project_images/Appledale_Crescent/Appledale_1.png",
         "project_images/Appledale_Crescent/Appledale_2.jpg",
-        "project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg",
+        "project_images/Appledale_Crescent/appledale_island_electrical_outlet.jpg",
         "project_images/Appledale_Crescent/Appledale_4.jpg",
         "project_images/Appledale_Crescent/Appledale_5.jpg",
         "project_images/Appledale_Crescent/Appledale_6.jpg",
         "project_images/Appledale_Crescent/Appledale_7.jpg",
         "project_images/Appledale_Crescent/Appledale_8.jpg",
-        "project_images/Appledale_Crescent/Appledale_9.jpg",
+        "project_images/Appledale_Crescent/appledale_laundry_suite_pocket_door.jpg",
         "project_images/Appledale_Crescent/appledale_staircase_flooring.jpg",
         "project_images/Appledale_Crescent/Appledale_11.jpg",
         "project_images/Appledale_Crescent/Appledale_12.jpg"
@@ -1195,8 +1214,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
         "project_images/Moore_Street_State_Flagship/moore_brick_arch_hallway.jpg",
         "project_images/Moore_Street_State_Flagship/Moore_3.png",
         "project_images/Moore_Street_State_Flagship/moore_hexagon_tile_shower.jpg",
-        "project_images/Moore_Street_State_Flagship/moore_sitting_room_office.jpg",
-        "project_images/Moore_Street_State_Flagship/Moore_6.png",
+        "project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg",
+        "project_images/Moore_Street_State_Flagship/moore_commercial_home_gym_basement.jpg",
         "project_images/Moore_Street_State_Flagship/moore_cedar_timber_sauna.jpg",
         "project_images/Moore_Street_State_Flagship/Moore_8.png",
         "project_images/Moore_Street_State_Flagship/moore_detached_garage_studio.jpg",
@@ -1443,8 +1462,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
             </a>
             <div className="flex items-center gap-4">
-              <a href="#projects-page" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" /> BACK TO PROJECTS
+              <a 
+                href="#projects-page" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (window.history.length > 1) {
+                    window.history.back();
+                  } else {
+                    window.location.hash = '#projects-page';
+                  }
+                }}
+                className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2 cursor-pointer"
+              >
+                <ArrowLeft className="w-4 h-4" /> GO BACK
               </a>
               <button 
                 type="button"
@@ -2031,7 +2061,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         </section>
 
                 {/* INSPIRATION GALLERY GRID SECTION */}
-        <section id="inspiration-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] text-[#24313A] overflow-hidden relative border-t border-[#0B2638]/10 font-sans">
+        <section id="inspiration-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] text-[#24313A] overflow-hidden relative border-t border-[#0B2638]/10 font-sans cass-reveal">
           <div className="max-w-7xl mx-auto px-6 mb-12 text-center space-y-3">
             <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
             <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider">INSPIRATION GALLERY</h2>
@@ -4239,7 +4269,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
 
                   {/* THE HAVENRIDGE PROCESS SECTION */}
-      <section id="process-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] font-sans text-[#24313A] border-t border-[#0B2638]/10">
+      <section id="process-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] font-sans text-[#24313A] border-t border-[#0B2638]/10 cass-reveal">
         <div className="max-w-7xl mx-auto px-6 space-y-12">
           
           {/* SECTION HEADER WITH 2-LINE TITLE */}
@@ -4380,7 +4410,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
       </section>
 
       {/* SINGLE-ROW CLIENT REVIEWS SLIDER */}
-      <section id="testimonials" className="scroll-mt-28 py-20 sm:py-24 bg-[#0B2638] font-sans text-white border-t border-[#CDAE72]/20 relative">
+      <section id="testimonials" className="scroll-mt-28 py-20 sm:py-24 bg-[#0B2638] font-sans text-white border-t border-[#CDAE72]/20 relative cass-reveal">
         <div className="max-w-7xl mx-auto px-6 space-y-8">
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
@@ -4450,7 +4480,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
       </section>
 
       {/* INSPIRATION GALLERY GRID SECTION */}
-      <section id="inspiration-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] text-[#24313A] overflow-hidden relative border-t border-[#0B2638]/10 font-sans">
+      <section id="inspiration-section" className="scroll-mt-28 py-20 sm:py-24 bg-[#F4F2EE] text-[#24313A] overflow-hidden relative border-t border-[#0B2638]/10 font-sans cass-reveal">
         <div className="max-w-7xl mx-auto px-6 mb-12 text-center space-y-3">
           <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">DESIGN INSPIRATION</span>
           <h2 className="font-cinzel text-3xl sm:text-4xl font-bold text-[#0B2638] tracking-wider">INSPIRATION GALLERY</h2>
@@ -4489,7 +4519,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
       </section>
 
       {/* TRUSTED PARTNERS (LOGOS SIZED UP BY 30% AGAIN - cell h-36, logos h-26/h-24) */}
-      <section id="partners" className="scroll-mt-28 py-16 md:py-20 bg-[#0B2638] text-white">
+      <section id="partners" className="scroll-mt-28 py-16 md:py-20 bg-[#0B2638] text-white cass-reveal">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-10">TRUSTED PARTNERS</span>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12 justify-items-center max-w-4xl mx-auto opacity-95">

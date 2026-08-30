@@ -2403,29 +2403,45 @@ The exterior envelope and surrounding property were entirely reborn to match the
               </div>
 
               {/* REVISED 4 GRID CARDS */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
-                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">01 / PRE-CONSTRUCTION</span>
-                  <h3 className="font-cinzel text-lg font-bold text-[#0B2638]">PRECISE PLANNING & TRANSPARENT PRICING</h3>
-                  <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    By establishing detailed scope documents, selection schedules, transparent pricing and clear communication before site work begins.
-                  </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="p-6 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">01 / PRE-CONSTRUCTION</span>
+                    <h3 className="font-cinzel text-base font-bold text-[#0B2638] leading-snug">DISCIPLINED PLANNING & SCOPE CLARITY</h3>
+                    <p className="text-xs sm:text-sm text-[#24313A]/80 leading-relaxed">
+                      Every successful residential renovation begins with clear pre-construction planning. By establishing detailed scope documents, selection schedules, and fixed permit layouts early, we eliminate mid-project surprises and budget creep.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
-                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">02 / CRAFTSMANSHIP</span>
-                  <h3 className="font-cinzel text-lg font-bold text-[#0B2638]">ONTARIO BUILDING CODE & PERMIT COMPLIANCE</h3>
-                  <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    Our team coordinates each phase of construction to meet applicable Ontario Building Code requirements and municipal inspection milestones.
-                  </p>
+                <div className="p-6 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">02 / CRAFTSMANSHIP</span>
+                    <h3 className="font-cinzel text-base font-bold text-[#0B2638] leading-snug">UNCOMPROMISING QUALITY & MILLWORK</h3>
+                    <p className="text-xs sm:text-sm text-[#24313A]/80 leading-relaxed">
+                      From structural timber roof additions to custom white-oak cabinetry, heated bathroom floors, and quartz island installations, we hold every trade phase to exact Ontario Building Code and high-end finish standards.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="p-8 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm">
-                  <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">03 / RESPECT & AFTERCARE</span>
-                  <h3 className="font-cinzel text-lg font-bold text-[#0B2638]">RESPECTFUL JOB SITES & DEPENDABLE AFTERCARE</h3>
-                  <p className="text-sm text-[#24313A]/80 leading-relaxed">
-                    We use practical site protection, keep active work areas clean, and provide dependable warranty follow-up after project completion.
-                  </p>
+                <div className="p-6 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">03 / ACCOUNTABILITY</span>
+                    <h3 className="font-cinzel text-base font-bold text-[#0B2638] leading-snug">TRANSPARENT CLIENT PORTAL COMMUNICATION</h3>
+                    <p className="text-xs sm:text-sm text-[#24313A]/80 leading-relaxed">
+                      Through our Buildertrend client portal, homeowners enjoy 24/7 access to daily job logs, site photos, selection approvals, and real-time schedules. Communication is direct, documented, and proactive.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-6 bg-[#F4F2EE] rounded-sm space-y-3 border-l-4 border-[#CDAE72] text-left shadow-sm flex flex-col justify-between">
+                  <div className="space-y-3">
+                    <span className="text-xs font-sans font-bold tracking-widest text-[#CDAE72] uppercase block">04 / RESPECT & WARRANTY</span>
+                    <h3 className="font-cinzel text-base font-bold text-[#0B2638] leading-snug">CLEAN JOB SITES & WARRANTY DEFENSE</h3>
+                    <p className="text-xs sm:text-sm text-[#24313A]/80 leading-relaxed">
+                      We respect your sanctuary. Our teams enforce strict dust containment, daily jobsite cleanup, and courteous site management — standing behind all completed work with dedicated homeowner warranty support.
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2451,7 +2467,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">Micheal Smith</h3>
                     </div>
                     <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
-                      Micheal leads Havenridge Build with more than 15 years of residential construction and renovation experience across Kitchener-Waterloo and surrounding communities. As Managing Partner, he guides projects from initial discovery through design coordination, pricing and final completion, ensuring clear scope clarity and reliable project execution.
+                      Bringing a strong background in mechanical engineering, Micheal has led Havenridge Build since 2014. Originally launching his career crafting custom decks and exterior carpentry, his 12 years of technical expertise and hands-on leadership ensure that every design-build addition, structural extension, and whole-home renovation is executed with disciplined project management and elite finishing quality.
                     </p>
                   </div>
                 </div>
@@ -2467,7 +2483,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       <h3 className="font-cinzel text-2xl font-bold text-[#0B2638]">David Woo</h3>
                     </div>
                     <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
-                      David brings hands-on framing experience and formal construction training from Conestoga College's Pre-Apprenticeship Program. As Site Supervisor, he coordinates daily site activities, supports quality control and helps keep projects organized and moving forward.
+                      David brings extensive on-site framing experience alongside formal construction training from Conestoga College's Pre-Apprenticeship Program. After spending two years specializing in structural framing, David joined Havenridge Build four years ago and has advanced into his vital role as Site Supervisor. Currently a second-year carpentry apprentice, his hands-on background ensures that daily jobsite activities are perfectly coordinated, strict building quality standards are maintained, and complex renovations remain flawlessly organized.
                     </p>
                   </div>
                 </div>

@@ -1668,7 +1668,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersonthego" 
+                href="https://www.facebook.com/carpentersotg/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -1678,7 +1678,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/havenridgebuild" 
+                href="https://www.instagram.com/carpentersonthego/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -1688,7 +1688,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.tiktok.com/@havenridgebuild" 
+                href="https://www.tiktok.com/@havenridge.build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="TikTok"
@@ -1698,7 +1698,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <TiktokIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.linkedin.com" 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="LinkedIn"
@@ -1708,7 +1708,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.youtube.com" 
+                href="https://www.youtube.com/@Havenridgebuild" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="YouTube"
@@ -1718,7 +1718,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/carpentersonthego" 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -1728,7 +1728,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
-                href="https://www.yelp.ca" 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Yelp"
@@ -2110,7 +2110,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersonthego" 
+                href="https://www.facebook.com/carpentersotg/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -2120,7 +2120,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/havenridgebuild" 
+                href="https://www.instagram.com/carpentersonthego/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -2130,7 +2130,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.tiktok.com/@havenridgebuild" 
+                href="https://www.tiktok.com/@havenridge.build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="TikTok"
@@ -2140,7 +2140,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <TiktokIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.linkedin.com" 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="LinkedIn"
@@ -2150,7 +2150,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.youtube.com" 
+                href="https://www.youtube.com/@Havenridgebuild" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="YouTube"
@@ -2160,7 +2160,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/carpentersonthego" 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -2170,7 +2170,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
-                href="https://www.yelp.ca" 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Yelp"
@@ -2636,7 +2636,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersonthego" 
+                href="https://www.facebook.com/carpentersotg/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -2646,7 +2646,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/havenridgebuild" 
+                href="https://www.instagram.com/carpentersonthego/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -2656,7 +2656,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.tiktok.com/@havenridgebuild" 
+                href="https://www.tiktok.com/@havenridge.build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="TikTok"
@@ -2666,7 +2666,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <TiktokIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.linkedin.com" 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="LinkedIn"
@@ -2676,7 +2676,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.youtube.com" 
+                href="https://www.youtube.com/@Havenridgebuild" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="YouTube"
@@ -2686,7 +2686,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/carpentersonthego" 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -2696,7 +2696,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
-                href="https://www.yelp.ca" 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Yelp"
@@ -3073,7 +3073,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersonthego" 
+                href="https://www.facebook.com/carpentersotg/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -3083,7 +3083,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/havenridgebuild" 
+                href="https://www.instagram.com/carpentersonthego/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -3093,7 +3093,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.tiktok.com/@havenridgebuild" 
+                href="https://www.tiktok.com/@havenridge.build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="TikTok"
@@ -3103,7 +3103,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <TiktokIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.linkedin.com" 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="LinkedIn"
@@ -3113,7 +3113,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.youtube.com" 
+                href="https://www.youtube.com/@Havenridgebuild" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="YouTube"
@@ -3123,7 +3123,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/carpentersonthego" 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -3133,7 +3133,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
-                href="https://www.yelp.ca" 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Yelp"
@@ -3924,7 +3924,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersonthego" 
+                href="https://www.facebook.com/carpentersotg/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -3934,7 +3934,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/havenridgebuild" 
+                href="https://www.instagram.com/carpentersonthego/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -3944,7 +3944,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.tiktok.com/@havenridgebuild" 
+                href="https://www.tiktok.com/@havenridge.build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="TikTok"
@@ -3954,7 +3954,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <TiktokIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.linkedin.com" 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="LinkedIn"
@@ -3964,7 +3964,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.youtube.com" 
+                href="https://www.youtube.com/@Havenridgebuild" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="YouTube"
@@ -3974,7 +3974,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/carpentersonthego" 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -3984,7 +3984,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
-                href="https://www.yelp.ca" 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Yelp"
@@ -4531,7 +4531,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersonthego" 
+                href="https://www.facebook.com/carpentersotg/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -4541,7 +4541,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/havenridgebuild" 
+                href="https://www.instagram.com/carpentersonthego/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -4551,7 +4551,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <InstagramIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.tiktok.com/@havenridgebuild" 
+                href="https://www.tiktok.com/@havenridge.build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="TikTok"
@@ -4561,7 +4561,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <TiktokIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.linkedin.com" 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="LinkedIn"
@@ -4571,7 +4571,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <LinkedinIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.youtube.com" 
+                href="https://www.youtube.com/@Havenridgebuild" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="YouTube"
@@ -4581,7 +4581,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/carpentersonthego" 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -4591,7 +4591,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
-                href="https://www.yelp.ca" 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Yelp"

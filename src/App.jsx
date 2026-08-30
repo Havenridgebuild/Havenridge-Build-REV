@@ -628,7 +628,7 @@ export default function App() {
       "inspiration/living_spaces/living_custom_4.png",
       "inspiration/living_spaces/living_custom_5.png",
       "inspiration/living_spaces/living_custom_6.jpg",
-      "inspiration/living_spaces/living_custom_7.png",
+      "inspiration/living_spaces/living_custom_7.jpg",
       "inspiration/living_spaces/living_custom_8.png"
     ],
       showcase: [

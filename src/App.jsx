@@ -1052,7 +1052,7 @@ The main level expands into a custom-built gourmet kitchen designed to maximize 
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
       img1: "project_images/Huntingwood_Court/Huntingwood_1.png",
-      img2: "project_images/Huntingwood_Court/Huntingwood_2.png",
+      img2: "project_images/Huntingwood_Court/huntingwood_living_fireplace_media.jpg",
       img3: "project_images/Huntingwood_Court/Huntingwood_3.png",
       overview: `The Huntingwood Court estate stands as a definitive showcase of complex multi-level design-build execution. On the main floor, we executed a major structural reconfiguration by removing a principal load-bearing wall, entirely opening the floor plan into a sprawling chef's kitchen. This gourmet culinary space is anchored by custom forest green shaker-style millwork, a massive central quartz-capped island, a bespoke custom-built range hood enclosure, an integrated dry bar, and a dedicated roll-out coffee cupboard station. Seamlessly flowing from the kitchen is the expansive living room, centered around an ultra-sleek, built-in three-sided linear fireplace media unit flanked by minimalist architectural shelving.
 

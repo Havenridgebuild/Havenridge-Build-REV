@@ -1467,7 +1467,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Additions and ADUs</a>
                     <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Whole Home Renovations</a>
                     <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Unit Conversions</a>
-                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Barrier-Free</a>
+                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Aging-in-Place Renovations</a>
                     <a href="#project-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Kitchen Renovations</a>
                     <a href="#project-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
                     <a href="#project-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Basement Suites</a>
@@ -1940,7 +1940,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Additions and ADUs</a>
                     <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Whole Home Renovations</a>
                     <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Unit Conversions</a>
-                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Barrier-Free</a>
+                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Aging-in-Place Renovations</a>
                     <a href="#project-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Kitchen Renovations</a>
                     <a href="#project-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
                     <a href="#project-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Basement Suites</a>
@@ -2883,7 +2883,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
                     <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
                     <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
-                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Barrier-Free</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
                   </div>
                 </div>
 
@@ -3333,7 +3333,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Additions and ADUs</a>
                     <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Whole Home Renovations</a>
                     <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Unit Conversions</a>
-                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Barrier-Free</a>
+                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Aging-in-Place Renovations</a>
                     <a href="#project-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Kitchen Renovations</a>
                     <a href="#project-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
                     <a href="#project-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Basement Suites</a>
@@ -3769,7 +3769,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                             'Addition',
                             'ADU / In-Law Suite',
                             'Multi-Unit Conversion',
-                            'Accessible / Barrier-Free',
+                            'Accessible & Aging-in-Place Renovations',
                             'Design Only',
                             'Other'
                           ].map((t) => (
@@ -4036,7 +4036,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
                 <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
                 <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
-                <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Barrier-Free</a>
+                <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
               </div>
             </div>
 
@@ -4097,7 +4097,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Additions and ADUs</a>
                   <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Whole Home Renovations</a>
                   <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Unit Conversions</a>
-                  <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Barrier-Free</a>
+                  <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Aging-in-Place Renovations</a>
                   <a href="#project-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Kitchen Renovations</a>
                   <a href="#project-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
                   <a href="#project-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Basement Suites</a>

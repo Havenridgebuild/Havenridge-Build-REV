@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 510" width="600" height="510">
+  <g aria-label="Havenridge H and roof mark">
+    <path fill="#CDAE72" d="m 90,20 h 160 v 18 c -30,0 -43,12 -43,46 v 356 c 0,34 13,42 43,42 v 18 H 90 v -18 c 30,0 43,-8 43,-42 V 84 C 133,50 120,38 90,38 Z m 260,0 h 160 v 18 c -30,0 -43,12 -43,46 v 356 c 0,34 13,42 43,42 v 18 H 350 v -18 c 30,0 43,-8 43,-42 V 84 C 393,50 380,38 350,38 Z" />
+    <path fill="#245ea8" d="M 0,390 300,165 600,390 300,220 Z" />
+  </g>
+</svg>

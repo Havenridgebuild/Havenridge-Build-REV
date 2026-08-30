@@ -1167,7 +1167,7 @@ The exterior transformations are equally spectacular, delivering world-class cur
       standards: "ESA & OBC Compliant, Havenridge Written Warranty",
       certifications: "ESA & OBC Compliant, Havenridge Written Warranty",
       img1: "project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg",
-      img2: "project_images/Moore_Street_State_Flagship/Moore_2.png",
+      img2: "project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg",
       img3: "project_images/Moore_Street_State_Flagship/Moore_3.png",
       overview: `The Moore Street estate stands as the definitive flagship showcase of Havenridge's engineering depth and uncompromising craftsmanship. As only the second owners of this historic 1908 home, we executed a complete top-to-bottom reconstruction that preserved its timeless heritage while embedding world-class modern luxury. Structurally, the project began deep underground, where we remediated significant century-old settling issues by installing structural steel beams in the basement and safely jacking the entire house up two inches to perfect level. We stripped the home to its bones, removed restrictive partition walls to establish an open-concept main floor, updated the infrastructure to a modern 200-amp electrical service, and replaced the entire HVAC system with brand-new custom trunk lines, venting, and a high-efficiency furnace. Every wall and attic cavity was fully insulated to modern code before being finished with precision drywall, mud, tape, and a flawless custom paint package.
 

@@ -711,15 +711,15 @@ export default function App() {
       heroImg: "project_images/moore/1.png",
       overview: "A modern detached garage or workshop should serve as a high-functioning extension of your lifestyle, not just a storage space for tools. Our garages division excels at taking standard outbuildings and completely transforming them into premium, dual-purpose environments. We handle every structural and envelope update required to maximize utility, beginning with pouring new engineered concrete structural pads and reinforcing wall frameworks. We strip away weathered original materials to upgrade the entire exterior envelope—installing high-efficiency modern garage doors, matching windows, low-maintenance premium siding, and integrated roof vents with clean soffit and fascia lines.\n\nInside the workshop footprint, we re-engineer the mechanical and architectural environment for year-round operational comfort. Our teams perform comprehensive insulation upgrades across all walls and attic spaces, cladding the main shop walls in heavy-duty, impact-resistant plywood for versatile utility. To support heavy machinery and modern office equipment, we upgrade electrical capabilities by running dedicated lines to install independent 60-amp sub-panels.\n\nWe excel at slicing out dedicated interior footprints within the structure to craft custom climate-controlled back offices. These executive zones are beautifully finished with durable luxury vinyl plank (LVP) flooring, energy-efficient ductless mini-split heating and cooling units, custom-built cabinetry storage, and integrated dry bar setups. A Havenridge garage transformation seamlessly merges heavy trade capability with refined, quiet workspaces.",
       grid: [
-        "project_images/moore/3.png",
-        "project_images/mcdougall/3.png",
-        "project_images/morningdale/2.png",
-        "project_images/moore/1.png",
-        "project_images/natchez/1.png",
-        "project_images/d_costa/1.png",
-        "project_images/mcdougall/12.png",
-        "project_images/morningdale/10.png"
-      ],
+      "inspiration/garages/garage_custom_1.png",
+      "inspiration/garages/garage_custom_2.png",
+      "inspiration/garages/garage_custom_3.png",
+      "inspiration/garages/garage_custom_4.png",
+      "inspiration/garages/garage_custom_5.png",
+      "inspiration/garages/garage_custom_6.png",
+      "inspiration/garages/garage_custom_7.png",
+      "inspiration/garages/garage_custom_8.png"
+    ],
       showcase: [
         { title: "The Moore Street Flagship Office", caption: "Detached garage exterior transformation & premium interior office with custom cabinets, LVP & mini-split.", img: "project_images/moore/3.png", link: "#project-garages" },
         { title: "McDougall Road Auxiliary Structure", caption: "Detached outbuilding with matching blue-gray siding, roof trim & timber decking.", img: "project_images/mcdougall/3.png", link: "#project-additions" },

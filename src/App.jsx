@@ -1,4 +1,4 @@
-import { wixClient } from "./lib/wixClient";
+import { wixClient, createWixContact } from "./lib/wixClient";
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
@@ -97,7 +97,7 @@ export default function App() {
     setFormQualified(isQual);
     
     try {
-      console.log("Submitting lead data to Wix Headless CRM...", {
+      await createWixContact({
         firstName: formFirstName,
         lastName: formLastName,
         email: formEmail,

@@ -1200,9 +1200,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
         "project_images/Moore_Street_State_Flagship/moore_cedar_timber_sauna.jpg",
         "project_images/Moore_Street_State_Flagship/Moore_8.png",
         "project_images/Moore_Street_State_Flagship/moore_detached_garage_studio.jpg",
-        "project_images/Moore_Street_State_Flagship/Moore_10.png",
-        "project_images/Moore_Street_State_Flagship/Moore_11.png",
-        "project_images/Moore_Street_State_Flagship/Moore_12.png"
+        "project_images/Moore_Street_State_Flagship/moore_mudroom_corridor_bench.jpg",
+        "project_images/Moore_Street_State_Flagship/moore_kitchen_step_stool_built_in.jpg",
+        "project_images/Moore_Street_State_Flagship/moore_appliance_garage_coffee_station.jpg"
       ]
     }
   };

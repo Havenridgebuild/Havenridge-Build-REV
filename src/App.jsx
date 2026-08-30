@@ -960,12 +960,12 @@ Working alongside a professional interior designer, the kitchen was relocated an
         "project_images/Wellington_Street/Wellington_4.jpg",
         "project_images/Wellington_Street/Wellington_5.jpg",
         "project_images/Wellington_Street/Wellington_6.jpg",
-        "project_images/Wellington_Street/Wellington_7.jpg",
+        "project_images/Wellington_Street/wellington_sage_beverage_coffee_bar.jpg",
         "project_images/Wellington_Street/Wellington_8.jpg",
         "project_images/Wellington_Street/Wellington_9.jpg",
         "project_images/Wellington_Street/Wellington_10.jpg",
         "project_images/Wellington_Street/Wellington_11.jpg",
-        "project_images/Wellington_Street/Wellington_12.jpg"
+        "project_images/Wellington_Street/wellington_island_microwave_built_in.jpg"
       ]
     },
             '#project-bathrooms': {

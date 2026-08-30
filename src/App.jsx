@@ -681,15 +681,15 @@ export default function App() {
       heroImg: "project_images/inspiration/inspiration_basements.jpg",
       overview: "Maximizing a home's sub-grade square footage requires specialized knowledge in structural space-planning, rigorous mechanical ventilation, and bulletproof moisture management. Our basements division goes far beyond basic framing and drywall; we specialize in completely restructuring lower levels to fit premium, high-utility lifestyle zones. We handle heavy structural modifications below grade, including the demolition of obsolete masonry fireplaces or old concrete cisterns to reclaim hidden space, converting standard foundations into bright structural walkouts, and roughing in full plumbing manifolds for future secondary kitchenette suites.\n\nEvery basement project we build is engineered for maximum thermal comfort and superior sound dampening. We wrap sub-floor and framing assemblies in advanced insulation systems and sub-grade moisture barriers, laying down continuous premium flooring that withstands lower-level demands. Our teams craft beautifully customized, multi-functional spaces tailored to your family's exact needs. We design and build dedicated home wellness gyms finished with commercial rubber flooring and full-height mirrors, custom timber saunas, independent cold plunge zones, and recessed water bottle filling stations. For entertainment, we construct media recreation rooms centered around sleek linear fireplaces with accent LED lighting, complete with modern wet bars featuring floating open tile shelves and integrated beverage centers. We even specialize in unique finish carpentry like custom indoor children's playhouses and integrated space-saving laundry suites with elevated appliance roll-outs.",
       grid: [
-        "project_images/moore/10.png",
-        "project_images/huntingwood/1.png",
-        "project_images/appledale/2.png",
-        "project_images/knox/1.png",
-        "project_images/huntingwood/11.jpg",
-        "project_images/moore/11.png",
-        "project_images/borkhoff/10.png",
-        "project_images/verhoeve/10.jpg"
-      ],
+      "inspiration/basements/basement_custom_1.png",
+      "inspiration/basements/basement_custom_2.png",
+      "inspiration/basements/basement_custom_3.png",
+      "inspiration/basements/basement_custom_4.png",
+      "inspiration/basements/basement_custom_5.png",
+      "inspiration/basements/basement_custom_6.png",
+      "inspiration/basements/basement_custom_7.png",
+      "inspiration/basements/basement_custom_8.png"
+    ],
       showcase: [
         { title: "The Moore Street Estate Wellness Retreat", caption: "Custom timber sauna, dedicated cold plunge station, fitness gym & herringbone tile bath.", img: "project_images/moore/10.png", link: "#project-garages" },
         { title: "Huntingwood Court Lower Level", caption: "Deep charcoal basement retreat with glass-enclosed training gym & entertainment kitchenette.", img: "project_images/huntingwood/1.png", link: "#project-basements" },

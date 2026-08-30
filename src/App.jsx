@@ -1141,18 +1141,18 @@ The exterior transformations are equally spectacular, delivering world-class cur
       prevHash: "#project-accessibility",
       nextHash: "#project-garages",
       gallery: [
-        "project_images/Morningdale_Crescent/Morningdale_1.png",
-        "project_images/Morningdale_Crescent/Morningdale_2.png",
-        "project_images/Morningdale_Crescent/Morningdale_3.png",
+        "project_images/Morningdale_Crescent/morningdale_kitchen_corner.jpg",
+        "project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg",
+        "project_images/Morningdale_Crescent/morningdale_tile_bathroom_tub.jpg",
         "project_images/Morningdale_Crescent/Morningdale_4.png",
         "project_images/Morningdale_Crescent/Morningdale_5.png",
         "project_images/Morningdale_Crescent/Morningdale_6.png",
         "project_images/Morningdale_Crescent/Morningdale_7.png",
-        "project_images/Morningdale_Crescent/Morningdale_8.png",
+        "project_images/Morningdale_Crescent/morningdale_teal_shower_suite.jpg",
         "project_images/Morningdale_Crescent/Morningdale_9.png",
         "project_images/Morningdale_Crescent/Morningdale_10.png",
         "project_images/Morningdale_Crescent/Morningdale_11.png",
-        "project_images/Morningdale_Crescent/Morningdale_12.png"
+        "project_images/Morningdale_Crescent/morningdale_charcoal_basement_theater.jpg"
       ]
     },
             '#project-garages': {

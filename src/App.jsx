@@ -551,7 +551,7 @@ export default function App() {
     { name: 'Morningdale Crescent — Total Property Overhaul', cat: 'Whole-Home Interior & Exterior', hash: '#project-living-spaces', img: 'project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg' },
     { name: 'Wellington Street — Designer Main Floor Reconstruction', cat: 'Main-Floor Transformation', hash: '#project-kitchens', img: 'project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg' },
     { name: 'Paisley Heights — Heritage Restoration & Modernization', cat: 'Heritage Restoration', hash: '#project-bathrooms', img: 'project_images/paisley/1.png' },
-    { name: 'The Moore Street Estate — 1908 Flagship Restoration', cat: 'Flagship Heritage Restoration', hash: '#project-garages', img: 'project_images/moore/1.png' },
+    { name: 'The Moore Street Estate — 1908 Flagship Restoration', cat: 'Flagship Heritage Restoration', hash: '#project-garages', img: 'project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg' },
   ];
 
     const inspirationItems = [
@@ -1166,7 +1166,7 @@ The exterior transformations are equally spectacular, delivering world-class cur
       scope: "Structural House Jacking (2\" Leveling), Sub-Grade Steel Beam Shoring, 200-Amp Electrical Upgrade & Whole-Home Ductwork/HVAC Overhaul, 3-Bed/1.5-Bath to 4-Bed/2.5-Bath Expansion, 12-Foot Waterfall Butcher Block Island & Solid Quartz Backsplash, 800 sq ft Master Suite with Tray Ceiling & Custom Glass Railings, Premium Basement Wellness Center (Sauna, Cold Plunge, Gym), Cistern Demolition & Walkout Structural Conversion, Detached Office & Shop Garage Overhaul with Ductless Split, 17'x17' Outdoor Timber Pergola & Hardscaping",
       standards: "ESA & OBC Compliant, Havenridge Written Warranty",
       certifications: "ESA & OBC Compliant, Havenridge Written Warranty",
-      img1: "project_images/Moore_Street_State_Flagship/Moore_1.png",
+      img1: "project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg",
       img2: "project_images/Moore_Street_State_Flagship/Moore_2.png",
       img3: "project_images/Moore_Street_State_Flagship/Moore_3.png",
       overview: `The Moore Street estate stands as the definitive flagship showcase of Havenridge's engineering depth and uncompromising craftsmanship. As only the second owners of this historic 1908 home, we executed a complete top-to-bottom reconstruction that preserved its timeless heritage while embedding world-class modern luxury. Structurally, the project began deep underground, where we remediated significant century-old settling issues by installing structural steel beams in the basement and safely jacking the entire house up two inches to perfect level. We stripped the home to its bones, removed restrictive partition walls to establish an open-concept main floor, updated the infrastructure to a modern 200-amp electrical service, and replaced the entire HVAC system with brand-new custom trunk lines, venting, and a high-efficiency furnace. Every wall and attic cavity was fully insulated to modern code before being finished with precision drywall, mud, tape, and a flawless custom paint package.

@@ -740,15 +740,15 @@ export default function App() {
       heroImg: "project_images/inspiration/inspiration_custom_millwork.jpg",
       overview: "The final phase of any elite construction project depends entirely on the precision and quality of its finish carpentry. Our custom millwork division specializes in designing, fabricating, and installing architectural wood details that define the unique character of your home. Whether matching the grand proportions of a century-old estate or crafting clean lines for a sleek modern remodel, we approach finish carpentry with furniture-grade accuracy. We specialize in extensive interior profiling, seamlessly cutting and installing stacked crown moldings, crisp wainscoting paneling, premium shiplap accent walls, and towering 12-inch historic profile baseboards that tie a room together.\n\nOur carpentry expertise blends fine aesthetic style with highly creative functional engineering. We build completely customized, floor-to-ceiling libraries and studies equipped with authentic rolling ladder track systems. In the culinary space, our millwork stretches far beyond standard shelving; we craft hidden storage features built directly into the cabinet architecture—including overhead refrigerator pull-out trays, integrated hidden toe-kick drawers, slide-out spice racks, custom-finished range hood boxes, and custom drop-level quartz-capped dining island tables. We meticulously preserve historic integrity by restoring original solid wood doors, matching custom-stained oak handrails to premium floor finishes, and flawlessly integrating modern, flush-mount Aria vents directly into your flooring for a perfectly seamless finish.",
       grid: [
-        "project_images/moore/2.png",
-        "project_images/huntingwood/10.png",
-        "project_images/wellington/1.png",
-        "project_images/appledale/1.png",
-        "project_images/knox/10.png",
-        "project_images/mcdougall/10.png",
-        "project_images/borkhoff/11.png",
-        "project_images/verhoeve/11.jpg"
-      ],
+      "inspiration/millwork/millwork_custom_1.png",
+      "inspiration/millwork/millwork_custom_2.png",
+      "inspiration/millwork/millwork_custom_3.png",
+      "inspiration/millwork/millwork_custom_4.png",
+      "inspiration/millwork/millwork_custom_5.png",
+      "inspiration/millwork/millwork_custom_6.png",
+      "inspiration/millwork/millwork_custom_7.png",
+      "inspiration/millwork/millwork_custom_8.png"
+    ],
       showcase: [
         { title: "The Moore Street Historic Millwork", caption: "12-inch historic baseboards, wall paneling, built-in library & hidden kitchen drawers.", img: "project_images/moore/2.png", link: "#project-garages" },
         { title: "Huntingwood Court Oak Library", caption: "Stained-oak floor-to-ceiling bookcase with authentic sliding rolling ladder.", img: "project_images/huntingwood/10.png", link: "#project-basements" },
@@ -770,15 +770,15 @@ export default function App() {
       heroImg: "project_images/d_costa/exterior_facade_stone_driveway.jpg",
       overview: "An exceptional property transformation must be as durable and visually commanding on the outside as it is luxurious on the inside. Our exteriors division handles everything required to completely rewrite your home's curb appeal and outdoor living utility, executing both heavy civil landscaping and complex structural carpentry. We specialize in completely updating weathered exterior envelopes—stripping old materials to install high-efficiency window replacements, modern insulated garage doors, and low-maintenance premium vertical board-and-batten siding with clean, updated soffit, fascia, and oversized eavestrough systems.\n\nMoving onto the grounds, our teams engineer multi-level interlocking stone masonry landscapes, crafting robust retaining walls, tiered front entryways, and wide stone driveways equipped with low-voltage ambient LED ledge lighting for stunning night visibility. In the backyard, we design and build full-scale custom entertainment spaces meant to act as true extensions of the home. We build massive, multi-tiered premium pressure-treated timber decks complete with under-soffit LED pot lighting, built-in horizontal privacy screening, sleek modern metal railing panels, and limestone flagstone landing pads. From crafting artisan-engineered 17'x17' structural timber pergolas over heavy concrete patios to building matching detached accessory structures and custom perimeter fencing, we build outdoor spaces optimized for style and engineered to withstand the elements.",
       grid: [
-        "project_images/morningdale/1.png",
-        "project_images/moore/1.png",
-        "project_images/mcdougall/1.png",
-        "project_images/d_costa/exterior_facade_stone_driveway.jpg",
-        "project_images/mcdougall/3.png",
-        "project_images/morningdale/2.png",
-        "project_images/moore/3.png",
-        "project_images/knox/1.png"
-      ],
+      "inspiration/exteriors/exteriors_custom_1.png",
+      "inspiration/exteriors/exteriors_custom_2.png",
+      "inspiration/exteriors/exteriors_custom_3.png",
+      "inspiration/exteriors/exteriors_custom_4.png",
+      "inspiration/exteriors/exteriors_custom_5.png",
+      "inspiration/exteriors/exteriors_custom_6.png",
+      "inspiration/exteriors/exteriors_custom_7.png",
+      "project_images/Moore_Street_State_Flagship/Moore_1.jpg"
+    ],
       showcase: [
         { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "project_images/morningdale/1.png", link: "#project-living-spaces" },
         { title: "The Moore Street Estate Pergola & Envelope", caption: "17'x17' outdoor timber pergola, concrete pad & full exterior siding/window overhaul.", img: "project_images/moore/1.png", link: "#project-garages" },

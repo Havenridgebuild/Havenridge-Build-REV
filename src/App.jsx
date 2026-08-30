@@ -652,15 +652,15 @@ export default function App() {
       heroImg: "project_images/inspiration/inspiration_additions.jpg",
       overview: "Executing a successful home addition requires extensive architectural foresight, strict engineering discipline, and a deep understanding of municipal zoning bylaws. Our additions division specializes in expanding living footprints where standard renovations cannot, taking projects completely from the excavation phase up to the final roof peak. Whether constructing a lateral main-floor extension, building a detached Accessory Dwelling Unit (ADU), or completely engineering a brand-new second-story vertical addition with striking, high-pitched A-frame gables, we seamlessly stitch new structural framing into your existing home.\n\nOur additions are built from the ground up to protect your investment and optimize daily living. We begin with precision excavation around property perimeters, implementing advanced sub-grade waterproofing membranes and commercial-grade drainage lines to guarantee structural longevity. We handle all complex structural steel shoring and timber framing, building out grand vaulted ceiling spaces, large-format window openings, and custom timber-framed entry porticos with exposed truss detailing. By completely modernizing mechanical, plumbing, and electrical lines to feed the new square footage, we deliver fully permitted, energy-efficient expansions that blend perfectly with your home's original character.",
       grid: [
-        "project_images/mcdougall/1.png",
-        "project_images/morningdale/1.png",
-        "project_images/moore/1.png",
-        "project_images/mcdougall/3.png",
-        "project_images/morningdale/2.png",
-        "project_images/d_costa/exterior_facade_stone_driveway.jpg",
-        "project_images/mcdougall/11.png",
-        "project_images/natchez/1.png"
-      ],
+      "inspiration/additions/addition_custom_1.png",
+      "inspiration/additions/addition_custom_2.png",
+      "inspiration/additions/addition_custom_3.png",
+      "inspiration/additions/addition_custom_4.png",
+      "inspiration/additions/addition_custom_5.png",
+      "inspiration/additions/addition_custom_6.png",
+      "inspiration/additions/addition_custom_7.png",
+      "inspiration/additions/addition_custom_8.png"
+    ],
       showcase: [
         { title: "McDougall Road Vertical Addition", caption: "Second-story vertical addition, high-pitched A-frame gables & custom timber-framed front portico.", img: "project_images/mcdougall/1.png", link: "#project-additions" },
         { title: "Morningdale Crescent Structural Expansion", caption: "Seamless roofline modifications & heavy structural beam integrations.", img: "project_images/morningdale/1.png", link: "#project-living-spaces" },

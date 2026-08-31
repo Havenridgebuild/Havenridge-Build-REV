@@ -1,7 +1,7 @@
 import { createClient, ApiKeyStrategy } from "@wix/sdk";
 import { contacts } from "@wix/crm";
 
-const WIX_API_KEY = process.env.WIX_API_KEY || "IST.eyJraWQiOiJQb3pIX2FDMiIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1wiaWRcIjpcIjk1ZGRjMzkyLTBhOGMtNDI3Zi05N2JkLTMxYTA4MTAwYTJhMFwiLFwiaWRlbnRpdHlcIjp7XCJ0eXBlXCI6XCJhcHBsaWNhdGlvblwiLFwiaWRcIjpcIjZlNWNjNGVjLTMyODktNDAzOC05M2I6LTllYTJjYWMzZDliOVwifSxcInRlbmFudFwiOntcInR5cGVcIjpcImFjY291bnRcIixcImlkXCI6XCJkYjMzOGNmOS0yMGYyLTRkZjAtYWNmNS0wNDZjNjE5ZWY1OTZcIn19IiwiaWF0IjoxNzg4MTM5MjA5fQ.mEMU8wV7e12HEUOICPzQv1p2xBCGFS9svMa9JcuM-jnAIQQA30qbP7vV2cVqRZO60rXkPuBOB4J8TetCyfRQ-Nj23gvqxHl78IGCVbgIEhq1iU5LcFFm_1JuO_XhQDF8H52MU02LmalC5svLlwnb4tk92UttJmbJI2ZdcPHPdkigfqXePW1L6NeFghkjSq0BDnWn11DoW1LPNtYMVkd6z-1Nwl_PhW6OoV7EOIBNmK4gR1ovjci95fSLq8z3tVAsJtooGV642ndCGKAoJBKOEMZcNql1AvS0NxIPOe3z4_8q7bbiA5xiUIHxKnc3Xar2QFKd9AVL96eXprByINDCMA";
+const WIX_API_KEY = process.env.WIX_API_KEY || "IST.eyJraWQiOiJQb3pIX2FDMiIsImFsZyI6IlJTMjU2In0.eyJkYXRhIjoie1wiaWRcIjpcIjk1ZGRjMzkyLTBhOGMtNDI3Zi05N2JkLTMxYTA4MTAwYTJhMFwiLFwiaWRlbnRpdHlcIjp7XCJ0eXBlXCI6XCJhcHBsaWNhdGlvblwiLFwiaWRcIjpcIjZlNWNjNGVjLTMyODktNDAzOC05M2I2LTllYTJjYWMzZDliOVwifSxcInRlbmFudFwiOntcInR5cGVcIjpcImFjY291bnRcIixcImlkXCI6XCJkYjMzOGNmOS0yMGYyLTRkZjAtYWNmNS0wNDZjNjE5ZWY1OTZcIn19IiwiaWF0IjoxNzg4MTM5MjA5fQ.mEMU8wV7e12HEUOICPzQv1p2xBCGFS9svMa9JcuM-jnAIQQA30qbP7vV2cVqRZO60rXkPuBOB4J8TetCyfRQ-Nj23gvqxHl78IGCVbgIEhq1iU5LcFFm_1JuO_XhQDF8H52MU02LmalC5svLlwnb4tk92UttJmbJI2ZdcPHPdkigfqXePW1L6NeFghkjSq0BDnWn11DoW1LPNtYMVkd6z-1Nwl_PhW6OoV7EOIBNmK4gR1ovjci95fSLq8z3tVAsJtooGV642ndCGKAoJBKOEMZcNql1AvS0NxIPOe3z4_8q7bbiA5xiUIHxKnc3Xar2QFKd9AVL96eXprByINDCMA";
 const WIX_SITE_ID = process.env.WIX_SITE_ID || "bcc24467-7d67-4dc3-a70c-75cc5c6467fb";
 
 const wixClient = createClient({
@@ -98,24 +98,8 @@ export default async function handler(req, res) {
       contactPayload.jobTitle = `Details: ${description.substring(0, 50)}`;
     }
 
-    // Populate Custom Contact Extended Fields in Wix CRM with fallback
-    let response;
-    try {
-      const extendedItems = {};
-      if (investment) extendedItems['custom.investment-budget-duklgyyhumeornuyp'] = String(investment);
-      if (typesStr) extendedItems['custom.project-scope-gcsyqbfmpsmbmfmxtnhdw'] = typesStr;
-      if (description) extendedItems['custom.project-description-znqhztotridmnzg'] = String(description);
-
-      if (Object.keys(extendedItems).length > 0) {
-        contactPayload.extendedFields = { items: extendedItems };
-      }
-      response = await wixClient.contacts.createContact(contactPayload);
-    } catch (exErr) {
-      console.warn("Retrying without custom extended fields...", exErr?.message);
-      delete contactPayload.extendedFields;
-      response = await wixClient.contacts.createContact(contactPayload);
-    }
-
+    console.log("Submitting lead payload to Wix CRM...", contactPayload);
+    const response = await wixClient.contacts.createContact(contactPayload);
     console.log("✅ Wix CRM Lead Created Successfully:", response?.contact?._id);
 
     return res.status(200).json({

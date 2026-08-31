@@ -88,14 +88,33 @@ export default async function handler(req, res) {
       contactPayload.company = `Budget: ${investment}`;
     }
 
-    if (projectTypes && projectTypes.length > 0) {
-      const typesStr = Array.isArray(projectTypes) ? projectTypes.join(", ") : String(projectTypes);
+    const typesStr = projectTypes && projectTypes.length > 0
+      ? (Array.isArray(projectTypes) ? projectTypes.join(", ") : String(projectTypes))
+      : "";
+
+    if (typesStr) {
       contactPayload.jobTitle = `Project: ${typesStr}`;
     } else if (description) {
       contactPayload.jobTitle = `Details: ${description.substring(0, 50)}`;
     }
 
-    console.log("Submitting full lead payload to Wix CRM...", contactPayload);
+    // Populate Custom Contact Extended Fields in Wix CRM
+    const extendedItems = {};
+    if (investment) {
+      extendedItems['custom.investment-budget-duklgyyhumeornuyp'] = String(investment);
+    }
+    if (typesStr) {
+      extendedItems['custom.project-scope-gcsyqbfmpsmbmfmxtnhdw'] = typesStr;
+    }
+    if (description) {
+      extendedItems['custom.project-description-znqhztotridmnzg'] = String(description);
+    }
+
+    if (Object.keys(extendedItems).length > 0) {
+      contactPayload.extendedFields = { items: extendedItems };
+    }
+
+    console.log("Submitting full lead payload to Wix CRM with Custom Extended Fields...", contactPayload);
     const response = await wixClient.contacts.createContact(contactPayload);
     console.log("✅ Wix CRM Lead Created Successfully:", response?.contact?._id);
 

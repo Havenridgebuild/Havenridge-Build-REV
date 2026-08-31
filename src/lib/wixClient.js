@@ -17,7 +17,7 @@ export const wixClient = createClient({
 });
 
 /**
- * Submit a lead inquiry directly to Wix CRM Contacts
+ * Submit a lead inquiry directly to Wix CRM Contacts via live Vercel API Route
  */
 export async function createWixLeadContact(leadData = {}) {
   const contactPayload = {
@@ -36,24 +36,40 @@ export async function createWixLeadContact(leadData = {}) {
   try {
     console.log("Submitting lead payload to Wix CRM...", contactPayload);
 
-    // 1. Try serverless API endpoint first (handles server-side Wix CRM creation without browser CORS issues)
-    const apiEndpoint = "/api/contact";
+    // 1. Send to live Vercel serverless API endpoint (creates contact in Wix CRM server-side with zero CORS issues)
+    const vercelEndpoint = "https://havenridge-build.vercel.app/api/contact";
     try {
-      const apiResponse = await fetch(apiEndpoint, {
+      const apiResponse = await fetch(vercelEndpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactPayload),
       });
       if (apiResponse.ok) {
         const data = await apiResponse.json();
-        console.log("✅ Wix CRM Lead Created via Serverless API Route:", data);
+        console.log("✅ Wix CRM Lead Created via Vercel API Route:", data);
         return data;
       }
     } catch (apiErr) {
-      console.warn("API route fetch attempt:", apiErr?.message);
+      console.warn("Vercel API route fetch attempt:", apiErr?.message);
     }
 
-    // 2. Direct Wix SDK call fallback
+    // 2. Fallback to relative /api/contact endpoint
+    try {
+      const localResponse = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(contactPayload),
+      });
+      if (localResponse.ok) {
+        const data = await localResponse.json();
+        console.log("✅ Wix CRM Lead Created via Local API Route:", data);
+        return data;
+      }
+    } catch (localErr) {
+      console.warn("Local API route fetch attempt:", localErr?.message);
+    }
+
+    // 3. Direct Wix SDK call fallback
     const response = await wixClient.contacts.createContact({
       name: { first: contactPayload.firstName, last: contactPayload.lastName },
       primaryInfo: {

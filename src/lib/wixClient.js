@@ -27,27 +27,23 @@ export async function createWixLeadContact({
   source = "Website Contact Form"
 }) {
   try {
-    const contactInfo = {
-      name: {
-        first: firstName,
-        last: lastName,
-      },
-      emails: email ? { items: [{ email, tag: "MAIN" }] } : undefined,
-      phones: phone ? { items: [{ phone, tag: "MOBILE" }] } : undefined,
-      extendedFields: {
-        items: {
-          "custom.project-type": projectType,
-          "custom.lead-source": source,
-          "custom.notes": notes,
-        }
+    const contactPayload = {
+      info: {
+        name: {
+          first: firstName || "Website",
+          last: lastName || "Lead",
+        },
+        emails: email ? { items: [{ email, tag: "MAIN" }] } : undefined,
+        phones: phone ? { items: [{ phone, tag: "MOBILE" }] } : undefined,
       }
     };
 
-    const response = await wixClient.contacts.createContact({ info: contactInfo });
+    console.log("Submitting lead to Wix CRM...", contactPayload);
+    const response = await wixClient.contacts.createContact(contactPayload);
     console.log("✅ Wix CRM Lead Created Successfully:", response);
     return response;
   } catch (error) {
-    console.warn("⚠️ Wix CRM Lead Capture Notice:", error?.message || error);
+    console.error("⚠️ Wix CRM Lead Error (HTTP 403 - Check Headless Permissions in Wix Dashboard):", error?.message || error);
     return null;
   }
 }

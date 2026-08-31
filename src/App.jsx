@@ -1,3 +1,4 @@
+import { createWixLeadContact } from "./lib/wixClient";
 import { wixClient, createWixContact } from "./lib/wixClient";
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
@@ -378,11 +379,26 @@ export default function App() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    createWixLeadContact({
+      firstName: formData.firstName || 'Website',
+      lastName: formData.lastName || 'Lead',
+      email: formData.email || '',
+      phone: formData.phone || '',
+      projectType: formData.projectType || 'General Renovation',
+      notes: formData.notes || '',
+      source: 'Contact Page Qualification Form'
+    });
     setFormSubmitted(true);
   };
 
   const handleNewsletterSubmit = (e) => {
     e.preventDefault();
+    createWixLeadContact({
+      firstName: 'Newsletter',
+      lastName: 'Subscriber',
+      email: e.target.elements?.email?.value || '',
+      source: 'Footer Newsletter Subscription'
+    });
     setNewsletterSubmitted(true);
   };
 

@@ -12,6 +12,8 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.3.3",
     "@tailwindcss/vite": "^4.3.3",
+    "@wix/contacts": "^1.0.27",
+    "@wix/crm": "^1.0.1616",
     "@wix/data": "^1.0.513",
     "@wix/members": "^1.0.515",
     "@wix/sdk": "^1.21.16",

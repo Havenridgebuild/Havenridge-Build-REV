@@ -1,10 +1,12 @@
+import { faqCategories, faqData } from "./data/faqData";
+import { guideCategories, guidesData } from "./data/guidesData";
 import { createWixLeadContact } from "./lib/wixClient";
 import { wixClient, createWixContact } from "./lib/wixClient";
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { CheckCircle2, ArrowLeft, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Star, MessageSquare, Ruler, ClipboardCheck, Smartphone, ShieldCheck, Laptop, Menu, X } from 'lucide-react';
+import { CheckCircle2, ArrowLeft, ArrowRight, ChevronDown, ChevronUp, ChevronLeft, ChevronRight, Star, MessageSquare, Ruler, ClipboardCheck, Smartphone, ShieldCheck, Laptop, Menu, X, HelpCircle, FileText, Layers } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -259,6 +261,12 @@ export default function App() {
 
   const [currentPath, setCurrentPath] = useState(window.location.hash || '#home');
   const [selectedBlogArticle, setSelectedBlogArticle] = useState(null);
+  const [selectedFaqCategory, setSelectedFaqCategory] = useState("all");
+  const [faqSearchQuery, setFaqSearchQuery] = useState("");
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
+  const [selectedGuideId, setSelectedGuideId] = useState(null);
+  const [selectedGuideCategory, setSelectedGuideCategory] = useState("all");
+
 
   // Safari & WebKit cross-browser compatible offset top helper
   const getElementOffsetTop = (el) => {
@@ -1266,55 +1274,116 @@ The exterior envelope and surrounding property were entirely reborn to match the
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         
         {/* NAV HEADER */}
-        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
-          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#home" className="flex items-center">
-              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
-            </a>
-            <div className="flex items-center gap-4">
-              <a href="#inspiration-section" className="text-xs font-sans font-bold tracking-widest uppercase text-[#CDAE72] hover:text-white transition-colors flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" /> BACK TO INSPIRATION GALLERY
+        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
               <button 
-                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-[#CDAE72] hover:text-white transition-colors cursor-pointer"
-                aria-label="Toggle Navigation Menu"
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
               >
                 {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </button>
             </div>
-          </div>
 
-          {/* MOBILE NAVIGATION DRAWER */}
-          {mobileMenuOpen && (
-            <div className="md:hidden fixed inset-x-0 top-20 bottom-0 bg-[#0B2638] z-50 overflow-y-auto border-t border-[#CDAE72]/20 flex flex-col justify-between p-6">
-              <div className="space-y-6">
-                <div className="space-y-2 border-b border-white/10 pb-4">
-                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.25em] uppercase block">INSPIRATION DIVISIONS</span>
-                  <div className="grid grid-cols-1 gap-2.5 pt-1 text-sm font-semibold">
-                    <a href="#inspiration-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
-                    <a href="#inspiration-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Gourmet Kitchens</a>
-                    <a href="#inspiration-living-spaces" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Structural Living Spaces</a>
-                    <a href="#inspiration-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Story Additions</a>
-                    <a href="#inspiration-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Sub-Grade Basements</a>
-                    <a href="#inspiration-garages" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Executive Workshops & Garages</a>
-                    <a href="#inspiration-millwork" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Custom Millwork & Trim</a>
-                    <a href="#inspiration-exteriors" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Exteriors & Hardscaping</a>
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
-                <div className="space-y-4 text-sm font-bold font-cinzel tracking-wider uppercase border-b border-white/10 pb-6">
-                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Home</a>
-                  <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] hover:text-white transition-colors">Inspiration Gallery</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Contact Us</a>
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
                 </div>
               </div>
-            </div>
-          )}
-        </nav>
+            )}
+          </nav>
 
         {/* HERO IMAGE */}
         <section className="relative w-full h-[45vh] md:h-[55vh] overflow-hidden bg-[#0B2638]">
@@ -1488,62 +1557,101 @@ The exterior envelope and surrounding property were entirely reborn to match the
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         
         {/* NAV HEADER */}
-        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
-          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#home" className="flex items-center">
-              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
-            </a>
-            <div className="flex items-center gap-4">
-              <a 
-                href="#projects-page" 
-                onClick={(e) => {
-                  e.preventDefault();
-                  if (window.history.length > 1) {
-                    window.history.back();
-                  } else {
-                    window.location.hash = '#projects-page';
-                  }
-                }}
-                className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2 cursor-pointer"
-              >
-                <ArrowLeft className="w-4 h-4" /> GO BACK
+        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
               <button 
-                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-[#CDAE72] hover:text-white transition-colors cursor-pointer"
-                aria-label="Toggle Navigation Menu"
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
               >
                 {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </button>
             </div>
-          </div>
 
-          {/* MOBILE NAVIGATION DRAWER */}
-          {mobileMenuOpen && (
-            <div className="md:hidden fixed inset-x-0 top-20 bottom-0 bg-[#0B2638] z-50 overflow-y-auto border-t border-[#CDAE72]/20 flex flex-col justify-between p-6">
-              <div className="space-y-6">
-                <div className="space-y-2 border-b border-white/10 pb-4">
-                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.25em] uppercase block">SERVICES & SHOWCASES</span>
-                  <div className="grid grid-cols-1 gap-2.5 pt-1 text-sm font-semibold">
-                    <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Additions and ADUs</a>
-                    <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Whole Home Renovations</a>
-                    <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Unit Conversions</a>
-                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Aging-in-Place Renovations</a>
-                    <a href="#project-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Kitchen Renovations</a>
-                    <a href="#project-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
-                    <a href="#project-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Basement Suites</a>
-                    <a href="#project-millwork" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Custom Millwork</a>
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
-                </div>
-
-                <div className="space-y-4 text-sm font-bold font-cinzel tracking-wider uppercase border-b border-white/10 pb-6">
-                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">About Us</a>
-                  <a href="#blog-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Renovation Blog</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] hover:text-white transition-colors">Contact Us</a>
                 </div>
 
                 <div>
@@ -1557,14 +1665,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   </a>
                 </div>
               </div>
-
-              <div className="pt-6 border-t border-white/10 text-center space-y-1 text-xs text-white/70">
-                <p className="font-semibold text-white">Havenridge Build | Cambridge & Waterloo Region</p>
-                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | Info@HavenridgeBuild.com</p>
-              </div>
-            </div>
-          )}
-        </nav>
+            )}
+          </nav>
 
         {/* HERO IMAGE */}
         <section className="relative w-full h-[55vh] md:h-[65vh] overflow-hidden bg-[#0B2638]">
@@ -1826,25 +1928,115 @@ The exterior envelope and surrounding property were entirely reborn to match the
     return (
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
-          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#home" className="flex items-center">
-              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
-            </a>
-            <div className="flex items-center gap-4">
-              <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" /> BACK TO HOME
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
               <button 
-                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-[#CDAE72] hover:text-white transition-colors cursor-pointer"
-                aria-label="Toggle Navigation Menu"
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
               >
                 {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </button>
             </div>
-          </div>
-        </nav>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
 
         <section className="bg-[#0B2638] text-white py-16 text-center border-b border-[#CDAE72]/20">
           <div className="max-w-4xl mx-auto px-6 space-y-3">
@@ -1887,17 +2079,115 @@ The exterior envelope and surrounding property were entirely reborn to match the
     return (
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
-          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#home" className="flex items-center">
-              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
-            </a>
-            <div className="flex items-center gap-4">
-              <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" /> BACK TO HOME
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
             </div>
-          </div>
-        </nav>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
 
         <section className="bg-[#0B2638] text-white py-16 text-center border-b border-[#CDAE72]/20">
           <div className="max-w-4xl mx-auto px-6 space-y-3">
@@ -1972,51 +2262,101 @@ The exterior envelope and surrounding property were entirely reborn to match the
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         
         {/* NAV HEADER */}
-        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
-          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#home" className="flex items-center">
-              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
-            </a>
-            <div className="flex items-center gap-4">
-              <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" /> BACK TO HOME
+        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
               <button 
-                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-[#CDAE72] hover:text-white transition-colors cursor-pointer"
-                aria-label="Toggle Navigation Menu"
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
               >
                 {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </button>
             </div>
-          </div>
 
-          {/* MOBILE NAVIGATION DRAWER */}
-          {mobileMenuOpen && (
-            <div className="md:hidden fixed inset-x-0 top-20 bottom-0 bg-[#0B2638] z-50 overflow-y-auto border-t border-[#CDAE72]/20 flex flex-col justify-between p-6">
-              <div className="space-y-6">
-                <div className="space-y-2 border-b border-white/10 pb-4">
-                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.25em] uppercase block">SERVICES & SHOWCASES</span>
-                  <div className="grid grid-cols-1 gap-2.5 pt-1 text-sm font-semibold">
-                    <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Additions and ADUs</a>
-                    <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Whole Home Renovations</a>
-                    <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Unit Conversions</a>
-                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Aging-in-Place Renovations</a>
-                    <a href="#project-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Kitchen Renovations</a>
-                    <a href="#project-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
-                    <a href="#project-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Basement Suites</a>
-                    <a href="#project-millwork" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Custom Millwork</a>
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
-                </div>
-
-                <div className="space-y-4 text-sm font-bold font-cinzel tracking-wider uppercase border-b border-white/10 pb-6">
-                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">About Us</a>
-                  <a href="#blog-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Renovation Blog</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] hover:text-white transition-colors">Contact Us</a>
                 </div>
 
                 <div>
@@ -2030,14 +2370,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   </a>
                 </div>
               </div>
-
-              <div className="pt-6 border-t border-white/10 text-center space-y-1 text-xs text-white/70">
-                <p className="font-semibold text-white">Havenridge Build | Cambridge & Waterloo Region</p>
-                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | Info@HavenridgeBuild.com</p>
-              </div>
-            </div>
-          )}
-        </nav>
+            )}
+          </nav>
 
         {/* HERO SPLIT IMAGE BANNER (CASS STYLE) */}
         <section className="grid grid-cols-2 gap-2 h-[250px] sm:h-[350px] overflow-hidden bg-[#0B2638]">
@@ -2405,29 +2739,113 @@ The exterior envelope and surrounding property were entirely reborn to match the
           {/* NAV HEADER */}
           <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-              <a href="#home" className="flex items-center group">
+              <a href="#home" className="flex items-center group shrink-0">
                 <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
-              {/* Desktop Nav */}
-              <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase text-white/90">
-                <a href="#services" className="hover:text-[#CDAE72] transition-colors">Services</a>
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
                 <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
-                <a href="#projects-page" className="hover:text-[#CDAE72] transition-colors">Our Work</a>
-                <a href="#about-page" className="text-[#CDAE72] font-bold border-b border-[#CDAE72] pb-0.5">About</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
                 <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
-                <a href="#blog-page" className="hover:text-[#CDAE72] transition-colors">Blog</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
                 <a 
                   href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-[#CDAE72] hover:text-white transition-colors"
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
                 >
                   Client Portal
                 </a>
               </div>
-              <div className="w-12 hidden md:block"></div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
             </div>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
           </nav>
 
           {/* NEW HERO SECTION (USER LIKED) */}
@@ -2923,25 +3341,36 @@ The exterior envelope and surrounding property were entirely reborn to match the
   }
 
 
-  if (currentPath === '#blog-page') {
+    // ==========================================
+  // FREQUENTLY ASKED QUESTIONS PAGE (#resources-faq)
+  // ==========================================
+  if (['#resources-faq', '#faq'].includes(currentPath)) {
+    const filteredFaqs = faqData.filter(faq => {
+      const matchesCategory = selectedFaqCategory === 'all' || faq.category === selectedFaqCategory;
+      const matchesQuery = !faqSearchQuery || 
+        faq.question.toLowerCase().includes(faqSearchQuery.toLowerCase()) || 
+        faq.answer.toLowerCase().includes(faqSearchQuery.toLowerCase());
+      return matchesCategory && matchesQuery;
+    });
+
     return (
       <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
         <div>
-          {/* HEADER NAV */}
+          {/* STICKY HEADER NAV */}
           <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-              <a href="#home" className="flex items-center group">
+              <a href="#home" className="flex items-center group shrink-0">
                 <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
-              {/* Nav list with dropdowns */}
-              <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase text-white/90">
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
                   <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
-                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
                     <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
                     <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
                     <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
@@ -2957,7 +3386,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
-                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
                     <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
                     <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
                   </div>
@@ -2969,22 +3398,833 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 {/* 5. Contact */}
                 <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
 
-                {/* 6. Blog */}
-                <a href="#blog-page" className="text-[#CDAE72] font-bold border-b border-[#CDAE72] pb-0.5">Blog</a>
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
 
                 {/* 7. Client Portal */}
                 <a 
                   href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="text-[#CDAE72] hover:text-white transition-colors"
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
                 >
                   Client Portal
                 </a>
               </div>
 
-              <div className="w-12 hidden md:block"></div>
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
             </div>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
+
+          {/* HERO BANNER */}
+          <section className="bg-[#0B2638] text-white py-16 sm:py-20 border-b border-[#CDAE72]/20 relative overflow-hidden">
+            <div className="max-w-5xl mx-auto px-6 text-center space-y-4">
+              <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">
+                HAVENRIDGE RENOVATION RESOURCES
+              </span>
+              <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+                Frequently Asked Questions
+              </h1>
+              <p className="text-white/80 font-light max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+                Clear, transparent answers about our design-build process, budgets, permits, project fit, and client expectations before you commit.
+              </p>
+            </div>
+          </section>
+
+          {/* MAIN CONTENT AREA */}
+          <main className="max-w-5xl mx-auto px-6 py-12 sm:py-16 space-y-10">
+            {/* SEARCH & CATEGORY FILTER BAR */}
+            <div className="space-y-6">
+              {/* SEARCH INPUT */}
+              <div className="relative max-w-xl mx-auto">
+                <input 
+                  type="text" 
+                  placeholder="Search questions by keyword (e.g. permits, warranty, budget, timeline)..." 
+                  value={faqSearchQuery}
+                  onChange={(e) => setFaqSearchQuery(e.target.value)}
+                  className="w-full bg-white border border-[#0B2638]/20 rounded-sm py-3.5 pl-12 pr-4 text-sm text-[#24313A] placeholder-[#24313A]/50 shadow-sm focus:outline-none focus:border-[#CDAE72]"
+                />
+                <HelpCircle className="w-5 h-5 text-[#CDAE72] absolute left-4 top-4" />
+                {faqSearchQuery && (
+                  <button onClick={() => setFaqSearchQuery('')} className="absolute right-4 top-3.5 text-xs text-[#24313A]/60 hover:text-[#0B2638] font-bold">
+                    Clear
+                  </button>
+                )}
+              </div>
+
+              {/* CATEGORY FILTER PILLS */}
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+                <button 
+                  onClick={() => setSelectedFaqCategory('all')}
+                  className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm transition-all border ${
+                    selectedFaqCategory === 'all' 
+                      ? 'bg-[#0B2638] text-[#CDAE72] border-[#0B2638] shadow-md' 
+                      : 'bg-white text-[#24313A] border-[#0B2638]/15 hover:border-[#CDAE72]'
+                  }`}
+                >
+                  All Questions ({faqData.length})
+                </button>
+                {faqCategories.map(cat => (
+                  <button 
+                    key={cat.id}
+                    onClick={() => setSelectedFaqCategory(cat.id)}
+                    className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm transition-all border ${
+                      selectedFaqCategory === cat.id 
+                        ? 'bg-[#0B2638] text-[#CDAE72] border-[#0B2638] shadow-md' 
+                        : 'bg-white text-[#24313A] border-[#0B2638]/15 hover:border-[#CDAE72]'
+                    }`}
+                  >
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* ACCORDION FAQ LIST */}
+            <div className="space-y-4">
+              {filteredFaqs.length > 0 ? (
+                filteredFaqs.map((faq, index) => {
+                  const isOpen = openFaqIndex === index;
+                  return (
+                    <div 
+                      key={index} 
+                      className="bg-white border border-[#0B2638]/10 rounded-sm shadow-sm hover:border-[#CDAE72]/50 transition-all overflow-hidden"
+                    >
+                      <button 
+                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                        className="w-full text-left px-6 py-5 flex justify-between items-center gap-4 hover:bg-[#F4F2EE]/50 transition-colors"
+                        aria-expanded={isOpen}
+                      >
+                        <span className="font-cinzel text-base sm:text-lg font-bold text-[#0B2638]">
+                          {faq.question}
+                        </span>
+                        <span className="w-8 h-8 rounded-full bg-[#F4F2EE] text-[#0B2638] flex items-center justify-center shrink-0 border border-[#0B2638]/10">
+                          {isOpen ? <ChevronUp className="w-4 h-4 text-[#CDAE72]" /> : <ChevronDown className="w-4 h-4 text-[#0B2638]" />}
+                        </span>
+                      </button>
+
+                      {isOpen && (
+                        <div className="px-6 pb-6 pt-2 text-sm text-[#24313A]/90 font-light leading-relaxed border-t border-[#0B2638]/5 bg-[#F4F2EE]/30 space-y-3">
+                          <p>{faq.answer}</p>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-center py-16 bg-white p-8 border border-[#0B2638]/10 rounded-sm space-y-3">
+                  <HelpCircle className="w-12 h-12 text-[#CDAE72] mx-auto opacity-80" />
+                  <h3 className="font-cinzel text-xl font-bold text-[#0B2638]">No Matching Questions Found</h3>
+                  <p className="text-xs text-[#24313A]/70 max-w-md mx-auto">
+                    Try refining your search keyword or selecting a different category above.
+                  </p>
+                  <button 
+                    onClick={() => { setFaqSearchQuery(''); setSelectedFaqCategory('all'); }}
+                    className="mt-2 text-xs font-bold uppercase tracking-widest text-[#0B2638] underline hover:text-[#CDAE72]"
+                  >
+                    Reset Filters
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* NEED MORE ANSWERS CTA BLOCK */}
+            <div className="bg-[#0B2638] text-white p-8 sm:p-10 rounded-sm shadow-xl border border-[#CDAE72]/30 text-center space-y-6">
+              <div className="space-y-2">
+                <span className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">
+                  STILL HAVE QUESTIONS?
+                </span>
+                <h3 className="font-cinzel text-2xl sm:text-3xl font-bold">Have a Specific Project Question?</h3>
+                <p className="text-xs sm:text-sm text-white/80 font-light max-w-xl mx-auto leading-relaxed">
+                  Our project team is available to review your property details, zoning suitability, and scope alignment before you begin construction.
+                </p>
+              </div>
+              <div className="pt-2 flex flex-wrap justify-center gap-4">
+                <a 
+                  href="#contact-page" 
+                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white font-bold px-8 py-3.5 text-xs tracking-widest uppercase transition-all shadow-md"
+                >
+                  Start a Conversation
+                </a>
+                <a 
+                  href="#resources-guides" 
+                  className="bg-transparent border border-white/30 text-white hover:border-[#CDAE72] hover:text-[#CDAE72] font-bold px-8 py-3.5 text-xs tracking-widest uppercase transition-all"
+                >
+                  Explore Renovation Guides
+                </a>
+              </div>
+            </div>
+          </main>
+        </div>
+
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-8 border-t border-[#CDAE72]/20 text-center text-xs font-light">
+          <p>© {new Date().getFullYear()} Havenridge Build. All rights reserved. Formerly Carpenters On The Go Inc.</p>
+        </footer>
+      </div>
+    );
+  }
+
+  // ==========================================
+  // RENOVATION GUIDES HUB & READER (#resources-guides)
+  // ==========================================
+  if (['#resources-guides', '#guides'].includes(currentPath)) {
+    const activeGuide = selectedGuideId ? guidesData.find(g => g.id === selectedGuideId) : null;
+    const filteredGuides = guidesData.filter(g => selectedGuideCategory === 'all' || g.category === selectedGuideCategory);
+
+    return (
+      <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
+        <div>
+          {/* HEADER NAV */}
+          <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
+            </div>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
+
+          {/* SINGLE GUIDE READER VIEW */}
+          {activeGuide ? (
+            <article className="max-w-4xl mx-auto px-6 py-12 sm:py-16 space-y-10">
+              {/* BREADCRUMB & BACK BUTTON */}
+              <div className="flex justify-between items-center border-b border-[#0B2638]/10 pb-4">
+                <button 
+                  onClick={() => setSelectedGuideId(null)}
+                  className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0B2638] hover:text-[#CDAE72] transition-colors"
+                >
+                  <ArrowLeft className="w-4 h-4" /> Back to All Guides
+                </button>
+                <span className="text-[#CDAE72] text-[11px] font-bold tracking-widest uppercase">
+                  {activeGuide.categoryLabel}
+                </span>
+              </div>
+
+              {/* GUIDE HEADER */}
+              <div className="space-y-4">
+                <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B2638] leading-tight">
+                  {activeGuide.title}
+                </h1>
+                <p className="text-base sm:text-lg text-[#24313A]/80 font-light">
+                  {activeGuide.subtitle}
+                </p>
+                <div className="flex items-center gap-4 text-xs text-[#24313A]/60 pt-2">
+                  <span>By {activeGuide.author}</span>
+                  <span>•</span>
+                  <span>{activeGuide.date}</span>
+                  <span>•</span>
+                  <span>{activeGuide.readTime}</span>
+                </div>
+              </div>
+
+              {/* HERO IMAGE */}
+              <div className="overflow-hidden rounded-sm shadow-md border border-[#0B2638]/10">
+                <img src={activeGuide.img} alt={activeGuide.title} className="w-full h-80 sm:h-96 object-cover" />
+              </div>
+
+              {/* QUICK ANSWER BANNER */}
+              <div className="bg-[#0B2638] text-white p-6 sm:p-8 rounded-sm shadow-lg border-l-4 border-[#CDAE72] space-y-3">
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.2em] uppercase block">
+                  QUICK ANSWER
+                </span>
+                <p className="text-sm sm:text-base text-white/95 font-light leading-relaxed">
+                  {activeGuide.quickAnswer}
+                </p>
+              </div>
+
+              {/* TABLE OF CONTENTS */}
+              {activeGuide.tableOfContents && (
+                <div className="bg-white p-6 rounded-sm border border-[#0B2638]/10 space-y-3">
+                  <span className="text-xs font-bold text-[#0B2638] uppercase tracking-widest block">ON THIS PAGE</span>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-[#24313A]/90 font-medium">
+                    {activeGuide.tableOfContents.map((item, idx) => (
+                      <a key={idx} href={`#${item.id}`} className="hover:text-[#CDAE72] transition-colors flex items-center gap-1.5">
+                        <ChevronRight className="w-3.5 h-3.5 text-[#CDAE72]" /> {item.title}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* GUIDE SECTIONS */}
+              <div className="space-y-10 pt-4 text-sm sm:text-base text-[#24313A]/90 leading-relaxed font-light">
+                {activeGuide.sections.map((sec, idx) => (
+                  <section key={idx} id={sec.id} className="space-y-3 bg-white p-6 sm:p-8 rounded-sm border border-[#0B2638]/10 shadow-sm scroll-mt-28">
+                    <h2 className="font-cinzel text-xl sm:text-2xl font-bold text-[#0B2638]">
+                      {sec.heading}
+                    </h2>
+                    <p>{sec.content}</p>
+                  </section>
+                ))}
+              </div>
+
+              {/* RELATED ACTION CTA */}
+              <div className="bg-[#0B2638] text-white p-8 rounded-sm shadow-xl border border-[#CDAE72]/30 text-center space-y-5">
+                <span className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">
+                  PLANNING A RENOVATION?
+                </span>
+                <h3 className="font-cinzel text-2xl font-bold">Ready to Discuss Your Property Scope?</h3>
+                <div className="flex flex-wrap justify-center gap-4 pt-2">
+                  <a href="#services" className="bg-white text-[#0B2638] hover:bg-[#CDAE72] font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">Explore Services →</a>
+                  <a href="#projects-page" className="bg-transparent border border-white/30 text-white hover:border-[#CDAE72] hover:text-[#CDAE72] font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">See Our Work →</a>
+                  <a href="#contact-page" className="bg-[#CDAE72] text-[#0B2638] hover:bg-white font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">Start a Conversation →</a>
+                </div>
+              </div>
+            </article>
+          ) : (
+            /* GUIDES HUB VIEW */
+            <main className="max-w-7xl mx-auto px-6 py-12 sm:py-16 space-y-12">
+              {/* HERO BANNER */}
+              <div className="text-center space-y-4 max-w-3xl mx-auto">
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">
+                  HAVENRIDGE RENOVATION LIBRARY
+                </span>
+                <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B2638]">
+                  Renovation Guides
+                </h1>
+                <p className="text-sm sm:text-base text-[#24313A]/80 font-light leading-relaxed">
+                  Deep planning, budgeting, contractor verification, permits, and architectural advice for homeowners in Kitchener, Waterloo, Cambridge & Guelph.
+                </p>
+              </div>
+
+              {/* CATEGORY FILTER PILLS */}
+              <div className="flex flex-wrap justify-center gap-2.5">
+                {guideCategories.map(cat => (
+                  <button 
+                    key={cat.id}
+                    onClick={() => setSelectedGuideCategory(cat.id)}
+                    className={`px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-sm transition-all border ${
+                      selectedGuideCategory === cat.id 
+                        ? 'bg-[#0B2638] text-[#CDAE72] border-[#0B2638] shadow-md' 
+                        : 'bg-white text-[#24313A] border-[#0B2638]/15 hover:border-[#CDAE72]'
+                    }`}
+                  >
+                    {cat.name}
+                  </button>
+                ))}
+              </div>
+
+              {/* GUIDES GRID */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredGuides.map((guide) => (
+                  <div 
+                    key={guide.id}
+                    onClick={() => setSelectedGuideId(guide.id)}
+                    className="bg-white border border-[#0B2638]/10 rounded-sm shadow-md hover:shadow-xl transition-all cursor-pointer group flex flex-col justify-between overflow-hidden"
+                  >
+                    <div>
+                      <div className="overflow-hidden h-52 relative">
+                        <img src={guide.img} alt={guide.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <span className="absolute top-4 left-4 bg-[#0B2638]/90 text-[#CDAE72] text-[10px] font-bold tracking-widest uppercase px-3 py-1 border border-[#CDAE72]/30">
+                          {guide.categoryLabel}
+                        </span>
+                      </div>
+                      <div className="p-6 space-y-3">
+                        <h3 className="font-cinzel text-xl font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors leading-snug">
+                          {guide.title}
+                        </h3>
+                        <p className="text-xs text-[#24313A]/75 font-light line-clamp-3 leading-relaxed">
+                          {guide.subtitle}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="px-6 pb-6 pt-2 flex items-center justify-between text-xs font-bold text-[#0B2638] group-hover:text-[#CDAE72] border-t border-[#0B2638]/5 mt-4">
+                      <span>Read Guide</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </main>
+          )}
+        </div>
+
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-8 border-t border-[#CDAE72]/20 text-center text-xs font-light">
+          <p>© {new Date().getFullYear()} Havenridge Build. All rights reserved. Formerly Carpenters On The Go Inc.</p>
+        </footer>
+      </div>
+    );
+  }
+
+  // ==========================================
+  // MAIN RESOURCES HUB LANDING PAGE (#resources)
+  // ==========================================
+  if (['#resources', '#resources-hub'].includes(currentPath)) {
+    return (
+      <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
+        <div>
+          {/* HEADER NAV */}
+          <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
+            </div>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
+
+          {/* HERO BANNER */}
+          <section className="bg-[#0B2638] text-white py-16 sm:py-20 border-b border-[#CDAE72]/20 text-center space-y-4">
+            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">
+              HAVENRIDGE PLANNING CENTER
+            </span>
+            <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
+              Renovation Resources
+            </h1>
+            <p className="text-white/80 font-light max-w-2xl mx-auto text-sm sm:text-base leading-relaxed">
+              Plan your renovation with clearer answers before you commit. Explore deep guides, project stories, and process FAQs.
+            </p>
+          </section>
+
+          {/* 3 HUB DESTINATION CARDS */}
+          <main className="max-w-6xl mx-auto px-6 py-12 sm:py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* CARD 1: RENOVATION GUIDES */}
+            <a 
+              href="#resources-guides" 
+              className="bg-white p-8 rounded-sm border border-[#0B2638]/10 shadow-md hover:shadow-xl transition-all group flex flex-col justify-between space-y-6"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full bg-[#F4F2EE] text-[#0B2638] flex items-center justify-center border border-[#0B2638]/10 group-hover:bg-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                  <FileText className="w-6 h-6" />
+                </div>
+                <h3 className="font-cinzel text-xl font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                  Renovation Guides
+                </h3>
+                <p className="text-xs text-[#24313A]/75 font-light leading-relaxed">
+                  Deep planning, budgeting, permit rules, contractor verification, and architectural advice.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-2 text-xs font-bold text-[#0B2638] group-hover:text-[#CDAE72] uppercase tracking-wider">
+                Explore Guides <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </a>
+
+            {/* CARD 2: BLOG */}
+            <a 
+              href="#resources-blog" 
+              className="bg-white p-8 rounded-sm border border-[#0B2638]/10 shadow-md hover:shadow-xl transition-all group flex flex-col justify-between space-y-6"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full bg-[#F4F2EE] text-[#0B2638] flex items-center justify-center border border-[#0B2638]/10 group-hover:bg-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <h3 className="font-cinzel text-xl font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                  Renovation Blog
+                </h3>
+                <p className="text-xs text-[#24313A]/75 font-light leading-relaxed">
+                  News, recent project spotlights, design inspiration, and company updates from our build team.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-2 text-xs font-bold text-[#0B2638] group-hover:text-[#CDAE72] uppercase tracking-wider">
+                Read Articles <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </a>
+
+            {/* CARD 3: FREQUENTLY ASKED QUESTIONS */}
+            <a 
+              href="#resources-faq" 
+              className="bg-white p-8 rounded-sm border border-[#0B2638]/10 shadow-md hover:shadow-xl transition-all group flex flex-col justify-between space-y-6"
+            >
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full bg-[#F4F2EE] text-[#0B2638] flex items-center justify-center border border-[#0B2638]/10 group-hover:bg-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                  <HelpCircle className="w-6 h-6" />
+                </div>
+                <h3 className="font-cinzel text-xl font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                  Frequently Asked Questions
+                </h3>
+                <p className="text-xs text-[#24313A]/75 font-light leading-relaxed">
+                  Quick answers about Havenridge, design-build process, project fit, credentials, and warranties.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-2 text-xs font-bold text-[#0B2638] group-hover:text-[#CDAE72] uppercase tracking-wider">
+                View FAQs <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </a>
+          </main>
+        </div>
+
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-8 border-t border-[#CDAE72]/20 text-center text-xs font-light">
+          <p>© {new Date().getFullYear()} Havenridge Build. All rights reserved. Formerly Carpenters On The Go Inc.</p>
+        </footer>
+      </div>
+    );
+  }
+
+
+  if (['#blog-page', '#resources-blog'].includes(currentPath)) {
+    return (
+      <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
+        <div>
+          {/* HEADER NAV */}
+          <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
+            </div>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
           </nav>
 
           {/* HERO BANNER */}
@@ -3365,51 +4605,101 @@ The exterior envelope and surrounding property were entirely reborn to match the
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         
         {/* NAV HEADER */}
-        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md">
-          <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <a href="#home" className="flex items-center">
-              <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
-            </a>
-            <div className="flex items-center gap-4">
-              <a href="#home" className="text-xs font-sans font-bold tracking-widest uppercase hover:text-[#CDAE72] transition-colors flex items-center gap-2">
-                <ArrowLeft className="w-4 h-4" /> BACK TO HOME
+        <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
               <button 
-                type="button"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 text-[#CDAE72] hover:text-white transition-colors cursor-pointer"
-                aria-label="Toggle Navigation Menu"
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
               >
                 {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </button>
             </div>
-          </div>
 
-          {/* MOBILE NAVIGATION DRAWER */}
-          {mobileMenuOpen && (
-            <div className="md:hidden fixed inset-x-0 top-20 bottom-0 bg-[#0B2638] z-50 overflow-y-auto border-t border-[#CDAE72]/20 flex flex-col justify-between p-6">
-              <div className="space-y-6">
-                <div className="space-y-2 border-b border-white/10 pb-4">
-                  <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.25em] uppercase block">SERVICES & SHOWCASES</span>
-                  <div className="grid grid-cols-1 gap-2.5 pt-1 text-sm font-semibold">
-                    <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Additions and ADUs</a>
-                    <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Whole Home Renovations</a>
-                    <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Unit Conversions</a>
-                    <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Aging-in-Place Renovations</a>
-                    <a href="#project-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Kitchen Renovations</a>
-                    <a href="#project-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
-                    <a href="#project-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Basement Suites</a>
-                    <a href="#project-millwork" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Custom Millwork</a>
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
-                </div>
-
-                <div className="space-y-4 text-sm font-bold font-cinzel tracking-wider uppercase border-b border-white/10 pb-6">
-                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">About Us</a>
-                  <a href="#blog-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Renovation Blog</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] hover:text-white transition-colors">Contact Us</a>
                 </div>
 
                 <div>
@@ -3423,14 +4713,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   </a>
                 </div>
               </div>
-
-              <div className="pt-6 border-t border-white/10 text-center space-y-1 text-xs text-white/70">
-                <p className="font-semibold text-white">Havenridge Build | Cambridge & Waterloo Region</p>
-                <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | Info@HavenridgeBuild.com</p>
-              </div>
-            </div>
-          )}
-        </nav>
+            )}
+          </nav>
 
         {/* HERO SECTION MATCHING SPEC & MOCKUP */}
         <section className="relative bg-[#0B2638] text-white py-20 text-center overflow-hidden">
@@ -4082,118 +5366,115 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
       {/* MAIN NAVIGATION */}
       <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
-        <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-          <a href="#home" className="flex items-center group">
-            <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
-          </a>
-
-          {/* Nav list with dropdowns */}
-          <div className="hidden md:flex items-center space-x-8 text-xs font-bold tracking-widest uppercase text-white/90">
-            {/* 1. Services Dropdown */}
-            <div className="relative group">
-              <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
-                Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="#home" className="flex items-center group shrink-0">
+                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
-              <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
-                <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
-                <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
-                <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
-                <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
-              </div>
-            </div>
 
-            {/* 2. Our Process */}
-            <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
-
-            {/* 3. Our Work Dropdown */}
-            <div className="relative group">
-              <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
-                Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
-              </a>
-              <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50">
-                <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
-                <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
-              </div>
-            </div>
-
-            {/* 4. About */}
-            <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
-
-            {/* 5. Contact */}
-            <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
-
-            {/* 6. Blog */}
-            <a href="#blog-page" className="hover:text-[#CDAE72] transition-colors">Blog</a>
-
-            {/* 6. Client Portal */}
-            <a 
-              href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-[#CDAE72] hover:text-white transition-colors"
-            >
-              Client Portal
-            </a>
-          </div>
-
-          {/* Mobile Hamburger Button */}
-          <button 
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 text-[#CDAE72] hover:text-white transition-colors cursor-pointer"
-            aria-label="Toggle Navigation Menu"
-          >
-            {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
-          </button>
-
-          <div className="w-12 hidden md:block"></div>
-        </div>
-
-        {/* MOBILE NAVIGATION DRAWER */}
-        {mobileMenuOpen && (
-          <div className="md:hidden fixed inset-x-0 top-20 bottom-0 bg-[#0B2638] z-50 overflow-y-auto border-t border-[#CDAE72]/20 flex flex-col justify-between p-6">
-            <div className="space-y-6">
-              <div className="space-y-2 border-b border-white/10 pb-4">
-                <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.25em] uppercase block">SERVICES & SHOWCASES</span>
-                <div className="grid grid-cols-1 gap-2.5 pt-1 text-sm font-semibold">
-                  <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Additions and ADUs</a>
-                  <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Whole Home Renovations</a>
-                  <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Multi-Unit Conversions</a>
-                  <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Accessible & Aging-in-Place Renovations</a>
-                  <a href="#project-kitchens" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Kitchen Renovations</a>
-                  <a href="#project-bathrooms" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Bathroom Retreats</a>
-                  <a href="#project-basements" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Basement Suites</a>
-                  <a href="#project-millwork" onClick={() => setMobileMenuOpen(false)} className="text-white/90 hover:text-[#CDAE72] transition-colors py-1">Custom Millwork</a>
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#project-additions" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="#project-whole-home" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="#project-multi-unit" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="#project-accessibility" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
                 </div>
-              </div>
 
-              <div className="space-y-4 text-sm font-bold font-cinzel tracking-wider uppercase border-b border-white/10 pb-6">
-                <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Process</a>
-                <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Our Work & Projects</a>
-                <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">About Us</a>
-                <a href="#blog-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] transition-colors">Renovation Blog</a>
-                <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] hover:text-white transition-colors">Contact Us</a>
-              </div>
+                {/* 2. Our Process */}
+                <a href="#process-section" className="hover:text-[#CDAE72] transition-colors">Our Process</a>
 
-              <div>
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="#inspiration-section" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="#projects-page" className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="#about-page" className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="#contact-page" className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="#resources-guides" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="#resources-blog" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="#resources-faq" className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
                 <a 
                   href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
                   target="_blank" 
                   rel="noopener noreferrer" 
-                  className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
                 >
-                  Client Portal Access
+                  Client Portal
                 </a>
               </div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
             </div>
 
-            <div className="pt-6 border-t border-white/10 text-center space-y-1 text-xs text-white/70">
-              <p className="font-semibold text-white">Havenridge Build | Cambridge & Waterloo Region</p>
-              <p><a href="tel:5196350963" className="text-[#CDAE72] font-bold underline">519-635-0963</a> | Info@HavenridgeBuild.com</p>
-            </div>
-          </div>
-        )}
-      </nav>
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
+                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+                  <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
+                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
+                  
+                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="#resources-faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
 
       {/* HERO SECTION */}
       <section className="relative bg-[#0B2638] text-white min-h-[500px] sm:min-h-[600px] md:min-h-[700px] flex items-end pb-16 sm:pb-24 md:pb-28 overflow-hidden">

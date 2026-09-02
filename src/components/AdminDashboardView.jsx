@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../lib/supabaseClient';
+import { supabase, getLeadsFromSupabase } from '../lib/supabaseClient';
 import { guidesData } from '../data/guidesData';
 import { 
   BarChart3 as ChartIcon, 
@@ -49,6 +49,33 @@ export default function AdminDashboardView({ onNavigateHome }) {
   const [clickToEmailCount, setClickToEmailCount] = useState(() => {
     return parseInt(localStorage.getItem('havenridge_metric_emails') || '19', 10);
   });
+  
+  // Fetch live leads from Supabase on mount
+  useEffect(() => {
+    async function fetchLiveLeads() {
+      try {
+        const data = await getLeadsFromSupabase();
+        if (data && data.length > 0) {
+          const mapped = data.map(l => ({
+            id: l.id,
+            date: l.created_at ? new Date(l.created_at).toLocaleString() : '2026-09-02',
+            name: l.name || 'Website Inquiry',
+            email: l.email || 'N/A',
+            phone: l.phone || 'N/A',
+            address: l.address || 'Waterloo Region',
+            budget: l.budget || 'Standard',
+            projectScope: l.project_scope || 'Renovations',
+            status: l.status || 'Pipedrive Deal Created'
+          }));
+          setFormSubmissions(mapped);
+        }
+      } catch (err) {
+        console.warn('Leads fetch error:', err);
+      }
+    }
+    fetchLiveLeads();
+  }, []);
+
   const [formSubmissions, setFormSubmissions] = useState(() => {
     const saved = localStorage.getItem('havenridge_leads_list');
     return saved ? JSON.parse(saved) : [

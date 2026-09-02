@@ -1,4 +1,4 @@
-import { supabase } from './lib/supabaseClient';
+import { supabase, saveLeadToSupabase } from './lib/supabaseClient';
 import AdminDashboardView from './components/AdminDashboardView';
 import { faqCategories, faqData } from "./data/faqData";
 import { guideCategories, guidesData } from "./data/guidesData";
@@ -62,6 +62,8 @@ const LinkedinIcon = ({ className = "w-4 h-4" }) => (
 export default function App() {
   // Mobile Menu State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [mobileWorkOpen, setMobileWorkOpen] = useState(false);
 
   // Form qualification state
   const [formStep, setFormStep] = useState(1);
@@ -102,6 +104,31 @@ export default function App() {
     const isQual = formInvestment !== 'Under $20,000';
     setFormQualified(isQual);
     
+    const leadObj = {
+      created_at: new Date().toISOString(),
+      name: (formFirstName + ' ' + formLastName).trim() || 'Website Inquiry',
+      email: formEmail || 'no-email@provided.com',
+      phone: formPhone || 'N/A',
+      address: formAddress ? (formAddress + ', ' + formCity) : 'Waterloo Region',
+      budget: formInvestment || 'Standard',
+      project_scope: Array.isArray(formProjectTypes) ? formProjectTypes.join(', ') : (formProjectTypes || 'Renovations'),
+      status: 'New Lead',
+      description: formDescription || ''
+    };
+
+    // Save to local storage for instant UI reflection in Admin Dashboard
+    try {
+      const savedLeads = JSON.parse(localStorage.getItem('havenridge_leads_list') || '[]');
+      localStorage.setItem('havenridge_leads_list', JSON.stringify([leadObj, ...savedLeads]));
+    } catch (err) {}
+
+    // Save to Supabase cloud database
+    try {
+      await saveLeadToSupabase(leadObj);
+    } catch (err) {
+      console.warn('Supabase lead save warning:', err);
+    }
+
     try {
       await createWixContact({
         firstName: formFirstName,
@@ -269,6 +296,14 @@ export default function App() {
   const [openFaqIndex, setOpenFaqIndex] = useState(null);
   const [selectedGuideId, setSelectedGuideId] = useState(null);
   const [selectedGuideCategory, setSelectedGuideCategory] = useState("all");
+
+  // Guarantee scroll to top when opening any guide or blog article
+  useEffect(() => {
+    if (selectedGuideId) {
+      window.scrollTo(0, 0);
+    }
+  }, [selectedGuideId]);
+
 
   // Live Guides & Blog state synced with Supabase CMS
   const [liveGuides, setLiveGuides] = useState(guidesData);
@@ -1394,15 +1429,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -1677,15 +1749,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -2047,15 +2156,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -2198,15 +2344,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -2382,15 +2565,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -2857,15 +3077,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -3484,15 +3741,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -3755,15 +4049,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -3791,7 +4122,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               {/* BREADCRUMB & BACK BUTTON */}
               <div className="flex justify-between items-center border-b border-[#0B2638]/10 pb-4">
                 <button 
-                  onClick={() => setSelectedGuideId(null)}
+                  onClick={() => { setSelectedGuideId(null); window.scrollTo(0, 0); }}
                   className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0B2638] hover:text-[#CDAE72] transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" /> Back to All Guides
@@ -3910,7 +4241,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 {filteredGuides.map((guide) => (
                   <div 
                     key={guide.id}
-                    onClick={() => setSelectedGuideId(guide.id)}
+                    onClick={() => { setSelectedGuideId(guide.id); window.scrollTo(0, 0); }}
                     className="bg-white border border-[#0B2638]/10 rounded-sm shadow-md hover:shadow-xl transition-all cursor-pointer group flex flex-col justify-between overflow-hidden"
                   >
                     <div>
@@ -4038,15 +4369,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -4243,15 +4611,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -4732,15 +5137,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
@@ -5492,15 +5934,52 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
             {/* Mobile Navigation Drawer */}
             {mobileMenuOpen && (
-              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-6 animate-fadeIn">
-                <div className="space-y-3 text-xs font-bold tracking-widest uppercase">
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
                   <a href="#home" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
-                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Process</a>
-                  <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Our Work & Projects</a>
-                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">About Us</a>
-                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72]">Contact Us</a>
                   
-                  <div className="space-y-2 py-2 border-t border-b border-white/10 my-2">
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Services</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#project-additions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="#project-whole-home" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="#project-multi-unit" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="#project-accessibility" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#process-section" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work & Projects</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="#inspiration-section" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="#projects-page" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="#about-page" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="#contact-page" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
                     <a href="#resources-guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
                     <a href="#resources-blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>

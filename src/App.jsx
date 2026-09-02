@@ -1,3 +1,5 @@
+import { supabase } from './lib/supabaseClient';
+import AdminDashboardView from './components/AdminDashboardView';
 import { faqCategories, faqData } from "./data/faqData";
 import { guideCategories, guidesData } from "./data/guidesData";
 import { createWixLeadContact } from "./lib/wixClient";
@@ -55,6 +57,7 @@ const LinkedinIcon = ({ className = "w-4 h-4" }) => (
     <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
   </svg>
 );
+
 
 export default function App() {
   // Mobile Menu State
@@ -267,6 +270,38 @@ export default function App() {
   const [selectedGuideId, setSelectedGuideId] = useState(null);
   const [selectedGuideCategory, setSelectedGuideCategory] = useState("all");
 
+  // Live Guides & Blog state synced with Supabase CMS
+  const [liveGuides, setLiveGuides] = useState(guidesData);
+
+  useEffect(() => {
+    async function loadLiveArticles() {
+      try {
+        const { data, error } = await supabase.from('blog_posts').select('*').eq('status', 'Published');
+        if (!error && data && data.length > 0) {
+          const mapped = data.map(b => ({
+            id: b.id,
+            slug: b.id,
+            category: b.category ? b.category.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'all',
+            categoryLabel: b.category || 'Renovation Guides',
+            title: b.title,
+            subtitle: b.subtitle || '',
+            author: b.author || 'Havenridge Technical Team',
+            date: b.date || 'August 30, 2026',
+            readTime: b.read_time || '8 min read',
+            img: b.img === 'project_images/Huntingwood_Court/Huntingwood_1.jpg' ? 'project_images/Huntingwood_Court/Huntingwood_1.png' : (b.img || 'project_images/hero_living_room_fireplace.jpg'),
+            quickAnswer: b.quick_answer || '',
+            sections: b.sections || []
+          }));
+          setLiveGuides(mapped);
+        }
+      } catch (err) {
+        console.warn('Live articles sync fallback:', err);
+      }
+    }
+    loadLiveArticles();
+  }, [currentPath]);
+
+
 
   // Safari & WebKit cross-browser compatible offset top helper
   const getElementOffsetTop = (el) => {
@@ -317,27 +352,31 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, [currentPath]);
 
-  // Dynamic NiceJob SDK script loader for #reviews-page SPA routing
+  // Robust NiceJob SDK re-trigger for SPA route changes
   useEffect(() => {
-    if (currentPath === '#reviews-page') {
-      const existingScript = document.getElementById('nicejob-sdk-dynamic');
-      if (existingScript) {
-        existingScript.remove();
-      }
-      const script = document.createElement('script');
-      script.id = 'nicejob-sdk-dynamic';
-      script.type = 'text/javascript';
-      script.src = 'https://cdn.nicejob.co/js/sdk.min.js?id=6309960057618432';
-      script.async = true;
-      document.body.appendChild(script);
-
-      if (window.NiceJob && typeof window.NiceJob.init === 'function') {
-        try {
-          window.NiceJob.init();
-        } catch (e) {
-          console.log('NiceJob init re-trigger:', e);
+    if (['#reviews-page', '#reviews', '#testimonials'].includes(currentPath)) {
+      const triggerNiceJob = () => {
+        if (window.NiceJob) {
+          try {
+            if (typeof window.NiceJob.init === 'function') window.NiceJob.init();
+            if (typeof window.NiceJob.parse === 'function') window.NiceJob.parse();
+          } catch (e) {
+            console.log('NiceJob SDK parse re-trigger:', e);
+          }
         }
-      }
+      };
+
+      // Trigger immediately + after React DOM paint delays (50ms, 200ms, 600ms)
+      triggerNiceJob();
+      const t1 = setTimeout(triggerNiceJob, 50);
+      const t2 = setTimeout(triggerNiceJob, 200);
+      const t3 = setTimeout(triggerNiceJob, 600);
+
+      return () => {
+        clearTimeout(t1);
+        clearTimeout(t2);
+        clearTimeout(t3);
+      };
     }
   }, [currentPath]);
 
@@ -605,7 +644,7 @@ export default function App() {
 
 
   const portfolioProjects = [
-    { name: 'Appledale Crescent — Total Transformation', cat: 'Whole-Home & Custom Millwork', hash: '#project-millwork', img: 'project_images/appledale/1.png' },
+    { name: 'Appledale Crescent — Total Transformation', cat: 'Whole-Home & Custom Millwork', hash: '#project-millwork', img: 'project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg' },
     { name: 'Huntingwood Court — Total Estate Reconstruction', cat: 'Whole-Home & Basement Retreat', hash: '#project-basements', img: 'project_images/huntingwood/1.png' },
     { name: 'Morningdale Crescent — Total Property Overhaul', cat: 'Whole-Home Interior & Exterior', hash: '#project-living-spaces', img: 'project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg' },
     { name: 'Wellington Street — Designer Main Floor Reconstruction', cat: 'Main-Floor Transformation', hash: '#project-kitchens', img: 'project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg' },
@@ -872,7 +911,7 @@ export default function App() {
       showcase: [
         { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg", link: "#project-living-spaces" },
         { title: "The Moore Street Estate Pergola & Envelope", caption: "17'x17' outdoor timber pergola, concrete pad & full exterior siding/window overhaul.", img: "project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "#project-garages" },
-        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "project_images/McDougall_Road/McDougall_1.png", link: "#project-additions" }
+        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "project_images/mcdougall/addition_adu_stone_facade.jpg", link: "#project-additions" }
       ]
     }
   };
@@ -2405,7 +2444,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   alt={p.name} 
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
                 />
-                <div className="absolute inset-0 bg-[#0B2638]/85 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 flex flex-col justify-between p-8 text-center backdrop-blur-[2px]">
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638]/90 via-[#0B2638]/60 to-transparent md:bg-[#0B2638]/85 md:opacity-0 md:group-hover:opacity-100 transition-all duration-500 flex flex-col justify-between p-6 sm:p-8 text-center backdrop-blur-[1px]">
                   <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.25em] uppercase block">PROJECT</span>
                   <div className="flex-1 flex flex-col justify-center items-center my-auto">
                     <h3 className="text-white text-xl sm:text-2xl font-cinzel font-bold leading-tight mb-2 tracking-wide">
@@ -3342,6 +3381,13 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
 
     // ==========================================
+    // ==========================================
+  // CLIENT ADMIN PORTAL (#admin)
+  // ==========================================
+  if (['#admin', '#dashboard'].includes(currentPath)) {
+    return <AdminDashboardView onNavigateHome={() => setCurrentPath('#home')} />;
+  }
+
   // FREQUENTLY ASKED QUESTIONS PAGE (#resources-faq)
   // ==========================================
   if (['#resources-faq', '#faq'].includes(currentPath)) {
@@ -3621,8 +3667,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
   // RENOVATION GUIDES HUB & READER (#resources-guides)
   // ==========================================
   if (['#resources-guides', '#guides'].includes(currentPath)) {
-    const activeGuide = selectedGuideId ? guidesData.find(g => g.id === selectedGuideId) : null;
-    const filteredGuides = guidesData.filter(g => selectedGuideCategory === 'all' || g.category === selectedGuideCategory);
+    const activeGuide = selectedGuideId ? liveGuides.find(g => g.id === selectedGuideId) : null;
+    const filteredGuides = liveGuides.filter(g => selectedGuideCategory === 'all' || g.category === selectedGuideCategory || g.categoryLabel.toLowerCase().includes(selectedGuideCategory.toLowerCase()));
 
     return (
       <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">

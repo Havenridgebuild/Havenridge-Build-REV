@@ -222,7 +222,7 @@ export const guidesData = [
     author: "Havenridge Technical Team",
     date: "August 30, 2026",
     readTime: "11 min read",
-    img: "project_images/Huntingwood_Court/Huntingwood_1.jpg",
+    img: "project_images/Huntingwood_Court/Huntingwood_1.png",
     quickAnswer: "The cost of an addition depends heavily on what is being added and how the new space connects to the existing home. A simple single-storey expansion, a second-storey addition and a fully serviced suite can have very different structural, foundation, mechanical and design requirements. Homeowners should budget from a verified scope, drawings and site conditions rather than a generic cost-per-square-foot number.",
     tableOfContents: [
       { id: "addition-types", title: "01. Addition Type & Size" },

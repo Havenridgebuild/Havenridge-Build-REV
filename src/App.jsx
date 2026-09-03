@@ -179,8 +179,38 @@ export default function App() {
     setFormSubmitted(true);
   };
 
+    const handleApplySubmit = async (e) => {
+    e.preventDefault();
+    setIsAppliedSubmitted(true);
+
+    try {
+      await fetch('/api/apply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          applicantName: applyName || 'Job Applicant',
+          applicantEmail: applyEmail,
+          applicantPhone: applyPhone,
+          roleType: applyRole || 'General Application',
+          tradeSpecialty: applyRole || 'Subcontractor / Trade Partner',
+          experienceYears: applyExperience || '1-3 Years',
+          message: applyMessage || 'Submitted application via website.',
+          resumeUrl: applicantFileName ? ('File attached: ' + applicantFileName) : 'Attached directly'
+        })
+      });
+    } catch (err) {
+      console.warn('API apply route error:', err);
+    }
+  };
+
   const compRef = useRef(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [applyName, setApplyName] = useState('');
+  const [applyEmail, setApplyEmail] = useState('');
+  const [applyPhone, setApplyPhone] = useState('');
+  const [applyRole, setApplyRole] = useState('');
+  const [applyExperience, setApplyExperience] = useState('');
+  const [applyMessage, setApplyMessage] = useState('');
   const [formData, setFormData] = useState({
     firstName: '', lastName: '', phone: '', email: '', projectType: 'Renovations', notes: ''
   });
@@ -2925,46 +2955,46 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   </div>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setIsAppliedSubmitted(true); }} className="space-y-4">
+                <form onSubmit={handleApplySubmit} className="space-y-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Full Name *</label>
-                    <input type="text" required placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    <input type="text" required value={applyName} onChange={(e) => setApplyName(e.target.value)} placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Email Address *</label>
-                      <input type="email" required placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                      <input type="email" required value={applyEmail} onChange={(e) => setApplyEmail(e.target.value)} placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Phone Number *</label>
-                      <input type="tel" required placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                      <input type="tel" required value={applyPhone} onChange={(e) => setApplyPhone(e.target.value)} placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
-                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                      <select required value={applyRole} onChange={(e) => setApplyRole(e.target.value)} className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="lead-carpenter">Lead Carpenter</option>
-                        <option value="framing">Framing Carpenter</option>
-                        <option value="finish">Finish Carpenter</option>
-                        <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
-                        <option value="project-manager">Project Manager</option>
-                        <option value="architectural-interior-designer">Architectural Designer / Interior Designer</option>
-                        <option value="admin-assistant">Admin / Assistant</option>
-                        <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
-                        <option value="general">General Application</option>
+                        <option value="Lead Carpenter">Lead Carpenter</option>
+                        <option value="Framing Carpenter">Framing Carpenter</option>
+                        <option value="Finish Carpenter">Finish Carpenter</option>
+                        <option value="Apprentice Carpenter">Apprentice Carpenter (1st / 2nd Year)</option>
+                        <option value="Project Manager">Project Manager</option>
+                        <option value="Architectural / Interior Designer">Architectural Designer / Interior Designer</option>
+                        <option value="Admin / Assistant">Admin / Assistant</option>
+                        <option value="Subcontractor / Trade Partner">Subcontractor / Licensed Trade Partner</option>
+                        <option value="General Application">General Application</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Years of Experience *</label>
-                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                      <select required value={applyExperience} onChange={(e) => setApplyExperience(e.target.value)} className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Experience...</option>
-                        <option value="1-3">1 - 3 Years</option>
-                        <option value="3-5">3 - 5 Years</option>
-                        <option value="5+">5+ Years</option>
+                        <option value="1-3 Years">1 - 3 Years</option>
+                        <option value="3-5 Years">3 - 5 Years</option>
+                        <option value="5+ Years">5+ Years</option>
                       </select>
                     </div>
                   </div>
@@ -2991,7 +3021,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Brief Introduction / Message</label>
-                    <textarea rows="3" placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
+                    <textarea rows="3" value={applyMessage} onChange={(e) => setApplyMessage(e.target.value)} placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
                   </div>
 
                   <div className="pt-2 flex justify-between items-center">
@@ -3571,46 +3601,46 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   </div>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setIsAppliedSubmitted(true); }} className="space-y-4">
+                <form onSubmit={handleApplySubmit} className="space-y-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Full Name *</label>
-                    <input type="text" required placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    <input type="text" required value={applyName} onChange={(e) => setApplyName(e.target.value)} placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Email Address *</label>
-                      <input type="email" required placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                      <input type="email" required value={applyEmail} onChange={(e) => setApplyEmail(e.target.value)} placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Phone Number *</label>
-                      <input type="tel" required placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                      <input type="tel" required value={applyPhone} onChange={(e) => setApplyPhone(e.target.value)} placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
-                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                      <select required value={applyRole} onChange={(e) => setApplyRole(e.target.value)} className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="lead-carpenter">Lead Carpenter</option>
-                        <option value="framing">Framing Carpenter</option>
-                        <option value="finish">Finish Carpenter</option>
-                        <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
-                        <option value="project-manager">Project Manager</option>
-                        <option value="architectural-interior-designer">Architectural Designer / Interior Designer</option>
-                        <option value="admin-assistant">Admin / Assistant</option>
-                        <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
-                        <option value="general">General Application</option>
+                        <option value="Lead Carpenter">Lead Carpenter</option>
+                        <option value="Framing Carpenter">Framing Carpenter</option>
+                        <option value="Finish Carpenter">Finish Carpenter</option>
+                        <option value="Apprentice Carpenter">Apprentice Carpenter (1st / 2nd Year)</option>
+                        <option value="Project Manager">Project Manager</option>
+                        <option value="Architectural / Interior Designer">Architectural Designer / Interior Designer</option>
+                        <option value="Admin / Assistant">Admin / Assistant</option>
+                        <option value="Subcontractor / Trade Partner">Subcontractor / Licensed Trade Partner</option>
+                        <option value="General Application">General Application</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Years of Experience *</label>
-                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                      <select required value={applyExperience} onChange={(e) => setApplyExperience(e.target.value)} className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Experience...</option>
-                        <option value="1-3">1 - 3 Years</option>
-                        <option value="3-5">3 - 5 Years</option>
-                        <option value="5+">5+ Years</option>
+                        <option value="1-3 Years">1 - 3 Years</option>
+                        <option value="3-5 Years">3 - 5 Years</option>
+                        <option value="5+ Years">5+ Years</option>
                       </select>
                     </div>
                   </div>
@@ -3637,7 +3667,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Brief Introduction / Message</label>
-                    <textarea rows="3" placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
+                    <textarea rows="3" value={applyMessage} onChange={(e) => setApplyMessage(e.target.value)} placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
                   </div>
 
                   <div className="pt-2 flex justify-between items-center">
@@ -4985,46 +5015,46 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   </div>
                 </div>
               ) : (
-                <form onSubmit={(e) => { e.preventDefault(); setIsAppliedSubmitted(true); }} className="space-y-4">
+                <form onSubmit={handleApplySubmit} className="space-y-4">
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Full Name *</label>
-                    <input type="text" required placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                    <input type="text" required value={applyName} onChange={(e) => setApplyName(e.target.value)} placeholder="John Doe" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Email Address *</label>
-                      <input type="email" required placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                      <input type="email" required value={applyEmail} onChange={(e) => setApplyEmail(e.target.value)} placeholder="john@example.com" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Phone Number *</label>
-                      <input type="tel" required placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
+                      <input type="tel" required value={applyPhone} onChange={(e) => setApplyPhone(e.target.value)} placeholder="(519) 555-0199" className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]" />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Role / Specialty *</label>
-                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                      <select required value={applyRole} onChange={(e) => setApplyRole(e.target.value)} className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Position...</option>
-                        <option value="lead-carpenter">Lead Carpenter</option>
-                        <option value="framing">Framing Carpenter</option>
-                        <option value="finish">Finish Carpenter</option>
-                        <option value="apprentice">Apprentice Carpenter (1st / 2nd Year)</option>
-                        <option value="project-manager">Project Manager</option>
-                        <option value="architectural-interior-designer">Architectural Designer / Interior Designer</option>
-                        <option value="admin-assistant">Admin / Assistant</option>
-                        <option value="subcontractor">Subcontractor / Licensed Trade Partner</option>
-                        <option value="general">General Application</option>
+                        <option value="Lead Carpenter">Lead Carpenter</option>
+                        <option value="Framing Carpenter">Framing Carpenter</option>
+                        <option value="Finish Carpenter">Finish Carpenter</option>
+                        <option value="Apprentice Carpenter">Apprentice Carpenter (1st / 2nd Year)</option>
+                        <option value="Project Manager">Project Manager</option>
+                        <option value="Architectural / Interior Designer">Architectural Designer / Interior Designer</option>
+                        <option value="Admin / Assistant">Admin / Assistant</option>
+                        <option value="Subcontractor / Trade Partner">Subcontractor / Licensed Trade Partner</option>
+                        <option value="General Application">General Application</option>
                       </select>
                     </div>
                     <div>
                       <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Years of Experience *</label>
-                      <select required className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
+                      <select required value={applyExperience} onChange={(e) => setApplyExperience(e.target.value)} className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72] bg-white">
                         <option value="">Select Experience...</option>
-                        <option value="1-3">1 - 3 Years</option>
-                        <option value="3-5">3 - 5 Years</option>
-                        <option value="5+">5+ Years</option>
+                        <option value="1-3 Years">1 - 3 Years</option>
+                        <option value="3-5 Years">3 - 5 Years</option>
+                        <option value="5+ Years">5+ Years</option>
                       </select>
                     </div>
                   </div>
@@ -5051,7 +5081,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                   <div>
                     <label className="block text-xs font-bold uppercase tracking-wider text-[#0B2638] mb-1">Brief Introduction / Message</label>
-                    <textarea rows="3" placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
+                    <textarea rows="3" value={applyMessage} onChange={(e) => setApplyMessage(e.target.value)} placeholder="Tell us about your woodworking, building experience, or background..." className="w-full border border-gray-300 p-3 text-sm rounded-sm focus:outline-none focus:border-[#CDAE72]"></textarea>
                   </div>
 
                   <div className="pt-2 flex justify-between items-center">

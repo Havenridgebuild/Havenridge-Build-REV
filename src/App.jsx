@@ -104,6 +104,8 @@ export default function App() {
     const isQual = formInvestment !== 'Under $20,000';
     setFormQualified(isQual);
     
+    const fullSourceStr = formSource + (formSourceDetail ? ` (${formSourceDetail})` : '');
+
     const leadObj = {
       created_at: new Date().toISOString(),
       name: (formFirstName + ' ' + formLastName).trim() || 'Website Inquiry',
@@ -127,6 +129,34 @@ export default function App() {
       await saveLeadToSupabase(leadObj);
     } catch (err) {
       console.warn('Supabase lead save warning:', err);
+    }
+
+    // Call /api/contact endpoint to send complete Resend Email & create Pipedrive Deal
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: formFirstName,
+          lastName: formLastName,
+          email: formEmail,
+          phone: formPhone,
+          address: formAddress,
+          city: formCity,
+          postalCode: formPostalCode,
+          investment: formInvestment,
+          projectTypes: formProjectTypes,
+          designStatus: formDesignStatus,
+          timing: formTiming,
+          decisionMakers: formDecisionMakers,
+          homeOccupied: formHomeOccupied,
+          source: fullSourceStr,
+          uploadedFile: formUploadedFile,
+          description: formDescription
+        })
+      });
+    } catch (apiErr) {
+      console.warn('API contact route warning:', apiErr);
     }
 
     try {

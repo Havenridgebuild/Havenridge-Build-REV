@@ -372,6 +372,17 @@ export default function App() {
   };
 
   const [currentPath, setCurrentPath] = useState(getCleanPath);
+  const handleNavigate = (e, targetUrl) => {
+    if (e && e.preventDefault) e.preventDefault();
+    setMobileMenuOpen(false);
+    if (window.location.pathname !== targetUrl) {
+      window.history.pushState({}, '', targetUrl);
+    }
+    setCurrentPath(targetUrl);
+    setSelectedGuideId(null);
+    setSelectedBlogArticle(null);
+    window.scrollTo(0, 0);
+  };
   const [selectedBlogArticle, setSelectedBlogArticle] = useState(null);
   const [selectedFaqCategory, setSelectedFaqCategory] = useState("all");
   const [faqSearchQuery, setFaqSearchQuery] = useState("");
@@ -1513,7 +1524,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -1526,15 +1537,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -1547,20 +1558,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -1833,7 +1844,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -1846,15 +1857,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -1867,20 +1878,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -2240,7 +2251,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -2253,15 +2264,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -2274,20 +2285,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -2428,7 +2439,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -2441,15 +2452,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -2462,20 +2473,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -2649,7 +2660,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -2662,15 +2673,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -2683,20 +2694,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -3161,7 +3172,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -3174,15 +3185,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -3195,20 +3206,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -3825,7 +3836,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -3838,15 +3849,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -3859,20 +3870,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -4133,7 +4144,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -4146,15 +4157,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -4167,20 +4178,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -4453,7 +4464,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -4466,15 +4477,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -4487,20 +4498,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -4695,7 +4706,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -4708,15 +4719,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -4729,20 +4740,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -5221,7 +5232,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -5234,15 +5245,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -5255,20 +5266,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 
@@ -6018,7 +6029,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {mobileMenuOpen && (
               <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
                 <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
-                  <a href="/" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -6031,15 +6042,15 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
-                        <a href="/services/whole-home-renovations" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
-                        <a href="/services/multi-unit-conversions" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/process" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
                   
                   {/* Our Work Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
@@ -6052,20 +6063,20 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={() => setMobileMenuOpen(false)} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={() => setMobileMenuOpen(false)} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
-                    <a href="/resources/guides" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
-                    <a href="/resources/blog" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
-                    <a href="/resources/faq" onClick={() => setMobileMenuOpen(false)} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
                   </div>
                 </div>
 

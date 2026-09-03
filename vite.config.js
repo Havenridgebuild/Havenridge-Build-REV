@@ -2,9 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-// https://vite.dev/config/
+// Dynamic base path: '/' for Vercel & custom domain, './' for relative environments
 export default defineConfig({
-  base: '/Havenridge-Build/',
+  base: process.env.VERCEL ? '/' : './',
   plugins: [
     react(),
     tailwindcss(),

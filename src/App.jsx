@@ -1451,7 +1451,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -1467,7 +1467,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -1484,7 +1484,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -1779,7 +1779,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -1795,7 +1795,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -1812,7 +1812,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -2073,7 +2073,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -2151,7 +2151,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
               <a 
-                href="#reviews-page" 
+                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
                 aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
@@ -2186,7 +2186,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2202,7 +2202,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2219,7 +2219,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -2351,7 +2351,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/work" className="hover:text-white transition-colors">Projects</a>
               <span className="text-white/30">•</span>
-              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
             </div>
           </div>
         </footer>
@@ -2374,7 +2374,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2390,7 +2390,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2407,7 +2407,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -2595,7 +2595,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2611,7 +2611,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2628,7 +2628,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -2858,7 +2858,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -2936,7 +2936,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
               <a 
-                href="#reviews-page" 
+                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
                 aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
@@ -3107,7 +3107,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -3123,7 +3123,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -3140,7 +3140,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -3505,7 +3505,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -3583,7 +3583,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
               <a 
-                href="#reviews-page" 
+                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
                 aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
@@ -3771,7 +3771,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -3787,7 +3787,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -3804,7 +3804,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -4079,7 +4079,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4095,7 +4095,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4112,7 +4112,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -4298,7 +4298,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 </span>
                 <h3 className="font-cinzel text-2xl font-bold">Ready to Discuss Your Property Scope?</h3>
                 <div className="flex flex-wrap justify-center gap-4 pt-2">
-                  <a href="#services" className="bg-white text-[#0B2638] hover:bg-[#CDAE72] font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">Explore Services →</a>
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="bg-white text-[#0B2638] hover:bg-[#CDAE72] font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">Explore Services →</a>
                   <a href="/work" className="bg-transparent border border-white/30 text-white hover:border-[#CDAE72] hover:text-[#CDAE72] font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">See Our Work →</a>
                   <a href="/contact" className="bg-[#CDAE72] text-[#0B2638] hover:bg-white font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">Start a Conversation →</a>
                 </div>
@@ -4399,7 +4399,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4415,7 +4415,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4432,7 +4432,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -4641,7 +4641,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4657,7 +4657,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4674,7 +4674,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -4919,7 +4919,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -4997,7 +4997,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
               <a 
-                href="#reviews-page" 
+                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
                 aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
@@ -5167,7 +5167,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -5183,7 +5183,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -5200,7 +5200,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -5803,7 +5803,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                             className="mt-1 h-4 w-4 text-[#0B2638] focus:ring-[#CDAE72] border-gray-300 rounded" 
                           />
                           <span className="text-xs text-[#24313A]/80 leading-relaxed font-light">
-                            I agree to allow Havenridge Build to contact me regarding my project inquiry in accordance with the <a href="#privacy-page" className="text-[#0B2638] font-bold underline hover:text-[#CDAE72]">Privacy Policy</a>.
+                            I agree to allow Havenridge Build to contact me regarding my project inquiry in accordance with the <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="text-[#0B2638] font-bold underline hover:text-[#CDAE72]">Privacy Policy</a>.
                           </span>
                         </label>
                       </div>
@@ -5851,7 +5851,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -5929,7 +5929,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
               <a 
-                href="#reviews-page" 
+                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
                 aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
@@ -5964,7 +5964,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="#services" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -5980,7 +5980,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 3. Our Work Dropdown */}
                 <div className="relative group">
-                  <a href="#projects" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -5997,7 +5997,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="#resources" className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -6359,7 +6359,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <p className="text-sm font-light text-white/70">Real feedback from homeowners across Kitchener, Waterloo, Cambridge, Guelph, and Surrounding Area.</p>
               <div className="pt-1">
                 <a 
-                  href="#reviews-page" 
+                  href="/about" onClick={(e) => handleNavigate(e, "/about")} 
                   className="bg-[#CDAE72] text-[#0B2638] font-bold px-6 py-2.5 text-xs font-sans tracking-widest uppercase hover:bg-white transition-all shadow-md rounded-sm inline-flex items-center gap-2"
                 >
                   <span>SEE MORE REVIEWS</span>
@@ -6516,7 +6516,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="#privacy-page" className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -6594,7 +6594,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
               <a 
-                href="#reviews-page" 
+                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
                 aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"

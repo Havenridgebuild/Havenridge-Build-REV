@@ -1444,7 +1444,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -1755,8 +1755,16 @@ The exterior envelope and surrounding property were entirely reborn to match the
   }
 
   // Render individual project detail sub-pages (CASS STYLE)
-  if (currentPath !== '#home' && currentPath !== '#contact-page' && currentPath !== '#projects-page' && currentPath !== '#about-page' && projectDetails[currentPath]) {
-    const proj = projectDetails[currentPath];
+  const cleanToProjectKey = {
+    '/services/additions-adus': '#project-additions',
+    '/services/whole-home-renovations': '#project-whole-home',
+    '/services/multi-unit-conversions': '#project-multi-unit',
+    '/services/accessible-aging-in-place': '#project-accessibility',
+  };
+  const activeProjKey = projectDetails[currentPath] ? currentPath : cleanToProjectKey[currentPath];
+
+  if (activeProjKey && projectDetails[activeProjKey]) {
+    const proj = projectDetails[activeProjKey];
     return (
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         
@@ -1764,7 +1772,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -2171,7 +2179,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -2359,7 +2367,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -2580,7 +2588,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -2727,8 +2735,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
         {/* HERO SPLIT IMAGE BANNER (CASS STYLE) */}
         <section className="grid grid-cols-2 gap-2 h-[250px] sm:h-[350px] overflow-hidden bg-[#0B2638]">
-          <img src="project_images/piccadilly/1.png" alt="Kitchen highlight" className="w-full h-full object-cover opacity-80" />
-          <img src="project_images/hero_living_room_fireplace.jpg" alt="Living Room highlight" className="w-full h-full object-cover opacity-80" />
+          <img src="/project_images/piccadilly/1.png" alt="Kitchen highlight" className="w-full h-full object-cover opacity-80" />
+          <img src="/project_images/hero_living_room_fireplace.jpg" alt="Living Room highlight" className="w-full h-full object-cover opacity-80" />
         </section>
 
         {/* HERO TITLE SECTION ON LIGHT BACKGROUND (CASS STYLE) */}
@@ -3092,7 +3100,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -3241,7 +3249,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           <section className="relative bg-[#0B2638] text-white py-24 px-6 overflow-hidden border-b border-[#CDAE72]/20">
             <div className="absolute inset-0 z-0">
               <img 
-                src="project_images/paisley/11.png" 
+                src="/project_images/paisley/11.png" 
                 alt="Havenridge Craftsmanship" 
                 className="w-full h-full object-cover opacity-15"
               />
@@ -3756,7 +3764,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -4064,7 +4072,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -4384,7 +4392,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -4626,7 +4634,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -5152,7 +5160,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}
@@ -5949,7 +5957,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
       <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
               <a href="/" className="flex items-center group shrink-0">
-                <img src="logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
               </a>
 
               {/* Centered Desktop Nav */}

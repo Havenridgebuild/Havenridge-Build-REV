@@ -375,7 +375,7 @@ export default function App() {
     if (hash === '#reviews-page') return '/reviews';
     if (hash === '#privacy-page') return '/privacy';
     if (hash === '#blog-page') return '/resources/blog';
-    if (hash === '#home' || hash === '') return '/';
+    if (hash === '#home') return '/';
 
     return rawPath === '' ? '/' : rawPath;
   };
@@ -6460,7 +6460,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {inspirationItems.map((item, idx) => (
               <a 
                 key={idx} 
-                href={item.link} 
+                href={item.link}
+                onClick={(e) => handleNavigate(e, item.link)}
                 className="relative w-full aspect-[2/3] overflow-hidden group transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer shadow-md bg-[#0B2638] font-sans rounded-2xl"
               >
                 <img 

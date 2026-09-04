@@ -20,7 +20,7 @@ export const guidesData = [
     author: "Havenridge Technical Team",
     date: "August 30, 2026",
     readTime: "8 min read",
-    img: "project_images/Appledale_Crescent/Appledale_3.jpg",
+    img: "/project_images/Appledale_Crescent/Appledale_3.jpg",
     quickAnswer: "Aging-in-place renovation is about making a home safer and easier to use without making it feel institutional. Common priorities include step-free or safer entries, better lighting, wider clearances, accessible bathrooms, easier kitchen storage, improved flooring transitions, safer stairs and planning for future mobility needs. The best time to incorporate these ideas is during a renovation that is already opening walls or changing layouts.",
     tableOfContents: [
       { id: "entry-circulation", title: "01. Entry and Circulation" },
@@ -69,7 +69,7 @@ export const guidesData = [
     author: "Havenridge Technical Team",
     date: "August 30, 2026",
     readTime: "10 min read",
-    img: "project_images/mcdougall/addition_adu_stone_facade.jpg",
+    img: "/project_images/mcdougall/addition_adu_stone_facade.jpg",
     quickAnswer: "Ontario does not have a general provincial licensing regime for renovation contractors. Verification therefore means checking the legal business identity, current liability insurance, WSIB clearance where applicable, municipal licensing where required, relevant private credentials or memberships, references, written contracts, and a documented change-order process. Do not rely on unverified claims of being 'provincially licensed'.",
     tableOfContents: [
       { id: "business-identity", title: "01. Verify Legal Business Identity" },
@@ -124,7 +124,7 @@ export const guidesData = [
     author: "Havenridge Technical Team",
     date: "August 30, 2026",
     readTime: "9 min read",
-    img: "project_images/knox/whole_home_white_kitchen.jpg",
+    img: "/project_images/knox/whole_home_white_kitchen.jpg",
     quickAnswer: "Before signing, homeowners should understand exactly who is responsible for design, permits, scheduling, site supervision, selections, changes, payment milestones, cleanup, insurance and warranty. A strong contractor should be willing to explain the process in writing and show how decisions and changes are documented.",
     tableOfContents: [
       { id: "legal-entity", title: "01. Legal Entity & Background" },
@@ -173,7 +173,7 @@ export const guidesData = [
     author: "Havenridge Technical Team",
     date: "August 30, 2026",
     readTime: "9 min read",
-    img: "project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg",
+    img: "/project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg",
     quickAnswer: "A kitchen renovation can range from a focused update to a major reconfiguration, so there is no responsible one-price answer. The biggest cost drivers are cabinetry, layout changes, plumbing and electrical work, structural changes, appliance level, countertops, flooring and finish selections. Havenridge publishes verified investment ranges during pre-construction planning.",
     tableOfContents: [
       { id: "cost-drivers", title: "01. What Drives the Investment Most?" },
@@ -222,7 +222,7 @@ export const guidesData = [
     author: "Havenridge Technical Team",
     date: "August 30, 2026",
     readTime: "11 min read",
-    img: "project_images/Huntingwood_Court/Huntingwood_1.png",
+    img: "/project_images/Huntingwood_Court/Huntingwood_1.png",
     quickAnswer: "The cost of an addition depends heavily on what is being added and how the new space connects to the existing home. A simple single-storey expansion, a second-storey addition and a fully serviced suite can have very different structural, foundation, mechanical and design requirements. Homeowners should budget from a verified scope, drawings and site conditions rather than a generic cost-per-square-foot number.",
     tableOfContents: [
       { id: "addition-types", title: "01. Addition Type & Size" },
@@ -271,7 +271,7 @@ export const guidesData = [
     author: "Havenridge Technical Team",
     date: "August 30, 2026",
     readTime: "12 min read",
-    img: "project_images/natchez/secondary_suite_exterior_entrance.jpg",
+    img: "/project_images/natchez/secondary_suite_exterior_entrance.jpg",
     quickAnswer: "This guide covers the broader additional-residential-unit (ARU/ADU) picture—including attached, detached, garden-suite and above-garage possibilities. Rules must be presented city by city because Cambridge, Kitchener and Waterloo do not share one universal unit-count, zoning or licensing regime. Current municipal sources must be checked immediately before planning.",
     tableOfContents: [
       { id: "aru-definitions", title: "01. What Counts as an ARU/ADU?" },

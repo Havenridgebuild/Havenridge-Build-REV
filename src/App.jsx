@@ -425,7 +425,7 @@ export default function App() {
             author: b.author || 'Havenridge Technical Team',
             date: b.date || 'August 30, 2026',
             readTime: b.read_time || '8 min read',
-            img: b.img === 'project_images/Huntingwood_Court/Huntingwood_1.jpg' ? 'project_images/Huntingwood_Court/Huntingwood_1.png' : (b.img || 'project_images/hero_living_room_fireplace.jpg'),
+            img: b.img === '/project_images/Huntingwood_Court/Huntingwood_1.jpg' ? '/project_images/Huntingwood_Court/Huntingwood_1.png' : (b.img || '/project_images/hero_living_room_fireplace.jpg'),
             quickAnswer: b.quick_answer || '',
             sections: b.sections || []
           }));
@@ -479,6 +479,7 @@ export default function App() {
     const sections = {
       '/process': '#process-section',
       '/services': '#services',
+      '/work/inspiration': '#inspiration-section',
       '/testimonials': '#testimonials',
       '/partners': '#partners'
     };
@@ -529,9 +530,9 @@ export default function App() {
   // Hero Slideshow State
   const [heroIndex, setHeroIndex] = useState(0);
   const heroImages = [
-    'project_images/hero_living_room_fireplace.jpg',
-    'project_images/piccadilly/1.png',
-    'project_images/mcdougall/3.png'
+    '/project_images/hero_living_room_fireplace.jpg',
+    '/project_images/piccadilly/1.png',
+    '/project_images/mcdougall/3.png'
   ];
 
   useEffect(() => {
@@ -600,28 +601,28 @@ export default function App() {
       title: "ADDITIONS & ADUs",
       headline: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
       desc: "This project transformed the home through structural reconfiguration and a new upper level. Havenridge coordinated framing, masonry and trade work so the addition connected naturally in appearance and function.",
-      img: "project_images/mcdougall/addition_adu_stone_facade.jpg",
+      img: "/project_images/mcdougall/addition_adu_stone_facade.jpg",
       hash: "/services/additions-adus"
     },
     {
       title: "WHOLE HOME RENOVATIONS",
       headline: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
       desc: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level.",
-      img: "project_images/knox/whole_home_white_kitchen.jpg",
+      img: "/project_images/knox/whole_home_white_kitchen.jpg",
       hash: "/services/whole-home-renovations"
     },
     {
       title: "MULTI-UNIT CONVERSIONS",
       headline: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
       desc: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Life-safety, egress, and code compliance were fully coordinated throughout construction.",
-      img: "project_images/natchez/secondary_suite_exterior_entrance.jpg",
+      img: "/project_images/natchez/secondary_suite_exterior_entrance.jpg",
       hash: "/services/multi-unit-conversions"
     },
     {
       title: "ACCESSIBLE & AGING-IN-PLACE RENOVATIONS",
       headline: "Improving safety, comfort, movement and independence through thoughtful accessible and aging-in-place design.",
       desc: "This bathroom renovation focused on reducing barriers and making everyday use easier with a widened doorway, accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
-      img: "project_images/isherwood/1.png",
+      img: "/project_images/isherwood/1.png",
       hash: "/services/accessible-aging-in-place"
     }
   ];
@@ -634,7 +635,7 @@ export default function App() {
       category: 'DESIGN TRENDS',
       date: 'August 12, 2026',
       readTime: '5 min read',
-      img: 'project_images/mcnamara/2.png',
+      img: '/project_images/mcnamara/2.png',
       excerpt: 'Discover how curbless walk-in showers, custom white oak double vanities, and heated herringbone tile transform daily routines into spa-like home retreats.',
       author: 'Micheal Smith',
       content: [
@@ -651,7 +652,7 @@ export default function App() {
       category: 'PERMITS & ADUS',
       date: 'August 05, 2026',
       readTime: '7 min read',
-      img: 'project_images/verhoeve/16.jpg',
+      img: '/project_images/verhoeve/16.jpg',
       excerpt: 'A complete guide to municipal zoning bylaws, permit submission timelines, ceiling height minimums, and fire-separation requirements for secondary basement suites.',
       author: 'Micheal Smith',
       content: [
@@ -668,7 +669,7 @@ export default function App() {
       category: 'MILLWORK',
       date: 'July 28, 2026',
       readTime: '6 min read',
-      img: 'project_images/piccadilly/2.png',
+      img: '/project_images/piccadilly/2.png',
       excerpt: 'Why master carpentry, solid wood mortise-and-tenon joints, and custom storage solutions offer unmatched durability and character over mass-produced cabinetry.',
       author: 'Micheal Smith',
       content: [
@@ -685,7 +686,7 @@ export default function App() {
       category: 'BUILDING PROCESS',
       date: 'July 15, 2026',
       readTime: '8 min read',
-      img: 'project_images/paisley/11.png',
+      img: '/project_images/paisley/11.png',
       excerpt: 'From initial 3D scope consultations to permit approvals, material lead times, and final quality audits—here is what to expect during a major renovation.',
       author: 'Micheal Smith',
       content: [
@@ -703,7 +704,7 @@ export default function App() {
       category: 'ACCESSIBILITY',
       date: 'July 02, 2026',
       readTime: '6 min read',
-      img: 'project_images/ouellette/2.png',
+      img: '/project_images/ouellette/2.png',
       excerpt: 'Essential architectural guidelines for curbless showers, solid wood wall backing, 36"+ widened doorways, and stylish barrier-free fixtures.',
       author: 'Micheal Smith',
       content: [
@@ -731,15 +732,15 @@ export default function App() {
   ];
 
   const stillInspirationGallery = [
-    { title: 'John Street Ensuite', subtitle: 'Spa-Like Double Vanity Retreat', img: 'project_images/mcnamara/1.png', cat: 'BATHROOMS' },
-    { title: 'West Forest Trail Kitchen', subtitle: 'Master Oak Cabinetry & Island', img: 'project_images/piccadilly/1.png', cat: 'KITCHENS' },
-    { title: 'Alderview Living Space', subtitle: 'Fireplace & Custom Bookshelves', img: 'project_images/paisley/living_room_wood_beam.jpg', cat: 'LIVING SPACES' },
-    { title: 'Joan Lane Sunroom Addition', subtitle: 'Sunroom & Multi-Story Addition', img: 'project_images/kuntz/3.jpg', cat: 'ADDITIONS' },
-    { title: 'Courtland Basement Suite', subtitle: 'Lower-Level Bar & Media Suite', img: 'project_images/verhoeve/basement_media_lounge.jpg', cat: 'BASEMENTS' },
-    { title: 'Young Street Executive Workshop', subtitle: 'Executive Workshop & Storage Loft', img: 'project_images/borkhoff/10.png', cat: 'GARAGES' },
-    { title: 'Ouellette Ensuite', subtitle: 'Herringbone Tile & Soaker Tub', img: 'project_images/ouellette/2.png', cat: 'BATHROOMS' },
-    { title: 'West Forest Trail Kitchen', subtitle: 'Open-Concept Family Hub', img: 'project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png', cat: 'KITCHENS' },
-    { title: 'Alderview Family Suite', subtitle: 'Open Family Living Layouts', img: 'project_images/paisley/11.png', cat: 'LIVING SPACES' }
+    { title: 'John Street Ensuite', subtitle: 'Spa-Like Double Vanity Retreat', img: '/project_images/mcnamara/1.png', cat: 'BATHROOMS' },
+    { title: 'West Forest Trail Kitchen', subtitle: 'Master Oak Cabinetry & Island', img: '/project_images/piccadilly/1.png', cat: 'KITCHENS' },
+    { title: 'Alderview Living Space', subtitle: 'Fireplace & Custom Bookshelves', img: '/project_images/paisley/living_room_wood_beam.jpg', cat: 'LIVING SPACES' },
+    { title: 'Joan Lane Sunroom Addition', subtitle: 'Sunroom & Multi-Story Addition', img: '/project_images/kuntz/3.jpg', cat: 'ADDITIONS' },
+    { title: 'Courtland Basement Suite', subtitle: 'Lower-Level Bar & Media Suite', img: '/project_images/verhoeve/basement_media_lounge.jpg', cat: 'BASEMENTS' },
+    { title: 'Young Street Executive Workshop', subtitle: 'Executive Workshop & Storage Loft', img: '/project_images/borkhoff/10.png', cat: 'GARAGES' },
+    { title: 'Ouellette Ensuite', subtitle: 'Herringbone Tile & Soaker Tub', img: '/project_images/ouellette/2.png', cat: 'BATHROOMS' },
+    { title: 'West Forest Trail Kitchen', subtitle: 'Open-Concept Family Hub', img: '/project_images/piccadilly/ChatGPT_Image_Aug_12__2026__09_44_30_AM.png', cat: 'KITCHENS' },
+    { title: 'Alderview Family Suite', subtitle: 'Open Family Living Layouts', img: '/project_images/paisley/11.png', cat: 'LIVING SPACES' }
   ];
 
   const processSteps = [
@@ -790,34 +791,34 @@ export default function App() {
 
 
   const portfolioProjects = [
-    { name: 'Appledale Crescent — Total Transformation', cat: 'Whole-Home & Custom Millwork', hash: '/work/project-millwork', img: 'project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg' },
-    { name: 'Huntingwood Court — Total Estate Reconstruction', cat: 'Whole-Home & Basement Retreat', hash: '/work/project-basements', img: 'project_images/huntingwood/1.png' },
-    { name: 'Morningdale Crescent — Total Property Overhaul', cat: 'Whole-Home Interior & Exterior', hash: '/work/project-living-spaces', img: 'project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg' },
-    { name: 'Wellington Street — Designer Main Floor Reconstruction', cat: 'Main-Floor Transformation', hash: '/work/project-kitchens', img: 'project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg' },
-    { name: 'Paisley Heights — Heritage Restoration & Modernization', cat: 'Heritage Restoration', hash: '/work/project-bathrooms', img: 'project_images/paisley/1.png' },
-    { name: 'The Moore Street Estate — 1908 Flagship Restoration', cat: 'Flagship Heritage Restoration', hash: '/work/project-garages', img: 'project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg' },
+    { name: 'Appledale Crescent — Total Transformation', cat: 'Whole-Home & Custom Millwork', hash: '/work/project-millwork', img: '/project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg' },
+    { name: 'Huntingwood Court — Total Estate Reconstruction', cat: 'Whole-Home & Basement Retreat', hash: '/work/project-basements', img: '/project_images/huntingwood/1.png' },
+    { name: 'Morningdale Crescent — Total Property Overhaul', cat: 'Whole-Home Interior & Exterior', hash: '/work/project-living-spaces', img: '/project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg' },
+    { name: 'Wellington Street — Designer Main Floor Reconstruction', cat: 'Main-Floor Transformation', hash: '/work/project-kitchens', img: '/project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg' },
+    { name: 'Paisley Heights — Heritage Restoration & Modernization', cat: 'Heritage Restoration', hash: '/work/project-bathrooms', img: '/project_images/paisley/1.png' },
+    { name: 'The Moore Street Estate — 1908 Flagship Restoration', cat: 'Flagship Heritage Restoration', hash: '/work/project-garages', img: '/project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg' },
   ];
 
     const inspirationItems = [
-    { title: 'BATHROOMS', subtitle: 'Spa-Like Wet Rooms, Zero-Clearance Glass & Custom Tile Layouts', img: 'project_images/paisley/1.png', link: '/work/inspiration-bathrooms' },
-    { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: 'project_images/wellington/1.png', link: '/work/inspiration-kitchens' },
-    { title: 'LIVING SPACES', subtitle: 'Structural Wall Removals, Linear Fireplaces & Custom Libraries', img: 'project_images/inspiration/inspiration_living_spaces.jpg', link: '/work/inspiration-living-spaces' },
-    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: 'project_images/inspiration/inspiration_additions.jpg', link: '/work/inspiration-additions' },
-    { title: 'BASEMENTS', subtitle: 'Sub-Grade Wellness Gyms, Custom Playhouses & Media Lounges', img: 'project_images/inspiration/inspiration_basements.jpg', link: '/work/inspiration-basements' },
-    { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: 'project_images/moore/1.png', link: '/work/inspiration-garages' },
-    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: 'project_images/inspiration/inspiration_custom_millwork.jpg', link: '/work/inspiration-millwork' },
-    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '/work/inspiration-exteriors' }
+    { title: 'BATHROOMS', subtitle: 'Spa-Like Wet Rooms, Zero-Clearance Glass & Custom Tile Layouts', img: '/project_images/paisley/1.png', link: '/work/inspiration-bathrooms' },
+    { title: 'KITCHENS', subtitle: 'Master Cabinetry & Quartz Islands', img: '/project_images/wellington/1.png', link: '/work/inspiration-kitchens' },
+    { title: 'LIVING SPACES', subtitle: 'Structural Wall Removals, Linear Fireplaces & Custom Libraries', img: '/project_images/inspiration/inspiration_living_spaces.jpg', link: '/work/inspiration-living-spaces' },
+    { title: 'ADDITIONS', subtitle: 'Multi-Story Extensions & ADU Suites', img: '/project_images/inspiration/inspiration_additions.jpg', link: '/work/inspiration-additions' },
+    { title: 'BASEMENTS', subtitle: 'Sub-Grade Wellness Gyms, Custom Playhouses & Media Lounges', img: '/project_images/inspiration/inspiration_basements.jpg', link: '/work/inspiration-basements' },
+    { title: 'GARAGES & OUTBUILDINGS', subtitle: 'Executive Workshops & Storage Lofts', img: '/project_images/moore/1.png', link: '/work/inspiration-garages' },
+    { title: 'CUSTOM MILLWORK', subtitle: 'Custom Architectural Trim & Cabinetry', img: '/project_images/inspiration/inspiration_custom_millwork.jpg', link: '/work/inspiration-millwork' },
+    { title: 'EXTERIORS', subtitle: 'Covered Porches & Structural Framing', img: '/project_images/d_costa/exterior_facade_stone_driveway.jpg', link: '/work/inspiration-exteriors' }
   ];
 
   const galleryCategories = [
-    { title: 'BATHROOMS', hash: '/work/inspiration-bathrooms', img: 'project_images/paisley/1.png' },
-    { title: 'KITCHENS', hash: '/work/inspiration-kitchens', img: 'project_images/wellington/1.png' },
-    { title: 'LIVING SPACES', hash: '/work/inspiration-living-spaces', img: 'project_images/inspiration/inspiration_living_spaces.jpg' },
-    { title: 'ADDITIONS', hash: '/work/inspiration-additions', img: 'project_images/inspiration/inspiration_additions.jpg' },
-    { title: 'BASEMENTS', hash: '/work/inspiration-basements', img: 'project_images/inspiration/inspiration_basements.jpg' },
-    { title: 'GARAGES & OUTBUILDINGS', hash: '/work/inspiration-garages', img: 'project_images/moore/1.png' },
-    { title: 'CUSTOM MILLWORK', hash: '/work/inspiration-millwork', img: 'project_images/inspiration/inspiration_custom_millwork.jpg' },
-    { title: 'EXTERIORS', hash: '/work/inspiration-exteriors', img: 'project_images/d_costa/exterior_facade_stone_driveway.jpg' },
+    { title: 'BATHROOMS', hash: '/work/inspiration-bathrooms', img: '/project_images/paisley/1.png' },
+    { title: 'KITCHENS', hash: '/work/inspiration-kitchens', img: '/project_images/wellington/1.png' },
+    { title: 'LIVING SPACES', hash: '/work/inspiration-living-spaces', img: '/project_images/inspiration/inspiration_living_spaces.jpg' },
+    { title: 'ADDITIONS', hash: '/work/inspiration-additions', img: '/project_images/inspiration/inspiration_additions.jpg' },
+    { title: 'BASEMENTS', hash: '/work/inspiration-basements', img: '/project_images/inspiration/inspiration_basements.jpg' },
+    { title: 'GARAGES & OUTBUILDINGS', hash: '/work/inspiration-garages', img: '/project_images/moore/1.png' },
+    { title: 'CUSTOM MILLWORK', hash: '/work/inspiration-millwork', img: '/project_images/inspiration/inspiration_custom_millwork.jpg' },
+    { title: 'EXTERIORS', hash: '/work/inspiration-exteriors', img: '/project_images/d_costa/exterior_facade_stone_driveway.jpg' },
   ];
 
 
@@ -834,23 +835,23 @@ export default function App() {
         { label: "ACCESSIBILITY CAPABILITIES", val: "Universal ADA/OBC Barrier-Free Bathrooms & Integrated Seating" },
         { label: "STANDARDS & WARRANTY", val: "Fully Insured, Havenridge Written Lifetime Waterproofing Warranty" }
       ],
-      heroImg: "project_images/paisley/1.png",
+      heroImg: "/project_images/paisley/1.png",
       overview: "At Havenridge, we believe a premium bathroom must perform flawlessly beneath the surface before it can look beautiful on top. Our bathroom division specializes in top-tier transformations, spanning luxurious custom master suites, vintage-inspired restorations, and fully compliant barrier-free accessible walk-in suites. We entirely replace dated mechanical infrastructure, install advanced structural framing subfloors to prevent tile deflection, and utilize 100% certified WEDI and Schluter waterproofing systems to offer a lifetime barrier against moisture.\n\nFrom the layout design to the final architectural trim, our craftsmanship shines through in every detail. We specialize in custom zero-threshold roll-in showers, frame-free sliding glass partitions, niche tile-setting, and complex mosaic layouts including herringbone and classic basketweave styles. Complemented by premium floating vanities, integrated makeup decks, and high-output architectural lighting, we construct spaces that perfectly balance everyday utility with a refined, spa-like aesthetic.",
       grid: [
-      "inspiration/bathrooms/bath_custom_1.jpg",
-      "inspiration/bathrooms/bath_custom_2.jpg",
-      "inspiration/bathrooms/bath_custom_3.jpg",
-      "inspiration/bathrooms/bath_custom_4.jpg",
-      "inspiration/bathrooms/bath_custom_5.jpg",
-      "inspiration/bathrooms/bath_custom_6.jpg",
-      "inspiration/bathrooms/bath_custom_7.jpg",
-      "inspiration/bathrooms/bath_custom_8.jpg"
+      "/inspiration/bathrooms/bath_custom_1.jpg",
+      "/inspiration/bathrooms/bath_custom_2.jpg",
+      "/inspiration/bathrooms/bath_custom_3.jpg",
+      "/inspiration/bathrooms/bath_custom_4.jpg",
+      "/inspiration/bathrooms/bath_custom_5.jpg",
+      "/inspiration/bathrooms/bath_custom_6.jpg",
+      "/inspiration/bathrooms/bath_custom_7.jpg",
+      "/inspiration/bathrooms/bath_custom_8.jpg"
     ],
       showcase: [
-        { title: "Appledale Crescent Walk-In Shower", caption: "Precision herringbone subway tile layout & custom frameless glass enclosure.", img: "project_images/Appledale_Crescent/Appledale_3.jpg", link: "/work/project-millwork" },
-        { title: "Huntingwood Court Basement Suite", caption: "Luxury wellness basement bathroom with custom quartz vanity & deep charcoal wainscoting.", img: "project_images/Huntingwood_Court/Huntingwood_8.jpg", link: "/work/project-basements" },
-        { title: "Paisley Heights Heritage Suite", caption: "Vintage black-and-white basketweave tile floor, sloped-glass tub partition & dark oak vanity.", img: "project_images/paisley/1.png", link: "/work/project-bathrooms" },
-        { title: "Isherwood Ave Universal Suite", caption: "Barrier-free accessible roll-in shower with integrated sitting bench & safety grab bars.", img: "project_images/isherwood/1.png", link: "/services/accessible-aging-in-place" }
+        { title: "Appledale Crescent Walk-In Shower", caption: "Precision herringbone subway tile layout & custom frameless glass enclosure.", img: "/project_images/Appledale_Crescent/Appledale_3.jpg", link: "/work/project-millwork" },
+        { title: "Huntingwood Court Basement Suite", caption: "Luxury wellness basement bathroom with custom quartz vanity & deep charcoal wainscoting.", img: "/project_images/Huntingwood_Court/Huntingwood_8.jpg", link: "/work/project-basements" },
+        { title: "Paisley Heights Heritage Suite", caption: "Vintage black-and-white basketweave tile floor, sloped-glass tub partition & dark oak vanity.", img: "/project_images/paisley/1.png", link: "/work/project-bathrooms" },
+        { title: "Isherwood Ave Universal Suite", caption: "Barrier-free accessible roll-in shower with integrated sitting bench & safety grab bars.", img: "/project_images/isherwood/1.png", link: "/services/accessible-aging-in-place" }
       ]
     },
     '/work/inspiration-kitchens': {
@@ -864,23 +865,23 @@ export default function App() {
         { label: "INTEGRATED FEATURES", val: "Hidden Kickplate Drawers, Roll-Out Coffee Hubs & Custom Hood Range Boxes" },
         { label: "STANDARDS & WARRANTY", val: "ESA Electrical Code Certified, Havenridge Written Workmanship Warranty" }
       ],
-      heroImg: "project_images/wellington/1.png",
+      heroImg: "/project_images/wellington/1.png",
       overview: "A true luxury kitchen requires a master-level understanding of both heavy structural re-engineering and fine architectural finish carpentry. Our kitchen division specializes in full-scale space optimization, frequently executing complex load-bearing wall removals and installing engineered support beams to completely open up dated, enclosed floor plans. We coordinate directly with professional interior designers to reposition plumbing and electrical infrastructure, upgrading lines to handle modern high-efficiency chef appliances, double wall-ovens, and integrated under-counter beverage centers.\n\nEvery kitchen we build is characterized by highly tailored, premium millwork features built to fit your home's exact dimensions. From full-height custom shaker cabinets in bold designer colorways to massive 12-foot islands featuring waterfall quartz or butcher-block extensions, we optimize every inch of storage. Our builds integrate clever, high-utility storage systems like hidden toe-kick drawers, slide-out spice racks, overhead refrigerator pull-outs, and custom roll-out coffee cupboard stations. Finished with solid-slab quartz backsplashes, custom architectural hood ranges, and elegant floating shelves, a Havenridge kitchen is engineered for peak utility and built to be a show-stopper.",
       grid: [
-      "inspiration/kitchens/kitchen_custom_1.png",
-      "inspiration/kitchens/kitchen_custom_2.png",
-      "inspiration/kitchens/kitchen_custom_3.png",
-      "inspiration/kitchens/kitchen_custom_4.jpg",
-      "inspiration/kitchens/kitchen_custom_5.png",
-      "inspiration/kitchens/kitchen_custom_6.jpg",
-      "inspiration/kitchens/kitchen_custom_7.jpg",
-      "inspiration/kitchens/kitchen_custom_8.jpg"
+      "/inspiration/kitchens/kitchen_custom_1.png",
+      "/inspiration/kitchens/kitchen_custom_2.png",
+      "/inspiration/kitchens/kitchen_custom_3.png",
+      "/inspiration/kitchens/kitchen_custom_4.jpg",
+      "/inspiration/kitchens/kitchen_custom_5.png",
+      "/inspiration/kitchens/kitchen_custom_6.jpg",
+      "/inspiration/kitchens/kitchen_custom_7.jpg",
+      "/inspiration/kitchens/kitchen_custom_8.jpg"
     ],
       showcase: [
-        { title: "The Moore Street Estate Island", caption: "Massive 12-foot central island with waterfall butcher-block top, solid quartz slab backsplash & hidden toe-kick drawers.", img: "project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg", link: "/work/project-garages" },
-        { title: "Wellington Street Designer Kitchen", caption: "Sage green cabinets with unique dual-level quartz island dining table extension.", img: "project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg", link: "/work/project-kitchens" },
-        { title: "Huntingwood Court Culinary Suite", caption: "Custom forest green cabinets, custom-built hood range box & dedicated dry bar setup.", img: "project_images/Huntingwood_Court/huntingwood_green_kitchen_pool.jpg", link: "/work/project-basements" },
-        { title: "Appledale Crescent Open Kitchen", caption: "Crisp open kitchen with quartz waterfall island, seamless flooring & dedicated coffee cupboard station.", img: "project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg", link: "/work/project-millwork" }
+        { title: "The Moore Street Estate Island", caption: "Massive 12-foot central island with waterfall butcher-block top, solid quartz slab backsplash & hidden toe-kick drawers.", img: "/project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg", link: "/work/project-garages" },
+        { title: "Wellington Street Designer Kitchen", caption: "Sage green cabinets with unique dual-level quartz island dining table extension.", img: "/project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg", link: "/work/project-kitchens" },
+        { title: "Huntingwood Court Culinary Suite", caption: "Custom forest green cabinets, custom-built hood range box & dedicated dry bar setup.", img: "/project_images/Huntingwood_Court/huntingwood_green_kitchen_pool.jpg", link: "/work/project-basements" },
+        { title: "Appledale Crescent Open Kitchen", caption: "Crisp open kitchen with quartz waterfall island, seamless flooring & dedicated coffee cupboard station.", img: "/project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg", link: "/work/project-millwork" }
       ]
     },
     '/work/inspiration-living-spaces': {
@@ -894,23 +895,23 @@ export default function App() {
         { label: "TRANSITION OVERHAULS", val: "Grand Architectural Staircase Reconstruction & Solid Oak Railings" },
         { label: "STANDARDS & WARRANTY", val: "Aria Flush Vent Integration, Havenridge Written Structural Warranty" }
       ],
-      heroImg: "project_images/inspiration/inspiration_living_spaces.jpg",
+      heroImg: "/project_images/inspiration/inspiration_living_spaces.jpg",
       overview: "Transforming a standard living area into a high-end, cohesive architectural space requires a team that can execute heavy structural engineering and delicate finish details in equal measure. Our living spaces division excels at completely changing the physical atmosphere and scale of your home. We specialize in complex open-concept conversions, safely executing partition wall removals and jacking up settled framing structures to create seamless transitions. From raising ceiling heights to create dramatic, airy vaults to wrapping exposed structural support beams in rich, custom-finished timber, we optimize both the physical space and structural flow.\n\nEvery living space we build features meticulously detailed finish carpentry designed to inject timeless character or clean modern lines. We craft striking media feature walls anchored by built-in multi-sided linear fireplaces, minimalist flush-mount architectural shelving, and seamless LED strip accent lighting. For historical estates and modern studies alike, we engineer custom floor-to-ceiling built-in libraries complete with authentic rolling ladder track assemblies, bold wainscoting, and towering 12-inch historic profile baseboards. We round out these grand living spaces by completely overhauling structural staircases—replacing aged frameworks with solid oak treads, architectural newel posts, modern glass railings, or sleek wrought-iron spindles. Every room is finished with continuous high-end flooring, seamlessly integrated modern flush-mount Aria vents, and a flawless, professional multi-tone paint package.",
       grid: [
-      "inspiration/living_spaces/living_custom_1.png",
-      "inspiration/living_spaces/living_custom_2.png",
-      "inspiration/living_spaces/living_custom_3.jpg",
-      "inspiration/living_spaces/living_custom_4.png",
-      "inspiration/living_spaces/living_custom_5.png",
-      "inspiration/living_spaces/living_custom_6.jpg",
-      "inspiration/living_spaces/living_custom_7.jpg",
-      "inspiration/living_spaces/living_custom_8.png"
+      "/inspiration/living_spaces/living_custom_1.png",
+      "/inspiration/living_spaces/living_custom_2.png",
+      "/inspiration/living_spaces/living_custom_3.jpg",
+      "/inspiration/living_spaces/living_custom_4.png",
+      "/inspiration/living_spaces/living_custom_5.png",
+      "/inspiration/living_spaces/living_custom_6.jpg",
+      "/inspiration/living_spaces/living_custom_7.jpg",
+      "/inspiration/living_spaces/living_custom_8.png"
     ],
       showcase: [
-        { title: "Huntingwood Court Stained Oak Library", caption: "Traditional stained-oak floor-to-ceiling library bookcase with sliding ladder & built-in 3-sided linear fireplace.", img: "project_images/Huntingwood_Court/huntingwood_stained_oak_library_ladder.jpg", link: "/work/project-basements" },
-        { title: "Morningdale Crescent Elevated Living Room", caption: "Elevated ceiling volume with custom wrapped structural timber beam.", img: "project_images/Morningdale_Crescent/morningdale_vaulted_living_room.jpg", link: "/work/project-living-spaces" },
-        { title: "The Moore Street Estate Heritage Lounge", caption: "Exposed brick feature wall, custom wall paneling & historic 12-inch baseboards.", img: "project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg", link: "/work/project-garages" },
-        { title: "Wellington Street Accent Lounge", caption: "Deep forest green accent feature wall & custom glass-paneled double French door entry transitions.", img: "project_images/Wellington_Street/wellington_lounge_french_doors_view.jpg", link: "/work/project-kitchens" }
+        { title: "Huntingwood Court Stained Oak Library", caption: "Traditional stained-oak floor-to-ceiling library bookcase with sliding ladder & built-in 3-sided linear fireplace.", img: "/project_images/Huntingwood_Court/huntingwood_stained_oak_library_ladder.jpg", link: "/work/project-basements" },
+        { title: "Morningdale Crescent Elevated Living Room", caption: "Elevated ceiling volume with custom wrapped structural timber beam.", img: "/project_images/Morningdale_Crescent/morningdale_vaulted_living_room.jpg", link: "/work/project-living-spaces" },
+        { title: "The Moore Street Estate Heritage Lounge", caption: "Exposed brick feature wall, custom wall paneling & historic 12-inch baseboards.", img: "/project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg", link: "/work/project-garages" },
+        { title: "Wellington Street Accent Lounge", caption: "Deep forest green accent feature wall & custom glass-paneled double French door entry transitions.", img: "/project_images/Wellington_Street/wellington_lounge_french_doors_view.jpg", link: "/work/project-kitchens" }
       ]
     },
     '/work/inspiration-additions': {
@@ -924,22 +925,22 @@ export default function App() {
         { label: "PERMITTING & COMPLIANCE", val: "Full Municipal Permit Handling & Zoning Bylaw Compliance" },
         { label: "STANDARDS & WARRANTY", val: "Tarion-Level Structural Compliance, Havenridge Written Structural Warranty" }
       ],
-      heroImg: "project_images/inspiration/inspiration_additions.jpg",
+      heroImg: "/project_images/inspiration/inspiration_additions.jpg",
       overview: "Executing a successful home addition requires extensive architectural foresight, strict engineering discipline, and a deep understanding of municipal zoning bylaws. Our additions division specializes in expanding living footprints where standard renovations cannot, taking projects completely from the excavation phase up to the final roof peak. Whether constructing a lateral main-floor extension, building a detached Accessory Dwelling Unit (ADU), or completely engineering a brand-new second-story vertical addition with striking, high-pitched A-frame gables, we seamlessly stitch new structural framing into your existing home.\n\nOur additions are built from the ground up to protect your investment and optimize daily living. We begin with precision excavation around property perimeters, implementing advanced sub-grade waterproofing membranes and commercial-grade drainage lines to guarantee structural longevity. We handle all complex structural steel shoring and timber framing, building out grand vaulted ceiling spaces, large-format window openings, and custom timber-framed entry porticos with exposed truss detailing. By completely modernizing mechanical, plumbing, and electrical lines to feed the new square footage, we deliver fully permitted, energy-efficient expansions that blend perfectly with your home's original character.",
       grid: [
-      "inspiration/additions/addition_custom_1.png",
-      "inspiration/additions/addition_custom_2.png",
-      "inspiration/additions/addition_custom_3.png",
-      "inspiration/additions/addition_custom_4.png",
-      "inspiration/additions/addition_custom_5.png",
-      "inspiration/additions/addition_custom_6.png",
-      "inspiration/additions/addition_custom_7.png",
-      "inspiration/additions/addition_custom_8.png"
+      "/inspiration/additions/addition_custom_1.png",
+      "/inspiration/additions/addition_custom_2.png",
+      "/inspiration/additions/addition_custom_3.png",
+      "/inspiration/additions/addition_custom_4.png",
+      "/inspiration/additions/addition_custom_5.png",
+      "/inspiration/additions/addition_custom_6.png",
+      "/inspiration/additions/addition_custom_7.png",
+      "/inspiration/additions/addition_custom_8.png"
     ],
       showcase: [
-        { title: "McDougall Road Vertical Addition", caption: "Second-story vertical addition, high-pitched A-frame gables & custom timber-framed front portico.", img: "project_images/McDougall_Road/McDougall_1.png", link: "/services/additions-adus" },
-        { title: "Morningdale Crescent Structural Expansion", caption: "Seamless roofline modifications & heavy structural beam integrations.", img: "project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg", link: "/work/project-living-spaces" },
-        { title: "The Moore Street Estate Framing Shoring", caption: "Leveling & shoring historic home frame before layout expansion.", img: "project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "/work/project-garages" }
+        { title: "McDougall Road Vertical Addition", caption: "Second-story vertical addition, high-pitched A-frame gables & custom timber-framed front portico.", img: "/project_images/McDougall_Road/McDougall_1.png", link: "/services/additions-adus" },
+        { title: "Morningdale Crescent Structural Expansion", caption: "Seamless roofline modifications & heavy structural beam integrations.", img: "/project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg", link: "/work/project-living-spaces" },
+        { title: "The Moore Street Estate Framing Shoring", caption: "Leveling & shoring historic home frame before layout expansion.", img: "/project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "/work/project-garages" }
       ]
     },
     '/work/inspiration-basements': {
@@ -953,23 +954,23 @@ export default function App() {
         { label: "ENTERTAINMENT MILLWORK", val: "Wet Bars, Custom Under-Counter Cooling & Built-In Playhouses" },
         { label: "STANDARDS & WARRANTY", val: "ESA & Plumbing Code Compliant, Havenridge Written Warranty" }
       ],
-      heroImg: "project_images/inspiration/inspiration_basements.jpg",
+      heroImg: "/project_images/inspiration/inspiration_basements.jpg",
       overview: "Maximizing a home's sub-grade square footage requires specialized knowledge in structural space-planning, rigorous mechanical ventilation, and bulletproof moisture management. Our basements division goes far beyond basic framing and drywall; we specialize in completely restructuring lower levels to fit premium, high-utility lifestyle zones. We handle heavy structural modifications below grade, including the demolition of obsolete masonry fireplaces or old concrete cisterns to reclaim hidden space, converting standard foundations into bright structural walkouts, and roughing in full plumbing manifolds for future secondary kitchenette suites.\n\nEvery basement project we build is engineered for maximum thermal comfort and superior sound dampening. We wrap sub-floor and framing assemblies in advanced insulation systems and sub-grade moisture barriers, laying down continuous premium flooring that withstands lower-level demands. Our teams craft beautifully customized, multi-functional spaces tailored to your family's exact needs. We design and build dedicated home wellness gyms finished with commercial rubber flooring and full-height mirrors, custom timber saunas, independent cold plunge zones, and recessed water bottle filling stations. For entertainment, we construct media recreation rooms centered around sleek linear fireplaces with accent LED lighting, complete with modern wet bars featuring floating open tile shelves and integrated beverage centers. We even specialize in unique finish carpentry like custom indoor children's playhouses and integrated space-saving laundry suites with elevated appliance roll-outs.",
       grid: [
-      "inspiration/basements/basement_custom_1.png",
-      "inspiration/basements/basement_custom_2.png",
-      "inspiration/basements/basement_custom_3.png",
-      "inspiration/basements/basement_custom_4.png",
-      "inspiration/basements/basement_custom_5.png",
-      "inspiration/basements/basement_custom_6.png",
-      "inspiration/basements/basement_custom_7.png",
-      "inspiration/basements/basement_custom_8.png"
+      "/inspiration/basements/basement_custom_1.png",
+      "/inspiration/basements/basement_custom_2.png",
+      "/inspiration/basements/basement_custom_3.png",
+      "/inspiration/basements/basement_custom_4.png",
+      "/inspiration/basements/basement_custom_5.png",
+      "/inspiration/basements/basement_custom_6.png",
+      "/inspiration/basements/basement_custom_7.png",
+      "/inspiration/basements/basement_custom_8.png"
     ],
       showcase: [
-        { title: "The Moore Street Estate Wellness Retreat", caption: "Custom timber sauna, dedicated cold plunge station, fitness gym & herringbone tile bath.", img: "project_images/Moore_Street_State_Flagship/moore_commercial_home_gym_basement.jpg", link: "/work/project-garages" },
-        { title: "Huntingwood Court Lower Level", caption: "Deep charcoal basement retreat with glass-enclosed training gym & entertainment kitchenette.", img: "project_images/Huntingwood_Court/huntingwood_basement_wetbar.jpg", link: "/work/project-basements" },
-        { title: "Appledale Crescent Laundry Suite", caption: "Basement bathroom & laundry room with elevated washer/dryer platforms & roll-out bins.", img: "project_images/Appledale_Crescent/appledale_laundry_suite_pocket_door.jpg", link: "/work/project-millwork" },
-        { title: "Knox Court Finished Basement", caption: "Media family room, linear fireplace wall & custom children's playhouse.", img: "project_images/Knox_Court/Knox_7.png", link: "/services/whole-home-renovations" }
+        { title: "The Moore Street Estate Wellness Retreat", caption: "Custom timber sauna, dedicated cold plunge station, fitness gym & herringbone tile bath.", img: "/project_images/Moore_Street_State_Flagship/moore_commercial_home_gym_basement.jpg", link: "/work/project-garages" },
+        { title: "Huntingwood Court Lower Level", caption: "Deep charcoal basement retreat with glass-enclosed training gym & entertainment kitchenette.", img: "/project_images/Huntingwood_Court/huntingwood_basement_wetbar.jpg", link: "/work/project-basements" },
+        { title: "Appledale Crescent Laundry Suite", caption: "Basement bathroom & laundry room with elevated washer/dryer platforms & roll-out bins.", img: "/project_images/Appledale_Crescent/appledale_laundry_suite_pocket_door.jpg", link: "/work/project-millwork" },
+        { title: "Knox Court Finished Basement", caption: "Media family room, linear fireplace wall & custom children's playhouse.", img: "/project_images/Knox_Court/Knox_7.png", link: "/services/whole-home-renovations" }
       ]
     },
     '/work/inspiration-garages': {
@@ -983,22 +984,22 @@ export default function App() {
         { label: "MILLWORK & CABINETRY", val: "Heavy-Duty Plywood Wall Cladding, Custom Tool Storage & Dry Bar Insets" },
         { label: "STANDARDS & WARRANTY", val: "ESA Code Certified, Havenridge Written Workmanship Warranty" }
       ],
-      heroImg: "project_images/moore/1.png",
+      heroImg: "/project_images/moore/1.png",
       overview: "A modern detached garage or workshop should serve as a high-functioning extension of your lifestyle, not just a storage space for tools. Our garages division excels at taking standard outbuildings and completely transforming them into premium, dual-purpose environments. We handle every structural and envelope update required to maximize utility, beginning with pouring new engineered concrete structural pads and reinforcing wall frameworks. We strip away weathered original materials to upgrade the entire exterior envelope—installing high-efficiency modern garage doors, matching windows, low-maintenance premium siding, and integrated roof vents with clean soffit and fascia lines.\n\nInside the workshop footprint, we re-engineer the mechanical and architectural environment for year-round operational comfort. Our teams perform comprehensive insulation upgrades across all walls and attic spaces, cladding the main shop walls in heavy-duty, impact-resistant plywood for versatile utility. To support heavy machinery and modern office equipment, we upgrade electrical capabilities by running dedicated lines to install independent 60-amp sub-panels.\n\nWe excel at slicing out dedicated interior footprints within the structure to craft custom climate-controlled back offices. These executive zones are beautifully finished with durable luxury vinyl plank (LVP) flooring, energy-efficient ductless mini-split heating and cooling units, custom-built cabinetry storage, and integrated dry bar setups. A Havenridge garage transformation seamlessly merges heavy trade capability with refined, quiet workspaces.",
       grid: [
-      "inspiration/garages/garage_custom_1.png",
-      "inspiration/garages/garage_custom_2.png",
-      "inspiration/garages/garage_custom_3.png",
-      "inspiration/garages/garage_custom_4.png",
-      "inspiration/garages/garage_custom_5.png",
-      "inspiration/garages/garage_custom_6.png",
-      "inspiration/garages/garage_custom_7.png",
-      "inspiration/garages/garage_custom_8.png"
+      "/inspiration/garages/garage_custom_1.png",
+      "/inspiration/garages/garage_custom_2.png",
+      "/inspiration/garages/garage_custom_3.png",
+      "/inspiration/garages/garage_custom_4.png",
+      "/inspiration/garages/garage_custom_5.png",
+      "/inspiration/garages/garage_custom_6.png",
+      "/inspiration/garages/garage_custom_7.png",
+      "/inspiration/garages/garage_custom_8.png"
     ],
       showcase: [
-        { title: "The Moore Street Flagship Office", caption: "Detached garage exterior transformation & premium interior office with custom cabinets, LVP & mini-split.", img: "project_images/Moore_Street_State_Flagship/moore_detached_garage_studio.jpg", link: "/work/project-garages" },
-        { title: "McDougall Road Auxiliary Structure", caption: "Detached outbuilding with matching blue-gray siding, roof trim & timber decking.", img: "project_images/McDougall_Road/McDougall_3.png", link: "/services/additions-adus" },
-        { title: "Morningdale Crescent Exterior Envelope", caption: "Clean modern garage door installations & weather-resistant siding tie-ins.", img: "project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg", link: "/work/project-living-spaces" }
+        { title: "The Moore Street Flagship Office", caption: "Detached garage exterior transformation & premium interior office with custom cabinets, LVP & mini-split.", img: "/project_images/Moore_Street_State_Flagship/moore_detached_garage_studio.jpg", link: "/work/project-garages" },
+        { title: "McDougall Road Auxiliary Structure", caption: "Detached outbuilding with matching blue-gray siding, roof trim & timber decking.", img: "/project_images/McDougall_Road/McDougall_3.png", link: "/services/additions-adus" },
+        { title: "Morningdale Crescent Exterior Envelope", caption: "Clean modern garage door installations & weather-resistant siding tie-ins.", img: "/project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg", link: "/work/project-living-spaces" }
       ]
     },
     '/work/inspiration-millwork': {
@@ -1012,23 +1013,23 @@ export default function App() {
         { label: "AESTHETIC UPGRADES", val: "Built-In Floor-to-Ceiling Libraries, Shaker Wainscoting & Custom Mantels" },
         { label: "STANDARDS & WARRANTY", val: "Aria Flush-Mount Vent Integration, Havenridge Written Finish Warranty" }
       ],
-      heroImg: "project_images/inspiration/inspiration_custom_millwork.jpg",
+      heroImg: "/project_images/inspiration/inspiration_custom_millwork.jpg",
       overview: "The final phase of any elite construction project depends entirely on the precision and quality of its finish carpentry. Our custom millwork division specializes in designing, fabricating, and installing architectural wood details that define the unique character of your home. Whether matching the grand proportions of a century-old estate or crafting clean lines for a sleek modern remodel, we approach finish carpentry with furniture-grade accuracy. We specialize in extensive interior profiling, seamlessly cutting and installing stacked crown moldings, crisp wainscoting paneling, premium shiplap accent walls, and towering 12-inch historic profile baseboards that tie a room together.\n\nOur carpentry expertise blends fine aesthetic style with highly creative functional engineering. We build completely customized, floor-to-ceiling libraries and studies equipped with authentic rolling ladder track systems. In the culinary space, our millwork stretches far beyond standard shelving; we craft hidden storage features built directly into the cabinet architecture—including overhead refrigerator pull-out trays, integrated hidden toe-kick drawers, slide-out spice racks, custom-finished range hood boxes, and custom drop-level quartz-capped dining island tables. We meticulously preserve historic integrity by restoring original solid wood doors, matching custom-stained oak handrails to premium floor finishes, and flawlessly integrating modern, flush-mount Aria vents directly into your flooring for a perfectly seamless finish.",
       grid: [
-      "inspiration/millwork/millwork_custom_1.png",
-      "inspiration/millwork/millwork_custom_2.png",
-      "inspiration/millwork/millwork_custom_3.png",
-      "inspiration/millwork/millwork_custom_4.png",
-      "inspiration/millwork/millwork_custom_5.png",
-      "inspiration/millwork/millwork_custom_6.png",
-      "inspiration/millwork/millwork_custom_7.png",
-      "inspiration/millwork/millwork_custom_8.png"
+      "/inspiration/millwork/millwork_custom_1.png",
+      "/inspiration/millwork/millwork_custom_2.png",
+      "/inspiration/millwork/millwork_custom_3.png",
+      "/inspiration/millwork/millwork_custom_4.png",
+      "/inspiration/millwork/millwork_custom_5.png",
+      "/inspiration/millwork/millwork_custom_6.png",
+      "/inspiration/millwork/millwork_custom_7.png",
+      "/inspiration/millwork/millwork_custom_8.png"
     ],
       showcase: [
-        { title: "The Moore Street Historic Millwork", caption: "12-inch historic baseboards, wall paneling, built-in library & hidden kitchen drawers.", img: "project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg", link: "/work/project-garages" },
-        { title: "Huntingwood Court Oak Library", caption: "Stained-oak floor-to-ceiling bookcase with authentic sliding rolling ladder.", img: "project_images/Huntingwood_Court/huntingwood_stained_oak_library_ladder.jpg", link: "/work/project-basements" },
-        { title: "Wellington Street Custom Shaker Cabinets", caption: "Sage green shaker cabinets, mudroom storage & drop-level island table extension.", img: "project_images/Wellington_Street/wellington_mudroom_alcove_cabinet.jpg", link: "/work/project-kitchens" },
-        { title: "Appledale Crescent Coffee Station", caption: "Custom coffee station & elevated laundry platforms with structural roll-out bins.", img: "project_images/Appledale_Crescent/appledale_coffee_station_cabinet.jpg", link: "/work/project-millwork" }
+        { title: "The Moore Street Historic Millwork", caption: "12-inch historic baseboards, wall paneling, built-in library & hidden kitchen drawers.", img: "/project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg", link: "/work/project-garages" },
+        { title: "Huntingwood Court Oak Library", caption: "Stained-oak floor-to-ceiling bookcase with authentic sliding rolling ladder.", img: "/project_images/Huntingwood_Court/huntingwood_stained_oak_library_ladder.jpg", link: "/work/project-basements" },
+        { title: "Wellington Street Custom Shaker Cabinets", caption: "Sage green shaker cabinets, mudroom storage & drop-level island table extension.", img: "/project_images/Wellington_Street/wellington_mudroom_alcove_cabinet.jpg", link: "/work/project-kitchens" },
+        { title: "Appledale Crescent Coffee Station", caption: "Custom coffee station & elevated laundry platforms with structural roll-out bins.", img: "/project_images/Appledale_Crescent/appledale_coffee_station_cabinet.jpg", link: "/work/project-millwork" }
       ]
     },
     '/work/inspiration-exteriors': {
@@ -1042,22 +1043,22 @@ export default function App() {
         { label: "FENESTRATION STANDARDS", val: "High-Efficiency Window Replacements & Insured Exterior Entry Porticos" },
         { label: "STANDARDS & WARRANTY", val: "OBC & Drainage Code Compliant, Havenridge Written Structural Warranty" }
       ],
-      heroImg: "project_images/d_costa/exterior_facade_stone_driveway.jpg",
+      heroImg: "/project_images/d_costa/exterior_facade_stone_driveway.jpg",
       overview: "An exceptional property transformation must be as durable and visually commanding on the outside as it is luxurious on the inside. Our exteriors division handles everything required to completely rewrite your home's curb appeal and outdoor living utility, executing both heavy civil landscaping and complex structural carpentry. We specialize in completely updating weathered exterior envelopes—stripping old materials to install high-efficiency window replacements, modern insulated garage doors, and low-maintenance premium vertical board-and-batten siding with clean, updated soffit, fascia, and oversized eavestrough systems.\n\nMoving onto the grounds, our teams engineer multi-level interlocking stone masonry landscapes, crafting robust retaining walls, tiered front entryways, and wide stone driveways equipped with low-voltage ambient LED ledge lighting for stunning night visibility. In the backyard, we design and build full-scale custom entertainment spaces meant to act as true extensions of the home. We build massive, multi-tiered premium pressure-treated timber decks complete with under-soffit LED pot lighting, built-in horizontal privacy screening, sleek modern metal railing panels, and limestone flagstone landing pads. From crafting artisan-engineered 17'x17' structural timber pergolas over heavy concrete patios to building matching detached accessory structures and custom perimeter fencing, we build outdoor spaces optimized for style and engineered to withstand the elements.",
       grid: [
-      "inspiration/exteriors/exteriors_custom_1.png",
-      "inspiration/exteriors/exteriors_custom_2.png",
-      "inspiration/exteriors/exteriors_custom_3.png",
-      "inspiration/exteriors/exteriors_custom_4.png",
-      "inspiration/exteriors/exteriors_custom_5.png",
-      "inspiration/exteriors/exteriors_custom_6.png",
-      "inspiration/exteriors/exteriors_custom_7.png",
-      "inspiration/exteriors/exteriors_custom_8.png"
+      "/inspiration/exteriors/exteriors_custom_1.png",
+      "/inspiration/exteriors/exteriors_custom_2.png",
+      "/inspiration/exteriors/exteriors_custom_3.png",
+      "/inspiration/exteriors/exteriors_custom_4.png",
+      "/inspiration/exteriors/exteriors_custom_5.png",
+      "/inspiration/exteriors/exteriors_custom_6.png",
+      "/inspiration/exteriors/exteriors_custom_7.png",
+      "/inspiration/exteriors/exteriors_custom_8.png"
     ],
       showcase: [
-        { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg", link: "/work/project-living-spaces" },
-        { title: "The Moore Street Estate Pergola & Envelope", caption: "17'x17' outdoor timber pergola, concrete pad & full exterior siding/window overhaul.", img: "project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "/work/project-garages" },
-        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "project_images/mcdougall/addition_adu_stone_facade.jpg", link: "/services/additions-adus" }
+        { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "/project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg", link: "/work/project-living-spaces" },
+        { title: "The Moore Street Estate Pergola & Envelope", caption: "17'x17' outdoor timber pergola, concrete pad & full exterior siding/window overhaul.", img: "/project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "/work/project-garages" },
+        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "/project_images/mcdougall/addition_adu_stone_facade.jpg", link: "/services/additions-adus" }
       ]
     }
   };
@@ -1075,22 +1076,22 @@ export default function App() {
       scope: "Structural Wall Removal, Custom Kitchen Cabinetry, Multi-Level Premium Bathroom Tile Work & Finished Basement Overhaul",
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
-      img1: "project_images/Knox_Court/Knox_1.png",
-      img2: "project_images/Knox_Court/Knox_2.png",
-      img3: "project_images/Knox_Court/Knox_3.png",
+      img1: "/project_images/Knox_Court/Knox_1.png",
+      img2: "/project_images/Knox_Court/Knox_2.png",
+      img3: "/project_images/Knox_Court/Knox_3.png",
       gallery: [
-        "project_images/Knox_Court/Knox_1.png",
-        "project_images/Knox_Court/Knox_2.png",
-        "project_images/Knox_Court/Knox_3.png",
-        "project_images/Knox_Court/Knox_4.png",
-        "project_images/Knox_Court/Knox_5.png",
-        "project_images/Knox_Court/Knox_6.png",
-        "project_images/Knox_Court/Knox_7.png",
-        "project_images/Knox_Court/Knox_8.png",
-        "project_images/Knox_Court/Knox_9.png",
-        "project_images/Knox_Court/Knox_10.png",
-        "project_images/Knox_Court/Knox_11.png",
-        "project_images/Knox_Court/Knox_12.png"
+        "/project_images/Knox_Court/Knox_1.png",
+        "/project_images/Knox_Court/Knox_2.png",
+        "/project_images/Knox_Court/Knox_3.png",
+        "/project_images/Knox_Court/Knox_4.png",
+        "/project_images/Knox_Court/Knox_5.png",
+        "/project_images/Knox_Court/Knox_6.png",
+        "/project_images/Knox_Court/Knox_7.png",
+        "/project_images/Knox_Court/Knox_8.png",
+        "/project_images/Knox_Court/Knox_9.png",
+        "/project_images/Knox_Court/Knox_10.png",
+        "/project_images/Knox_Court/Knox_11.png",
+        "/project_images/Knox_Court/Knox_12.png"
       ],
       overview: "A true multi-level whole-home renovation requires disciplined project management, precision engineering foresight, and seamless trade coordination. From re-framing structural load-bearing walls on the main floor to upgrading mechanical plumbing infrastructure across three levels, we rebuilt this home to satisfy modern living standards. The massive scope of work spanned a fully integrated gourmet kitchen overhaul, a luxurious master suite and upper-level guest bathroom redesign, and a comprehensive sub-grade basement finish featuring a custom children's playhouse, home fitness zone, and dedicated laundry room.",
       desc1: "A true multi-level whole-home renovation requires disciplined project management, precision engineering foresight, and seamless trade coordination. From re-framing structural load-bearing walls on the main floor to upgrading mechanical plumbing infrastructure across three levels, we rebuilt this home to satisfy modern living standards. The massive scope of work spanned a fully integrated gourmet kitchen overhaul, a luxurious master suite and upper-level guest bathroom redesign, and a comprehensive sub-grade basement finish featuring a custom children's playhouse, home fitness zone, and dedicated laundry room.",
@@ -1109,22 +1110,22 @@ export default function App() {
       scope: "Legal 2-Bedroom Suite Layout, Egress Window Installation, Custom Kitchenette, Mechanical Upgrades & Fire-Separation Assemblies",
       standards: "ESA & Building Code Compliant, Havenridge Written Warranty",
       certifications: "ESA & Building Code Compliant, Havenridge Written Warranty",
-      img1: "project_images/Natchez_Road/Natchez_1.png",
-      img2: "project_images/Natchez_Road/Natchez_2.png",
-      img3: "project_images/Natchez_Road/Natchez_3.png",
+      img1: "/project_images/Natchez_Road/Natchez_1.png",
+      img2: "/project_images/Natchez_Road/Natchez_2.png",
+      img3: "/project_images/Natchez_Road/Natchez_3.png",
       gallery: [
-        "project_images/Natchez_Road/Natchez_1.png",
-        "project_images/Natchez_Road/Natchez_2.png",
-        "project_images/Natchez_Road/Natchez_3.png",
-        "project_images/Natchez_Road/Natchez_4.png",
-        "project_images/Natchez_Road/Natchez_5.png",
-        "project_images/Natchez_Road/Natchez_6.png",
-        "project_images/Natchez_Road/Natchez_7.png",
-        "project_images/Natchez_Road/Natchez_8.png",
-        "project_images/Natchez_Road/Natchez_9.png",
-        "project_images/Natchez_Road/Natchez_10.png",
-        "project_images/Natchez_Road/Natchez_11.png",
-        "project_images/Natchez_Road/Natchez_12.png"
+        "/project_images/Natchez_Road/Natchez_1.png",
+        "/project_images/Natchez_Road/Natchez_2.png",
+        "/project_images/Natchez_Road/Natchez_3.png",
+        "/project_images/Natchez_Road/Natchez_4.png",
+        "/project_images/Natchez_Road/Natchez_5.png",
+        "/project_images/Natchez_Road/Natchez_6.png",
+        "/project_images/Natchez_Road/Natchez_7.png",
+        "/project_images/Natchez_Road/Natchez_8.png",
+        "/project_images/Natchez_Road/Natchez_9.png",
+        "/project_images/Natchez_Road/Natchez_10.png",
+        "/project_images/Natchez_Road/Natchez_11.png",
+        "/project_images/Natchez_Road/Natchez_12.png"
       ],
       overview: "Executing a legal multi-unit conversion demands a thorough mastery of municipal zoning bylaws, Ontario Building Code compliance, and rigorous fire safety regulations. For this duplex optimization project on Natchez Road, we transformed a raw lower level into a fully legal, highly functional two-bedroom rental suite. The comprehensive conversion required structural modifications to install a code-compliant egress window, ensuring necessary natural light and emergency exit pathways. Our team completely overhauled the sub-grade footprint to integrate an efficient modern kitchenette, two private bedrooms, a full bathroom, and independent mechanical considerations. From fire-rated drywall assemblies and soundproofing to strict electrical compliance, this project seamlessly blends investor utility with premium tenant living.",
       desc1: "Executing a legal multi-unit conversion demands a thorough mastery of municipal zoning bylaws, Ontario Building Code compliance, and rigorous fire safety regulations. For this duplex optimization project on Natchez Road, we transformed a raw lower level into a fully legal, highly functional two-bedroom rental suite. The comprehensive conversion required structural modifications to install a code-compliant egress window, ensuring necessary natural light and emergency exit pathways. Our team completely overhauled the sub-grade footprint to integrate an efficient modern kitchenette, two private bedrooms, a full bathroom, and independent mechanical considerations. From fire-rated drywall assemblies and soundproofing to strict electrical compliance, this project seamlessly blends investor utility with premium tenant living.",
@@ -1143,9 +1144,9 @@ export default function App() {
       scope: "Open-Concept Kitchen Reconfiguration, Custom Coffee Station, Multi-Level Flooring & Feature Walls, Custom Laundry Suite & Premium Tile Bathrooms",
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
-      img1: "project_images/Appledale_Crescent/Appledale_1.png",
-      img2: "project_images/Appledale_Crescent/appledale_coffee_station_cabinet.jpg",
-      img3: "project_images/Appledale_Crescent/Appledale_3.jpg",
+      img1: "/project_images/Appledale_Crescent/Appledale_1.png",
+      img2: "/project_images/Appledale_Crescent/appledale_coffee_station_cabinet.jpg",
+      img3: "/project_images/Appledale_Crescent/Appledale_3.jpg",
       overview: `This extensive whole-house renovation on Appledale Crescent showcases a seamless blend of spatial re-engineering and highly specialized finish carpentry. On the main floor, we removed dividing barriers to open up a gourmet chef's kitchen, anchored by a massive quartz waterfall-edge island, integrated full-height pantry walls, and a dedicated custom coffee cupboard. Premium engineered flooring runs continuously across the entire level, tying into a striking architectural feature wall and freshly painted main and upper levels.
 
 Upstairs, the main washroom was completely reimagined with a modern tub-to-shower conversion featuring precision herringbone subway tile layouts and contrasting matte black plumbing fixtures. The sub-grade transformation features a brilliant dual-purpose layout optimization: a high-end custom bathroom that transitions seamlessly via space-saving pocket doors into a luxury laundry suite. This mechanical space features elevated washer and dryer platforms with integrated structural roll-out bins for maximum ergonomic utility.
@@ -1160,18 +1161,18 @@ From the frameless glass shower enclosures to the final architectural trim, this
       prevHash: "/services/multi-unit-conversions",
       nextHash: "/work/project-kitchens",
       gallery: [
-        "project_images/Appledale_Crescent/Appledale_1.png",
-        "project_images/Appledale_Crescent/Appledale_2.jpg",
-        "project_images/Appledale_Crescent/appledale_island_electrical_outlet.jpg",
-        "project_images/Appledale_Crescent/Appledale_4.jpg",
-        "project_images/Appledale_Crescent/Appledale_5.jpg",
-        "project_images/Appledale_Crescent/Appledale_6.jpg",
-        "project_images/Appledale_Crescent/Appledale_7.jpg",
-        "project_images/Appledale_Crescent/Appledale_8.jpg",
-        "project_images/Appledale_Crescent/appledale_laundry_suite_pocket_door.jpg",
-        "project_images/Appledale_Crescent/appledale_staircase_flooring.jpg",
-        "project_images/Appledale_Crescent/Appledale_11.jpg",
-        "project_images/Appledale_Crescent/Appledale_12.jpg"
+        "/project_images/Appledale_Crescent/Appledale_1.png",
+        "/project_images/Appledale_Crescent/Appledale_2.jpg",
+        "/project_images/Appledale_Crescent/appledale_island_electrical_outlet.jpg",
+        "/project_images/Appledale_Crescent/Appledale_4.jpg",
+        "/project_images/Appledale_Crescent/Appledale_5.jpg",
+        "/project_images/Appledale_Crescent/Appledale_6.jpg",
+        "/project_images/Appledale_Crescent/Appledale_7.jpg",
+        "/project_images/Appledale_Crescent/Appledale_8.jpg",
+        "/project_images/Appledale_Crescent/appledale_laundry_suite_pocket_door.jpg",
+        "/project_images/Appledale_Crescent/appledale_staircase_flooring.jpg",
+        "/project_images/Appledale_Crescent/Appledale_11.jpg",
+        "/project_images/Appledale_Crescent/Appledale_12.jpg"
       ]
     },
             '#project-kitchens': {
@@ -1185,9 +1186,9 @@ From the frameless glass shower enclosures to the final architectural trim, this
       scope: "Load-Bearing Wall Removal for Open-Concept Living, Gourmet Kitchen Overhaul with Sage Shaker Millwork, Custom Drop-Level Dining Island, Matching Architectural Range Hood, Built-In Storage Mudroom Inset, Re-Engineering Pocket Doors, Cast-Iron Plumbing Remediation & Electrical System Upgrades, Luxury Continuous Flooring & Capped Staircase Transitions",
       standards: "ESA & OBC Compliant, Havenridge Written Warranty",
       certifications: "ESA & OBC Compliant, Havenridge Written Warranty",
-      img1: "project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg",
-      img2: "project_images/Wellington_Street/wellington_mudroom_alcove_cabinet.jpg",
-      img3: "project_images/Wellington_Street/Wellington_3.png",
+      img1: "/project_images/Wellington_Street/wellington_sage_kitchen_hero.jpg",
+      img2: "/project_images/Wellington_Street/wellington_mudroom_alcove_cabinet.jpg",
+      img3: "/project_images/Wellington_Street/Wellington_3.png",
       overview: `The Wellington Street project is a premier example of balancing advanced hidden engineering with meticulous interior design execution. To modernize the layout and maximize flow, we began by removing a primary load-bearing wall, opening up the entire main level footprint into a spacious, light-filled open-concept environment. Because of the home's age, our team performed comprehensive mechanical remediation, completely replacing old cast-iron plumbing stacks with modern drainage lines and executing a total electrical panel and wiring overhaul. We laid down premium continuous warm-toned flooring across the entire main floor, beautifully completing the structural transitions by capping the lower staircase treads and risers to ensure visual harmony.
 
 Working alongside a professional interior designer, the kitchen was relocated and entirely custom-built. The culinary space showcases high-end, full-height sage green shaker cabinets, pristine quartz countertops, a modern horizontal stack tiled backsplash, and an integrated under-counter beverage cooler station. The center of the room is anchored by a massive, highly innovative island unit featuring an integrated, drop-level custom breakfast table extension wrapped in matching quartz. Nearby, a custom architectural range hood box coordinates flawlessly with the cabinetry profile, flanked by rustic floating wood corner shelving. We carefully repaired and restored the home's original pocket doors and installed premium double French doors to transition gracefully into a cozy living room accented by a deep forest-green feature wall. Additionally, the foyer layout was optimized to include a smart, inset mudroom storage alcove featuring custom floor-to-ceiling cabinetry, integrated brass hardware, and built-in tiered open shoe shelving. The entire level was finished with a clean, professional multi-tone paint package.`,
@@ -1198,18 +1199,18 @@ Working alongside a professional interior designer, the kitchen was relocated an
       prevHash: "/work/project-millwork",
       nextHash: "/work/project-bathrooms",
       gallery: [
-        "project_images/Wellington_Street/Wellington_1.png",
-        "project_images/Wellington_Street/Wellington_2.png",
-        "project_images/Wellington_Street/Wellington_3.png",
-        "project_images/Wellington_Street/Wellington_4.jpg",
-        "project_images/Wellington_Street/Wellington_5.jpg",
-        "project_images/Wellington_Street/Wellington_6.jpg",
-        "project_images/Wellington_Street/wellington_sage_beverage_coffee_bar.jpg",
-        "project_images/Wellington_Street/Wellington_8.jpg",
-        "project_images/Wellington_Street/Wellington_9.jpg",
-        "project_images/Wellington_Street/Wellington_10.jpg",
-        "project_images/Wellington_Street/Wellington_11.jpg",
-        "project_images/Wellington_Street/wellington_island_microwave_built_in.jpg"
+        "/project_images/Wellington_Street/Wellington_1.png",
+        "/project_images/Wellington_Street/Wellington_2.png",
+        "/project_images/Wellington_Street/Wellington_3.png",
+        "/project_images/Wellington_Street/Wellington_4.jpg",
+        "/project_images/Wellington_Street/Wellington_5.jpg",
+        "/project_images/Wellington_Street/Wellington_6.jpg",
+        "/project_images/Wellington_Street/wellington_sage_beverage_coffee_bar.jpg",
+        "/project_images/Wellington_Street/Wellington_8.jpg",
+        "/project_images/Wellington_Street/Wellington_9.jpg",
+        "/project_images/Wellington_Street/Wellington_10.jpg",
+        "/project_images/Wellington_Street/Wellington_11.jpg",
+        "/project_images/Wellington_Street/wellington_island_microwave_built_in.jpg"
       ]
     },
             '#project-bathrooms': {
@@ -1223,9 +1224,9 @@ Working alongside a professional interior designer, the kitchen was relocated an
       scope: "Structural Staircase Reconstruction & Custom Guardrails, Heritage Woodwork & Stained Glass Preservation, Slate Blue Shaker Kitchen & Peninsula, Luxury Continuous Flooring, Classic Basketweave & Subway Tile Bathroom Overhaul, Custom Sloped-Glass Tub Enclosure, Premium French Entry Door, Comprehensive Lathe-and-Plaster Drywall Remediation",
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
-      img1: "project_images/Paisley_Heights/Paisley_1.png",
-      img2: "project_images/Paisley_Heights/Paisley_2.png",
-      img3: "project_images/Paisley_Heights/Paisley_3.png",
+      img1: "/project_images/Paisley_Heights/Paisley_1.png",
+      img2: "/project_images/Paisley_Heights/Paisley_2.png",
+      img3: "/project_images/Paisley_Heights/Paisley_3.png",
       overview: `The Paisley Heights project is a premier demonstration of balancing structural heritage preservation with high-performance modern living. Working within the challenging framework of a classic old home, we began by addressing compromised structural elements, executing comprehensive drywall and framing remediation to completely fix aged, failing walls. The central core of the home was elevated by entirely replacing a deteriorated upper staircase with a beautifully engineered, solid oak stair layout. This grand structural pathway is bounded by custom-stained wood handrails and square block spindles, meticulously color-matched to the premium, wide-plank continuous flooring running across the main level. At the base of the stairs, the foyer was refreshed with a premium glass-paneled white French entry door and architectural crown trim that seamlessly frames the home's historic, original stained-glass window.
 
 The main level expands into a custom-built gourmet kitchen designed to maximize storage and workflow. The space features full-height slate blue beadboard-shaker cabinetry, crisp white quartz countertops, a stone-mosaic subway tile backsplash, and a functional peninsula island setup. Upstairs, the main bathroom underwent a complete transformation into a timeless, spa-like sanctuary. Paying homage to vintage design, we installed classic black-and-white basketweave mosaic floor tiles paired with an expansive deep soaking tub wrapped in a flawless white subway tile surround and an integrated niche. The tub suite is completed with premium matte-black fixtures, a custom-fitted fixed frosted glass privacy shield, and a rich, dark-stained oak double-sink vanity layout. The entire home was brought together by preserving the original rich wood paneled doors and applying a flawless, cohesive historical paint package.`,
@@ -1236,18 +1237,18 @@ The main level expands into a custom-built gourmet kitchen designed to maximize 
       prevHash: "/work/project-kitchens",
       nextHash: "/services/additions-adus",
       gallery: [
-        "project_images/Paisley_Heights/Paisley_1.png",
-        "project_images/Paisley_Heights/Paisley_2.png",
-        "project_images/Paisley_Heights/Paisley_3.png",
-        "project_images/Paisley_Heights/Paisley_4.png",
-        "project_images/Paisley_Heights/Paisley_5.png",
-        "project_images/Paisley_Heights/Paisley_6.png",
-        "project_images/Paisley_Heights/Paisley_7.png",
-        "project_images/Paisley_Heights/Paisley_8.png",
-        "project_images/Paisley_Heights/Paisley_9.png",
-        "project_images/Paisley_Heights/Paisley_10.png",
-        "project_images/Paisley_Heights/Paisley_11.png",
-        "project_images/Paisley_Heights/Paisley_12.png"
+        "/project_images/Paisley_Heights/Paisley_1.png",
+        "/project_images/Paisley_Heights/Paisley_2.png",
+        "/project_images/Paisley_Heights/Paisley_3.png",
+        "/project_images/Paisley_Heights/Paisley_4.png",
+        "/project_images/Paisley_Heights/Paisley_5.png",
+        "/project_images/Paisley_Heights/Paisley_6.png",
+        "/project_images/Paisley_Heights/Paisley_7.png",
+        "/project_images/Paisley_Heights/Paisley_8.png",
+        "/project_images/Paisley_Heights/Paisley_9.png",
+        "/project_images/Paisley_Heights/Paisley_10.png",
+        "/project_images/Paisley_Heights/Paisley_11.png",
+        "/project_images/Paisley_Heights/Paisley_12.png"
       ]
     },
     '#project-additions': {
@@ -1261,22 +1262,22 @@ The main level expands into a custom-built gourmet kitchen designed to maximize 
       scope: "Structural Reconfiguration, Vertical Additions, Custom Stone Masonry & Architectural Trim",
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
-      img1: "project_images/McDougall_Road/McDougall_1.png",
-      img2: "project_images/McDougall_Road/McDougall_2.png",
-      img3: "project_images/McDougall_Road/McDougall_3.png",
+      img1: "/project_images/McDougall_Road/McDougall_1.png",
+      img2: "/project_images/McDougall_Road/McDougall_2.png",
+      img3: "/project_images/McDougall_Road/McDougall_3.png",
       gallery: [
-        "project_images/McDougall_Road/McDougall_1.png",
-        "project_images/McDougall_Road/McDougall_2.png",
-        "project_images/McDougall_Road/McDougall_3.png",
-        "project_images/McDougall_Road/McDougall_4.png",
-        "project_images/McDougall_Road/McDougall_5.png",
-        "project_images/McDougall_Road/McDougall_6.png",
-        "project_images/McDougall_Road/McDougall_7.png",
-        "project_images/McDougall_Road/McDougall_8.png",
-        "project_images/McDougall_Road/McDougall_9.png",
-        "project_images/McDougall_Road/McDougall_10.png",
-        "project_images/McDougall_Road/McDougall_11.png",
-        "project_images/McDougall_Road/McDougall_12.png"
+        "/project_images/McDougall_Road/McDougall_1.png",
+        "/project_images/McDougall_Road/McDougall_2.png",
+        "/project_images/McDougall_Road/McDougall_3.png",
+        "/project_images/McDougall_Road/McDougall_4.png",
+        "/project_images/McDougall_Road/McDougall_5.png",
+        "/project_images/McDougall_Road/McDougall_6.png",
+        "/project_images/McDougall_Road/McDougall_7.png",
+        "/project_images/McDougall_Road/McDougall_8.png",
+        "/project_images/McDougall_Road/McDougall_9.png",
+        "/project_images/McDougall_Road/McDougall_10.png",
+        "/project_images/McDougall_Road/McDougall_11.png",
+        "/project_images/McDougall_Road/McDougall_12.png"
       ],
       overview: "True transformations require flawless structural engineering and uncompromising design vision. For this comprehensive whole-home reconstruction, we stripped the original structure to its core to completely reconfigure the layout, adding an entirely new engineered vertical story with striking A-frame gables. From extensive foundation excavation and advanced modern waterproofing systems to wrapping the exterior in high-end, custom split-face stone masonry, every phase of this build was executed to elevate both structural integrity and architectural aesthetic.",
       desc1: "True transformations require flawless structural engineering and uncompromising design vision. For this comprehensive whole-home reconstruction, we stripped the original structure to its core to completely reconfigure the layout, adding an entirely new engineered vertical story with striking A-frame gables. From extensive foundation excavation and advanced modern waterproofing systems to wrapping the exterior in high-end, custom split-face stone masonry, every phase of this build was executed to elevate both structural integrity and architectural aesthetic.",
@@ -1295,9 +1296,9 @@ The main level expands into a custom-built gourmet kitchen designed to maximize 
       scope: "Load-Bearing Wall Removal, Custom Kitchen Millwork & Dry Bar, Floor-to-Ceiling Fireplace Media Wall, Bespoke Library Bookcase & Sliding Ladder, Custom Powder Room, Grand Staircase Reconstruction, Engineered Hardwood & Aria Flush Vent Integration, Sub-Grade Basement Gym & Kitchenette",
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
-      img1: "project_images/Huntingwood_Court/Huntingwood_1.png",
-      img2: "project_images/Huntingwood_Court/huntingwood_living_fireplace_media.jpg",
-      img3: "project_images/Huntingwood_Court/Huntingwood_3.png",
+      img1: "/project_images/Huntingwood_Court/Huntingwood_1.png",
+      img2: "/project_images/Huntingwood_Court/huntingwood_living_fireplace_media.jpg",
+      img3: "/project_images/Huntingwood_Court/Huntingwood_3.png",
       overview: `The Huntingwood Court estate stands as a definitive showcase of complex multi-level design-build execution. On the main floor, we executed a major structural reconfiguration by removing a principal load-bearing wall, entirely opening the floor plan into a sprawling chef's kitchen. This gourmet culinary space is anchored by custom forest green shaker-style millwork, a massive central quartz-capped island, a bespoke custom-built range hood enclosure, an integrated dry bar, and a dedicated roll-out coffee cupboard station. Seamlessly flowing from the kitchen is the expansive living room, centered around an ultra-sleek, built-in three-sided linear fireplace media unit flanked by minimalist architectural shelving.
 
 No detail was spared in the structural or visual continuity of the home; we installed premium wide-plank engineered hardwood flooring across both upper levels, seamlessly integrating modern flush-mount Aria vents. Off the main foyer, a sophisticated private library features a custom floor-to-ceiling stained oak bookcase equipped with an authentic rolling library ladder system. Nearby, a show-stopping powder room makes a bold statement with deep, dramatic wainscoting topped by a vibrant botanical wallcovering and a luxury marble vanity. Structural transitions were completely elevated by fully replacing the main architectural staircase and professionally capping the secondary staircase to match the premium floor finishes.
@@ -1316,18 +1317,18 @@ The entire estate was brought together with a flawless whole-home professional p
       prevHash: "/services/additions-adus",
       nextHash: "/services/accessible-aging-in-place",
       gallery: [
-        "project_images/Huntingwood_Court/Huntingwood_1.png",
-        "project_images/Huntingwood_Court/huntingwood_green_kitchen_pool.jpg",
-        "project_images/Huntingwood_Court/Huntingwood_3.png",
-        "project_images/Huntingwood_Court/Huntingwood_4.png",
-        "project_images/Huntingwood_Court/Huntingwood_5.jpg",
-        "project_images/Huntingwood_Court/Huntingwood_6.jpg",
-        "project_images/Huntingwood_Court/huntingwood_dining_room.jpg",
-        "project_images/Huntingwood_Court/Huntingwood_8.jpg",
-        "project_images/Huntingwood_Court/huntingwood_staircase_foyer.jpg",
-        "project_images/Huntingwood_Court/huntingwood_basement_wetbar.jpg",
-        "project_images/Huntingwood_Court/Huntingwood_11.jpg",
-        "project_images/Huntingwood_Court/Huntingwood_12.jpg"
+        "/project_images/Huntingwood_Court/Huntingwood_1.png",
+        "/project_images/Huntingwood_Court/huntingwood_green_kitchen_pool.jpg",
+        "/project_images/Huntingwood_Court/Huntingwood_3.png",
+        "/project_images/Huntingwood_Court/Huntingwood_4.png",
+        "/project_images/Huntingwood_Court/Huntingwood_5.jpg",
+        "/project_images/Huntingwood_Court/Huntingwood_6.jpg",
+        "/project_images/Huntingwood_Court/huntingwood_dining_room.jpg",
+        "/project_images/Huntingwood_Court/Huntingwood_8.jpg",
+        "/project_images/Huntingwood_Court/huntingwood_staircase_foyer.jpg",
+        "/project_images/Huntingwood_Court/huntingwood_basement_wetbar.jpg",
+        "/project_images/Huntingwood_Court/Huntingwood_11.jpg",
+        "/project_images/Huntingwood_Court/Huntingwood_12.jpg"
       ]
     },
     '#project-accessibility': {
@@ -1341,15 +1342,15 @@ The entire estate was brought together with a flawless whole-home professional p
       scope: "Structural Doorway Widening, Zero-Threshold Barrier-Free Shower, Integrated Bench Seating, Custom Vanity Storage, Heavy-Duty Grab Bars & High-Output Lighting",
       standards: "ADA / OBC Compliant, Havenridge Written Warranty",
       certifications: "ADA / OBC Compliant, Havenridge Written Warranty",
-      img1: "project_images/Isherwood_Ave/Isherwood_1.png",
-      img2: "project_images/Isherwood_Ave/Isherwood_2.png",
-      img3: "project_images/Isherwood_Ave/Isherwood_3.png",
+      img1: "/project_images/Isherwood_Ave/Isherwood_1.png",
+      img2: "/project_images/Isherwood_Ave/Isherwood_2.png",
+      img3: "/project_images/Isherwood_Ave/Isherwood_3.png",
       gallery: [
-        "project_images/Isherwood_Ave/Isherwood_1.png",
-        "project_images/Isherwood_Ave/Isherwood_2.png",
-        "project_images/Isherwood_Ave/Isherwood_3.png",
-        "project_images/Isherwood_Ave/Isherwood_4.png",
-        "project_images/Isherwood_Ave/Isherwood_5.png"
+        "/project_images/Isherwood_Ave/Isherwood_1.png",
+        "/project_images/Isherwood_Ave/Isherwood_2.png",
+        "/project_images/Isherwood_Ave/Isherwood_3.png",
+        "/project_images/Isherwood_Ave/Isherwood_4.png",
+        "/project_images/Isherwood_Ave/Isherwood_5.png"
       ],
       overview: "Creating a safe, beautiful, and accessible living space within a retirement community requires a deep understanding of universal design principles and structural adaptability. For this comprehensive bathroom renovation, our primary focus was eliminating physical barriers to maximize safety and independence for independent senior living. We began by structurally widening the doorway framework to comfortably accommodate walkers and mobility aids. The original layout was completely overhauled to feature a zero-threshold, barrier-free roll-in shower complete with a heavy-duty integrated bench for sitting and strategically anchored safety grab bars. Every detail was meticulously planned to balance utility and style—including custom-designed vanity storage positioned for easy reach, a comfort-height toilet, and high-output, shadow-free architectural lighting to drastically improve visibility.",
       desc1: "Creating a safe, beautiful, and accessible living space within a retirement community requires a deep understanding of universal design principles and structural adaptability. For this comprehensive bathroom renovation, our primary focus was eliminating physical barriers to maximize safety and independence for independent senior living. We began by structurally widening the doorway framework to comfortably accommodate walkers and mobility aids. The original layout was completely overhauled to feature a zero-threshold, barrier-free roll-in shower complete with a heavy-duty integrated bench for sitting and strategically anchored safety grab bars. Every detail was meticulously planned to balance utility and style—including custom-designed vanity storage positioned for easy reach, a comfort-height toilet, and high-output, shadow-free architectural lighting to drastically improve visibility.",
@@ -1368,9 +1369,9 @@ The entire estate was brought together with a flawless whole-home professional p
       scope: "Living Room Ceiling Elevation & Exposed Timber Wrap, Custom Kitchen Overhaul with White Shaker Cabinets, Premium Engineered Hardwood Flooring, Bold Mediterranean Graphic Tile Bathroom, Architectural Staircases & Wrought-Iron Spindles, Deep-Tone Finished Basement Rec Room & Custom Gym, Exterior Siding & High-Efficiency Windows, Multi-Tiered Backyard Entertainment Deck & Privacy Fencing, Multi-Level Front Interlock Stone Retaining Driveway with Ambient Lighting",
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
-      img1: "project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg",
-      img2: "project_images/Morningdale_Crescent/morningdale_vaulted_living_room.jpg",
-      img3: "project_images/Morningdale_Crescent/Morningdale_3.png",
+      img1: "/project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg",
+      img2: "/project_images/Morningdale_Crescent/morningdale_vaulted_living_room.jpg",
+      img3: "/project_images/Morningdale_Crescent/Morningdale_3.png",
       overview: `The Morningdale Crescent estate stands as a definitive blueprint for an extensive, top-tier interior and exterior renovation. Inside the main living spaces, we structurally raised the ceiling heights into an open architectural vault, perfectly grounded by a massive, rich-toned custom wrapped timber beam. The main level flows seamlessly into a bright, modern gourmet kitchen featuring custom full-height white shaker cabinets, premium concrete-tone countertops, a professional chimney-style stainless hood range, and a geometric tiled backsplash. The entire level is wrapped in premium wide-plank engineered hardwood flooring that runs continuously down a newly overhauled foyer staircase, complete with solid oak handrails, a stately squared newel post, and modern matte black wrought-iron spindles. Every room was further elevated with crisp white solid-core doors, sleek black architectural hardware, and a flawless whole-home professional paint package.
 
 A standout interior feature is the show-stopping main level bathroom, showcasing bold Mediterranean-inspired black-and-white graphic porcelain floor tiles that climb seamlessly up a magnificent walk-in shower enclosure, secured by premium matte-black framed glass sliding doors and high-end plumbing fixtures. Below grade, the home opens into an ultra-sleek, deep charcoal-finished basement retreat. This multi-functional sub-grade footprint features an expansive theater-style recreation room with under-glow LED media lighting, a modern full bathroom, and a dedicated high-performance home gym complete with commercial rubber floor protection, an expansive full-height framed workout mirror, and a vibrant custom faux-ivy green wall display.
@@ -1385,18 +1386,18 @@ The exterior transformations are equally spectacular, delivering world-class cur
       prevHash: "/services/accessible-aging-in-place",
       nextHash: "/work/project-garages",
       gallery: [
-        "project_images/Morningdale_Crescent/morningdale_kitchen_corner.jpg",
-        "project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg",
-        "project_images/Morningdale_Crescent/morningdale_tile_bathroom_tub.jpg",
-        "project_images/Morningdale_Crescent/Morningdale_4.png",
-        "project_images/Morningdale_Crescent/Morningdale_5.png",
-        "project_images/Morningdale_Crescent/Morningdale_6.png",
-        "project_images/Morningdale_Crescent/Morningdale_7.png",
-        "project_images/Morningdale_Crescent/morningdale_teal_shower_suite.jpg",
-        "project_images/Morningdale_Crescent/Morningdale_9.png",
-        "project_images/Morningdale_Crescent/Morningdale_10.png",
-        "project_images/Morningdale_Crescent/Morningdale_11.png",
-        "project_images/Morningdale_Crescent/morningdale_charcoal_basement_theater.jpg"
+        "/project_images/Morningdale_Crescent/morningdale_kitchen_corner.jpg",
+        "/project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg",
+        "/project_images/Morningdale_Crescent/morningdale_tile_bathroom_tub.jpg",
+        "/project_images/Morningdale_Crescent/Morningdale_4.png",
+        "/project_images/Morningdale_Crescent/Morningdale_5.png",
+        "/project_images/Morningdale_Crescent/Morningdale_6.png",
+        "/project_images/Morningdale_Crescent/Morningdale_7.png",
+        "/project_images/Morningdale_Crescent/morningdale_teal_shower_suite.jpg",
+        "/project_images/Morningdale_Crescent/Morningdale_9.png",
+        "/project_images/Morningdale_Crescent/Morningdale_10.png",
+        "/project_images/Morningdale_Crescent/Morningdale_11.png",
+        "/project_images/Morningdale_Crescent/morningdale_charcoal_basement_theater.jpg"
       ]
     },
             '#project-garages': {
@@ -1410,9 +1411,9 @@ The exterior transformations are equally spectacular, delivering world-class cur
       scope: "Structural House Jacking (2\" Leveling), Sub-Grade Steel Beam Shoring, 200-Amp Electrical Upgrade & Whole-Home Ductwork/HVAC Overhaul, 3-Bed/1.5-Bath to 4-Bed/2.5-Bath Expansion, 12-Foot Waterfall Butcher Block Island & Solid Quartz Backsplash, 800 sq ft Master Suite with Tray Ceiling & Custom Glass Railings, Premium Basement Wellness Center (Sauna, Cold Plunge, Gym), Cistern Demolition & Walkout Structural Conversion, Detached Office & Shop Garage Overhaul with Ductless Split, 17'x17' Outdoor Timber Pergola & Hardscaping",
       standards: "ESA & OBC Compliant, Havenridge Written Warranty",
       certifications: "ESA & OBC Compliant, Havenridge Written Warranty",
-      img1: "project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg",
-      img2: "project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg",
-      img3: "project_images/Moore_Street_State_Flagship/Moore_3.png",
+      img1: "/project_images/Moore_Street_State_Flagship/moore_navy_kitchen_butcherblock_hero.jpg",
+      img2: "/project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg",
+      img3: "/project_images/Moore_Street_State_Flagship/Moore_3.png",
       overview: `The Moore Street estate stands as the definitive flagship showcase of Havenridge's engineering depth and uncompromising craftsmanship. As only the second owners of this historic 1908 home, we executed a complete top-to-bottom reconstruction that preserved its timeless heritage while embedding world-class modern luxury. Structurally, the project began deep underground, where we remediated significant century-old settling issues by installing structural steel beams in the basement and safely jacking the entire house up two inches to perfect level. We stripped the home to its bones, removed restrictive partition walls to establish an open-concept main floor, updated the infrastructure to a modern 200-amp electrical service, and replaced the entire HVAC system with brand-new custom trunk lines, venting, and a high-efficiency furnace. Every wall and attic cavity was fully insulated to modern code before being finished with precision drywall, mud, tape, and a flawless custom paint package.
 
 The main level is a masterclass in architectural finishing and clever utility. The heart of the home is a custom chef's kitchen featuring an oversized 12-foot central island wrapped in a spectacular waterfall-edge butcher block countertop, complemented by perimeter quartz surfaces, a solid quartz slab backsplash, and high-end hidden features like an overhead refrigerator pull-out and an integrated toe-kick drawer. The living areas showcase an exposed brick feature wall, elegant custom wall paneling, towering 12-inch historic profile baseboards, and a bespoke built-in library bookcase. To honor the home's heritage, we meticulously restored the original solid-wood interior doors, retaining their rich stained finishes and fully operational skeleton key hardware. The main floor layout was expanded to include a new solid oak staircase, a bedroom, and a stunning full bathroom boasting 9-foot ceilings, a deep soaking tub, a sleek floating vanity, and a custom tile shower.
@@ -1435,18 +1436,18 @@ The exterior envelope and surrounding property were entirely reborn to match the
       prevHash: "/work/project-living-spaces",
       nextHash: "/services/whole-home-renovations",
       gallery: [
-        "project_images/Moore_Street_State_Flagship/Moore_1.png",
-        "project_images/Moore_Street_State_Flagship/moore_brick_arch_hallway.jpg",
-        "project_images/Moore_Street_State_Flagship/Moore_3.png",
-        "project_images/Moore_Street_State_Flagship/moore_hexagon_tile_shower.jpg",
-        "project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg",
-        "project_images/Moore_Street_State_Flagship/moore_commercial_home_gym_basement.jpg",
-        "project_images/Moore_Street_State_Flagship/moore_cedar_timber_sauna.jpg",
-        "project_images/Moore_Street_State_Flagship/Moore_8.png",
-        "project_images/Moore_Street_State_Flagship/moore_detached_garage_studio.jpg",
-        "project_images/Moore_Street_State_Flagship/moore_mudroom_corridor_bench.jpg",
-        "project_images/Moore_Street_State_Flagship/moore_kitchen_step_stool_built_in.jpg",
-        "project_images/Moore_Street_State_Flagship/moore_appliance_garage_coffee_station.jpg"
+        "/project_images/Moore_Street_State_Flagship/Moore_1.png",
+        "/project_images/Moore_Street_State_Flagship/moore_brick_arch_hallway.jpg",
+        "/project_images/Moore_Street_State_Flagship/Moore_3.png",
+        "/project_images/Moore_Street_State_Flagship/moore_hexagon_tile_shower.jpg",
+        "/project_images/Moore_Street_State_Flagship/moore_green_bookcase_reading_lounge.jpg",
+        "/project_images/Moore_Street_State_Flagship/moore_commercial_home_gym_basement.jpg",
+        "/project_images/Moore_Street_State_Flagship/moore_cedar_timber_sauna.jpg",
+        "/project_images/Moore_Street_State_Flagship/Moore_8.png",
+        "/project_images/Moore_Street_State_Flagship/moore_detached_garage_studio.jpg",
+        "/project_images/Moore_Street_State_Flagship/moore_mudroom_corridor_bench.jpg",
+        "/project_images/Moore_Street_State_Flagship/moore_kitchen_step_stool_built_in.jpg",
+        "/project_images/Moore_Street_State_Flagship/moore_appliance_garage_coffee_station.jpg"
       ]
     }
   };
@@ -3766,13 +3767,13 @@ The exterior envelope and surrounding property were entirely reborn to match the
     // ==========================================
   // CLIENT ADMIN PORTAL (#admin)
   // ==========================================
-  if (['#admin', '#dashboard'].includes(currentPath)) {
+  if (['/admin', '#admin', '#dashboard'].includes(currentPath)) {
     return <AdminDashboardView onNavigateHome={() => setCurrentPath('/')} />;
   }
 
   // FREQUENTLY ASKED QUESTIONS PAGE (#resources-faq)
   // ==========================================
-  if (['#resources-faq', '#faq'].includes(currentPath)) {
+  if (['/resources/faq', '#resources-faq', '#faq'].includes(currentPath)) {
     const filteredFaqs = faqData.filter(faq => {
       const matchesCategory = selectedFaqCategory === 'all' || faq.category === selectedFaqCategory;
       const matchesQuery = !faqSearchQuery || 
@@ -4085,7 +4086,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
   // ==========================================
   // RENOVATION GUIDES HUB & READER (#resources-guides)
   // ==========================================
-  if (['#resources-guides', '#guides'].includes(currentPath)) {
+  if (['/resources/guides', '#resources-guides', '#guides'].includes(currentPath)) {
     const activeGuide = selectedGuideId ? liveGuides.find(g => g.id === selectedGuideId) : null;
     const filteredGuides = liveGuides.filter(g => selectedGuideCategory === 'all' || g.category === selectedGuideCategory || g.categoryLabel.toLowerCase().includes(selectedGuideCategory.toLowerCase()));
 
@@ -4408,7 +4409,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
   // ==========================================
   // MAIN RESOURCES HUB LANDING PAGE (#resources)
   // ==========================================
-  if (['#resources', '#resources-hub'].includes(currentPath)) {
+  if (['/resources', '#resources', '#resources-hub'].includes(currentPath)) {
     return (
       <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
         <div>

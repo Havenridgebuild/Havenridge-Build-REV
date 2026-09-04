@@ -425,7 +425,7 @@ export default function App() {
             author: b.author || 'Havenridge Technical Team',
             date: b.date || 'August 30, 2026',
             readTime: b.read_time || '8 min read',
-            img: b.img === '/project_images/Huntingwood_Court/Huntingwood_1.jpg' ? '/project_images/Huntingwood_Court/Huntingwood_1.png' : (b.img || '/project_images/hero_living_room_fireplace.jpg'),
+            img: b.img ? (b.img.startsWith('/') ? b.img : '/' + b.img) : '/project_images/hero_living_room_fireplace.jpg',
             quickAnswer: b.quick_answer || '',
             sections: b.sections || []
           }));

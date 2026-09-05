@@ -34,6 +34,7 @@ export default async function handler(req, res) {
       homeOccupied = "",
       source = "",
       uploadedFile = "",
+      uploadedFileData = null,
       description = ""
     } = body;
 
@@ -107,6 +108,28 @@ export default async function handler(req, res) {
               content: htmlNote
             })
           });
+
+          // Upload File to Pipedrive Deal
+          if (uploadedFileData && uploadedFileData.content) {
+            try {
+              const buffer = Buffer.from(uploadedFileData.content, "base64");
+              const blob = new Blob([buffer], { type: uploadedFileData.type || "application/octet-stream" });
+              const formData = new FormData();
+              formData.append("file", blob, uploadedFileData.filename);
+              formData.append("deal_id", pipedriveDealId);
+              
+              const fileRes = await fetch(`https://api.pipedrive.com/v1/files?api_token=${PIPEDRIVE_API_TOKEN}`, {
+                method: "POST",
+                body: formData
+              });
+              const fileDataResult = await fileRes.json();
+              if(!fileDataResult.success) {
+                console.warn("Pipedrive File API returned false success flag", fileDataResult);
+              }
+            } catch (fileErr) {
+              console.warn("Pipedrive File Upload Error:", fileErr?.message || fileErr);
+            }
+          }
         }
       } catch (pipeErr) {
         console.warn("⚠️ Pipedrive Sync Warning:", pipeErr?.message || pipeErr);
@@ -157,7 +180,13 @@ export default async function handler(req, res) {
                   <p style="margin: 4px 0; white-space: pre-wrap; color: #334155;">${description}</p>
                 </div>` : ""}
               </div>
-            `
+            `,
+            attachments: uploadedFileData ? [
+              {
+                filename: uploadedFileData.filename,
+                content: uploadedFileData.content
+              }
+            ] : []
           })
         });
         if (resendRes.ok) emailStatus = "sent_via_resend";

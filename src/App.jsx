@@ -87,6 +87,7 @@ export default function App() {
   const [formDescription, setFormDescription] = useState('');
   const [formHomeOccupied, setFormHomeOccupied] = useState('Yes');
   const [formUploadedFile, setFormUploadedFile] = useState('');
+  const [formUploadedFileObj, setFormUploadedFileObj] = useState(null);
   const [formSource, setFormSource] = useState('Google');
   const [formSourceDetail, setFormSourceDetail] = useState('');
   const [formConsent, setFormConsent] = useState(false);
@@ -133,6 +134,21 @@ export default function App() {
 
     // Call /api/contact endpoint to send complete Resend Email & create Pipedrive Deal
     try {
+      let fileData = null;
+      if (formUploadedFileObj) {
+        const base64Data = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(formUploadedFileObj);
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = error => reject(error);
+        });
+        fileData = {
+          filename: formUploadedFileObj.name,
+          content: base64Data,
+          type: formUploadedFileObj.type || 'application/octet-stream'
+        };
+      }
+
       await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -152,6 +168,7 @@ export default function App() {
           homeOccupied: formHomeOccupied,
           source: fullSourceStr,
           uploadedFile: formUploadedFile,
+          uploadedFileData: fileData,
           description: formDescription
         })
       });
@@ -5819,7 +5836,11 @@ The exterior envelope and surrounding property were entirely reborn to match the
                           <input 
                             type="file" 
                             accept=".jpg,.jpeg,.png,.pdf" 
-                            onChange={(e) => setFormUploadedFile(e.target.files[0]?.name || '')}
+                            onChange={(e) => {
+                              const file = e.target.files[0];
+                              setFormUploadedFile(file?.name || '');
+                              setFormUploadedFileObj(file || null);
+                            }}
                             className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
                           />
                           <p className="text-xs text-[#24313A]/70">

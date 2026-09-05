@@ -22,17 +22,16 @@ export default async function handler(req, res) {
       applicantEmail = "",
       applicantPhone = "",
       roleType = "Trade Partner / Subcontractor",
-      tradeSpecialty = "",
       experienceYears = "",
       message = "",
-      resumeUrl = ""
+      resumeData = null
     } = body;
 
     const cleanName = (applicantName || "Job Applicant").trim();
     const cleanEmail = applicantEmail ? applicantEmail.trim() : "";
     const cleanPhone = applicantPhone ? applicantPhone.trim() : "";
 
-    console.log("📩 New Careers Application Received:", { cleanName, cleanEmail, roleType, tradeSpecialty });
+    console.log("📩 New Careers Application Received:", { cleanName, cleanEmail, roleType });
 
     let emailStatus = "logged_locally";
     if (RESEND_API_KEY) {
@@ -46,23 +45,27 @@ export default async function handler(req, res) {
           body: JSON.stringify({
             from: process.env.RESEND_FROM_EMAIL || "Havenridge Careers <careers@havenridgebuild.com>",
             to: [APPLICATIONS_EMAIL],
-            subject: `💼 New Work With Us Application: ${cleanName} (${tradeSpecialty || roleType})`,
+            subject: `💼 New Work With Us Application: ${cleanName} (${roleType})`,
             html: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 8px; padding: 24px; background-color: #ffffff;">
                 <h2 style="color: #0B2638; margin-top: 0;">🔨 New Subcontractor / Career Application</h2>
                 <p style="color: #4b5563; font-size: 14px;">An application to work with Havenridge Build was submitted on the website.</p>
                 <div style="background-color: #f8fafc; border-left: 4px solid #CDAE72; padding: 16px; margin: 20px 0;">
-                  <p style="margin: 4px 0;"><strong>Applicant Name:</strong> ${cleanName}</p>
-                  <p style="margin: 4px 0;"><strong>Email:</strong> <a href="mailto:${cleanEmail}">${cleanEmail}</a></p>
-                  <p style="margin: 4px 0;"><strong>Phone:</strong> <a href="tel:${cleanPhone}">${cleanPhone}</a></p>
-                  <p style="margin: 4px 0;"><strong>Role / Capacity:</strong> ${roleType}</p>
-                  <p style="margin: 4px 0;"><strong>Trade Specialty:</strong> ${tradeSpecialty || "N/A"}</p>
+                  <p style="margin: 4px 0;"><strong>Full Name:</strong> ${cleanName}</p>
+                  <p style="margin: 4px 0;"><strong>Email Address:</strong> <a href="mailto:${cleanEmail}">${cleanEmail}</a></p>
+                  <p style="margin: 4px 0;"><strong>Phone Number:</strong> <a href="tel:${cleanPhone}">${cleanPhone}</a></p>
+                  <p style="margin: 4px 0;"><strong>Role / Specialty:</strong> ${roleType}</p>
                   <p style="margin: 4px 0;"><strong>Years of Experience:</strong> ${experienceYears || "N/A"}</p>
-                  <p style="margin: 4px 0;"><strong>Introduction Message:</strong> ${message || "N/A"}</p>
-                  ${resumeUrl ? `<p style="margin: 4px 0;"><strong>Resume / Portfolio Link:</strong> <a href="${resumeUrl}" target="_blank">${resumeUrl}</a></p>` : ""}
+                  <p style="margin: 4px 0;"><strong>Brief Introduction / Message:</strong> ${message || "N/A"}</p>
                 </div>
               </div>
-            `
+            `,
+            attachments: resumeData ? [
+              {
+                filename: resumeData.filename,
+                content: resumeData.content
+              }
+            ] : []
           })
         });
         if (resendRes.ok) emailStatus = "sent_via_resend";

@@ -184,6 +184,20 @@ export default function App() {
     setIsAppliedSubmitted(true);
 
     try {
+      let fileData = null;
+      if (applicantFile) {
+        const base64Data = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(applicantFile);
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = error => reject(error);
+        });
+        fileData = {
+          filename: applicantFile.name,
+          content: base64Data
+        };
+      }
+
       await fetch('/api/apply', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -192,10 +206,9 @@ export default function App() {
           applicantEmail: applyEmail,
           applicantPhone: applyPhone,
           roleType: applyRole || 'General Application',
-          tradeSpecialty: applyRole || 'Subcontractor / Trade Partner',
           experienceYears: applyExperience || '1-3 Years',
           message: applyMessage || 'Submitted application via website.',
-          resumeUrl: applicantFileName ? ('File attached: ' + applicantFileName) : 'Attached directly'
+          resumeData: fileData
         })
       });
     } catch (err) {
@@ -339,6 +352,7 @@ export default function App() {
   const [isAppliedSubmitted, setIsAppliedSubmitted] = useState(false);
   const [uploadedFileName, setUploadedFileName] = useState('');
   const [applicantFileName, setApplicantFileName] = useState('');
+  const [applicantFile, setApplicantFile] = useState(null);
   const inspirationRef = useRef(null);
   const testimonialRef = useRef(null);
 
@@ -1470,7 +1484,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -1547,13 +1561,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -1804,7 +1817,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -1881,13 +1894,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -2211,7 +2223,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2288,13 +2300,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -2399,7 +2410,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2476,13 +2487,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -2620,7 +2630,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -2697,13 +2707,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -3072,7 +3081,11 @@ The exterior envelope and surrounding property were entirely reborn to match the
                         type="file" 
                         required 
                         accept=".pdf,.doc,.docx" 
-                        onChange={(e) => setApplicantFileName(e.target.files[0]?.name || '')}
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          setApplicantFileName(file?.name || '');
+                          setApplicantFile(file || null);
+                        }}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
                       />
                       <p className="text-xs text-[#24313A]/70">
@@ -3132,7 +3145,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -3209,13 +3222,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -3718,7 +3730,11 @@ The exterior envelope and surrounding property were entirely reborn to match the
                         type="file" 
                         required 
                         accept=".pdf,.doc,.docx" 
-                        onChange={(e) => setApplicantFileName(e.target.files[0]?.name || '')}
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          setApplicantFileName(file?.name || '');
+                          setApplicantFile(file || null);
+                        }}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
                       />
                       <p className="text-xs text-[#24313A]/70">
@@ -3796,7 +3812,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -3873,13 +3889,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -4104,7 +4119,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4181,13 +4196,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -4424,7 +4438,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4501,13 +4515,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -4666,7 +4679,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -4743,13 +4756,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -5132,7 +5144,11 @@ The exterior envelope and surrounding property were entirely reborn to match the
                         type="file" 
                         required 
                         accept=".pdf,.doc,.docx" 
-                        onChange={(e) => setApplicantFileName(e.target.files[0]?.name || '')}
+                        onChange={(e) => {
+                          const file = e.target.files[0];
+                          setApplicantFileName(file?.name || '');
+                          setApplicantFile(file || null);
+                        }}
                         className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
                       />
                       <p className="text-xs text-[#24313A]/70">
@@ -5192,7 +5208,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -5269,13 +5285,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
@@ -5989,7 +6004,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
                 {/* 1. Services Dropdown */}
                 <div className="relative group">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
@@ -6066,13 +6081,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   
                   {/* Services Accordion Dropdown */}
                   <div className="border-t border-white/10 pt-3">
-                    <button 
-                      onClick={() => setMobileServicesOpen(!mobileServicesOpen)} 
-                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
-                    >
-                      <span>Services</span>
-                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
-                    </button>
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
                         <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>

@@ -533,27 +533,20 @@ export default function App() {
   // Robust NiceJob SDK re-trigger for SPA route changes
   useEffect(() => {
     if (['/reviews', '#reviews-page', '#reviews', '#testimonials'].includes(currentPath)) {
-      const triggerNiceJob = () => {
-        if (window.NiceJob) {
-          try {
-            if (typeof window.NiceJob.init === 'function') window.NiceJob.init();
-            if (typeof window.NiceJob.parse === 'function') window.NiceJob.parse();
-          } catch (e) {
-            console.log('NiceJob SDK parse re-trigger:', e);
-          }
-        }
-      };
+      // Clean up any existing nicejob script elements just to be safe
+      const existingScripts = document.querySelectorAll('script[src*="nicejob"]');
+      existingScripts.forEach(script => script.remove());
 
-      // Trigger immediately + after React DOM paint delays (50ms, 200ms, 600ms)
-      triggerNiceJob();
-      const t1 = setTimeout(triggerNiceJob, 50);
-      const t2 = setTimeout(triggerNiceJob, 200);
-      const t3 = setTimeout(triggerNiceJob, 600);
+      // Dynamically inject the NiceJob script so it always executes AFTER the DOM is painted
+      const script = document.createElement('script');
+      script.src = "https://cdn.nicejob.co/js/sdk.min.js?id=6309960057618432";
+      script.async = true;
+      document.body.appendChild(script);
 
       return () => {
-        clearTimeout(t1);
-        clearTimeout(t2);
-        clearTimeout(t3);
+        if (document.body.contains(script)) {
+          document.body.removeChild(script);
+        }
       };
     }
   }, [currentPath]);
@@ -1490,6 +1483,14 @@ The exterior envelope and surrounding property were entirely reborn to match the
     return (
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         
+        {/* GO BACK ARROW (INSPIRATION) */}
+        <div className="bg-[#F4F2EE] border-b border-[#0B2638]/10 py-3">
+          <div className="max-w-7xl mx-auto px-6">
+            <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="inline-flex items-center gap-2 text-[#0B2638] hover:text-[#CDAE72] transition-colors text-xs font-bold tracking-widest uppercase font-sans">
+              <ChevronLeft className="w-4 h-4" /> Back to Inspiration
+            </a>
+          </div>
+        </div>
         {/* NAV HEADER */}
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
@@ -1534,7 +1535,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -1798,6 +1799,112 @@ The exterior envelope and surrounding property were entirely reborn to match the
             </div>
           </div>
         </section>
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersotg/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/carpentersonthego/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@havenridge.build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="TikTok"
+                title="TikTok"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <TiktokIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@Havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
+          </div>
+        </footer>
         {renderLightbox()}
       </div>
     );
@@ -1823,6 +1930,14 @@ The exterior envelope and surrounding property were entirely reborn to match the
     return (
       <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
         
+        {/* GO BACK ARROW (PROJECTS) */}
+        <div className="bg-[#F4F2EE] border-b border-[#0B2638]/10 py-3">
+          <div className="max-w-7xl mx-auto px-6">
+            <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="inline-flex items-center gap-2 text-[#0B2638] hover:text-[#CDAE72] transition-colors text-xs font-bold tracking-widest uppercase font-sans">
+              <ChevronLeft className="w-4 h-4" /> Back to Projects
+            </a>
+          </div>
+        </div>
         {/* NAV HEADER */}
         <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
             <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
@@ -1867,7 +1982,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -2127,7 +2242,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -2192,7 +2309,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Houzz"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
               >
-                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
                 href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
@@ -2202,11 +2319,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Yelp"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
               >
-                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
-              <a 
-                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
-                aria-label="Client Reviews"
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
               >
@@ -2273,7 +2388,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -2404,7 +2519,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-white transition-colors">Projects</a>
               <span className="text-white/30">•</span>
-              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
             </div>
           </div>
         </footer>
@@ -2460,7 +2577,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -2680,7 +2797,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -2909,7 +3026,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -2974,7 +3093,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Houzz"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
               >
-                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
                 href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
@@ -2984,11 +3103,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Yelp"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
               >
-                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
-              <a 
-                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
-                aria-label="Client Reviews"
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
               >
@@ -3195,7 +3312,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -3559,7 +3676,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -3624,7 +3743,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Houzz"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
               >
-                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
                 href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
@@ -3634,11 +3753,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Yelp"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
               >
-                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
-              <a 
-                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
-                aria-label="Client Reviews"
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
               >
@@ -3862,7 +3979,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -4108,8 +4225,110 @@ The exterior envelope and surrounding property were entirely reborn to match the
         </div>
 
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-8 border-t border-[#CDAE72]/20 text-center text-xs font-light">
-          <p>© {new Date().getFullYear()} Havenridge Build. All rights reserved. Formerly Carpenters On The Go Inc.</p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersotg/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/carpentersonthego/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@havenridge.build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="TikTok"
+                title="TikTok"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <TiktokIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@Havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
+          </div>
         </footer>
       </div>
     );
@@ -4169,7 +4388,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -4430,8 +4649,110 @@ The exterior envelope and surrounding property were entirely reborn to match the
         </div>
 
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-8 border-t border-[#CDAE72]/20 text-center text-xs font-light">
-          <p>© {new Date().getFullYear()} Havenridge Build. All rights reserved. Formerly Carpenters On The Go Inc.</p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersotg/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/carpentersonthego/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@havenridge.build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="TikTok"
+                title="TikTok"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <TiktokIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@Havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
+          </div>
         </footer>
       </div>
     );
@@ -4488,7 +4809,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -4673,8 +4994,110 @@ The exterior envelope and surrounding property were entirely reborn to match the
         </div>
 
         {/* FOOTER */}
-        <footer className="bg-[#0B2638] text-white/70 py-8 border-t border-[#CDAE72]/20 text-center text-xs font-light">
-          <p>© {new Date().getFullYear()} Havenridge Build. All rights reserved. Formerly Carpenters On The Go Inc.</p>
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/carpentersotg/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/carpentersonthego/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@havenridge.build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="TikTok"
+                title="TikTok"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <TiktokIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="LinkedIn"
+                title="LinkedIn"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <LinkedinIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@Havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
+          </div>
         </footer>
       </div>
     );
@@ -4729,7 +5152,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -4973,7 +5396,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -5038,7 +5463,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Houzz"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
               >
-                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
                 href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
@@ -5048,11 +5473,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Yelp"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
               >
-                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
-              <a 
-                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
-                aria-label="Client Reviews"
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
               >
@@ -5258,7 +5681,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -5864,7 +6287,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                             className="mt-1 h-4 w-4 text-[#0B2638] focus:ring-[#CDAE72] border-gray-300 rounded" 
                           />
                           <span className="text-xs text-[#24313A]/80 leading-relaxed font-light">
-                            I agree to allow Havenridge Build to contact me regarding my project inquiry in accordance with the <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="text-[#0B2638] font-bold underline hover:text-[#CDAE72]">Privacy Policy</a>.
+                            I agree to allow Havenridge Build to contact me regarding my project inquiry in accordance with the <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="text-[#0B2638] font-bold underline hover:text-[#CDAE72]">Privacy Policy</a>.
                           </span>
                         </label>
                       </div>
@@ -5912,7 +6335,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -5977,7 +6402,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Houzz"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
               >
-                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
                 href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
@@ -5987,11 +6412,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Yelp"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
               >
-                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
-              <a 
-                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
-                aria-label="Client Reviews"
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
               >
@@ -6058,7 +6481,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
                 {/* 6. Resources Dropdown */}
                 <div className="relative group">
-                  <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
                     Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
                   </a>
                   <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
@@ -6420,7 +6843,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <p className="text-sm font-light text-white/70">Real feedback from homeowners across Kitchener, Waterloo, Cambridge, Guelph, and Surrounding Area.</p>
               <div className="pt-1">
                 <a 
-                  href="/about" onClick={(e) => handleNavigate(e, "/about")} 
+                  href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} 
                   className="bg-[#CDAE72] text-[#0B2638] font-bold px-6 py-2.5 text-xs font-sans tracking-widest uppercase hover:bg-white transition-all shadow-md rounded-sm inline-flex items-center gap-2"
                 >
                   <span>SEE MORE REVIEWS</span>
@@ -6578,7 +7001,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <span className="text-white/30">•</span>
               <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
               <span className="text-white/30">•</span>
-              <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
               <span className="text-white/30">•</span>
               <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
             </div>
@@ -6643,7 +7068,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Houzz"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
               >
-                <img src="houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
               </a>
               <a 
                 href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
@@ -6653,11 +7078,9 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 title="Yelp"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
               >
-                <img src="yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
               </a>
-              <a 
-                href="/about" onClick={(e) => handleNavigate(e, "/about")} 
-                aria-label="Client Reviews"
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
                 title="Verified Client Reviews"
                 className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
               >

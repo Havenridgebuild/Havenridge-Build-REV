@@ -74,7 +74,15 @@ export default async function handler(req, res) {
             person_id: pipedrivePersonId,
             stage_id: 1,
             currency: "CAD",
-            "2ce2a93e96753839a3d8251182f002231638404f": fullSiteAddress
+            "2ce2a93e96753839a3d8251182f002231638404f": fullSiteAddress,
+            "942f85eeee6b601f3c44970b723e20244f3b42b6": investment,
+            "23677f1698f93482be883591def4ad78f2c51559": typesStr,
+            "63a419dda9253a5f826bfc17bff142ff7519e401": designStatus,
+            "19bc780543f09b515e9f7c2bbb1cab1f2343ba9b": timing,
+            "2e84281f410c132a062c9d6a364f3bcd8e57071f": decisionMakers,
+            "c6eabb8cfaaa266dcd72399f23e296c1ddd6a4c1": homeOccupied,
+            "cd213a1e958652bc211a30576e83205c318424d0": source,
+            "61ebb6977bedc5f6f96aa599374aff5c52793705": description
           })
         });
         const dealData = await dealRes.json();

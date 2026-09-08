@@ -1,5 +1,6 @@
 export const servicesData = {
   "additions-adus": {
+    heroImg: "/project_images/mcdougall/addition_adu_stone_facade.jpg",
     topSmallName: "HOME EXPANSIONS & SECONDARY LIVING",
     topMainName: "ADDITIONS & ADUs",
     topDescription: `Expand the home you already love with thoughtfully designed additions and accessory dwelling units tailored to the way you want to live.
@@ -37,6 +38,7 @@ The result is an addition or ADU designed to feel intentional from the beginning
   },
   
   "whole-home-renovations": {
+    heroImg: "/project_images/knox/whole_home_white_kitchen.jpg",
     topSmallName: "COMPLETE HOME TRANSFORMATIONS",
     topMainName: "WHOLE-HOME RENOVATIONS",
     topDescription: `Transform the home you already love into one that better fits the way you live today.
@@ -75,6 +77,7 @@ From the initial design direction through construction and final detailing, the 
   },
   
   "multi-unit-conversions": {
+    heroImg: "/project_images/natchez/secondary_suite_exterior_entrance.jpg",
     topSmallName: "MULTI-UNIT LIVING & PROPERTY CONVERSIONS",
     topMainName: "MULTI-UNIT CONVERSIONS",
     topDescription: `Transform an existing home into a thoughtfully planned multi-unit property designed for independent living, long-term flexibility and better use of the space you already have.
@@ -113,6 +116,7 @@ From independent kitchens and bathrooms to entrances, fire separation, sound con
   },
   
   "accessible-aging-in-place": {
+    heroImg: "/project_images/isherwood/1.png",
     topSmallName: "ADAPTIVE LIVING & HOME ACCESSIBILITY",
     topMainName: "ACCESSIBLE & AGING IN PLACE",
     topDescription: `Your home should continue to support the way you live, even as your needs change.

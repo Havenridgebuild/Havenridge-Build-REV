@@ -2124,26 +2124,33 @@ The exterior envelope and surrounding property were entirely reborn to match the
             )}
           </nav>
 
-          {/* TOP SECTION */}
-          <section className="pt-24 lg:pt-32 pb-12 bg-[#F4F2EE]">
-            <div className="max-w-6xl mx-auto px-6 text-center space-y-6">
-              <span className="text-[#CDAE72] text-[10px] sm:text-xs font-sans font-bold tracking-[0.25em] uppercase block">
-                {svc.topSmallName}
-              </span>
-              <h1 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold text-[#0B2638] tracking-tight uppercase">
+          {/* HERO SECTION WITH IMAGE & MAIN TITLE */}
+          <section className="relative h-[60vh] sm:h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+            <img src={svc.heroImg} alt={svc.topMainName} className="absolute inset-0 w-full h-full object-cover cass-hero-fade" />
+            <div className="absolute inset-0 bg-[#0B2638]/50"></div>
+            <div className="relative z-10 max-w-7xl mx-auto px-6 text-center w-full mt-10 cass-reveal">
+              <h1 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-widest uppercase drop-shadow-2xl">
                 {svc.topMainName}
               </h1>
-              <p className="text-[#24313A] text-sm sm:text-base lg:text-lg font-light leading-relaxed max-w-5xl mx-auto whitespace-pre-line">
-                {svc.topDescription}
-              </p>
             </div>
           </section>
 
-          {/* MIDDLE SECTION */}
+          {/* INTRO COPY AND GALLERY */}
           <section className="py-16 bg-white border-y border-[#0B2638]/10">
             <div className="max-w-7xl mx-auto px-6">
-              {/* GALLERY (MOVED TO TOP OF MIDDLE SECTION) */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-16">
+              
+              {/* INTRO TEXT MOVED BELOW HERO */}
+              <div className="mb-16 space-y-4 max-w-5xl">
+                <span className="text-[#CDAE72] text-[10px] sm:text-xs font-sans font-bold tracking-[0.25em] uppercase block">
+                  {svc.topSmallName}
+                </span>
+                <p className="text-[#24313A] text-sm sm:text-base lg:text-lg font-light leading-relaxed whitespace-pre-line">
+                  {svc.topDescription}
+                </p>
+              </div>
+
+              {/* GALLERY GRID */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                 {svc.gallery.map((g, i) => (
                   <div 
                     key={i} 
@@ -2159,7 +2166,6 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   </div>
                 ))}
               </div>
-
 
             </div>
           </section>

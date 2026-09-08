@@ -2,8 +2,6 @@ import { supabase, saveLeadToSupabase } from './lib/supabaseClient';
 import AdminDashboardView from './components/AdminDashboardView';
 import { faqCategories, faqData } from "./data/faqData";
 import { guideCategories, guidesData } from "./data/guidesData";
-import { createWixLeadContact } from "./lib/wixClient";
-import { wixClient, createWixContact } from "./lib/wixClient";
 import React, { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
@@ -102,6 +100,8 @@ export default function App() {
 
   const handleLeadSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     const isQual = formInvestment !== 'Under $20,000';
     setFormQualified(isQual);
     
@@ -176,24 +176,10 @@ export default function App() {
       console.warn('API contact route warning:', apiErr);
     }
 
-    try {
-      await createWixContact({
-        firstName: formFirstName,
-        lastName: formLastName,
-        email: formEmail,
-        phone: formPhone,
-        address: formAddress,
-        city: formCity,
-        postalCode: formPostalCode,
-        investment: formInvestment,
-        projectTypes: formProjectTypes,
-        description: formDescription,
-      });
-    } catch (err) {
-      console.warn("Wix Lead capture warning:", err);
-    }
+
 
     setFormSubmitted(true);
+    setIsSubmitting(false);
   };
 
     const handleApplySubmit = async (e) => {
@@ -235,6 +221,7 @@ export default function App() {
 
   const compRef = useRef(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [applyName, setApplyName] = useState('');
   const [applyEmail, setApplyEmail] = useState('');
   const [applyPhone, setApplyPhone] = useState('');
@@ -607,16 +594,25 @@ export default function App() {
       source: 'Contact Page Qualification Form'
     });
     setFormSubmitted(true);
+    setIsSubmitting(false);
   };
 
-  const handleNewsletterSubmit = (e) => {
+  const handleNewsletterSubmit = async (e) => {
     e.preventDefault();
-    createWixLeadContact({
-      firstName: 'Newsletter',
-      lastName: 'Subscriber',
-      email: e.target.elements?.email?.value || '',
-      source: 'Footer Newsletter Subscription'
-    });
+    try {
+      await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: 'Newsletter',
+          lastName: 'Subscriber',
+          email: e.target.elements?.email?.value || '',
+          source: 'Footer Newsletter Subscription'
+        })
+      });
+    } catch (err) {
+      console.warn("Newsletter API warning:", err);
+    }
     setNewsletterSubmitted(true);
   };
 
@@ -6303,9 +6299,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                         <div className="flex flex-col items-end space-y-2">
                           <button 
                             type="submit" 
-                            className="bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm cursor-pointer"
+                            disabled={isSubmitting}
+                            className={`bg-[#0B2638] text-[#CDAE72] font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm ${isSubmitting ? 'opacity-50 cursor-not-allowed' : 'hover:bg-[#CDAE72] hover:text-[#0B2638] cursor-pointer'}`}
                           >
-                            SUBMIT YOUR PROJECT →
+                            {isSubmitting ? "SUBMITTING..." : "SUBMIT YOUR PROJECT →"}
                           </button>
                           <p className="text-[11px] text-[#24313A]/70 font-light text-right leading-relaxed max-w-sm">
                             By submitting this form, you agree that Havenridge Build may contact you regarding your project inquiry. We respect your privacy and do not sell your information.

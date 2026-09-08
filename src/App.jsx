@@ -59,6 +59,15 @@ const LinkedinIcon = ({ className = "w-4 h-4" }) => (
 );
 
 
+const cleanToProjectKey = {
+  '/work/project-millwork': '#project-millwork',
+  '/work/project-kitchens': '#project-kitchens',
+  '/work/project-bathrooms': '#project-bathrooms',
+  '/work/project-basements': '#project-basements',
+  '/work/project-garages': '#project-garages',
+  '/work/project-living-spaces': '#project-living-spaces',
+};
+
 export default function App() {
   // Mobile Menu State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -1958,14 +1967,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
   }
 
   // Render individual project detail sub-pages (CASS STYLE)
-  const cleanToProjectKey = {
-    '/work/project-millwork': '#project-millwork',
-    '/work/project-kitchens': '#project-kitchens',
-    '/work/project-bathrooms': '#project-bathrooms',
-    '/work/project-basements': '#project-basements',
-    '/work/project-garages': '#project-garages',
-    '/work/project-living-spaces': '#project-living-spaces',
-  };
+
 
   // Render Services Detail Pages
   if (currentPath.startsWith('/services/')) {

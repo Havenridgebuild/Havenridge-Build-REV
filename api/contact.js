@@ -58,7 +58,8 @@ export default async function handler(req, res) {
           body: JSON.stringify({
             name: fullName,
             email: cleanEmail ? [cleanEmail] : [],
-            phone: cleanPhone ? [cleanPhone] : []
+            phone: cleanPhone ? [cleanPhone] : [],
+            "cf64483c4670da016b7a07d30d7354308938d646": fullSiteAddress
           })
         });
         const personData = await personRes.json();
@@ -74,7 +75,6 @@ export default async function handler(req, res) {
             person_id: pipedrivePersonId,
             stage_id: 1,
             currency: "CAD",
-            "2ce2a93e96753839a3d8251182f002231638404f": fullSiteAddress,
             "942f85eeee6b601f3c44970b723e20244f3b42b6": investment,
             "23677f1698f93482be883591def4ad78f2c51559": typesStr,
             "63a419dda9253a5f826bfc17bff142ff7519e401": designStatus,

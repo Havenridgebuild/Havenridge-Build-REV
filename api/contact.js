@@ -46,8 +46,91 @@ export default async function handler(req, res) {
     const typesStr = Array.isArray(projectTypes) ? projectTypes.join(", ") : String(projectTypes || "");
     const fullSiteAddress = [address, city, postalCode].filter(Boolean).join(", ");
 
+
     let pipedrivePersonId = null;
     let pipedriveDealId = null;
+
+    // --- PIPEDRIVE MAPPING LOGIC ---
+    const mapInvestment = (val) => {
+      if (!val) return null;
+      if (val.includes('Under $20')) return 141;
+      if (val.includes('$20,000')) return 142;
+      if (val.includes('$50,000')) return 143;
+      if (val.includes('$100,000')) return 144;
+      if (val.includes('$250,000')) return 145;
+      if (val.includes('$500,000')) return 146;
+      if (val.includes('guidance')) return 147;
+      return null;
+    };
+
+    const mapTiming = (val) => {
+      if (!val) return null;
+      if (val.includes('0') && val.includes('3')) return 133;
+      if (val.includes('3') && val.includes('6')) return 134;
+      if (val.includes('6') && val.includes('12')) return 135;
+      if (val.includes('12') && val.includes('24')) return 136;
+      if (val.includes('Flexible') || val.includes('not sure')) return 137;
+      return null;
+    };
+
+    const mapSource = (val) => {
+      if (!val) return null;
+      if (val.includes('Referral')) return 116;
+      if (val.includes('Google')) return 117;
+      if (val.includes('Social media') || val.includes('Social Media')) return 118;
+      if (val.includes('Sign') || val.includes('vehicle')) return 119;
+      if (val.includes('Baeumler')) return 120;
+      if (val.includes('RenoMark')) return 121;
+      if (val.includes('Chamber')) return 122;
+      if (val.includes('Returning')) return 123;
+      if (val.includes('Other')) return 124;
+      return null;
+    };
+
+    const mapDecisionMakers = (val) => {
+      if (!val) return null;
+      if (val.includes('Yes')) return 138;
+      if (val.includes('Not yet')) return 139;
+      if (val.includes('sole')) return 140;
+      return null;
+    };
+
+    const mapHomeOccupied = (val) => {
+      if (!val) return null;
+      if (val.includes('Yes')) return 130;
+      if (val.includes('No')) return 131;
+      if (val.includes('Not sure')) return 132;
+      return null;
+    };
+
+    const mapDesignStatus = (val) => {
+      if (!val) return null;
+      if (val.includes('coordinate design')) return 111;
+      if (val.includes('preliminary plans')) return 112;
+      if (val.includes('permit-ready')) return 113;
+      if (val.includes('submitted')) return 114;
+      if (val.includes('guidance')) return 115;
+      return null;
+    };
+
+    const mapProjectTypes = (arr) => {
+      if (!Array.isArray(arr) || arr.length === 0) return null;
+      const mapped = [];
+      arr.forEach(t => {
+        if (t.includes('Kitchen')) mapped.push(101);
+        else if (t.includes('Bathroom')) mapped.push(102);
+        else if (t.includes('Basement')) mapped.push(103);
+        else if (t.includes('Whole-home')) mapped.push(104);
+        else if (t.includes('Addition')) mapped.push(105);
+        else if (t.includes('ADU')) mapped.push(106);
+        else if (t.includes('Multi-Unit')) mapped.push(107);
+        else if (t.includes('Accessible')) mapped.push(108);
+        else if (t.includes('Design Only')) mapped.push(109);
+        else mapped.push(110);
+      });
+      return mapped.join(',');
+    };
+
 
     // 1. PIPEDRIVE INTEGRATION
     if (PIPEDRIVE_API_TOKEN) {

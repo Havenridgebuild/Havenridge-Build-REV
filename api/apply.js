@@ -43,8 +43,8 @@ export default async function handler(req, res) {
             "Authorization": `Bearer ${RESEND_API_KEY}`
           },
           body: JSON.stringify({
-            from: process.env.RESEND_FROM_EMAIL || "Havenridge Careers <careers@havenridgebuild.com>",
-            to: [APPLICATIONS_EMAIL],
+            from: "Havenridge Build <info@havenridgebuild.com>",
+            to: ["careers@havenridgebuild.com"],
             subject: `💼 New Work With Us Application: ${cleanName} (${roleType})`,
             html: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 8px; padding: 24px; background-color: #ffffff;">

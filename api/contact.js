@@ -1,6 +1,6 @@
 const PIPEDRIVE_API_TOKEN = process.env.PIPEDRIVE_API_TOKEN || "e19e3b9b7d2a0646e7752f4d41eb88f763bfeecf";
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "Micheal@Havenridgebuild.com";
+const NOTIFICATION_EMAIL = process.env.NOTIFICATION_EMAIL || "info@havenridgebuild.com";
 
 export default async function handler(req, res) {
   // Enable CORS headers for client-side frontend submissions
@@ -155,7 +155,7 @@ export default async function handler(req, res) {
             "Authorization": `Bearer ${RESEND_API_KEY}`
           },
           body: JSON.stringify({
-            from: process.env.RESEND_FROM_EMAIL || "Havenridge Build <info@havenridgebuild.com>",
+            from: "Havenridge Build <info@havenridgebuild.com>",
             to: [NOTIFICATION_EMAIL],
             subject: `🏠 Lead Confirmation: ${fullName} (${typesStr || "Renovation"})`,
             html: `

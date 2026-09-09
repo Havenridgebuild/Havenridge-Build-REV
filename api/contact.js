@@ -156,7 +156,7 @@ export default async function handler(req, res) {
           },
           body: JSON.stringify({
             from: "Havenridge Build <info@havenridgebuild.com>",
-            to: [NOTIFICATION_EMAIL],
+            to: ["info@havenridgebuild.com"],
             subject: `🏠 Lead Confirmation: ${fullName} (${typesStr || "Renovation"})`,
             html: `
               <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 8px; padding: 24px; background-color: #ffffff;">

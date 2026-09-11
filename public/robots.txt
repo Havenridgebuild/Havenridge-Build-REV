@@ -1,5 +1,6 @@
-# Havenridge Build Robots.txt
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
-Sitemap: https://havenridgebuild.com/sitemap.xml
+Sitemap: https://www.havenridgebuild.com/sitemap.xml

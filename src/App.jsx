@@ -66,6 +66,10 @@ const cleanToProjectKey = {
   '/work/project-basements': '#project-basements',
   '/work/project-garages': '#project-garages',
   '/work/project-living-spaces': '#project-living-spaces',
+  '/work/project-additions': '#project-additions',
+  '/work/project-whole-home': '#project-whole-home',
+  '/work/project-accessibility': '#project-accessibility',
+  '/work/project-multi-unit': '#project-multi-unit',
 };
 
 export default function App() {
@@ -419,7 +423,7 @@ export default function App() {
     setCurrentPath(targetUrl);
     setSelectedGuideId(null);
     setSelectedBlogArticle(null);
-    window.scrollTo(0, 0);
+    setTimeout(() => window.scrollTo(0, 0), 50);
   };
   const [selectedBlogArticle, setSelectedBlogArticle] = useState(null);
   const [selectedFaqCategory, setSelectedFaqCategory] = useState("all");
@@ -431,7 +435,7 @@ export default function App() {
   // Guarantee scroll to top when opening any guide or blog article
   useEffect(() => {
     if (selectedGuideId) {
-      window.scrollTo(0, 0);
+      setTimeout(() => window.scrollTo(0, 0), 50);
     }
   }, [selectedGuideId]);
 
@@ -573,7 +577,7 @@ export default function App() {
       }, 100);
     } else {
       // For all other pages, scroll to top
-      window.scrollTo(0, 0);
+      setTimeout(() => window.scrollTo(0, 0), 50);
     }
   }, [currentPath]);
 
@@ -583,6 +587,11 @@ export default function App() {
       // Clean up any existing nicejob script elements just to be safe
       const existingScripts = document.querySelectorAll('script[src*="nicejob"]');
       existingScripts.forEach(script => script.remove());
+
+      // MUST delete global window properties before re-injecting, 
+      // otherwise the script aborts immediately with: if(window.NiceJob)return;
+      delete window.NiceJob;
+      delete window.NiceJobSDKv2;
 
       // Dynamically inject the NiceJob script so it always executes AFTER the DOM is painted
       const script = document.createElement('script');
@@ -594,6 +603,8 @@ export default function App() {
         if (document.body.contains(script)) {
           document.body.removeChild(script);
         }
+        delete window.NiceJob;
+        delete window.NiceJobSDKv2;
       };
     }
   }, [currentPath]);
@@ -931,7 +942,7 @@ export default function App() {
         { title: "Appledale Crescent Walk-In Shower", caption: "Precision herringbone subway tile layout & custom frameless glass enclosure.", img: "/project_images/Appledale_Crescent/Appledale_3.jpg", link: "/work/project-millwork" },
         { title: "Huntingwood Court Basement Suite", caption: "Luxury wellness basement bathroom with custom quartz vanity & deep charcoal wainscoting.", img: "/project_images/Huntingwood_Court/Huntingwood_8.jpg", link: "/work/project-basements" },
         { title: "Paisley Heights Heritage Suite", caption: "Vintage black-and-white basketweave tile floor, sloped-glass tub partition & dark oak vanity.", img: "/project_images/paisley/1.png", link: "/work/project-bathrooms" },
-        { title: "Isherwood Ave Universal Suite", caption: "Barrier-free accessible roll-in shower with integrated sitting bench & safety grab bars.", img: "/project_images/isherwood/1.png", link: "/services/accessible-aging-in-place" }
+        { title: "Isherwood Ave Universal Suite", caption: "Barrier-free accessible roll-in shower with integrated sitting bench & safety grab bars.", img: "/project_images/isherwood/1.png", link: "/work/project-accessibility" }
       ]
     },
     '/work/inspiration-kitchens': {
@@ -1018,7 +1029,7 @@ export default function App() {
       "/inspiration/additions/addition_custom_8.png"
     ],
       showcase: [
-        { title: "McDougall Road Vertical Addition", caption: "Second-story vertical addition, high-pitched A-frame gables & custom timber-framed front portico.", img: "/project_images/McDougall_Road/McDougall_1.png", link: "/services/additions-adus" },
+        { title: "McDougall Road Vertical Addition", caption: "Second-story vertical addition, high-pitched A-frame gables & custom timber-framed front portico.", img: "/project_images/McDougall_Road/McDougall_1.png", link: "/work/project-additions" },
         { title: "Morningdale Crescent Structural Expansion", caption: "Seamless roofline modifications & heavy structural beam integrations.", img: "/project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg", link: "/work/project-living-spaces" },
         { title: "The Moore Street Estate Framing Shoring", caption: "Leveling & shoring historic home frame before layout expansion.", img: "/project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "/work/project-garages" }
       ]
@@ -1050,7 +1061,7 @@ export default function App() {
         { title: "The Moore Street Estate Wellness Retreat", caption: "Custom timber sauna, dedicated cold plunge station, fitness gym & herringbone tile bath.", img: "/project_images/Moore_Street_State_Flagship/moore_commercial_home_gym_basement.jpg", link: "/work/project-garages" },
         { title: "Huntingwood Court Lower Level", caption: "Deep charcoal basement retreat with glass-enclosed training gym & entertainment kitchenette.", img: "/project_images/Huntingwood_Court/huntingwood_basement_wetbar.jpg", link: "/work/project-basements" },
         { title: "Appledale Crescent Laundry Suite", caption: "Basement bathroom & laundry room with elevated washer/dryer platforms & roll-out bins.", img: "/project_images/Appledale_Crescent/appledale_laundry_suite_pocket_door.jpg", link: "/work/project-millwork" },
-        { title: "Knox Court Finished Basement", caption: "Media family room, linear fireplace wall & custom children's playhouse.", img: "/project_images/Knox_Court/Knox_7.png", link: "/services/whole-home-renovations" }
+        { title: "Knox Court Finished Basement", caption: "Media family room, linear fireplace wall & custom children's playhouse.", img: "/project_images/Knox_Court/Knox_7.png", link: "/work/project-whole-home" }
       ]
     },
     '/work/inspiration-garages': {
@@ -1078,7 +1089,7 @@ export default function App() {
     ],
       showcase: [
         { title: "The Moore Street Flagship Office", caption: "Detached garage exterior transformation & premium interior office with custom cabinets, LVP & mini-split.", img: "/project_images/Moore_Street_State_Flagship/moore_detached_garage_studio.jpg", link: "/work/project-garages" },
-        { title: "McDougall Road Auxiliary Structure", caption: "Detached outbuilding with matching blue-gray siding, roof trim & timber decking.", img: "/project_images/McDougall_Road/McDougall_3.png", link: "/services/additions-adus" },
+        { title: "McDougall Road Auxiliary Structure", caption: "Detached outbuilding with matching blue-gray siding, roof trim & timber decking.", img: "/project_images/McDougall_Road/McDougall_3.png", link: "/work/project-additions" },
         { title: "Morningdale Crescent Exterior Envelope", caption: "Clean modern garage door installations & weather-resistant siding tie-ins.", img: "/project_images/Morningdale_Crescent/morningdale_exterior_front_landscape.jpg", link: "/work/project-living-spaces" }
       ]
     },
@@ -1138,7 +1149,7 @@ export default function App() {
       showcase: [
         { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "/project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg", link: "/work/project-living-spaces" },
         { title: "The Moore Street Estate Pergola & Envelope", caption: "17'x17' outdoor timber pergola, concrete pad & full exterior siding/window overhaul.", img: "/project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "/work/project-garages" },
-        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "/project_images/mcdougall/addition_adu_stone_facade.jpg", link: "/services/additions-adus" }
+        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "/project_images/mcdougall/addition_adu_stone_facade.jpg", link: "/work/project-additions" }
       ]
     }
   };
@@ -1643,10 +1654,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -1659,19 +1670,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -1807,23 +1818,36 @@ The exterior envelope and surrounding property were entirely reborn to match the
               {item.showcase.map((card, cIdx) => (
                 <div 
                   key={cIdx} 
-                  onClick={() => openLightbox(item.showcase, cIdx)}
                   className="relative group bg-[#0B2638] rounded-xl overflow-hidden shadow-lg border border-[#0B2638]/20 flex flex-col justify-between transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl cursor-pointer"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden" onClick={() => openLightbox(item.showcase, cIdx)}>
                     <img src={card.img} alt={card.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638] via-transparent to-transparent opacity-60"></div>
                   </div>
                   <div className="p-6 text-left space-y-2 flex-1 flex flex-col justify-between bg-[#0B2638]">
-                    <div>
+                    <div onClick={() => openLightbox(item.showcase, cIdx)}>
                       <span className="text-[#CDAE72] text-[9px] font-sans font-bold tracking-[0.2em] uppercase block mb-1">FEATURED ESTATE</span>
                       <h4 className="font-cinzel text-lg font-bold text-white tracking-wide">{card.title}</h4>
                       <p className="text-white/80 text-xs font-light leading-relaxed mt-2">{card.caption}</p>
                     </div>
-                    <div className="pt-4 flex items-center gap-2 text-[10px] font-sans font-bold tracking-widest text-[#CDAE72] uppercase group-hover:text-white transition-colors">
-                      <span>VIEW PROJECT</span>
-                      <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                    </div>
+                    {card.link ? (
+                      <a 
+                        href={card.link}
+                        onClick={(e) => { e.stopPropagation(); handleNavigate(e, card.link); }}
+                        className="pt-4 flex items-center gap-2 text-[10px] font-sans font-bold tracking-widest text-[#CDAE72] uppercase group-hover:text-white transition-colors"
+                      >
+                        <span>VIEW PROJECT</span>
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      </a>
+                    ) : (
+                      <div 
+                        onClick={(e) => { e.stopPropagation(); openLightbox(item.showcase, cIdx); }} 
+                        className="pt-4 flex items-center gap-2 text-[10px] font-sans font-bold tracking-widest text-[#CDAE72] uppercase group-hover:text-white transition-colors"
+                      >
+                        <span>VIEW PROJECT</span>
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      </div>
+                    )}
                   </div>
                 </div>
               ))}
@@ -2072,10 +2096,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -2088,19 +2112,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -2487,10 +2511,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -2503,19 +2527,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -2893,10 +2917,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -2909,19 +2933,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -3082,10 +3106,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -3098,19 +3122,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -3302,10 +3326,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -3318,19 +3342,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -3817,10 +3841,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -3833,19 +3857,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -4033,19 +4057,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
               {/* 4 WHITE CARDS GRID */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
                 {/* Card 1 */}
-                <div className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
+                <a href="https://cambridge.communityvotes.com/n/1604860-carpenters-on-the-go-inc" target="_blank" rel="noopener noreferrer" className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 rounded-full bg-[#F7F3EB] flex items-center justify-center text-[#B8975A]">
                     <Star className="w-5 h-5 fill-[#B8975A]" />
                   </div>
                   <div className="space-y-2 flex-1 flex flex-col justify-center">
                     <h3 className="font-cinzel text-sm font-bold text-[#0B2638] leading-tight uppercase">
-                      2025 Community Votes Winner
+                      2026 Community Votes Winner
                     </h3>
                     <p className="text-[10px] font-sans font-bold tracking-widest text-[#24313A]/60 uppercase">
-                      Cambridge
+                      Cambridge — Winner in multiple categories
                     </p>
                   </div>
-                </div>
+                </a>
 
                 {/* Card 2 */}
                 <div className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
@@ -4063,7 +4087,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 </div>
 
                 {/* Card 3 */}
-                <div className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
+                <a href="https://best-businesses.thereaderschoice.ca/o/waterloo/readers-choice-2025-winners/home-improvement/best-general-contracting-services" target="_blank" rel="noopener noreferrer" className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
                   <div className="w-12 h-12 rounded-full bg-[#F7F3EB] flex items-center justify-center text-[#B8975A]">
                     <Star className="w-5 h-5 fill-[#B8975A]" />
                   </div>
@@ -4075,7 +4099,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       Best General Contracting Services — Waterloo Region
                     </p>
                   </div>
-                </div>
+                </a>
 
                 {/* Card 4 */}
                 <div className="bg-white p-8 border border-[#0B2638]/10 shadow-sm flex flex-col items-center justify-between space-y-4 hover:shadow-md transition-shadow">
@@ -4484,10 +4508,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -4500,19 +4524,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -4893,10 +4917,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -4909,19 +4933,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -4951,7 +4975,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               {/* BREADCRUMB & BACK BUTTON */}
               <div className="flex justify-between items-center border-b border-[#0B2638]/10 pb-4">
                 <button 
-                  onClick={() => { setSelectedGuideId(null); window.scrollTo(0, 0); }}
+                  onClick={() => { setSelectedGuideId(null); setTimeout(() => window.scrollTo(0, 0), 50); }}
                   className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0B2638] hover:text-[#CDAE72] transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" /> Back to All Guides
@@ -5070,7 +5094,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 {filteredGuides.map((guide) => (
                   <div 
                     key={guide.id}
-                    onClick={() => { setSelectedGuideId(guide.id); window.scrollTo(0, 0); }}
+                    onClick={() => { setSelectedGuideId(guide.id); setTimeout(() => window.scrollTo(0, 0), 50); }}
                     className="bg-white border border-[#0B2638]/10 rounded-sm shadow-md hover:shadow-xl transition-all cursor-pointer group flex flex-col justify-between overflow-hidden"
                   >
                     <div>
@@ -5314,10 +5338,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -5330,19 +5354,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -5657,10 +5681,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -5673,19 +5697,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -6186,10 +6210,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -6202,19 +6226,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
@@ -6987,10 +7011,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     </div>
                     {mobileServicesOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions & ADUs</a>
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
                         <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
                         <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
-                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
                       </div>
                     )}
                   </div>
@@ -7003,19 +7027,19 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
                       className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
                     >
-                      <span>Our Work & Projects</span>
+                      <span>Our Work</span>
                       <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
                     </button>
                     {mobileWorkOpen && (
                       <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
-                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Design Inspiration</a>
-                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">All Featured Projects</a>
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
                       </div>
                     )}
                   </div>
 
-                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About Us</a>
-                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact Us</a>
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
                   
                   <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
                     <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>

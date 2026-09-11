@@ -29,9 +29,9 @@ The result is an addition or ADU designed to feel intentional from the beginning
       { title: "DESIGN-BUILD DELIVERY", text: "Coordinated Planning, Design, Construction & Project Management From Concept Through Completion" }
     ],
     gallery: [
-      "/project_images/McDougall_Road/McDougall_1.png",
-      "/project_images/McDougall_Road/McDougall_2.png",
-      "/project_images/McDougall_Road/McDougall_3.png"
+      "/project_images/services/adu_blue.jpg",
+      "/project_images/services/addition_stone.jpg",
+      "/project_images/services/adu_white.jpg"
     ],
     prevHash: "/services/accessible-aging-in-place",
     nextHash: "/services/whole-home-renovations"
@@ -68,9 +68,9 @@ From the initial design direction through construction and final detailing, the 
       { title: "DESIGN-BUILD DELIVERY", text: "Coordinated Planning, Design, Selections, Construction & Project Management From Concept Through Completion" }
     ],
     gallery: [
-      "/project_images/Knox_Court/Knox_1.png",
-      "/project_images/Knox_Court/Knox_2.png",
-      "/project_images/Knox_Court/Knox_3.png"
+      "/project_images/services/whole_home_basement.jpg",
+      "/project_images/services/whole_home_shower.jpg",
+      "/project_images/services/whole_home_living.jpg"
     ],
     prevHash: "/services/additions-adus",
     nextHash: "/services/multi-unit-conversions"
@@ -107,9 +107,9 @@ From independent kitchens and bathrooms to entrances, fire separation, sound con
       { title: "DESIGN-BUILD DELIVERY", text: "Coordinated Planning, Design, Construction & Project Management From Initial Feasibility Through Completion" }
     ],
     gallery: [
-      "/project_images/Natchez_Road/Natchez_1.png",
-      "/project_images/Natchez_Road/Natchez_2.png",
-      "/project_images/Natchez_Road/Natchez_3.png"
+      "/project_images/services/multi_unit_kitchenette.jpg",
+      "/project_images/services/multi_unit_bedroom.jpg",
+      "/project_images/services/multi_unit_laundry.jpg"
     ],
     prevHash: "/services/whole-home-renovations",
     nextHash: "/services/accessible-aging-in-place"
@@ -146,9 +146,9 @@ Whether addressing an immediate accessibility requirement or preparing a home fo
       { title: "DESIGN-BUILD DELIVERY", text: "Coordinated Planning, Design, Construction & Project Management From Initial Assessment Through Completion" }
     ],
     gallery: [
-      "/project_images/Isherwood_Ave/Isherwood_1.png",
-      "/project_images/Isherwood_Ave/Isherwood_2.png",
-      "/project_images/Isherwood_Ave/Isherwood_3.png"
+      "/project_images/services/accessible_shower_marble.jpg",
+      "/project_images/services/accessible_entryway.jpg",
+      "/project_images/services/accessible_bathroom.jpg"
     ],
     prevHash: "/services/multi-unit-conversions",
     nextHash: "/services/additions-adus"

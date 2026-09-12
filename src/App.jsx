@@ -462,7 +462,16 @@ export default function App() {
             quickAnswer: b.quick_answer || '',
             sections: b.sections || []
           }));
-          setLiveGuides(mapped);
+          const merged = [...guidesData];
+          mapped.forEach(m => {
+            const existingIdx = merged.findIndex(g => g.id === m.id);
+            if (existingIdx >= 0) {
+              merged[existingIdx] = m;
+            } else {
+              merged.push(m);
+            }
+          });
+          setLiveGuides(merged);
         }
       } catch (err) {
         console.warn('Live articles sync fallback:', err);
@@ -1902,7 +1911,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -1912,7 +1921,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -1952,7 +1961,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -2310,7 +2319,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
                 <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
                   <a 
-                    href="https://www.facebook.com/carpentersotg/" 
+                    href="https://www.facebook.com/havenridgebuild/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     aria-label="Facebook"
@@ -2320,7 +2329,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     <FacebookIcon className="w-4 h-4" />
                   </a>
                   <a 
-                    href="https://www.instagram.com/carpentersonthego/" 
+                    href="https://www.instagram.com/havenridgebuild/" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     aria-label="Instagram"
@@ -2360,7 +2369,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     <YoutubeIcon className="w-4 h-4" />
                   </a>
                   <a 
-                    href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                    href="https://www.houzz.com/pro/havenridgebuild/__public" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     aria-label="Houzz"
@@ -2729,7 +2738,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -2739,7 +2748,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -2779,7 +2788,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -3513,7 +3522,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -3523,7 +3532,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -3563,7 +3572,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -4163,7 +4172,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -4173,7 +4182,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -4213,7 +4222,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -4724,7 +4733,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -4734,7 +4743,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -4774,7 +4783,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -5152,7 +5161,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -5162,7 +5171,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -5202,7 +5211,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -5497,7 +5506,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -5507,7 +5516,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -5547,7 +5556,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -5589,7 +5598,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
     let activeBlogArticle = selectedBlogArticle;
     if (currentPath.startsWith('/resources/blog/')) {
       const slug = currentPath.split('/resources/blog/')[1];
-      activeBlogArticle = liveGuides.find(post => post.slug === slug);
+      activeBlogArticle = [...blogPosts, ...liveGuides].find(post => post.slug === slug || post.id === slug);
     }
     return (
       <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
@@ -5756,10 +5765,10 @@ The exterior envelope and surrounding property were entirely reborn to match the
           {/* BLOG POSTS GRID */}
           <section className="max-w-7xl mx-auto px-6 py-16">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post) => (
+              {[...blogPosts, ...liveGuides.filter(g => g.category && g.category.includes('blog'))].map((post) => (
                 <div 
                   key={post.id} 
-                  onClick={(e) => handleNavigate(e, '/resources/blog/' + post.slug)}
+                  onClick={(e) => handleNavigate(e, '/resources/blog/' + (post.slug || post.id))}
                   className="bg-white border border-[#0B2638]/10 shadow-sm flex flex-col justify-between overflow-hidden cursor-pointer group hover:shadow-xl hover:border-[#CDAE72]/50 transition-all duration-300"
                 >
                   <div className="relative h-56 overflow-hidden">
@@ -5825,9 +5834,25 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <img src={activeBlogArticle.img} alt={activeBlogArticle.title} className="w-full h-72 object-cover border border-[#0B2638]/10 shadow-md" />
 
               <div className="space-y-4 text-xs sm:text-sm font-light text-[#24313A]/90 leading-relaxed">
-                {(selectedBlogArticle?.content || []).map((paragraph, pIdx) => (
-                  <p key={pIdx}>{paragraph}</p>
-                ))}
+                {activeBlogArticle.content ? (
+                  activeBlogArticle.content.map((paragraph, pIdx) => (
+                    <p key={pIdx}>{paragraph}</p>
+                  ))
+                ) : activeBlogArticle.sections ? (
+                  <div className="space-y-6">
+                    {activeBlogArticle.quickAnswer && (
+                      <div className="p-4 bg-[#CDAE72]/10 border-l-4 border-[#CDAE72] font-semibold text-[#0B2638]">
+                        {activeBlogArticle.quickAnswer}
+                      </div>
+                    )}
+                    {activeBlogArticle.sections.map((sec, idx) => (
+                      <div key={idx} className="space-y-2">
+                        <h3 className="font-cinzel font-bold text-[#0B2638] text-base">{sec.heading}</h3>
+                        <p>{sec.content}</p>
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
               </div>
 
               <div className="pt-6 border-t border-[#0B2638]/10 flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -5892,7 +5917,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -5902,7 +5927,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -5942,7 +5967,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -6832,7 +6857,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -6842,7 +6867,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -6882,7 +6907,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"
@@ -7498,7 +7523,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
               <a 
-                href="https://www.facebook.com/carpentersotg/" 
+                href="https://www.facebook.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Facebook"
@@ -7508,7 +7533,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <FacebookIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.instagram.com/carpentersonthego/" 
+                href="https://www.instagram.com/havenridgebuild/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Instagram"
@@ -7548,7 +7573,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <YoutubeIcon className="w-4 h-4" />
               </a>
               <a 
-                href="https://www.houzz.com/pro/webuser-117372779/__public" 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 aria-label="Houzz"

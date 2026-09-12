@@ -423,7 +423,9 @@ export default function App() {
     setCurrentPath(targetUrl);
     setSelectedGuideId(null);
     setSelectedBlogArticle(null);
+    window.scrollTo(0, 0);
     setTimeout(() => window.scrollTo(0, 0), 50);
+    setTimeout(() => window.scrollTo(0, 0), 150);
   };
   const [selectedBlogArticle, setSelectedBlogArticle] = useState(null);
   const [selectedFaqCategory, setSelectedFaqCategory] = useState("all");
@@ -585,8 +587,12 @@ export default function App() {
         }
       }, 100);
     } else {
-      // For all other pages, scroll to top
+      // For all other pages, force scroll to top. 
+      // Multiple timeouts ensure it beats iOS Safari/Chrome async DOM rendering quirks.
+      window.scrollTo(0, 0);
       setTimeout(() => window.scrollTo(0, 0), 50);
+      setTimeout(() => window.scrollTo(0, 0), 150);
+      setTimeout(() => window.scrollTo(0, 0), 300);
     }
   }, [currentPath]);
 
@@ -5063,7 +5069,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 </span>
                 <h3 className="font-cinzel text-2xl font-bold">Ready to Discuss Your Property Scope?</h3>
                 <div className="flex flex-wrap justify-center gap-4 pt-2">
-                  <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="bg-white text-[#0B2638] hover:bg-[#CDAE72] font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">Explore Services →</a>
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="bg-white text-[#0B2638] hover:bg-[#CDAE72] font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">Explore Services →</a>
                   <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="bg-transparent border border-white/30 text-white hover:border-[#CDAE72] hover:text-[#CDAE72] font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">See Our Work →</a>
                   <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="bg-[#CDAE72] text-[#0B2638] hover:bg-white font-bold px-6 py-3 text-xs uppercase tracking-widest transition-all">Start a Conversation →</a>
                 </div>
@@ -5858,7 +5864,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="pt-6 border-t border-[#0B2638]/10 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <a 
                   href="/contact" 
-                  onClick={(e) => handleNavigate(e, '/resources/blog')}
+                  onClick={(e) => handleNavigate(e, '/contact')}
                   className="w-full sm:w-auto bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all text-center shadow-md"
                 >
                   Book a Consultation for Your Project

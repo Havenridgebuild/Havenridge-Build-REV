@@ -423,9 +423,6 @@ export default function App() {
     setCurrentPath(targetUrl);
     setSelectedGuideId(null);
     setSelectedBlogArticle(null);
-    window.scrollTo(0, 0);
-    setTimeout(() => window.scrollTo(0, 0), 50);
-    setTimeout(() => window.scrollTo(0, 0), 150);
   };
   const [selectedBlogArticle, setSelectedBlogArticle] = useState(null);
   const [selectedFaqCategory, setSelectedFaqCategory] = useState("all");
@@ -595,6 +592,7 @@ export default function App() {
     };
 
     if (sections[currentPath]) {
+      // Increase timeout slightly for mobile to ensure DOM is fully painted before calculating Y offset
       setTimeout(() => {
         const el = document.querySelector(sections[currentPath]);
         if (el) {
@@ -602,14 +600,11 @@ export default function App() {
           const y = Math.max(0, getElementOffsetTop(el) + yOffset);
           window.scrollTo({ top: y, behavior: 'smooth' });
         }
-      }, 100);
+      }, 150);
     } else {
-      // For all other pages, force scroll to top. 
-      // Multiple timeouts ensure it beats iOS Safari/Chrome async DOM rendering quirks.
+      // Native window scroll for all other pages
       window.scrollTo(0, 0);
-      setTimeout(() => window.scrollTo(0, 0), 50);
-      setTimeout(() => window.scrollTo(0, 0), 150);
-      setTimeout(() => window.scrollTo(0, 0), 300);
+      setTimeout(() => window.scrollTo(0, 0), 100);
     }
   }, [currentPath]);
 

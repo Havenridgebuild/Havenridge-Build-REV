@@ -99,8 +99,8 @@ export default function App() {
   const [formProjectTypes, setFormProjectTypes] = useState(['Kitchen']);
   const [formDescription, setFormDescription] = useState('');
   const [formHomeOccupied, setFormHomeOccupied] = useState('Yes');
-  const [formUploadedFile, setFormUploadedFile] = useState('');
-  const [formUploadedFileObj, setFormUploadedFileObj] = useState(null);
+  const [formUploadedFile, setFormUploadedFile] = useState(''); // kept for UI string
+  const [formUploadedFiles, setFormUploadedFiles] = useState([]); // Array of files
   const [formSource, setFormSource] = useState('Google');
   const [formSourceDetail, setFormSourceDetail] = useState('');
   const [formConsent, setFormConsent] = useState(false);
@@ -149,19 +149,21 @@ export default function App() {
 
     // Call /api/contact endpoint to send complete Resend Email & create Pipedrive Deal
     try {
-      let fileData = null;
-      if (formUploadedFileObj) {
-        const base64Data = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.readAsDataURL(formUploadedFileObj);
-          reader.onload = () => resolve(reader.result.split(',')[1]);
-          reader.onerror = error => reject(error);
-        });
-        fileData = {
-          filename: formUploadedFileObj.name,
-          content: base64Data,
-          type: formUploadedFileObj.type || 'application/octet-stream'
-        };
+      let filesData = [];
+      if (formUploadedFiles && formUploadedFiles.length > 0) {
+        filesData = await Promise.all(formUploadedFiles.map(async (file) => {
+          const base64Data = await new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result.split(',')[1]);
+            reader.onerror = error => reject(error);
+          });
+          return {
+            filename: file.name,
+            content: base64Data,
+            type: file.type || 'application/octet-stream'
+          };
+        }));
       }
 
       await fetch('/api/contact', {
@@ -183,7 +185,7 @@ export default function App() {
           homeOccupied: formHomeOccupied,
           source: fullSourceStr,
           uploadedFile: formUploadedFile,
-          uploadedFileData: fileData,
+          uploadedFilesData: filesData,
           description: formDescription
         })
       });
@@ -6787,21 +6789,56 @@ The exterior envelope and surrounding property were entirely reborn to match the
                         <div className="border-2 border-dashed border-gray-300 hover:border-[#0B2638] p-4 text-center rounded-sm bg-white cursor-pointer relative">
                           <input 
                             type="file" 
+                            multiple
                             accept=".jpg,.jpeg,.png,.pdf" 
                             onChange={(e) => {
-                              const file = e.target.files[0];
-                              setFormUploadedFile(file?.name || '');
-                              setFormUploadedFileObj(file || null);
+                              if (e.target.files.length > 0) {
+                                const newFiles = Array.from(e.target.files);
+                                setFormUploadedFiles(prev => {
+                                  // Combine previous files with new files, filtering out duplicates by name
+                                  const existingNames = new Set(prev.map(f => f.name));
+                                  const uniqueNewFiles = newFiles.filter(f => !existingNames.has(f.name));
+                                  const combined = [...prev, ...uniqueNewFiles];
+                                  setFormUploadedFile(combined.map(f => f.name).join(', '));
+                                  return combined;
+                                });
+                                // Reset the input value so the same file can be selected again if it was removed
+                                e.target.value = null;
+                              }
                             }}
-                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" 
+                            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
                           />
-                          <p className="text-xs text-[#24313A]/70">
-                            {formUploadedFile ? (
-                              <span className="font-bold text-[#0B2638]">{formUploadedFile}</span>
+                          <div className="text-xs text-[#24313A]/70 px-2 relative z-20 pointer-events-none">
+                            {formUploadedFiles && formUploadedFiles.length > 0 ? (
+                              <div className="space-y-2">
+                                <span className="font-bold text-[#0B2638] block">{formUploadedFiles.length} file(s) selected:</span>
+                                <div className="flex flex-wrap gap-2 justify-center pointer-events-auto">
+                                  {formUploadedFiles.map((f, idx) => (
+                                    <span key={idx} className="bg-[#F4F2EE] border border-[#0B2638]/20 text-[#0B2638] px-2 py-1 rounded-sm flex items-center gap-1 text-[10px]">
+                                      <span className="truncate max-w-[150px]">{f.name}</span>
+                                      <button 
+                                        type="button" 
+                                        onClick={(e) => {
+                                          e.preventDefault();
+                                          e.stopPropagation();
+                                          setFormUploadedFiles(prev => {
+                                            const updated = prev.filter((_, i) => i !== idx);
+                                            setFormUploadedFile(updated.map(file => file.name).join(', '));
+                                            return updated;
+                                          });
+                                        }} 
+                                        className="text-[#0B2638]/60 hover:text-red-500 font-bold ml-1"
+                                      >
+                                        ×
+                                      </button>
+                                    </span>
+                                  ))}
+                                </div>
+                              </div>
                             ) : (
-                              'Click or drag photos, sketches or drawing PDFs here to upload (max 10MB)'
+                              <p>Click or drag photos, sketches or drawing PDFs here to upload multiple files (max 10MB total)</p>
                             )}
-                          </p>
+                          </div>
                         </div>
                       </div>
 

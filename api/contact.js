@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       homeOccupied = "",
       source = "",
       uploadedFile = "",
-      uploadedFileData = null,
+      uploadedFilesData = null,
       description = ""
     } = body;
 
@@ -186,7 +186,7 @@ export default async function handler(req, res) {
             <p><b>Decision Makers Aligned:</b> ${decisionMakers || "Not specified"}</p>
             <p><b>Home Occupied During Build:</b> ${homeOccupied || "Not specified"}</p>
             <p><b>How Found Us:</b> ${source || "Not specified"}</p>
-            ${uploadedFile ? `<p><b>Uploaded Attachment:</b> <a href="${uploadedFile}" target="_blank">${uploadedFile}</a></p>` : ""}
+            ${uploadedFilesData && uploadedFilesData.length > 0 ? `<p><b>Attachments:</b> ${uploadedFilesData.length} files attached securely to Pipedrive Deal.</p>` : ""}
             <p><b>Project Description:</b> ${description || "None provided"}</p>
             <p><i>Submitted via Havenridge Build Website</i></p>
           `;
@@ -200,25 +200,27 @@ export default async function handler(req, res) {
             })
           });
 
-          // Upload File to Pipedrive Deal
-          if (uploadedFileData && uploadedFileData.content) {
-            try {
-              const buffer = Buffer.from(uploadedFileData.content, "base64");
-              const blob = new Blob([buffer], { type: uploadedFileData.type || "application/octet-stream" });
-              const formData = new FormData();
-              formData.append("file", blob, uploadedFileData.filename);
-              formData.append("deal_id", pipedriveDealId);
-              
-              const fileRes = await fetch(`https://api.pipedrive.com/v1/files?api_token=${PIPEDRIVE_API_TOKEN}`, {
-                method: "POST",
-                body: formData
-              });
-              const fileDataResult = await fileRes.json();
-              if(!fileDataResult.success) {
-                console.warn("Pipedrive File API returned false success flag", fileDataResult);
+          // Upload Files to Pipedrive Deal
+          if (uploadedFilesData && uploadedFilesData.length > 0) {
+            for (const fileData of uploadedFilesData) {
+              try {
+                const buffer = Buffer.from(fileData.content, "base64");
+                const blob = new Blob([buffer], { type: fileData.type || "application/octet-stream" });
+                const formData = new FormData();
+                formData.append("file", blob, fileData.filename);
+                formData.append("deal_id", pipedriveDealId);
+                
+                const fileRes = await fetch(`https://api.pipedrive.com/v1/files?api_token=${PIPEDRIVE_API_TOKEN}`, {
+                  method: "POST",
+                  body: formData
+                });
+                const fileDataResult = await fileRes.json();
+                if(!fileDataResult.success) {
+                  console.warn("Pipedrive File API returned false success flag", fileDataResult);
+                }
+              } catch (fileErr) {
+                console.warn("Pipedrive File Upload Error:", fileErr?.message || fileErr);
               }
-            } catch (fileErr) {
-              console.warn("Pipedrive File Upload Error:", fileErr?.message || fileErr);
             }
           }
         }
@@ -262,7 +264,7 @@ export default async function handler(req, res) {
                   <p style="margin: 4px 0;"><strong>All Decision Makers Aligned:</strong> ${decisionMakers || "Not specified"}</p>
                   <p style="margin: 4px 0;"><strong>Home Occupied During Build:</strong> ${homeOccupied || "Not specified"}</p>
                   <p style="margin: 4px 0;"><strong>How Found Us:</strong> ${source || "Not specified"}</p>
-                  ${uploadedFile ? `<p style="margin: 8px 0; padding-top: 8px; border-top: 1px dashed #cbd5e1;"><strong>📎 Uploaded Attachment / Design File:</strong> <a href="${uploadedFile}" target="_blank" style="color: #0B2638; font-weight: bold; text-decoration: underline;">View Uploaded File</a></p>` : ""}
+                  ${uploadedFilesData && uploadedFilesData.length > 0 ? `<p style="margin: 8px 0; padding-top: 8px; border-top: 1px dashed #cbd5e1;"><strong>📎 Uploaded Attachments:</strong> ${uploadedFilesData.length} file(s) attached to this email.</p>` : ""}
                 </div>
 
                 ${description ? `
@@ -272,12 +274,10 @@ export default async function handler(req, res) {
                 </div>` : ""}
               </div>
             `,
-            attachments: uploadedFileData ? [
-              {
-                filename: uploadedFileData.filename,
-                content: uploadedFileData.content
-              }
-            ] : []
+            attachments: uploadedFilesData && uploadedFilesData.length > 0 ? uploadedFilesData.map(f => ({
+              filename: f.filename,
+              content: f.content
+            })) : []
           })
         });
         if (resendRes.ok) emailStatus = "sent_via_resend";

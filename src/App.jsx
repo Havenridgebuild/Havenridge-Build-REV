@@ -523,9 +523,9 @@ export default function App() {
       title = "Project Portfolio | Havenridge Build";
     } else if (currentPath === '/work/inspiration') {
       title = "Design Inspiration | Havenridge Build";
-    } else if (currentPath === '/resources/guides') {
+    } else if (currentPath.startsWith('/resources/guides')) {
       title = "Renovation Guides | Havenridge Build";
-    } else if (currentPath === '/resources/blog') {
+    } else if (currentPath.startsWith('/resources/blog')) {
       title = "Blog | Havenridge Build";
     } else if (currentPath === '/resources/faq') {
       title = "Frequently Asked Questions | Havenridge Build";
@@ -4814,8 +4814,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
   // ==========================================
   // RENOVATION GUIDES HUB & READER (#resources-guides)
   // ==========================================
-  if (['/resources/guides', '#resources-guides', '#guides'].includes(currentPath)) {
-    const activeGuide = selectedGuideId ? liveGuides.find(g => g.id === selectedGuideId) : null;
+  if (['/resources/guides', '#resources-guides', '#guides'].includes(currentPath) || currentPath.startsWith('/resources/guides/')) {
+    let activeGuide = selectedGuideId ? liveGuides.find(g => g.id === selectedGuideId) : null;
+    if (currentPath.startsWith('/resources/guides/')) {
+      const slug = currentPath.split('/resources/guides/')[1];
+      activeGuide = liveGuides.find(post => post.slug === slug || post.id === slug);
+    }
     const filteredGuides = liveGuides.filter(g => selectedGuideCategory === 'all' || g.category === selectedGuideCategory || g.categoryLabel.toLowerCase().includes(selectedGuideCategory.toLowerCase()));
 
     return (
@@ -4975,7 +4979,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               {/* BREADCRUMB & BACK BUTTON */}
               <div className="flex justify-between items-center border-b border-[#0B2638]/10 pb-4">
                 <button 
-                  onClick={() => { setSelectedGuideId(null); setTimeout(() => window.scrollTo(0, 0), 50); }}
+                  onClick={(e) => handleNavigate(e, '/resources/guides')}
                   className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0B2638] hover:text-[#CDAE72] transition-colors"
                 >
                   <ArrowLeft className="w-4 h-4" /> Back to All Guides
@@ -5094,7 +5098,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 {filteredGuides.map((guide) => (
                   <div 
                     key={guide.id}
-                    onClick={() => { setSelectedGuideId(guide.id); setTimeout(() => window.scrollTo(0, 0), 50); }}
+                    onClick={(e) => handleNavigate(e, '/resources/guides/' + guide.id)}
                     className="bg-white border border-[#0B2638]/10 rounded-sm shadow-md hover:shadow-xl transition-all cursor-pointer group flex flex-col justify-between overflow-hidden"
                   >
                     <div>
@@ -5581,7 +5585,12 @@ The exterior envelope and surrounding property were entirely reborn to match the
   }
 
 
-  if (currentPath === '/resources/blog') {
+  if (currentPath.startsWith('/resources/blog')) {
+    let activeBlogArticle = selectedBlogArticle;
+    if (currentPath.startsWith('/resources/blog/')) {
+      const slug = currentPath.split('/resources/blog/')[1];
+      activeBlogArticle = liveGuides.find(post => post.slug === slug);
+    }
     return (
       <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
         <div>
@@ -5750,7 +5759,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               {blogPosts.map((post) => (
                 <div 
                   key={post.id} 
-                  onClick={() => setSelectedBlogArticle(post)}
+                  onClick={(e) => handleNavigate(e, '/resources/blog/' + post.slug)}
                   className="bg-white border border-[#0B2638]/10 shadow-sm flex flex-col justify-between overflow-hidden cursor-pointer group hover:shadow-xl hover:border-[#CDAE72]/50 transition-all duration-300"
                 >
                   <div className="relative h-56 overflow-hidden">
@@ -5790,30 +5799,30 @@ The exterior envelope and surrounding property were entirely reborn to match the
         </div>
 
         {/* ARTICLE READER MODAL */}
-        {selectedBlogArticle && (
+        {activeBlogArticle && (
           <div className="fixed inset-0 z-50 bg-[#061622]/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
             <div className="bg-white max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-[#CDAE72]/30 shadow-2xl space-y-6 p-6 sm:p-8 relative">
               <button 
-                onClick={() => setSelectedBlogArticle(null)}
+                onClick={(e) => handleNavigate(e, '/resources/blog')}
                 className="absolute top-6 right-6 text-[#0B2638] hover:text-[#CDAE72] font-bold text-xl"
               >
                 ✕
               </button>
 
               <div className="space-y-3">
-                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">{selectedBlogArticle.category}</span>
-                <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-[#0B2638]">{selectedBlogArticle.title}</h2>
-                <p className="text-xs text-[#CDAE72] font-bold">{selectedBlogArticle.subtitle}</p>
+                <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">{activeBlogArticle.category}</span>
+                <h2 className="font-cinzel text-2xl sm:text-3xl font-bold text-[#0B2638]">{activeBlogArticle.title}</h2>
+                <p className="text-xs text-[#CDAE72] font-bold">{activeBlogArticle.subtitle}</p>
                 <div className="flex items-center gap-4 text-xs text-[#24313A]/70 border-b border-[#0B2638]/10 pb-4">
-                  <span>By {selectedBlogArticle.author}</span>
+                  <span>By {activeBlogArticle.author}</span>
                   <span>•</span>
-                  <span>{selectedBlogArticle.date}</span>
+                  <span>{activeBlogArticle.date}</span>
                   <span>•</span>
-                  <span>{selectedBlogArticle.readTime}</span>
+                  <span>{activeBlogArticle.readTime}</span>
                 </div>
               </div>
 
-              <img src={selectedBlogArticle.img} alt={selectedBlogArticle.title} className="w-full h-72 object-cover border border-[#0B2638]/10 shadow-md" />
+              <img src={activeBlogArticle.img} alt={activeBlogArticle.title} className="w-full h-72 object-cover border border-[#0B2638]/10 shadow-md" />
 
               <div className="space-y-4 text-xs sm:text-sm font-light text-[#24313A]/90 leading-relaxed">
                 {(selectedBlogArticle?.content || []).map((paragraph, pIdx) => (
@@ -5824,13 +5833,13 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="pt-6 border-t border-[#0B2638]/10 flex flex-col sm:flex-row justify-between items-center gap-4">
                 <a 
                   href="/contact" 
-                  onClick={() => setSelectedBlogArticle(null)}
+                  onClick={(e) => handleNavigate(e, '/resources/blog')}
                   className="w-full sm:w-auto bg-[#0B2638] text-[#CDAE72] hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-8 py-3 text-xs tracking-widest uppercase transition-all text-center shadow-md"
                 >
                   Book a Consultation for Your Project
                 </a>
                 <button 
-                  onClick={() => setSelectedBlogArticle(null)}
+                  onClick={(e) => handleNavigate(e, '/resources/blog')}
                   className="text-xs font-bold text-[#0B2638] hover:text-[#CDAE72] uppercase tracking-wider"
                 >
                   Close Article

@@ -536,8 +536,25 @@ export default function App() {
       title = "Design Inspiration | Havenridge Build";
     } else if (currentPath.startsWith('/resources/guides')) {
       title = "Renovation Guides | Havenridge Build";
+      const slug = currentPath.replace('/resources/guides', '').replace('/', '');
+      if (slug) {
+        const article = liveGuides.find(post => post.slug === slug || post.id === slug);
+        if (article) {
+          title = `${article.title} | Havenridge Build`;
+          desc = (article.subtitle || article.excerpt || article.quickAnswer || desc).replace(/\n/g, ' ').substring(0, 155) + "...";
+        }
+      }
     } else if (currentPath.startsWith('/resources/blog')) {
       title = "Blog | Havenridge Build";
+      const slug = currentPath.replace('/resources/blog', '').replace('/', '');
+      if (slug) {
+        const allBlogs = [...blogPosts, ...liveGuides];
+        const article = allBlogs.find(post => post.slug === slug || post.id === slug);
+        if (article) {
+          title = `${article.title} | Havenridge Build`;
+          desc = (article.subtitle || article.excerpt || article.quickAnswer || desc).replace(/\n/g, ' ').substring(0, 155) + "...";
+        }
+      }
     } else if (currentPath === '/resources/faq') {
       title = "Frequently Asked Questions | Havenridge Build";
     } else if (currentPath === '/admin') {
@@ -563,7 +580,7 @@ export default function App() {
     if (metaDesc) {
       metaDesc.setAttribute('content', desc);
     }
-  }, [currentPath]);
+  }, [currentPath, liveGuides]);
 
 
   

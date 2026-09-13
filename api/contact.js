@@ -158,17 +158,20 @@ export default async function handler(req, res) {
             person_id: pipedrivePersonId,
             stage_id: 1,
             currency: "CAD",
-            "942f85eeee6b601f3c44970b723e20244f3b42b6": mapInvestment(investment) || investment,
-            "23677f1698f93482be883591def4ad78f2c51559": mapProjectTypes(projectTypes) || typesStr,
-            "63a419dda9253a5f826bfc17bff142ff7519e401": mapDesignStatus(designStatus) || designStatus,
-            "19bc780543f09b515e9f7c2bbb1cab1f2343ba9b": mapTiming(timing) || timing,
-            "2e84281f410c132a062c9d6a364f3bcd8e57071f": mapDecisionMakers(decisionMakers) || decisionMakers,
-            "c6eabb8cfaaa266dcd72399f23e296c1ddd6a4c1": mapHomeOccupied(homeOccupied) || homeOccupied,
-            "cd213a1e958652bc211a30576e83205c318424d0": mapSource(source) || source,
+            "942f85eeee6b601f3c44970b723e20244f3b42b6": mapInvestment(investment) || null,
+            "23677f1698f93482be883591def4ad78f2c51559": mapProjectTypes(projectTypes) || null,
+            "63a419dda9253a5f826bfc17bff142ff7519e401": mapDesignStatus(designStatus) || null,
+            "19bc780543f09b515e9f7c2bbb1cab1f2343ba9b": mapTiming(timing) || null,
+            "2e84281f410c132a062c9d6a364f3bcd8e57071f": mapDecisionMakers(decisionMakers) || null,
+            "c6eabb8cfaaa266dcd72399f23e296c1ddd6a4c1": mapHomeOccupied(homeOccupied) || null,
+            "cd213a1e958652bc211a30576e83205c318424d0": mapSource(source) || null,
             "61ebb6977bedc5f6f96aa599374aff5c52793705": description
           })
         });
         const dealData = await dealRes.json();
+        if (!dealData?.success) {
+          console.error("PIPEDRIVE DEAL ERROR:", dealData);
+        }
         if (dealData?.success && dealData?.data?.id) {
           pipedriveDealId = dealData.data.id;
 

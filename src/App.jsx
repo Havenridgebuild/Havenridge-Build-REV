@@ -1,4 +1,4 @@
-import { supabase, saveLeadToSupabase } from './lib/supabaseClient';
+import { supabase, saveLeadToSupabase, incrementMetric } from './lib/supabaseClient';
 import AdminDashboardView from './components/AdminDashboardView';
 import { servicesData } from "./data/servicesData";
 
@@ -73,6 +73,23 @@ const cleanToProjectKey = {
 };
 
 export default function App() {
+
+  // Global click tracker for metrics
+  useEffect(() => {
+    const handleGlobalClick = (e) => {
+      const a = e.target.closest('a');
+      if (a && a.href) {
+        if (a.href.startsWith('tel:')) {
+          incrementMetric('calls');
+        } else if (a.href.startsWith('mailto:')) {
+          incrementMetric('emails');
+        }
+      }
+    };
+    document.addEventListener('click', handleGlobalClick);
+    return () => document.removeEventListener('click', handleGlobalClick);
+  }, []);
+
   // Mobile Menu State
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);

@@ -28,3 +28,27 @@ export async function saveLeadToSupabase(leadObj) {
     console.warn('Lead saved locally:', err?.message || err);
   }
 }
+
+
+// Increment a site metric (calls or emails)
+export async function incrementMetric(type) {
+  try {
+    const { data } = await supabase.from('site_metrics').select('count').eq('id', type).single();
+    if (data) {
+      await supabase.from('site_metrics').update({ count: (data.count || 0) + 1 }).eq('id', type);
+    }
+  } catch (err) {
+    console.warn('Metric increment error:', err);
+  }
+}
+
+// Get site metrics
+export async function getSiteMetrics() {
+  try {
+    const { data } = await supabase.from('site_metrics').select('*');
+    return data || [];
+  } catch (err) {
+    console.warn('Metrics fetch error:', err);
+    return [];
+  }
+}

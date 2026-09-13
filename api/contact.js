@@ -34,7 +34,7 @@ export default async function handler(req, res) {
       homeOccupied = "",
       source = "",
       uploadedFile = "",
-      uploadedFilesData = null,
+      uploadedFilesUrls = [],
       description = ""
     } = body;
 
@@ -189,7 +189,7 @@ export default async function handler(req, res) {
             <p><b>Decision Makers Aligned:</b> ${decisionMakers || "Not specified"}</p>
             <p><b>Home Occupied During Build:</b> ${homeOccupied || "Not specified"}</p>
             <p><b>How Found Us:</b> ${source || "Not specified"}</p>
-            ${uploadedFilesData && uploadedFilesData.length > 0 ? `<p><b>Attachments:</b> ${uploadedFilesData.length} files attached securely to Pipedrive Deal.</p>` : ""}
+            ${uploadedFilesUrls && uploadedFilesUrls.length > 0 ? `<p><b>Attachments:</b></p><ul>${uploadedFilesUrls.map(f => `<li><a href="${f.url}">${f.filename}</a></li>`).join('')}</ul>` : ""}
             <p><b>Project Description:</b> ${description || "None provided"}</p>
             <p><i>Submitted via Havenridge Build Website</i></p>
           `;
@@ -203,14 +203,17 @@ export default async function handler(req, res) {
             })
           });
 
-          // Upload Files to Pipedrive Deal
-          if (uploadedFilesData && uploadedFilesData.length > 0) {
-            for (const fileData of uploadedFilesData) {
+          // Fetch files from Supabase URL and upload natively to Pipedrive
+          if (uploadedFilesUrls && uploadedFilesUrls.length > 0) {
+            for (const fileObj of uploadedFilesUrls) {
               try {
-                const buffer = Buffer.from(fileData.content, "base64");
-                const blob = new Blob([buffer], { type: fileData.type || "application/octet-stream" });
+                const fetchedRes = await fetch(fileObj.url);
+                const arrayBuffer = await fetchedRes.arrayBuffer();
+                const buffer = Buffer.from(arrayBuffer);
+                const blob = new Blob([buffer], { type: fileObj.type || "application/octet-stream" });
+                
                 const formData = new FormData();
-                formData.append("file", blob, fileData.filename);
+                formData.append("file", blob, fileObj.filename);
                 formData.append("deal_id", pipedriveDealId);
                 
                 const fileRes = await fetch(`https://api.pipedrive.com/v1/files?api_token=${PIPEDRIVE_API_TOKEN}`, {
@@ -267,7 +270,7 @@ export default async function handler(req, res) {
                   <p style="margin: 4px 0;"><strong>All Decision Makers Aligned:</strong> ${decisionMakers || "Not specified"}</p>
                   <p style="margin: 4px 0;"><strong>Home Occupied During Build:</strong> ${homeOccupied || "Not specified"}</p>
                   <p style="margin: 4px 0;"><strong>How Found Us:</strong> ${source || "Not specified"}</p>
-                  ${uploadedFilesData && uploadedFilesData.length > 0 ? `<p style="margin: 8px 0; padding-top: 8px; border-top: 1px dashed #cbd5e1;"><strong>📎 Uploaded Attachments:</strong> ${uploadedFilesData.length} file(s) attached to this email.</p>` : ""}
+                  ${uploadedFilesUrls && uploadedFilesUrls.length > 0 ? `<div style="background-color: #f8fafc; border-left: 4px solid #22c55e; padding: 16px; margin: 20px 0; border-radius: 4px;"><h3 style="color: #0B2638; margin-top: 0; font-size: 16px;">📎 Uploaded Project Files</h3><ul style="margin: 4px 0; padding-left: 20px;">${uploadedFilesUrls.map(f => `<li style="margin-bottom: 8px;"><a href="${f.url}" style="color: #0284c7; text-decoration: none; font-weight: bold;">${f.filename}</a></li>`).join('')}</ul><p style="font-size: 12px; color: #64748b; margin-top: 8px;">Click a link above to instantly view or download the secure file.</p></div>` : ""}
                 </div>
 
                 ${description ? `
@@ -277,10 +280,8 @@ export default async function handler(req, res) {
                 </div>` : ""}
               </div>
             `,
-            attachments: uploadedFilesData && uploadedFilesData.length > 0 ? uploadedFilesData.map(f => ({
-              filename: f.filename,
-              content: f.content
-            })) : []
+            // We removed native attachments to prevent Vercel & Email provider size limits. 
+            // Files are securely linked in the HTML body instead.
           })
         });
         if (resendRes.ok) emailStatus = "sent_via_resend";

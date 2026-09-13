@@ -166,21 +166,36 @@ export default function App() {
 
     // Call /api/contact endpoint to send complete Resend Email & create Pipedrive Deal
     try {
-      let filesData = [];
+      let uploadedFilesUrls = [];
       if (formUploadedFiles && formUploadedFiles.length > 0) {
-        filesData = await Promise.all(formUploadedFiles.map(async (file) => {
-          const base64Data = await new Promise((resolve, reject) => {
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onload = () => resolve(reader.result.split(',')[1]);
-            reader.onerror = error => reject(error);
-          });
-          return {
-            filename: file.name,
-            content: base64Data,
-            type: file.type || 'application/octet-stream'
-          };
+        uploadedFilesUrls = await Promise.all(formUploadedFiles.map(async (file) => {
+          const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+          const uniqueName = `${Date.now()}_${Math.floor(Math.random()*1000)}_${safeName}`;
+          
+          try {
+            const { error } = await supabase.storage
+              .from('lead-attachments')
+              .upload(uniqueName, file, { cacheControl: '3600', upsert: false });
+              
+            if (error) console.warn("Supabase Storage error:", error);
+            
+            const { data } = supabase.storage
+              .from('lead-attachments')
+              .getPublicUrl(uniqueName);
+              
+            return {
+              filename: file.name,
+              url: data.publicUrl,
+              type: file.type || 'application/octet-stream'
+            };
+          } catch (e) {
+            console.warn("Upload exception:", e);
+            return null;
+          }
         }));
+        
+        // Filter out any failed uploads
+        uploadedFilesUrls = uploadedFilesUrls.filter(Boolean);
       }
 
       await fetch('/api/contact', {
@@ -202,7 +217,7 @@ export default function App() {
           homeOccupied: formHomeOccupied,
           source: fullSourceStr,
           uploadedFile: formUploadedFile,
-          uploadedFilesData: filesData,
+          uploadedFilesUrls: uploadedFilesUrls,
           description: formDescription
         })
       });

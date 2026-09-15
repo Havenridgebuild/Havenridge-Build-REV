@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase, getLeadsFromSupabase } from '../lib/supabaseClient';
+import { supabase, getLeadsFromSupabase, getSiteMedia, saveSiteMedia } from '../lib/supabaseClient';
 import { guidesData } from '../data/guidesData';
 import { 
   BarChart3 as ChartIcon, 
@@ -81,9 +81,7 @@ export default function AdminDashboardView({ onNavigateHome }) {
   });
 
   // SITE-WIDE MEDIA ASSET MANAGER STATE BY PAGE / SECTION
-  const [siteImages, setSiteImages] = useState(() => {
-    const saved = localStorage.getItem('havenridge_site_images');
-    return saved ? JSON.parse(saved) : {
+  const [siteImages, setSiteImages] = useState({
       home_hero_1: 'project_images/hero_living_room_fireplace.jpg',
       home_hero_2: 'project_images/piccadilly/1.png',
       home_hero_3: 'project_images/mcdougall/3.png',
@@ -103,7 +101,6 @@ export default function AdminDashboardView({ onNavigateHome }) {
       about_craftsmanship: 'project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg',
       resources_guides_banner: 'project_images/Huntingwood_Court/Huntingwood_1.png',
       resources_blog_banner: 'project_images/hero_living_room_fireplace.jpg'
-    };
   });
   const [selectedMediaCategory, setSelectedMediaCategory] = useState('all');
   const [mediaSavedNotice, setMediaSavedNotice] = useState(false);
@@ -364,20 +361,40 @@ export default function AdminDashboardView({ onNavigateHome }) {
     }, 2000);
   };
 
-  const handleSaveMedia = () => {
-    localStorage.setItem('havenridge_site_images', JSON.stringify(siteImages));
+  
+  useEffect(() => {
+    getSiteMedia().then(data => {
+      if (data && Object.keys(data).length > 0) {
+        setSiteImages(prev => ({ ...prev, ...data }));
+      }
+    });
+  }, []);
+
+  const handleSaveMedia = async () => {
+    await saveSiteMedia(siteImages);
     setMediaSavedNotice(true);
     setTimeout(() => setMediaSavedNotice(false), 3000);
   };
 
-  const handleFileUpload = (key, event) => {
+  const handleFileUpload = async (key, event) => {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSiteImages(prev => ({ ...prev, [key]: reader.result }));
-      };
-      reader.readAsDataURL(file);
+      // Show temporary loading state
+      setSiteImages(prev => ({ ...prev, [key]: 'Uploading...' }));
+      
+      const safeName = file.name.replace(/[^a-zA-Z0-9.\-_]/g, '_');
+      const uniqueName = `${Date.now()}_${Math.floor(Math.random()*1000)}_${safeName}`;
+      
+      try {
+        const { error } = await supabase.storage.from('lead-attachments').upload(uniqueName, file);
+        if (error) throw error;
+        
+        const { data } = supabase.storage.from('lead-attachments').getPublicUrl(uniqueName);
+        setSiteImages(prev => ({ ...prev, [key]: data.publicUrl }));
+      } catch (e) {
+        console.error('Error uploading media:', e);
+        alert('Upload failed. Please try again.');
+      }
     }
   };
 

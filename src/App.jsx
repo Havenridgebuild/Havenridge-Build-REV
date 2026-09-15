@@ -1,4 +1,4 @@
-import { supabase, saveLeadToSupabase, incrementMetric } from './lib/supabaseClient';
+import { supabase, saveLeadToSupabase, incrementMetric, getSiteMedia } from './lib/supabaseClient';
 import AdminDashboardView from './components/AdminDashboardView';
 import { servicesData } from "./data/servicesData";
 
@@ -73,6 +73,17 @@ const cleanToProjectKey = {
 };
 
 export default function App() {
+
+  // Global Site Media Overrides
+  const [siteMedia, setSiteMedia] = useState({});
+  useEffect(() => {
+    getSiteMedia().then(data => {
+      if (data && Object.keys(data).length > 0) {
+        setSiteMedia(data);
+      }
+    });
+  }, []);
+
 
   // Global click tracker for metrics
   useEffect(() => {
@@ -673,9 +684,9 @@ export default function App() {
   // Hero Slideshow State
   const [heroIndex, setHeroIndex] = useState(0);
   const heroImages = [
-    '/project_images/hero_living_room_fireplace.jpg',
-    '/project_images/piccadilly/1.png',
-    '/project_images/mcdougall/3.png'
+    siteMedia['home_hero_1'] || '/project_images/hero_living_room_fireplace.jpg',
+    siteMedia['home_hero_2'] || '/project_images/piccadilly/1.png',
+    siteMedia['home_hero_3'] || '/project_images/mcdougall/3.png'
   ];
 
   useEffect(() => {
@@ -3441,8 +3452,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
         {/* HERO SPLIT IMAGE BANNER (CASS STYLE) */}
         <section className="grid grid-cols-2 gap-2 h-[250px] sm:h-[350px] overflow-hidden bg-[#0B2638]">
-          <img src="/project_images/piccadilly/1.png" alt="Kitchen highlight" className="w-full h-full object-cover opacity-80" />
-          <img src="/project_images/hero_living_room_fireplace.jpg" alt="Living Room highlight" className="w-full h-full object-cover opacity-80" />
+          <img src={siteMedia['home_hero_2'] || "/project_images/piccadilly/1.png"} alt="Kitchen highlight" className="w-full h-full object-cover opacity-80" />
+          <img src={siteMedia['home_hero_1'] || "/project_images/hero_living_room_fireplace.jpg"} alt="Living Room highlight" className="w-full h-full object-cover opacity-80" />
         </section>
 
         {/* HERO TITLE SECTION ON LIGHT BACKGROUND (CASS STYLE) */}

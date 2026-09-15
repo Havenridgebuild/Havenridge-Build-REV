@@ -52,3 +52,24 @@ export async function getSiteMetrics() {
     return [];
   }
 }
+
+
+// Get all site media overrides
+export async function getSiteMedia() {
+  try {
+    const { data, error } = await supabase.from('site_settings').select('value').eq('id', 'media').single();
+    return data ? data.value : {};
+  } catch (err) {
+    console.warn('Media fetch error:', err);
+    return {};
+  }
+}
+
+// Save all site media overrides
+export async function saveSiteMedia(mediaObj) {
+  try {
+    await supabase.from('site_settings').upsert({ id: 'media', value: mediaObj });
+  } catch (err) {
+    console.warn('Media save error:', err);
+  }
+}

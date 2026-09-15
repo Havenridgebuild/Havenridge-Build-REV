@@ -502,7 +502,7 @@ export default function App() {
             author: b.author || 'Havenridge Technical Team',
             date: b.date || 'August 30, 2026',
             readTime: b.read_time || '8 min read',
-            img: b.img ? (b.img.startsWith('/') ? b.img : '/' + b.img) : '/project_images/hero_living_room_fireplace.jpg',
+            img: b.img ? (b.img.startsWith('/') ? b.img : '/' + b.img) : (siteMedia['resources_blog_banner'] || '/project_images/hero_living_room_fireplace.jpg'),
             quickAnswer: b.quick_answer || '',
             sections: b.sections || []
           }));
@@ -764,28 +764,28 @@ export default function App() {
       title: "ADDITIONS & ADUs",
       headline: "Expanding a dated home with a carefully planned second-storey addition and a renewed exterior.",
       desc: "This project transformed the home through structural reconfiguration and a new upper level. Havenridge coordinated framing, masonry and trade work so the addition connected naturally in appearance and function.",
-      img: "/project_images/mcdougall/addition_adu_stone_facade.jpg",
+      img: siteMedia["pillar_additions"] || "/project_images/mcdougall/addition_adu_stone_facade.jpg",
       hash: "/services/additions-adus"
     },
     {
       title: "WHOLE HOME RENOVATIONS",
       headline: "Reworking the layout, function and finishes of a multi-level home through one coordinated renovation process.",
       desc: "The renovation brought several levels of the home together through coordinated planning and construction. Work included main-floor layout changes, a new kitchen, bathroom renovations and a finished lower level.",
-      img: "/project_images/knox/whole_home_white_kitchen.jpg",
+      img: siteMedia["pillar_whole_home"] || "/project_images/knox/whole_home_white_kitchen.jpg",
       hash: "/services/whole-home-renovations"
     },
     {
       title: "MULTI-UNIT CONVERSIONS",
       headline: "Creating a safe, functional secondary suite through coordinated planning, code review, permits and construction.",
       desc: "Havenridge converted the lower level into a functional two-bedroom living space with a kitchenette, bathroom and egress. Life-safety, egress, and code compliance were fully coordinated throughout construction.",
-      img: "/project_images/natchez/secondary_suite_exterior_entrance.jpg",
+      img: siteMedia["pillar_multi_unit"] || "/project_images/natchez/secondary_suite_exterior_entrance.jpg",
       hash: "/services/multi-unit-conversions"
     },
     {
       title: "ACCESSIBLE & AGING-IN-PLACE RENOVATIONS",
       headline: "Improving safety, comfort, movement and independence through thoughtful accessible and aging-in-place design.",
       desc: "This bathroom renovation focused on reducing barriers and making everyday use easier with a widened doorway, accessible shower configuration, integrated seating, grab bars, reachable storage and improved lighting.",
-      img: "/project_images/isherwood/1.png",
+      img: siteMedia["pillar_accessible"] || "/project_images/isherwood/1.png",
       hash: "/services/accessible-aging-in-place"
     }
   ];
@@ -1014,7 +1014,7 @@ export default function App() {
         { title: "Appledale Crescent Walk-In Shower", caption: "Precision herringbone subway tile layout & custom frameless glass enclosure.", img: "/project_images/Appledale_Crescent/Appledale_3.jpg", link: "/work/project-millwork" },
         { title: "Huntingwood Court Basement Suite", caption: "Luxury wellness basement bathroom with custom quartz vanity & deep charcoal wainscoting.", img: "/project_images/Huntingwood_Court/Huntingwood_8.jpg", link: "/work/project-basements" },
         { title: "Paisley Heights Heritage Suite", caption: "Vintage black-and-white basketweave tile floor, sloped-glass tub partition & dark oak vanity.", img: "/project_images/paisley/1.png", link: "/work/project-bathrooms" },
-        { title: "Isherwood Ave Universal Suite", caption: "Barrier-free accessible roll-in shower with integrated sitting bench & safety grab bars.", img: "/project_images/isherwood/1.png", link: "/work/project-accessibility" }
+        { title: "Isherwood Ave Universal Suite", caption: "Barrier-free accessible roll-in shower with integrated sitting bench & safety grab bars.", img: siteMedia["pillar_accessible"] || "/project_images/isherwood/1.png", link: "/work/project-accessibility" }
       ]
     },
     '/work/inspiration-kitchens': {
@@ -1221,7 +1221,7 @@ export default function App() {
       showcase: [
         { title: "Morningdale Crescent Hardscaping & Deck", caption: "Multi-level front interlock stone driveway with LED lighting & multi-tiered backyard timber deck.", img: "/project_images/Morningdale_Crescent/morningdale_backyard_deck_twilight.jpg", link: "/work/project-living-spaces" },
         { title: "The Moore Street Estate Pergola & Envelope", caption: "17'x17' outdoor timber pergola, concrete pad & full exterior siding/window overhaul.", img: "/project_images/Moore_Street_State_Flagship/moore_timber_pergola_outdoor_patio.jpg", link: "/work/project-garages" },
-        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: "/project_images/mcdougall/addition_adu_stone_facade.jpg", link: "/work/project-additions" }
+        { title: "McDougall Road Portico & Stone Veneer", caption: "Timber-framed front portico with exposed truss detailing & split-face stone masonry veneer.", img: siteMedia["pillar_additions"] || "/project_images/mcdougall/addition_adu_stone_facade.jpg", link: "/work/project-additions" }
       ]
     }
   };
@@ -1273,12 +1273,12 @@ export default function App() {
       scope: "Legal 2-Bedroom Suite Layout, Egress Window Installation, Custom Kitchenette, Mechanical Upgrades & Fire-Separation Assemblies",
       standards: "ESA & Building Code Compliant, Havenridge Written Warranty",
       certifications: "ESA & Building Code Compliant, Havenridge Written Warranty",
-      img1: "/project_images/Natchez_Road/Natchez_1.png",
+      img1: siteMedia["natchez_gallery_1"] || "/project_images/Natchez_Road/Natchez_1.png",
       img2: "/project_images/Natchez_Road/Natchez_2.png",
       img3: "/project_images/Natchez_Road/Natchez_3.png",
       gallery: [
-        "/project_images/Natchez_Road/Natchez_1.png",
-        "/project_images/Natchez_Road/Natchez_2.png",
+        (siteMedia["natchez_gallery_1"] || "/project_images/Natchez_Road/Natchez_1.png"),
+        (siteMedia["natchez_gallery_2"] || "/project_images/Natchez_Road/Natchez_2.png"),
         "/project_images/Natchez_Road/Natchez_3.png",
         "/project_images/Natchez_Road/Natchez_4.png",
         "/project_images/Natchez_Road/Natchez_5.png",
@@ -1425,7 +1425,7 @@ The main level expands into a custom-built gourmet kitchen designed to maximize 
       scope: "Structural Reconfiguration, Vertical Additions, Custom Stone Masonry & Architectural Trim",
       standards: "WEDI Certified, Havenridge Written Warranty",
       certifications: "WEDI Certified, Havenridge Written Warranty",
-      img1: "/project_images/McDougall_Road/McDougall_1.png",
+      img1: siteMedia["mcdougall_gallery_1"] || "/project_images/McDougall_Road/McDougall_1.png",
       img2: "/project_images/McDougall_Road/McDougall_2.png",
       img3: "/project_images/McDougall_Road/McDougall_3.png",
       gallery: [
@@ -2070,6 +2070,13 @@ The exterior envelope and surrounding property were entirely reborn to match the
     const serviceId = currentPath.split('/').pop();
     const svc = servicesData[serviceId];
     if (svc) {
+      const coverKeyMap = {
+        'additions-adus': 'service_additions_cover',
+        'whole-home-renovations': 'service_whole_home_cover',
+        'multi-unit-conversions': 'service_multi_unit_cover',
+        'accessible-aging-in-place': 'service_accessible_cover'
+      };
+      const activeCoverImg = siteMedia[coverKeyMap[serviceId]] || svc.heroImg;
       return (
         <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
                 {/* MAIN NAVIGATION */}
@@ -2222,7 +2229,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
           {/* HERO SECTION WITH IMAGE & MAIN TITLE */}
           <section className="relative h-[60vh] sm:h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-            <img src={svc.heroImg} alt={svc.topMainName} className="absolute inset-0 w-full h-full object-cover cass-hero-fade" />
+            <img src={activeCoverImg} alt={svc.topMainName} className="absolute inset-0 w-full h-full object-cover cass-hero-fade" />
             <div className="absolute inset-0 bg-[#0B2638]/50"></div>
             <div className="relative z-10 max-w-7xl mx-auto px-6 text-center w-full mt-10 cass-reveal">
               <h1 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-widest uppercase drop-shadow-2xl">
@@ -3969,7 +3976,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           <section className="relative bg-[#0B2638] text-white py-24 px-6 overflow-hidden border-b border-[#CDAE72]/20">
             <div className="absolute inset-0 z-0">
               <img 
-                src="/project_images/paisley/11.png" 
+                src={siteMedia["about_craftsmanship"] || "/project_images/paisley/11.png"} 
                 alt="Havenridge Craftsmanship" 
                 className="w-full h-full object-cover opacity-15"
               />
@@ -4083,7 +4090,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <div className="space-y-6 text-left bg-white p-8 rounded-sm shadow-md border border-[#0B2638]/10 flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="aspect-[4/5] overflow-hidden bg-[#0B2638]/10 shadow-sm rounded-sm">
-                      <img src="michael_smith.jpg" alt="Micheal Smith - Owner & General Contractor" className="w-full h-full object-cover" />
+                      <img src={siteMedia["about_team_photo"] || "michael_smith.jpg"} alt="Micheal Smith - Owner & General Contractor" className="w-full h-full object-cover" />
                     </div>
                     <div className="space-y-1">
                       <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">OWNER & GENERAL CONTRACTOR</span>
@@ -7283,7 +7290,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
       <section className="relative py-28 bg-[#0B2638] text-white text-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
-            src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1600" 
+            src={siteMedia["resources_guides_banner"] || "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1600"} 
             alt="Atmosphere" 
             className="w-full h-full object-cover opacity-15"
           />

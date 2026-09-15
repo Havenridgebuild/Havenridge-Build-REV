@@ -68,7 +68,7 @@ export async function getSiteMedia() {
 // Save all site media overrides
 export async function saveSiteMedia(mediaObj) {
   try {
-    await supabase.from('site_settings').upsert({ id: 'media', value: mediaObj });
+    await supabase.from('site_settings').update({ value: mediaObj }).eq('id', 'media');
   } catch (err) {
     console.warn('Media save error:', err);
   }

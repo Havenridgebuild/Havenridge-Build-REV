@@ -82,25 +82,25 @@ export default function AdminDashboardView({ onNavigateHome }) {
 
   // SITE-WIDE MEDIA ASSET MANAGER STATE BY PAGE / SECTION
   const [siteImages, setSiteImages] = useState({
-      home_hero_1: 'project_images/hero_living_room_fireplace.jpg',
-      home_hero_2: 'project_images/piccadilly/1.png',
-      home_hero_3: 'project_images/mcdougall/3.png',
-      pillar_additions: 'project_images/natchez/secondary_suite_exterior_entrance.jpg',
-      pillar_whole_home: 'project_images/knox/whole_home_white_kitchen.jpg',
-      pillar_multi_unit: 'project_images/mcdougall/addition_adu_stone_facade.jpg',
-      pillar_accessible: 'project_images/Appledale_Crescent/Appledale_3.jpg',
-      service_additions_cover: 'project_images/natchez/secondary_suite_exterior_entrance.jpg',
-      service_whole_home_cover: 'project_images/knox/whole_home_white_kitchen.jpg',
-      service_multi_unit_cover: 'project_images/mcdougall/addition_adu_stone_facade.jpg',
-      service_accessible_cover: 'project_images/Appledale_Crescent/Appledale_3.jpg',
-      natchez_gallery_1: 'project_images/natchez/1.png',
-      natchez_gallery_2: 'project_images/natchez/2.png',
-      piccadilly_gallery_1: 'project_images/piccadilly/1.png',
-      mcdougall_gallery_1: 'project_images/mcdougall/1.png',
-      about_team_photo: 'project_images/mcdougall/1.png',
-      about_craftsmanship: 'project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg',
-      resources_guides_banner: 'project_images/Huntingwood_Court/Huntingwood_1.png',
-      resources_blog_banner: 'project_images/hero_living_room_fireplace.jpg'
+      home_hero_1: '/project_images/hero_living_room_fireplace.jpg',
+      home_hero_2: '/project_images/piccadilly/1.png',
+      home_hero_3: '/project_images/mcdougall/3.png',
+      pillar_additions: '/project_images/mcdougall/addition_adu_stone_facade.jpg',
+      pillar_whole_home: '/project_images/knox/whole_home_white_kitchen.jpg',
+      pillar_multi_unit: '/project_images/natchez/secondary_suite_exterior_entrance.jpg',
+      pillar_accessible: '/project_images/isherwood/1.png',
+      service_additions_cover: '/project_images/mcdougall/addition_adu_stone_facade.jpg',
+      service_whole_home_cover: '/project_images/knox/whole_home_white_kitchen.jpg',
+      service_multi_unit_cover: '/project_images/natchez/secondary_suite_exterior_entrance.jpg',
+      service_accessible_cover: '/project_images/isherwood/1.png',
+      natchez_gallery_1: '/project_images/Natchez_Road/Natchez_1.png',
+      natchez_gallery_2: '/project_images/Natchez_Road/Natchez_2.png',
+      piccadilly_gallery_1: '/project_images/piccadilly/1.png',
+      mcdougall_gallery_1: '/project_images/McDougall_Road/McDougall_1.png',
+      about_team_photo: '/michael_smith.jpg',
+      about_craftsmanship: '/project_images/paisley/11.png',
+      resources_guides_banner: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1600',
+      resources_blog_banner: '/project_images/hero_living_room_fireplace.jpg'
   });
   const [selectedMediaCategory, setSelectedMediaCategory] = useState('all');
   const [mediaSavedNotice, setMediaSavedNotice] = useState(false);

@@ -79,7 +79,15 @@ export default function App() {
   useEffect(() => {
     getSiteMedia().then(data => {
       if (data && Object.keys(data).length > 0) {
-        setSiteMedia(data);
+        // Fix missing leading slashes from legacy admin dashboard state to prevent 404s on sub-routes
+        const fixedMedia = { ...data };
+        for (const key in fixedMedia) {
+          const val = fixedMedia[key];
+          if (typeof val === 'string' && val && !val.startsWith('/') && !val.startsWith('http')) {
+            fixedMedia[key] = '/' + val;
+          }
+        }
+        setSiteMedia(fixedMedia);
       }
     });
   }, []);
@@ -4090,7 +4098,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 <div className="space-y-6 text-left bg-white p-8 rounded-sm shadow-md border border-[#0B2638]/10 flex flex-col justify-between">
                   <div className="space-y-4">
                     <div className="aspect-[4/5] overflow-hidden bg-[#0B2638]/10 shadow-sm rounded-sm">
-                      <img src={siteMedia["about_team_photo"] || "michael_smith.jpg"} alt="Micheal Smith - Owner & General Contractor" className="w-full h-full object-cover" />
+                      <img src={siteMedia["about_team_photo"] || "/michael_smith.jpg"} alt="Micheal Smith - Owner & General Contractor" className="w-full h-full object-cover" />
                     </div>
                     <div className="space-y-1">
                       <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-widest uppercase block">OWNER & GENERAL CONTRACTOR</span>

@@ -100,7 +100,9 @@ export default function AdminDashboardView({ onNavigateHome }) {
       about_team_photo: '/michael_smith.jpg',
       about_craftsmanship: '/project_images/paisley/11.png',
       resources_guides_banner: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1600',
-      resources_blog_banner: '/project_images/hero_living_room_fireplace.jpg'
+      resources_blog_banner: '/project_images/hero_living_room_fireplace.jpg',
+      brand_favicon: '/logo_social_profile_navy.png',
+      brand_social_share: '/project_images/piccadilly/1.png'
   });
   const [selectedMediaCategory, setSelectedMediaCategory] = useState('all');
   const [mediaSavedNotice, setMediaSavedNotice] = useState(false);
@@ -532,6 +534,7 @@ export default function AdminDashboardView({ onNavigateHome }) {
 
   const filteredMediaEntries = Object.entries(siteImages).filter(([key]) => {
     if (selectedMediaCategory === 'all') return true;
+    if (selectedMediaCategory === 'brand') return key.startsWith('brand_');
     if (selectedMediaCategory === 'home') return key.startsWith('home_') || key.startsWith('pillar_');
     if (selectedMediaCategory === 'services') return key.startsWith('service_');
     if (selectedMediaCategory === 'projects') return key.includes('gallery');

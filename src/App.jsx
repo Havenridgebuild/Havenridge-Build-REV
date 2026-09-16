@@ -88,6 +88,28 @@ export default function App() {
           }
         }
         setSiteMedia(fixedMedia);
+        
+        // Dynamically update Favicon
+        const faviconUrl = fixedMedia['brand_favicon'];
+        if (faviconUrl) {
+          let link = document.querySelector("link[rel~='icon']");
+          if (!link) {
+            link = document.createElement('link');
+            link.rel = 'icon';
+            document.head.appendChild(link);
+          }
+          link.href = faviconUrl;
+        }
+
+        // Dynamically update Social Share (OG/Twitter)
+        const socialUrl = fixedMedia['brand_social_share'];
+        if (socialUrl) {
+          let ogImage = document.querySelector("meta[property='og:image']");
+          if (ogImage) ogImage.setAttribute('content', socialUrl);
+
+          let twitterImage = document.querySelector("meta[name='twitter:image']");
+          if (twitterImage) twitterImage.setAttribute('content', socialUrl);
+        }
       }
     });
   }, []);

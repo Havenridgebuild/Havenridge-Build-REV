@@ -266,7 +266,12 @@ export default function App() {
       console.warn('API contact route warning:', apiErr);
     }
 
-
+    // Fire Google Ads Lead Form Conversion Event
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('event', 'conversion', {
+        'send_to': 'AW-18449799436/VtaeCPH41v0cEIyyxt1E'
+      });
+    }
 
     setFormSubmitted(true);
     setIsSubmitting(false);

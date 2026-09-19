@@ -10,6 +10,23 @@
 
       gtag('config', 'AW-18449799436');
     </script>
+    <!-- Event snippet for Click to call conversion page -->
+    <script>
+      function gtag_report_conversion(url) {
+        var callback = function () {
+          if (typeof(url) != 'undefined') {
+            window.location = url;
+          }
+        };
+        gtag('event', 'conversion', {
+            'send_to': 'AW-18449799436/y1jwCKDp0v0cEIyyxt1E',
+            'value': 1.0,
+            'currency': 'CAD',
+            'event_callback': callback
+        });
+        return false;
+      }
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Havenridge Build | Design-Build Renovations, Additions & Transformations</title>

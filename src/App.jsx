@@ -6423,7 +6423,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <div className="space-y-4 text-sm leading-relaxed text-[#24313A]/80 font-sans border-b border-[#0B2638]/10 pb-6">
                 <p className="flex items-center gap-3">
                   <span className="font-bold text-[#0B2638] min-w-[70px]">Office</span>
-                  <a href="tel:5196350963" className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">(519) 635-0963</a>
+                  <a href="tel:5196350963" onClick={(e) => { e.preventDefault(); if(window.gtag_report_conversion) window.gtag_report_conversion("tel:5196350963"); else window.location.href="tel:5196350963"; }} className="text-[#0B2638] font-bold hover:text-[#CDAE72] transition-colors">(519) 635-0963</a>
                 </p>
                 <p className="flex items-center gap-3">
                   <span className="font-bold text-[#0B2638] min-w-[70px]">Email</span>
@@ -6507,7 +6507,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                       </div>
 
                       <p className="text-xs text-[#24313A]/70 text-center italic">
-                        Need immediate assistance? Call us directly at <a href="tel:5196350963" className="font-bold text-[#0B2638] underline hover:text-[#CDAE72]">519-635-0963</a>.
+                        Need immediate assistance? Call us directly at <a href="tel:5196350963" onClick={(e) => { e.preventDefault(); if(window.gtag_report_conversion) window.gtag_report_conversion("tel:5196350963"); else window.location.href="tel:5196350963"; }} className="font-bold text-[#0B2638] underline hover:text-[#CDAE72]">519-635-0963</a>.
                       </p>
                     </div>
                   ) : (

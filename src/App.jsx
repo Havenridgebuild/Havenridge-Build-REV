@@ -2262,27 +2262,24 @@ The exterior envelope and surrounding property were entirely reborn to match the
             )}
           </nav>
 
-          {/* HERO SECTION WITH IMAGE & MAIN TITLE */}
-          <section className="relative h-[60vh] sm:h-[70vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-            <img src={activeCoverImg} alt={svc.topMainName} className="absolute inset-0 w-full h-full object-cover cass-hero-fade" />
-            <div className="absolute inset-0 bg-[#0B2638]/50"></div>
-            <div className="relative z-10 max-w-7xl mx-auto px-6 text-center w-full mt-10 cass-reveal">
-              <h1 className="font-cinzel text-4xl sm:text-5xl lg:text-6xl font-bold text-white tracking-widest uppercase drop-shadow-2xl">
-                {svc.topMainName}
-              </h1>
-            </div>
+          {/* HERO IMAGE ONLY */}
+          <section className="relative w-full h-[45vh] md:h-[55vh] overflow-hidden bg-[#0B2638]">
+            <img src={activeCoverImg} alt={svc.topMainName} className="absolute inset-0 w-full h-full object-cover cass-hero-fade opacity-90" />
           </section>
 
           {/* INTRO COPY AND GALLERY */}
-          <section className="py-16 bg-white border-y border-[#0B2638]/10">
+          <section className="pt-10 pb-16 md:pt-14 md:pb-24 bg-white border-y border-[#0B2638]/10">
             <div className="max-w-7xl mx-auto px-6">
               
-              {/* INTRO TEXT MOVED BELOW HERO */}
+              {/* INTRO TEXT WITH LEFT-ALIGNED TITLE (MATCHING INSPIRATIONAL PROJECTS) */}
               <div className="mb-16 space-y-4 max-w-5xl">
-                <span className="text-[#CDAE72] text-[10px] sm:text-xs font-sans font-bold tracking-[0.25em] uppercase block">
+                <span className="text-[#CDAE72] text-[10px] sm:text-xs font-sans font-bold tracking-widest uppercase block">
                   {svc.topSmallName}
                 </span>
-                <p className="text-[#24313A] text-sm sm:text-base lg:text-lg font-light leading-relaxed whitespace-pre-line">
+                <h1 className="font-cinzel text-3xl sm:text-4xl md:text-5xl font-bold text-[#0B2638] leading-tight">
+                  {svc.topMainName}
+                </h1>
+                <p className="text-[#24313A] text-sm sm:text-base lg:text-lg font-light leading-relaxed whitespace-pre-line pt-4">
                   {svc.topDescription}
                 </p>
               </div>
@@ -2678,7 +2675,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           </nav>
 
         {/* HERO IMAGE */}
-        <section className="relative w-full h-[55vh] md:h-[65vh] overflow-hidden bg-[#0B2638]">
+        <section className="relative w-full h-[45vh] md:h-[55vh] overflow-hidden bg-[#0B2638]">
           <img src={proj.img1} alt={proj.title} className="w-full h-full object-cover opacity-90" />
         </section>
 
@@ -3085,7 +3082,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
         <section className="bg-[#0B2638] text-white py-16 text-center border-b border-[#CDAE72]/20">
           <div className="max-w-4xl mx-auto px-6 space-y-3">
-            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CLIENT TESTIMONIALS</span>
+            <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">CLIENT REVIEWS</span>
             <h1 className="font-cinzel text-3xl sm:text-4xl font-bold text-white">What Our Clients Say</h1>
             <p className="text-sm font-light text-white/80 max-w-2xl mx-auto leading-relaxed">
               Feedback from homeowners across Waterloo Region, Guelph and surrounding communities.
@@ -4026,11 +4023,47 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 Full-service design-build general contracting serving Cambridge, Kitchener, Waterloo, Guelph, and surrounding communities with detailed building standards.
               </p>
               
-              <div className="pt-4 flex flex-wrap justify-center gap-4 text-xs font-sans font-bold tracking-wider uppercase text-[#CDAE72]">
-                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Serving Homeowners Since 2014</span>
-                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Baeumler Approved</span>
-                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">RenoMark Certified</span>
-                <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Written Warranty & Aftercare</span>
+              <div className="pt-4 flex flex-col items-center gap-4 text-xs font-sans font-bold tracking-wider uppercase text-[#CDAE72]">
+                {/* Row 1: Non-clickable */}
+                <div className="flex flex-wrap justify-center gap-4">
+                  <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Serving Homeowners Since 2014</span>
+                  <span className="bg-[#17365D] px-4 py-2 border border-[#CDAE72]/30 shadow-md">Written Warranty & Aftercare</span>
+                </div>
+                {/* Row 2: Clickable links */}
+                <div className="flex flex-wrap justify-center gap-4">
+                  <a 
+                    href="https://www.baeumlerapproved.ca/contractors/carpenters-on-the-go/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-[#17365D] px-4 py-2 border border-[#CDAE72] shadow-md hover:bg-[#CDAE72] hover:text-[#0B2638] transition-colors cursor-pointer"
+                  >
+                    Baeumler Approved
+                  </a>
+                  <a 
+                    href="https://renomark.ca/renovator/carpenters-on-the-go-inc/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-[#17365D] px-4 py-2 border border-[#CDAE72] shadow-md hover:bg-[#CDAE72] hover:text-[#0B2638] transition-colors cursor-pointer"
+                  >
+                    RenoMark Certified
+                  </a>
+                  <a 
+                    href="https://www.bbb.org/ca/on/cambridge/profile/general-contractor/havenridge-build-0107-1421242" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-[#17365D] px-4 py-2 border border-[#CDAE72] shadow-md hover:bg-[#CDAE72] hover:text-[#0B2638] transition-colors cursor-pointer"
+                  >
+                    BBB - Better Business Bureau
+                  </a>
+                  <a 
+                    href="https://kb.nkba.org/profile/havenridge-build/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="bg-[#17365D] px-4 py-2 border border-[#CDAE72] shadow-md hover:bg-[#CDAE72] hover:text-[#0B2638] transition-colors cursor-pointer"
+                  >
+                    NKBA Member
+                  </a>
+                </div>
               </div>
             </div>
           </section>
@@ -4674,8 +4707,16 @@ The exterior envelope and surrounding property were entirely reborn to match the
             )}
           </nav>
 
+          {/* BACK BUTTON */}
+          <div className="bg-[#0B2638] px-6 pt-8 pb-0">
+            <div className="max-w-7xl mx-auto flex justify-start items-center border-b border-white/10 pb-4">
+              <a href="/resources" onClick={(e) => handleNavigate(e, '/resources')} className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-white hover:text-[#CDAE72] transition-colors">
+                <ArrowLeft className="w-4 h-4" /> Back to Resources
+              </a>
+            </div>
+          </div>
           {/* HERO BANNER */}
-          <section className="bg-[#0B2638] text-white py-16 sm:py-20 border-b border-[#CDAE72]/20 relative overflow-hidden">
+          <section className="bg-[#0B2638] text-white py-12 sm:py-16 border-b border-[#CDAE72]/20 relative overflow-hidden">
             <div className="max-w-5xl mx-auto px-6 text-center space-y-4">
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">
                 HAVENRIDGE RENOVATION RESOURCES
@@ -5177,6 +5218,11 @@ The exterior envelope and surrounding property were entirely reborn to match the
           ) : (
             /* GUIDES HUB VIEW */
             <main className="max-w-7xl mx-auto px-6 py-12 sm:py-16 space-y-12">
+              <div className="flex justify-start items-center border-b border-[#0B2638]/10 pb-4 mb-8">
+                <a href="/resources" onClick={(e) => handleNavigate(e, '/resources')} className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#0B2638] hover:text-[#CDAE72] transition-colors">
+                  <ArrowLeft className="w-4 h-4" /> Back to Resources
+                </a>
+              </div>
               {/* HERO BANNER */}
               <div className="text-center space-y-4 max-w-3xl mx-auto">
                 <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">
@@ -5856,8 +5902,16 @@ The exterior envelope and surrounding property were entirely reborn to match the
             )}
           </nav>
 
+          {/* BACK BUTTON */}
+          <div className="bg-[#0B2638] px-6 pt-8 pb-0">
+            <div className="max-w-7xl mx-auto flex justify-start items-center border-b border-white/10 pb-4">
+              <a href="/resources" onClick={(e) => handleNavigate(e, '/resources')} className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-white hover:text-[#CDAE72] transition-colors">
+                <ArrowLeft className="w-4 h-4" /> Back to Resources
+              </a>
+            </div>
+          </div>
           {/* HERO BANNER */}
-          <section className="bg-[#0B2638] text-white py-20 px-6 text-center border-b border-[#CDAE72]/20">
+          <section className="bg-[#0B2638] text-white py-12 px-6 text-center border-b border-[#CDAE72]/20">
             <div className="max-w-4xl mx-auto space-y-4">
               <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block">INSIGHTS & JOURNAL</span>
               <h1 className="font-cinzel text-4xl sm:text-5xl font-bold tracking-wider text-white">Renovation Guides & Trends</h1>
@@ -7323,17 +7377,11 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
       {/* CASS-STYLE BRAND INTERSTITIAL */}
       <section className="relative py-28 bg-[#0B2638] text-white text-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <img 
-            src={siteMedia["resources_guides_banner"] || "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=1600"} 
-            alt="Atmosphere" 
-            className="w-full h-full object-cover opacity-15"
-          />
-        </div>
-
         <div className="relative z-10 max-w-4xl mx-auto px-6 cass-reveal">
           <h2 className="font-cinzel text-2xl sm:text-4xl text-[#CDAE72] font-bold tracking-wider leading-relaxed">
-            Thoughtfully planned. Carefully built.<br className="hidden sm:block" /> Made to feel like home.
+            Thoughtfully planned.<br />
+            Carefully built.<br />
+            Made to feel like home.
           </h2>
         </div>
       </section>

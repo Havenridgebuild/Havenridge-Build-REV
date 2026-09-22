@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node generate-rss.js && vite build",
+    "build": "node generate-rss.js && node generate-sitemap.js && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postbuild": "node prerender.js"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.112.4",
@@ -17,7 +18,8 @@
     "lucide-react": "^1.31.0",
     "node-fetch": "^2.7.0",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "react-helmet-async": "^3.0.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.17",
@@ -26,6 +28,8 @@
     "autoprefixer": "^10.5.4",
     "oxlint": "^1.75.0",
     "postcss": "^8.5.26",
+    "puppeteer": "^25.11.0",
+    "serve-handler": "^6.1.7",
     "tailwindcss": "^4.3.3",
     "vite": "^8.2.0"
   }

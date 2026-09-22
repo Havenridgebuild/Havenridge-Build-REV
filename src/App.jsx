@@ -5,6 +5,7 @@ import { servicesData } from "./data/servicesData";
 import { faqCategories, faqData } from "./data/faqData";
 import { guideCategories, guidesData } from "./data/guidesData";
 import React, { useState, useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { createPortal } from 'react-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -72,7 +73,7 @@ const cleanToProjectKey = {
   '/work/project-multi-unit': '#project-multi-unit',
 };
 
-export default function App() {
+function AppContent({ setSeoData }) {
 
   // Global Site Media Overrides
   const [siteMedia, setSiteMedia] = useState({});
@@ -652,11 +653,7 @@ export default function App() {
        }
     }
     
-    document.title = title;
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', desc);
-    }
+    setSeoData({ title, desc });
   }, [currentPath, liveGuides]);
 
 
@@ -7926,5 +7923,27 @@ The exterior envelope and surrounding property were entirely reborn to match the
       )}
 
     </div>
+  );
+}
+
+
+export default function App() {
+  const [seoData, setSeoData] = useState({
+    title: "Havenridge Build | Design-Build Renovations, Additions & Transformations",
+    desc: "Havenridge Build is Cambridge & Waterloo Region's premier design-build contractor. Specializing in whole-home renovations, additions, kitchens, and architectural transformations."
+  });
+
+  return (
+    <>
+      <Helmet>
+        <title>{seoData.title}</title>
+        <meta name="description" content={seoData.desc} />
+        <meta property="og:title" content={seoData.title} />
+        <meta property="og:description" content={seoData.desc} />
+        <meta name="twitter:title" content={seoData.title} />
+        <meta name="twitter:description" content={seoData.desc} />
+      </Helmet>
+      <AppContent setSeoData={setSeoData} />
+    </>
   );
 }

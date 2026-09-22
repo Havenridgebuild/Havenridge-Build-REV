@@ -1,15 +1,25 @@
 import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { hydrateRoot, createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import { HelmetProvider } from 'react-helmet-async';
 
 // Disable aggressive native scroll restoration to fix iOS jump-to-bottom issues
 if ('scrollRestoration' in history) {
   history.scrollRestoration = 'manual';
 }
 
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+const app = (
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
+  </StrictMode>
+);
+
+if (rootElement.hasChildNodes()) {
+  hydrateRoot(rootElement, app);
+} else {
+  createRoot(rootElement).render(app);
+}

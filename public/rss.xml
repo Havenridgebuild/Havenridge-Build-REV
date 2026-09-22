@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Havenridge Build Blog &amp; Guides</title>
+    <link>https://havenridgebuild.com</link>
+    <description>Expert design-build renovation advice, trends, and guides for Waterloo Region.</description>
+    <atom:link href="https://havenridgebuild.com/rss.xml" rel="self" type="application/rss+xml" />
+    <language>en-ca</language>
+    
+    <item>
+      <title>Aging-in-Place Renovations in Waterloo Region</title>
+      <link>https://havenridgebuild.com/resources/guides/aging-in-place-renovations-waterloo-region</link>
+      <guid>https://havenridgebuild.com/resources/guides/aging-in-place-renovations-waterloo-region</guid>
+      <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
+      <description>Creating a safe, accessible, and elegant home for long-term mobility and comfort.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/Appledale_Crescent/Appledale_3.jpg" type="image/jpeg" />
+    </item>
+    <item>
+      <title>How to Verify a Renovation Contractor in Ontario</title>
+      <link>https://havenridgebuild.com/resources/guides/how-to-verify-renovation-contractor-ontario</link>
+      <guid>https://havenridgebuild.com/resources/guides/how-to-verify-renovation-contractor-ontario</guid>
+      <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
+      <description>A homeowner&apos;s essential checklist for checking licensing, WSIB, insurance, and reputation.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/mcdougall/addition_adu_stone_facade.jpg" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Questions to Ask a Renovation Contractor Before Signing a Contract in Ontario</title>
+      <link>https://havenridgebuild.com/resources/guides/questions-to-ask-renovation-contractor-ontario</link>
+      <guid>https://havenridgebuild.com/resources/guides/questions-to-ask-renovation-contractor-ontario</guid>
+      <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
+      <description>Key questions on project management, permits, change orders, and payment terms.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/knox/whole_home_white_kitchen.jpg" type="image/jpeg" />
+    </item>
+    <item>
+      <title>How Much Does a Kitchen Renovation Cost in Waterloo Region?</title>
+      <link>https://havenridgebuild.com/resources/guides/kitchen-renovation-cost-waterloo-region</link>
+      <guid>https://havenridgebuild.com/resources/guides/kitchen-renovation-cost-waterloo-region</guid>
+      <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
+      <description>Understanding layout changes, custom cabinetry, countertops, plumbing, and trade costs.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/Appledale_Crescent/appledale_kitchen_full_wide.jpg" type="image/jpeg" />
+    </item>
+    <item>
+      <title>How Much Does a Home Addition Cost in Waterloo Region?</title>
+      <link>https://havenridgebuild.com/resources/guides/home-addition-cost-waterloo-region</link>
+      <guid>https://havenridgebuild.com/resources/guides/home-addition-cost-waterloo-region</guid>
+      <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
+      <description>Navigating foundations, structural tie-ins, mechanical extensions, and permits.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/Huntingwood_Court/Huntingwood_1.png" type="image/jpeg" />
+    </item>
+    <item>
+      <title>ADUs &amp; Secondary Suites in Waterloo Region</title>
+      <link>https://havenridgebuild.com/resources/guides/adus-secondary-suites-waterloo-region</link>
+      <guid>https://havenridgebuild.com/resources/guides/adus-secondary-suites-waterloo-region</guid>
+      <pubDate>Sun, 30 Aug 2026 04:00:00 GMT</pubDate>
+      <description>Understanding attached, detached, garden suite, and accessory residential unit rules.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/natchez/secondary_suite_exterior_entrance.jpg" type="image/jpeg" />
+    </item>
+    <item>
+      <title>2026 Luxury Bathroom Renovation Trends in Kitchener-Waterloo</title>
+      <link>https://havenridgebuild.com/resources/blog/luxury-bathroom-trends-2026</link>
+      <guid>https://havenridgebuild.com/resources/blog/luxury-bathroom-trends-2026</guid>
+      <pubDate>Wed, 12 Aug 2026 04:00:00 GMT</pubDate>
+      <description>Discover how curbless walk-in showers, custom white oak double vanities, and heated herringbone tile transform daily routines into spa-like home retreats.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/mcnamara/2.png" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Navigating Permits for ADUs &amp; Secondary Suites in Cambridge &amp; Waterloo</title>
+      <link>https://havenridgebuild.com/resources/blog/adu-permits-cambridge-waterloo</link>
+      <guid>https://havenridgebuild.com/resources/blog/adu-permits-cambridge-waterloo</guid>
+      <pubDate>Wed, 05 Aug 2026 04:00:00 GMT</pubDate>
+      <description>A complete guide to municipal zoning bylaws, permit submission timelines, ceiling height minimums, and fire-separation requirements for secondary basement suites.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/verhoeve/16.jpg" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Custom White Oak Millwork vs. Factory Cabinetry: What Kitchener Homeowners Need to Know</title>
+      <link>https://havenridgebuild.com/resources/blog/custom-white-oak-millwork-vs-factory</link>
+      <guid>https://havenridgebuild.com/resources/blog/custom-white-oak-millwork-vs-factory</guid>
+      <pubDate>Tue, 28 Jul 2026 04:00:00 GMT</pubDate>
+      <description>Why master carpentry, solid wood mortise-and-tenon joints, and custom storage solutions offer unmatched durability and character over mass-produced cabinetry.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/piccadilly/2.png" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Whole-Home Renovation Timelines in Guelph &amp; Cambridge: Scope to Handover</title>
+      <link>https://havenridgebuild.com/resources/blog/whole-home-renovation-timelines</link>
+      <guid>https://havenridgebuild.com/resources/blog/whole-home-renovation-timelines</guid>
+      <pubDate>Wed, 15 Jul 2026 04:00:00 GMT</pubDate>
+      <description>From initial 3D scope consultations to permit approvals, material lead times, and final quality audits—here is what to expect during a major renovation.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/paisley/11.png" type="image/jpeg" />
+    </item>
+    <item>
+      <title>Barrier-Free &amp; Accessible Washrooms in Waterloo Region: Barrier-Free &amp; Aging-in-Place</title>
+      <link>https://havenridgebuild.com/resources/blog/barrier-free-accessibility-waterloo</link>
+      <guid>https://havenridgebuild.com/resources/blog/barrier-free-accessibility-waterloo</guid>
+      <pubDate>Thu, 02 Jul 2026 04:00:00 GMT</pubDate>
+      <description>Essential architectural guidelines for curbless showers, solid wood wall backing, 36&quot;+ widened doorways, and stylish barrier-free fixtures.</description>
+      <enclosure url="https://havenridgebuild.com/project_images/ouellette/2.png" type="image/jpeg" />
+    </item>
+  </channel>
+</rss>

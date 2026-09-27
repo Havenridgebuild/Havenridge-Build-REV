@@ -528,12 +528,19 @@ function AppContent({ setSeoData }) {
       try {
         const { data, error } = await supabase.from('blog_posts').select('*').eq('status', 'Published');
         if (!error && data && data.length > 0) {
-          const mapped = data.map(b => ({
-            id: b.id,
-            slug: b.id,
-            category: b.category ? b.category.toLowerCase().replace(/[^a-z0-9]/g, '-') : 'all',
-            categoryLabel: b.category || 'Renovation Guides',
-            title: b.title,
+          const mapped = data.map(b => {
+            const rawCat = b.category || 'Blog::Design Insights';
+            const isDelimited = rawCat.includes('::');
+            const typeVal = isDelimited ? rawCat.split('::')[0] : (rawCat.toLowerCase().includes('guide') ? 'Guide' : 'Blog');
+            const topicVal = isDelimited ? rawCat.split('::')[1] : (rawCat || 'Design Insights');
+            
+            return {
+              id: b.id,
+              slug: b.id,
+              articleType: typeVal,
+              category: topicVal.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+              categoryLabel: topicVal,
+              title: b.title,
             subtitle: b.subtitle || '',
             author: b.author || 'Havenridge Technical Team',
             date: b.date || 'August 30, 2026',
@@ -541,7 +548,8 @@ function AppContent({ setSeoData }) {
             img: b.img ? (b.img.startsWith('/') ? b.img : '/' + b.img) : (siteMedia['resources_blog_banner'] || '/project_images/hero_living_room_fireplace.jpg'),
             quickAnswer: b.quick_answer || '',
             sections: b.sections || []
-          }));
+          };
+          });
           const merged = [...guidesData];
           mapped.forEach(m => {
             const existingIdx = merged.findIndex(g => g.id === m.id);
@@ -824,6 +832,7 @@ function AppContent({ setSeoData }) {
 
   const blogPosts = [
     {
+      articleType: 'Blog',
       id: 'luxury-bathroom-trends-2026',
       title: '2026 Luxury Bathroom Renovation Trends in Kitchener-Waterloo',
       subtitle: 'Curbless Showers, Custom Oak Vanities & Heated Flooring',
@@ -841,6 +850,7 @@ function AppContent({ setSeoData }) {
       ]
     },
     {
+      articleType: 'Blog',
       id: 'adu-permits-cambridge-waterloo',
       title: 'Navigating Permits for ADUs & Secondary Suites in Cambridge & Waterloo',
       subtitle: 'Zoning Bylaws, Egress Windows & Fire Separation Rules',
@@ -1987,7 +1997,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -2331,6 +2341,14 @@ The exterior envelope and surrounding property were entirely reborn to match the
                   <p className="text-[#24313A] text-base font-light leading-relaxed whitespace-pre-line">
                     {svc.lowerDescription}
                   </p>
+                  
+                  {serviceId === 'accessible-aging-in-place' && (
+                    <div className="mt-20 text-center">
+                      <a href="https://hub.chba.ca/member-directory/Details/havenridge-build-4246900" target="_blank" rel="noopener noreferrer" className="inline-block transition-transform hover:scale-105">
+                        <img src="/adaptiv-home-badge.png" alt="Adaptiv Home" className="w-64 md:w-80 h-auto object-contain mx-auto" />
+                      </a>
+                    </div>
+                  )}
                 </div>
 
 
@@ -2399,7 +2417,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
             <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
               <div className="max-w-5xl mx-auto px-6 space-y-4">
                 <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-                <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+                <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
                 <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
                   <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -2818,7 +2836,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -3098,7 +3116,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
               <span className="text-white/30">•</span>
@@ -3326,7 +3344,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
           </div>
         </footer>
         {renderLightbox()}
@@ -3602,7 +3620,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -4288,7 +4306,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -4857,7 +4875,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -4972,7 +4990,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
       const slug = currentPath.split('/resources/guides/')[1];
       activeGuide = liveGuides.find(post => post.slug === slug || post.id === slug);
     }
-    const filteredGuides = liveGuides.filter(g => selectedGuideCategory === 'all' || g.category === selectedGuideCategory || g.categoryLabel.toLowerCase().includes(selectedGuideCategory.toLowerCase()));
+    const filteredGuides = liveGuides.filter(g => (g.articleType === 'Guide' || !g.articleType) && (selectedGuideCategory === 'all' || g.category === selectedGuideCategory || g.categoryLabel.toLowerCase().includes(selectedGuideCategory.toLowerCase())));
 
     return (
       <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
@@ -5290,7 +5308,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -5635,7 +5653,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -5746,7 +5764,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
     let activeBlogArticle = selectedBlogArticle;
     if (currentPath.startsWith('/resources/blog/')) {
       const slug = currentPath.split('/resources/blog/')[1];
-      activeBlogArticle = [...blogPosts, ...liveGuides].find(post => post.slug === slug || post.id === slug);
+      activeBlogArticle = [...blogPosts, ...liveGuides.filter(g => g.articleType === 'Blog')].find(post => post.slug === slug || post.id === slug);
     }
     return (
       <div className="bg-[#F4F2EE] text-[#24313A] font-sans antialiased min-h-screen flex flex-col justify-between">
@@ -5921,7 +5939,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
           {/* BLOG POSTS GRID */}
           <section className="max-w-7xl mx-auto px-6 py-16">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[...blogPosts, ...liveGuides.filter(g => g.category && g.category.includes('blog'))].map((post) => (
+              {[...blogPosts, ...liveGuides.filter(g => g.articleType === 'Blog')].map((post) => (
                 <div 
                   key={post.id} 
                   onClick={(e) => handleNavigate(e, '/resources/blog/' + (post.slug || post.id))}
@@ -6054,7 +6072,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -7029,7 +7047,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
@@ -7689,7 +7707,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
         <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
           <div className="max-w-5xl mx-auto px-6 space-y-4">
             <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
-            <p className="text-white/80 text-xs font-light">519-635-0963 | Info@HavenridgeBuild.com | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
             
             <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
               <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>

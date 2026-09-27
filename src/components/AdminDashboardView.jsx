@@ -220,6 +220,7 @@ export default function AdminDashboardView({ onNavigateHome }) {
   const [editingPostId, setEditingPostId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
   const [editSubtitle, setEditSubtitle] = useState('');
+  const [editArticleType, setEditArticleType] = useState('Blog');
   const [editCategory, setEditCategory] = useState('Renovation Guides');
   const [editStatus, setEditStatus] = useState('Published');
   const [editDate, setEditDate] = useState('2026-09-01');
@@ -292,11 +293,17 @@ export default function AdminDashboardView({ onNavigateHome }) {
 
         const { data: blogsData } = await supabase.from('blog_posts').select('*').order('created_at', { ascending: false });
         if (blogsData && blogsData.length > 0) {
-          const mappedBlogs = blogsData.map(b => ({
-            id: b.id,
-            title: b.title,
-            subtitle: b.subtitle || '',
-            category: b.category || 'Renovation Guides',
+          const mappedBlogs = blogsData.map(b => {
+            const rawCat = b.category || 'Blog::Design Insights';
+            const isDelimited = rawCat.includes('::');
+            const typeVal = isDelimited ? rawCat.split('::')[0] : (rawCat.toLowerCase().includes('guide') ? 'Guide' : 'Blog');
+            const topicVal = isDelimited ? rawCat.split('::')[1] : rawCat;
+            return {
+              id: b.id,
+              title: b.title,
+              subtitle: b.subtitle || '',
+              articleType: typeVal,
+              category: topicVal,
             status: b.status || 'Published',
             date: b.date || 'August 30, 2026',
             readTime: b.read_time || '8 min read',
@@ -304,7 +311,8 @@ export default function AdminDashboardView({ onNavigateHome }) {
             img: b.img === 'project_images/Huntingwood_Court/Huntingwood_1.jpg' ? 'project_images/Huntingwood_Court/Huntingwood_1.png' : (b.img || 'project_images/hero_living_room_fireplace.jpg'),
             quickAnswer: b.quick_answer || '',
             sections: b.sections || []
-          }));
+          };
+          });
           setBlogPosts(mappedBlogs);
         }
       } catch (err) {
@@ -436,7 +444,8 @@ export default function AdminDashboardView({ onNavigateHome }) {
       setEditingPostId(null);
       setEditTitle('');
       setEditSubtitle('');
-      setEditCategory('Renovation Guides');
+      setEditArticleType('Blog');
+      setEditCategory('Design Insights');
       setEditStatus('Published');
       setEditDate('2026-09-02');
       setEditReadTime('5 min read');
@@ -468,6 +477,7 @@ export default function AdminDashboardView({ onNavigateHome }) {
       id: editingPostId || ('article-' + Date.now()),
       title: editTitle,
       subtitle: editSubtitle,
+      articleType: editArticleType,
       category: editCategory,
       status: editStatus,
       date: editDate,
@@ -493,7 +503,7 @@ export default function AdminDashboardView({ onNavigateHome }) {
         id: updatedPost.id,
         title: updatedPost.title,
         subtitle: updatedPost.subtitle,
-        category: updatedPost.category,
+        category: updatedPost.articleType + '::' + updatedPost.category,
         status: updatedPost.status,
         date: updatedPost.date,
         read_time: updatedPost.readTime,
@@ -550,7 +560,7 @@ export default function AdminDashboardView({ onNavigateHome }) {
 
   const filteredBlogPosts = blogPosts.filter(p => {
     const matchesStatus = selectedBlogStatus === 'all' || p.status.toLowerCase() === selectedBlogStatus.toLowerCase();
-    const isGuide = isGuideCategory(p.category);
+    const isGuide = p.articleType === 'Guide' || isGuideCategory(p.category);
     const matchesType = selectedResourceType === 'all' || 
       (selectedResourceType === 'guide' && isGuide) || 
       (selectedResourceType === 'blog' && !isGuide);
@@ -558,8 +568,8 @@ export default function AdminDashboardView({ onNavigateHome }) {
     return matchesStatus && matchesType && matchesQuery;
   });
 
-  const totalGuidesCount = blogPosts.filter(p => isGuideCategory(p.category)).length;
-  const totalBlogsCount = blogPosts.filter(p => !isGuideCategory(p.category)).length;
+  const totalGuidesCount = blogPosts.filter(p => p.articleType === 'Guide' || isGuideCategory(p.category)).length;
+  const totalBlogsCount = blogPosts.filter(p => p.articleType !== 'Guide' && !isGuideCategory(p.category)).length;
 
   // UNAUTHENTICATED LOGIN SCREEN
   if (!isAuthenticated) {
@@ -1119,7 +1129,18 @@ export default function AdminDashboardView({ onNavigateHome }) {
 
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
                 <div>
-                  <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Category</label>
+                  <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Article Type</label>
+                  <select
+                    value={editArticleType}
+                    onChange={(e) => setEditArticleType(e.target.value)}
+                    className="w-full bg-[#071722] border border-gray-700 text-white text-xs p-3 rounded-xl focus:border-[#CDAE72]"
+                  >
+                    <option value="Blog">Blog Post</option>
+                    <option value="Guide">Renovation Guide</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">Topic Category</label>
                   <select
                     value={editCategory}
                     onChange={(e) => setEditCategory(e.target.value)}

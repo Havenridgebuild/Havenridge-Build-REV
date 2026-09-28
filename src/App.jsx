@@ -547,7 +547,8 @@ function AppContent({ setSeoData }) {
             readTime: b.read_time || '8 min read',
             img: b.img ? (b.img.startsWith('/') ? b.img : '/' + b.img) : (siteMedia['resources_blog_banner'] || '/project_images/hero_living_room_fireplace.jpg'),
             quickAnswer: b.quick_answer || '',
-            sections: b.sections || []
+            sections: b.sections || [],
+            tableOfContents: (b.sections || []).map((sec, idx) => ({ id: sec.id || ('sec-' + idx), title: sec.heading }))
           };
           });
           const merged = [...guidesData];
@@ -5212,7 +5213,13 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     <h2 className="font-cinzel text-xl sm:text-2xl font-bold text-[#0B2638]">
                       {sec.heading}
                     </h2>
-                    <p>{sec.content}</p>
+                    <div className="space-y-4 text-sm sm:text-base leading-relaxed">
+                      {sec.content.split('\n').map((line, i) => (
+                        <p key={i}>
+                          {line.split('**').map((part, j) => j % 2 === 1 ? <strong key={j} className="text-[#0B2638]">{part}</strong> : part)}
+                        </p>
+                      ))}
+                    </div>
                   </section>
                 ))}
               </div>
@@ -6022,7 +6029,13 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     {activeBlogArticle.sections.map((sec, idx) => (
                       <div key={idx} className="space-y-2">
                         <h3 className="font-cinzel font-bold text-[#0B2638] text-base">{sec.heading}</h3>
-                        <p>{sec.content}</p>
+                        <div className="space-y-4 text-sm sm:text-base leading-relaxed">
+                      {sec.content.split('\n').map((line, i) => (
+                        <p key={i}>
+                          {line.split('**').map((part, j) => j % 2 === 1 ? <strong key={j} className="text-[#0B2638]">{part}</strong> : part)}
+                        </p>
+                      ))}
+                    </div>
                       </div>
                     ))}
                   </div>

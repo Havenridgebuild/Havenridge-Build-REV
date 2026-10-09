@@ -175,6 +175,11 @@ function AppContent({ setSeoData }) {
   const handleLeadSubmit = async (e) => {
     e.preventDefault();
     if (isSubmitting) return;
+    if (formCompanyWebsite) {
+      setFormSubmitted(true);
+      setIsSubmitting(false);
+      return;
+    }
     setIsSubmitting(true);
     const isQual = formInvestment !== 'Under $20,000';
     setFormQualified(isQual);
@@ -260,7 +265,8 @@ function AppContent({ setSeoData }) {
           source: fullSourceStr,
           uploadedFile: formUploadedFile,
           uploadedFilesUrls: uploadedFilesUrls,
-          description: formDescription
+          description: formDescription,
+          companyWebsite: formCompanyWebsite
         })
       });
     } catch (apiErr) {
@@ -317,6 +323,7 @@ function AppContent({ setSeoData }) {
 
   const compRef = useRef(null);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [formCompanyWebsite, setFormCompanyWebsite] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [applyName, setApplyName] = useState('');
   const [applyEmail, setApplyEmail] = useState('');
@@ -791,6 +798,7 @@ function AppContent({ setSeoData }) {
           firstName: 'Newsletter',
           lastName: 'Subscriber',
           email: e.target.elements?.email?.value || '',
+          companyWebsite: e.target.elements?.company_website?.value || '',
           source: 'Footer Newsletter Subscription'
         })
       });
@@ -6618,6 +6626,11 @@ The exterior envelope and surrounding property were entirely reborn to match the
                 </div>
               ) : (
                 <form onSubmit={handleLeadSubmit} className="space-y-8">
+                  {/* HONEYPOT FIELD - INVISIBLE TO USERS */}
+                  <div className="absolute overflow-hidden h-0 w-0 z-[-1] opacity-0" aria-hidden="true" tabIndex="-1">
+                    <label htmlFor="company_website_lead">Company Website</label>
+                    <input type="text" id="company_website_lead" name="company_website" value={formCompanyWebsite} onChange={(e) => setFormCompanyWebsite(e.target.value)} tabIndex="-1" autoComplete="off" />
+                  </div>
                   
                   {/* FORM HEADER & PROGRESS BAR */}
                   <div className="space-y-4 border-b border-[#0B2638]/10 pb-6">
@@ -7674,7 +7687,17 @@ The exterior envelope and surrounding property were entirely reborn to match the
       <section id="partners" className="scroll-mt-28 py-16 md:py-20 bg-[#0B2638] text-white cass-reveal">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <span className="text-[#CDAE72] text-xs font-sans font-bold tracking-[0.25em] uppercase block mb-10">TRUSTED PARTNERS</span>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 md:gap-12 justify-items-center max-w-4xl mx-auto opacity-95">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 md:gap-12 justify-items-center max-w-5xl mx-auto opacity-95">
+            <a 
+              href="https://www.btacademy.com/the-program" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              aria-label="Breakthrough Academy Member"
+              title="Breakthrough Academy Member"
+              className="h-36 flex items-center justify-center w-full hover:scale-105 transition-transform cursor-pointer group"
+            >
+              <img src="bta-certified.png" alt="Breakthrough Academy Member" width="180" className="h-26 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity " />
+            </a>
             <a 
               href="https://renomark.ca/renovator/carpenters-on-the-go-inc/" 
               target="_blank" 

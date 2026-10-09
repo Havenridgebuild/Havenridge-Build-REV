@@ -35,8 +35,19 @@ export default async function handler(req, res) {
       source = "",
       uploadedFile = "",
       uploadedFilesUrls = [],
-      description = ""
+      description = "",
+      companyWebsite = ""
     } = body;
+
+    // 0. HONEYPOT VALIDATION - Stop bots from submitting fake leads
+    if (companyWebsite) {
+      console.log(`[SPAM BLOCKED] Honeypot triggered. Silent rejection for: ${email}`);
+      return res.status(200).json({
+        success: true,
+        message: "Lead processed successfully",
+        honeypot: true
+      });
+    }
 
     const formattedFirstName = (firstName || "Website").trim();
     const formattedLastName = (lastName || "Lead").trim();

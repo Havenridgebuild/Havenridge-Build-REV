@@ -69,7 +69,7 @@ try {
   console.error("Failed to parse liveGuides:", e);
 }
 
-const siteUrl = 'https://havenridgebuild.com';
+const siteUrl = 'https://www.havenridgebuild.com';
 
 const staticRoutes = [
   '/',
@@ -99,7 +99,6 @@ const staticRoutes = [
   '/services/whole-home-renovations',
   '/services/multi-unit-conversions',
   '/services/accessible-aging-in-place',
-  '/resources',
   '/resources/guides',
   '/resources/blog',
   '/resources/faq',

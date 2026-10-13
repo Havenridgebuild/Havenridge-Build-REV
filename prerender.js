@@ -24,7 +24,7 @@ server.listen(0, async () => {
   try {
     // Read sitemap to get all routes
     const sitemapContent = fs.readFileSync(path.join(DIST_DIR, 'sitemap.xml'), 'utf-8');
-    const matches = [...sitemapContent.matchAll(/<loc>https:\/\/havenridgebuild\.com(.*?)<\/loc>/g)];
+    const matches = [...sitemapContent.matchAll(/<loc>https:\/\/(?:www\.)?havenridgebuild\.com(.*?)<\/loc>/g)];
     const routes = matches.map(m => m[1] || '/');
     
     console.log(`Found ${routes.length} routes to prerender...`);

@@ -123,6 +123,15 @@ function AppContent({ setSeoData }) {
       if (a && a.href) {
         if (a.href.startsWith('tel:')) {
           incrementMetric('calls');
+          if (typeof window !== 'undefined' && typeof window.gtag_report_conversion === 'function') {
+            window.gtag_report_conversion(a.href);
+          } else if (typeof window !== 'undefined' && window.gtag) {
+            window.gtag('event', 'conversion', {
+              'send_to': 'AW-18449799436/y1jwCKDp0v0cEIyyxt1E',
+              'value': 1.0,
+              'currency': 'CAD'
+            });
+          }
         } else if (a.href.startsWith('mailto:')) {
           incrementMetric('emails');
         }
@@ -627,7 +636,16 @@ function AppContent({ setSeoData }) {
     } else if (currentPath === '/work') {
       title = "Project Portfolio | Havenridge Build";
     } else if (currentPath === '/work/inspiration') {
-      title = "Design Inspiration | Havenridge Build";
+      title = "Design & Craftsmanship Inspiration Gallery | Havenridge Build";
+      desc = "Curated renovation inspiration, custom millwork, luxury bathrooms, kitchens, and architectural home additions crafted by Havenridge Build.";
+    } else if (currentPath === '/services') {
+      title = "Architectural Design-Build Services | Havenridge Build";
+      desc = "Explore Havenridge Build's design-build renovation services in Cambridge, Kitchener, and Waterloo: custom additions, whole-home renovations, secondary suites, and accessible living.";
+    } else if (currentPath === '/reviews') {
+      title = "Client Reviews & Testimonials | Havenridge Build";
+      desc = "Read verified homeowner reviews and client testimonials for Havenridge Build's design-build renovations across Cambridge and Waterloo Region.";
+    } else if (currentPath === '/privacy') {
+      title = "Privacy Policy | Havenridge Build";
     } else if (currentPath.startsWith('/resources/guides')) {
       title = "Renovation Guides | Havenridge Build";
       const slug = currentPath.replace('/resources/guides', '').replace('/', '');
@@ -669,7 +687,9 @@ function AppContent({ setSeoData }) {
        }
     }
     
-    setSeoData({ title, desc });
+    const cleanPath = currentPath.split('#')[0] || '/';
+    const canonical = `https://www.havenridgebuild.com${cleanPath === '/' ? '' : cleanPath}`;
+    setSeoData({ title, desc, canonical });
   }, [currentPath, liveGuides]);
 
 
@@ -678,8 +698,8 @@ function AppContent({ setSeoData }) {
   useEffect(() => {
     const sections = {
       '/process': '#process-section',
-      '/services': '#services',
-      '/work/inspiration': '#inspiration-section',
+      '#services': '#services',
+      '#inspiration': '#inspiration-section',
       '/testimonials': '#testimonials',
       '/partners': '#partners'
     };
@@ -1667,6 +1687,352 @@ The exterior envelope and surrounding property were entirely reborn to match the
   };
 
 
+  // ==========================================
+  // DEDICATED INSPIRATION HUB PAGE (/work/inspiration)
+  // ==========================================
+  if (currentPath === '/work/inspiration') {
+    return (
+      <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638] flex flex-col justify-between">
+        <div>
+          {/* NAV HEADER */}
+          <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="/" onClick={(e) => handleNavigate(e, "/")} className="flex items-center group shrink-0">
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
+            </div>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
+
+          {/* HERO BANNER */}
+          <section className="bg-[#0B2638] text-white py-16 sm:py-24 border-b border-[#CDAE72]/20 relative overflow-hidden">
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#CDAE72_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div className="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-5">
+              <span className="text-[#CDAE72] text-xs font-bold tracking-[0.25em] uppercase block">
+                CURATED DESIGN & FINISHES GALLERY
+              </span>
+              <h1 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white max-w-4xl mx-auto leading-tight">
+                DESIGN & CRAFTSMANSHIP INSPIRATION
+              </h1>
+              <p className="text-white/80 max-w-2xl mx-auto text-sm sm:text-base font-light leading-relaxed">
+                Explore real project details, custom millwork, architectural layouts, and luxury finishes crafted across Waterloo Region, Cambridge, and Kitchener.
+              </p>
+              <div className="flex flex-wrap justify-center items-center gap-4 pt-4">
+                <a 
+                  href="/work" 
+                  onClick={(e) => handleNavigate(e, "/work")} 
+                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white font-bold px-8 py-3.5 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm"
+                >
+                  VIEW COMPLETED PROJECTS
+                </a>
+                <a 
+                  href="/contact" 
+                  onClick={(e) => handleNavigate(e, "/contact")} 
+                  className="border border-white/30 text-white hover:bg-white hover:text-[#0B2638] font-bold px-8 py-3.5 text-xs tracking-widest uppercase transition-all rounded-sm"
+                >
+                  START YOUR PROJECT
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* 8 INSPIRATION CATEGORIES GRID */}
+          <section className="py-16 sm:py-24 max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {galleryCategories.map((cat, idx) => (
+                <div 
+                  key={idx}
+                  onClick={(e) => handleNavigate(e, cat.hash)}
+                  className="group bg-white rounded-sm overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 border border-[#0B2638]/10 cursor-pointer flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="h-56 overflow-hidden relative">
+                      <img 
+                        src={cat.img} 
+                        alt={cat.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638]/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                      <span className="absolute bottom-3 left-4 text-[10px] font-bold tracking-widest text-[#CDAE72] uppercase bg-[#0B2638]/80 px-2 py-1 rounded-xs backdrop-blur-xs">
+                        GALLERY {idx + 1 < 10 ? `0${idx + 1}` : idx + 1}
+                      </span>
+                    </div>
+                    <div className="p-6 space-y-3">
+                      <h3 className="font-cinzel text-lg font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                        {cat.title}
+                      </h3>
+                      <p className="text-xs text-[#24313A]/75 font-light leading-relaxed line-clamp-3">
+                        {inspirationSubpages[cat.hash]?.subtitle || "Explore tailored craftsmanship, architectural details, and luxury materials engineered to enduring standards."}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="px-6 pb-6 pt-2">
+                    <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                      VIEW GALLERY <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* CALLOUT TO COMPLETED PROJECTS */}
+            <div className="mt-16 bg-[#0B2638] text-white p-8 sm:p-12 rounded-sm flex flex-col md:flex-row items-center justify-between gap-8 border border-[#CDAE72]/20">
+              <div className="space-y-2 text-center md:text-left">
+                <span className="text-[#CDAE72] text-[11px] font-bold tracking-widest uppercase">CASE STUDIES & COMPLETE HOMES</span>
+                <h3 className="font-cinzel text-2xl sm:text-3xl font-bold">Looking for Finished Project Scopes?</h3>
+                <p className="text-white/80 text-xs sm:text-sm max-w-xl font-light">
+                  Browse our portfolio of whole-home renovations, custom kitchens, additions, and secondary suites complete with full project briefs and photography.
+                </p>
+              </div>
+              <a 
+                href="/work" 
+                onClick={(e) => handleNavigate(e, "/work")} 
+                className="bg-[#CDAE72] text-[#0B2638] hover:bg-white font-bold px-8 py-3.5 text-xs tracking-widest uppercase transition-all shadow-md shrink-0"
+              >
+                EXPLORE PROJECTS PORTFOLIO →
+              </a>
+            </div>
+          </section>
+        </div>
+
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@havenridge.build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="TikTok"
+                title="TikTok"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <TiktokIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@Havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
   // Render Dedicated Inspiration Subpages (CASS STYLE)
   if (currentPath !== '/' && inspirationSubpages[currentPath]) {
     const item = inspirationSubpages[currentPath];
@@ -2115,6 +2481,448 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
   // Render individual project detail sub-pages (CASS STYLE)
 
+
+  // ==========================================
+  // DEDICATED SERVICES HUB PAGE (/services)
+  // ==========================================
+  if (currentPath === '/services') {
+    const pillars = [
+      {
+        slug: 'additions-adus',
+        tag: 'STRUCTURAL EXPANSIONS',
+        title: 'Additions & Accessory Dwelling Units (ADUs)',
+        desc: 'Expand your existing footprint with thoughtfully designed second-storey additions, main-floor extensions, and detached garden suites engineered to complement your home\'s architecture.',
+        highlights: [
+          'Municipal zoning & Committee of Adjustment representation',
+          'Engineered structural framing & foundation extensions',
+          'Complete exterior architectural matching & roofline tie-ins'
+        ],
+        img: '/project_images/mcdougall/addition_adu_stone_facade.jpg'
+      },
+      {
+        slug: 'whole-home-renovations',
+        tag: 'COMPLETE TRANSFORMATIONS',
+        title: 'Whole-Home Renovations & Reconfigurations',
+        desc: 'Transform dated layouts into cohesive, open-concept residences with structural wall removals, complete mechanical overhauls, custom millwork, and luxury finishes.',
+        highlights: [
+          'Load-bearing wall removals & structural steel beam installations',
+          'Plumbing, HVAC & 200A electrical panel upgrades',
+          'Custom white oak millwork, hardwood flooring & designer lighting'
+        ],
+        img: '/project_images/knox/whole_home_white_kitchen.jpg'
+      },
+      {
+        slug: 'multi-unit-conversions',
+        tag: 'INCOME & MULTI-RESIDENTIAL',
+        title: 'Multi-Unit Conversions & Secondary Suites',
+        desc: 'Unlock substantial property value by converting single-family homes into compliant duplexes, triplexes, or legal basement suites meeting all Ontario Building Code mandates.',
+        highlights: [
+          'OBC Section 9.10 fire separation & drywall assemblies',
+          'STC-rated acoustic insulation & resilient soundproofing channels',
+          'Independent egress doors, egress windows & separate utility meters'
+        ],
+        img: '/project_images/natchez/secondary_suite_exterior_entrance.jpg'
+      },
+      {
+        slug: 'accessible-aging-in-place',
+        tag: 'BARRIER-FREE COMFORT',
+        title: 'Accessible & Aging-in-Place Renovations',
+        desc: 'Thoughtfully engineered modifications that empower comfortable, dignified independent living without sacrificing the refined aesthetic of a luxury residence.',
+        highlights: [
+          'Curbless zero-threshold roll-in showers with WEDI waterproofing',
+          'Widened doorways, flush transition flooring & discreet blocking',
+          'Ergonomic main-floor master bedroom & bathroom reconfigurations'
+        ],
+        img: '/project_images/isherwood/1.png'
+      }
+    ];
+
+    return (
+      <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638] flex flex-col justify-between">
+        <div>
+          {/* NAV HEADER */}
+          <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="/" onClick={(e) => handleNavigate(e, "/")} className="flex items-center group shrink-0">
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
+            </div>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
+
+          {/* HERO BANNER */}
+          <section className="bg-[#0B2638] text-white py-16 sm:py-24 border-b border-[#CDAE72]/20 relative overflow-hidden">
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#CDAE72_1px,transparent_1px)] [background-size:16px_16px]"></div>
+            <div className="max-w-7xl mx-auto px-6 relative z-10 text-center space-y-5">
+              <span className="text-[#CDAE72] text-xs font-bold tracking-[0.25em] uppercase block">
+                HAVENRIDGE ARCHITECTURAL SERVICES
+              </span>
+              <h1 className="font-cinzel text-3xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white max-w-4xl mx-auto leading-tight">
+                DESIGN-BUILD RENOVATIONS & ADDITIONS
+              </h1>
+              <p className="text-white/80 max-w-2xl mx-auto text-sm sm:text-base font-light leading-relaxed">
+                From structural additions and whole-home transformations to legal multi-unit secondary suites and barrier-free living, we manage design, engineering, and master carpentry under one roof.
+              </p>
+              <div className="flex flex-wrap justify-center items-center gap-4 pt-4">
+                <a 
+                  href="/contact" 
+                  onClick={(e) => handleNavigate(e, "/contact")} 
+                  className="bg-[#CDAE72] text-[#0B2638] hover:bg-white font-bold px-8 py-3.5 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm"
+                >
+                  SCHEDULE A CONSULTATION
+                </a>
+                <a 
+                  href="/work" 
+                  onClick={(e) => handleNavigate(e, "/work")} 
+                  className="border border-white/30 text-white hover:bg-white hover:text-[#0B2638] font-bold px-8 py-3.5 text-xs tracking-widest uppercase transition-all rounded-sm"
+                >
+                  EXPLORE OUR WORK
+                </a>
+              </div>
+            </div>
+          </section>
+
+          {/* 4 SERVICE PILLARS GRID */}
+          <section className="py-16 sm:py-24 max-w-7xl mx-auto px-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {pillars.map((pillar, idx) => (
+                <div 
+                  key={idx} 
+                  className="bg-white rounded-sm overflow-hidden shadow-lg border border-[#0B2638]/10 flex flex-col justify-between group hover:shadow-2xl transition-all duration-300"
+                >
+                  <div>
+                    <div className="h-64 sm:h-72 overflow-hidden relative">
+                      <img 
+                        src={pillar.img} 
+                        alt={pillar.title} 
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#0B2638]/80 via-transparent to-transparent opacity-60"></div>
+                      <span className="absolute top-4 left-4 bg-[#0B2638]/90 text-[#CDAE72] text-[10px] font-bold tracking-widest uppercase px-3 py-1 rounded-xs backdrop-blur-xs">
+                        {pillar.tag}
+                      </span>
+                    </div>
+
+                    <div className="p-6 sm:p-8 space-y-4">
+                      <h3 className="font-cinzel text-xl sm:text-2xl font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors">
+                        {pillar.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#24313A]/80 font-light leading-relaxed">
+                        {pillar.desc}
+                      </p>
+
+                      <div className="border-t border-[#0B2638]/10 pt-4 space-y-2">
+                        <span className="text-[11px] font-bold tracking-wider text-[#0B2638] uppercase block">
+                          Scope & Capabilities:
+                        </span>
+                        <ul className="space-y-1.5 text-xs text-[#24313A]/80 font-light">
+                          {pillar.highlights.map((h, hIdx) => (
+                            <li key={hIdx} className="flex items-center gap-2">
+                              <CheckCircle2 className="w-3.5 h-3.5 text-[#CDAE72] shrink-0" />
+                              <span>{h}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="p-6 sm:p-8 pt-0">
+                    <a 
+                      href={`/services/${pillar.slug}`}
+                      onClick={(e) => handleNavigate(e, `/services/${pillar.slug}`)}
+                      className="block w-full text-center bg-[#0B2638] text-white hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold py-3.5 text-xs tracking-widest uppercase transition-all rounded-sm shadow-md"
+                    >
+                      EXPLORE SERVICE DETAILS →
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* THE HAVENRIDGE DIFFERENCE */}
+            <div className="mt-20 bg-[#0B2638] text-white p-8 sm:p-14 rounded-sm border border-[#CDAE72]/20 space-y-10">
+              <div className="text-center space-y-3 max-w-3xl mx-auto">
+                <span className="text-[#CDAE72] text-[11px] font-bold tracking-widest uppercase">ENDURING QUALITY</span>
+                <h2 className="font-cinzel text-2xl sm:text-4xl font-bold">The Havenridge Design-Build Standard</h2>
+                <p className="text-white/80 text-xs sm:text-sm font-light leading-relaxed">
+                  We eliminate the friction between separate architects and contractors by uniting planning, municipal permits, structural engineering, and master carpentry under one accountable management process.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+                <div className="bg-[#17365D]/60 p-6 rounded-sm border border-[#CDAE72]/20 space-y-2">
+                  <span className="text-[#CDAE72] font-cinzel text-xl font-bold">01</span>
+                  <h4 className="font-cinzel text-sm font-bold text-white">Single-Point Accountability</h4>
+                  <p className="text-white/70 text-xs font-light leading-relaxed">One dedicated team coordinates zoning, architectural plans, trade partners, and inspections.</p>
+                </div>
+                <div className="bg-[#17365D]/60 p-6 rounded-sm border border-[#CDAE72]/20 space-y-2">
+                  <span className="text-[#CDAE72] font-cinzel text-xl font-bold">02</span>
+                  <h4 className="font-cinzel text-sm font-bold text-white">Fixed-Price Proposals</h4>
+                  <p className="text-white/70 text-xs font-light leading-relaxed">Comprehensive, transparent line-item scopes with realistic allowances—no budget surprises.</p>
+                </div>
+                <div className="bg-[#17365D]/60 p-6 rounded-sm border border-[#CDAE72]/20 space-y-2">
+                  <span className="text-[#CDAE72] font-cinzel text-xl font-bold">03</span>
+                  <h4 className="font-cinzel text-sm font-bold text-white">Dedicated Client Portal</h4>
+                  <p className="text-white/70 text-xs font-light leading-relaxed">Daily project logs, real-time schedule calendars, and cloud milestone sign-offs.</p>
+                </div>
+                <div className="bg-[#17365D]/60 p-6 rounded-sm border border-[#CDAE72]/20 space-y-2">
+                  <span className="text-[#CDAE72] font-cinzel text-xl font-bold">04</span>
+                  <h4 className="font-cinzel text-sm font-bold text-white">Certified Warranty</h4>
+                  <p className="text-white/70 text-xs font-light leading-relaxed">RenoMark certified, fully insured, and backed by a written structural workmanship warranty.</p>
+                </div>
+              </div>
+
+              <div className="pt-4 text-center">
+                <a 
+                  href="/contact" 
+                  onClick={(e) => handleNavigate(e, "/contact")} 
+                  className="inline-block bg-[#CDAE72] text-[#0B2638] hover:bg-white font-bold px-10 py-4 text-xs tracking-widest uppercase transition-all shadow-lg rounded-sm"
+                >
+                  START YOUR PROJECT CONSULTATION →
+                </a>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@havenridge.build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="TikTok"
+                title="TikTok"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <TiktokIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@Havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
 
   // Render Services Detail Pages
   if (currentPath.startsWith('/services/')) {
@@ -4064,7 +4872,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
                     Baeumler Approved
                   </a>
                   <a 
-                    href="https://renomark.ca/renovator/carpenters-on-the-go-inc/" 
+                    href="https://renomark.ca/renovator/havenridge-build/" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-[#17365D] px-4 py-2 border border-[#CDAE72] shadow-md hover:bg-[#CDAE72] hover:text-[#0B2638] transition-colors cursor-pointer"
@@ -7178,7 +7986,338 @@ The exterior envelope and surrounding property were entirely reborn to match the
 
       </div>
     );
-  }  // Home Page View
+  }
+
+  // ==========================================
+  // BRANDED 404 NOT FOUND VIEW
+  // ==========================================
+  const recognizedLandingPaths = [
+    '/', '', '/process',
+    '#home', '#process-section', '#process', '#our-process',
+    '#testimonials', '#partners', '#services', '#inspiration-section'
+  ];
+  if (!recognizedLandingPaths.includes(currentPath) && !currentPath.startsWith('/#') && !currentPath.startsWith('#')) {
+    return (
+      <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638] flex flex-col justify-between">
+        <div>
+          {/* NAV HEADER */}
+          <nav className="sticky top-0 z-50 bg-[#0B2638] text-white shadow-md font-sans">
+            <div className="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+              <a href="/" onClick={(e) => handleNavigate(e, "/")} className="flex items-center group shrink-0">
+                <img src="/logo_horizontal_dark.svg" className="h-11 sm:h-13 md:h-16 w-auto transition-transform hover:scale-105" alt="Havenridge Build Logo" />
+              </a>
+
+              {/* Centered Desktop Nav */}
+              <div className="hidden md:flex items-center justify-center space-x-6 lg:space-x-8 text-xs font-bold tracking-widest uppercase text-white/90 flex-1 mx-4 lg:mx-8">
+                {/* 1. Services Dropdown */}
+                <div className="relative group">
+                  <a href="/services" onClick={(e) => handleNavigate(e, "/services")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Services <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Additions and ADUs</a>
+                    <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Whole Home Renovations</a>
+                    <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Multi-Unit Conversions</a>
+                    <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Accessible & Aging-in-Place Renovations</a>
+                  </div>
+                </div>
+
+                {/* 2. Our Process */}
+                <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-[#CDAE72] transition-colors">Our Process</a>
+
+                {/* 3. Our Work Dropdown */}
+                <div className="relative group">
+                  <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Our Work <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full left-0 bg-[#0B2638] border border-[#CDAE72]/20 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl py-2 z-50 text-left">
+                    <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Inspiration</a>
+                    <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block px-4 py-3 text-[11px] tracking-wider text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors">Projects</a>
+                  </div>
+                </div>
+
+                {/* 4. About */}
+                <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="hover:text-[#CDAE72] transition-colors">About</a>
+
+                {/* 5. Contact */}
+                <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-[#CDAE72] transition-colors">Contact</a>
+
+                {/* 6. Resources Dropdown */}
+                <div className="relative group">
+                  <a href="/resources" onClick={(e) => handleNavigate(e, "/resources")} className="hover:text-[#CDAE72] transition-colors py-7 flex items-center gap-1">
+                    Resources <ChevronDown className="w-3 h-3 text-[#CDAE72]" />
+                  </a>
+                  <div className="absolute top-full right-0 bg-[#0B2638] border border-[#CDAE72]/20 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-2xl py-2 z-50 text-left">
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      RENOVATION GUIDES
+                    </a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      BLOG
+                    </a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block px-4 py-3 text-[11px] font-sans font-bold tracking-widest text-white hover:bg-[#17365D] hover:text-[#CDAE72] transition-colors uppercase">
+                      FREQUENTLY ASKED QUESTIONS
+                    </a>
+                  </div>
+                </div>
+
+                {/* 7. Client Portal */}
+                <a 
+                  href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-[#CDAE72] hover:text-white transition-colors shrink-0"
+                >
+                  Client Portal
+                </a>
+              </div>
+
+              {/* Mobile Hamburger Button */}
+              <button 
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="md:hidden text-white hover:text-[#CDAE72] p-2 focus:outline-none"
+              >
+                {mobileMenuOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
+              </button>
+            </div>
+
+            {/* Mobile Navigation Drawer */}
+            {mobileMenuOpen && (
+              <div className="md:hidden bg-[#0B2638] border-b border-[#CDAE72]/20 px-6 py-6 space-y-5 animate-fadeIn">
+                <div className="space-y-4 text-xs font-bold tracking-widest uppercase">
+                  <a href="/" onClick={(e) => handleNavigate(e, "/")} className="block text-white hover:text-[#CDAE72]">Home</a>
+                  
+                  {/* Services Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <div className="flex items-center justify-between w-full text-white font-bold uppercase tracking-widest">
+                      <a href="/services" onClick={(e) => { setMobileServicesOpen(true); handleNavigate(e, "/services"); }} className="hover:text-[#CDAE72] flex-1 text-left">Services</a>
+                      <button onClick={() => setMobileServicesOpen(!mobileServicesOpen)} className="p-2 -mr-2">
+                        <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileServicesOpen ? 'rotate-180' : ''}`} />
+                      </button>
+                    </div>
+                    {mobileServicesOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="/services/additions-adus" onClick={(e) => handleNavigate(e, "/services/additions-adus")} className="block text-white/90 hover:text-[#CDAE72]">Additions and ADUs</a>
+                        <a href="/services/whole-home-renovations" onClick={(e) => handleNavigate(e, "/services/whole-home-renovations")} className="block text-white/90 hover:text-[#CDAE72]">Whole Home Renovations</a>
+                        <a href="/services/multi-unit-conversions" onClick={(e) => handleNavigate(e, "/services/multi-unit-conversions")} className="block text-white/90 hover:text-[#CDAE72]">Multi-Unit Conversions</a>
+                        <a href="/services/accessible-aging-in-place" onClick={(e) => handleNavigate(e, "/services/accessible-aging-in-place")} className="block text-white/90 hover:text-[#CDAE72]">Accessible & Aging-in-Place Renovations</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="block text-white hover:text-[#CDAE72] pt-1">Our Process</a>
+                  
+                  {/* Our Work Accordion Dropdown */}
+                  <div className="border-t border-white/10 pt-3">
+                    <button 
+                      onClick={() => setMobileWorkOpen(!mobileWorkOpen)} 
+                      className="flex items-center justify-between w-full text-left text-white hover:text-[#CDAE72] font-bold uppercase tracking-widest"
+                    >
+                      <span>Our Work</span>
+                      <ChevronDown className={`w-4 h-4 text-[#CDAE72] transition-transform ${mobileWorkOpen ? 'rotate-180' : ''}`} />
+                    </button>
+                    {mobileWorkOpen && (
+                      <div className="pl-3 pt-2 pb-1 space-y-2.5 border-l-2 border-[#CDAE72]/40 mt-2 text-[11px]">
+                        <a href="/work/inspiration" onClick={(e) => handleNavigate(e, "/work/inspiration")} className="block text-white/90 hover:text-[#CDAE72]">Inspiration</a>
+                        <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="block text-white/90 hover:text-[#CDAE72]">Projects</a>
+                      </div>
+                    )}
+                  </div>
+
+                  <a href="/about" onClick={(e) => handleNavigate(e, "/about")} className="block text-white hover:text-[#CDAE72] pt-1">About</a>
+                  <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="block text-[#CDAE72] pt-1">Contact</a>
+                  
+                  <div className="space-y-2 py-3 border-t border-b border-white/10 my-2">
+                    <span className="text-[#CDAE72] text-[10px] font-sans font-bold tracking-[0.2em] uppercase block">RENOVATION RESOURCES</span>
+                    <a href="/resources/guides" onClick={(e) => handleNavigate(e, "/resources/guides")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">RENOVATION GUIDES</a>
+                    <a href="/resources/blog" onClick={(e) => handleNavigate(e, "/resources/blog")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">BLOG</a>
+                    <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="block text-white hover:text-[#CDAE72] pl-2 text-xs font-bold font-cinzel">FREQUENTLY ASKED QUESTIONS</a>
+                  </div>
+                </div>
+
+                <div>
+                  <a 
+                    href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block w-full text-center bg-[#CDAE72] text-[#0B2638] font-bold py-3.5 text-xs font-sans tracking-widest uppercase rounded-sm shadow-md"
+                  >
+                    Client Portal Access
+                  </a>
+                </div>
+              </div>
+            )}
+          </nav>
+
+          {/* 404 CONTENT */}
+          <section className="py-20 sm:py-32 max-w-4xl mx-auto px-6 text-center space-y-8">
+            <div className="space-y-4">
+              <span className="font-cinzel text-6xl sm:text-8xl font-bold text-[#CDAE72] tracking-wider block">
+                404
+              </span>
+              <h1 className="font-cinzel text-2xl sm:text-4xl font-bold text-[#0B2638] uppercase tracking-wide">
+                Page Not Found
+              </h1>
+              <p className="text-sm sm:text-base text-[#24313A]/80 max-w-lg mx-auto font-light leading-relaxed">
+                The page you are looking for may have been moved, had its URL updated, or does not exist. Please use the navigation links below to find what you need.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-3xl mx-auto pt-4 text-left">
+              <a 
+                href="/" 
+                onClick={(e) => handleNavigate(e, "/")} 
+                className="bg-white p-5 rounded-sm border border-[#0B2638]/10 hover:border-[#CDAE72] shadow-sm hover:shadow-md transition-all group"
+              >
+                <span className="text-[10px] font-bold tracking-widest text-[#CDAE72] uppercase block">START HERE</span>
+                <span className="font-cinzel text-sm font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors block mt-1">Homepage</span>
+                <span className="text-[11px] text-[#24313A]/70 font-light block mt-1">Explore our design-build philosophy and core capabilities.</span>
+              </a>
+
+              <a 
+                href="/services" 
+                onClick={(e) => handleNavigate(e, "/services")} 
+                className="bg-white p-5 rounded-sm border border-[#0B2638]/10 hover:border-[#CDAE72] shadow-sm hover:shadow-md transition-all group"
+              >
+                <span className="text-[10px] font-bold tracking-widest text-[#CDAE72] uppercase block">CAPABILITIES</span>
+                <span className="font-cinzel text-sm font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors block mt-1">Our Services</span>
+                <span className="text-[11px] text-[#24313A]/70 font-light block mt-1">Additions, whole-home, secondary suites & accessibility.</span>
+              </a>
+
+              <a 
+                href="/work" 
+                onClick={(e) => handleNavigate(e, "/work")} 
+                className="bg-white p-5 rounded-sm border border-[#0B2638]/10 hover:border-[#CDAE72] shadow-sm hover:shadow-md transition-all group"
+              >
+                <span className="text-[10px] font-bold tracking-widest text-[#CDAE72] uppercase block">PORTFOLIO</span>
+                <span className="font-cinzel text-sm font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors block mt-1">Our Projects</span>
+                <span className="text-[11px] text-[#24313A]/70 font-light block mt-1">View completed renovations with detailed photo briefs.</span>
+              </a>
+
+              <a 
+                href="/contact" 
+                onClick={(e) => handleNavigate(e, "/contact")} 
+                className="bg-white p-5 rounded-sm border border-[#0B2638]/10 hover:border-[#CDAE72] shadow-sm hover:shadow-md transition-all group"
+              >
+                <span className="text-[10px] font-bold tracking-widest text-[#CDAE72] uppercase block">CONSULTATION</span>
+                <span className="font-cinzel text-sm font-bold text-[#0B2638] group-hover:text-[#CDAE72] transition-colors block mt-1">Contact Us</span>
+                <span className="text-[11px] text-[#24313A]/70 font-light block mt-1">Speak with our team about your project scope & timing.</span>
+              </a>
+            </div>
+
+            <div className="pt-6">
+              <a 
+                href="/" 
+                onClick={(e) => handleNavigate(e, "/")} 
+                className="inline-block bg-[#0B2638] text-white hover:bg-[#CDAE72] hover:text-[#0B2638] font-bold px-10 py-3.5 text-xs tracking-widest uppercase transition-all shadow-md rounded-sm"
+              >
+                ← RETURN TO HOMEPAGE
+              </a>
+            </div>
+          </section>
+        </div>
+
+        {/* FOOTER */}
+        <footer className="bg-[#0B2638] text-white/70 py-12 border-t border-white/10 font-sans text-xs text-center">
+          <div className="max-w-5xl mx-auto px-6 space-y-4">
+            <p className="text-[#CDAE72] text-[11px] font-sans font-bold tracking-[0.2em] uppercase">DESIGN-BUILD RENOVATIONS · ADDITIONS · CUSTOM RESIDENTIAL CONSTRUCTION</p>
+            <p className="text-white/80 text-xs font-light"><a href="tel:519-635-0963" className="hover:text-[#CDAE72] transition-colors">519-635-0963</a> | <a href="mailto:Info@HavenridgeBuild.com" className="hover:text-[#CDAE72] transition-colors">Info@HavenridgeBuild.com</a> | Cambridge, Kitchener, Waterloo, Guelph &amp; surrounding communities</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-6 text-[11px] font-sans font-bold uppercase tracking-wider text-[#CDAE72] pt-1 pb-2">
+              <a href="/contact" onClick={(e) => handleNavigate(e, "/contact")} className="hover:text-white transition-colors">Start Your Project</a>
+              <span className="text-white/30">•</span>
+              <a href="/work" onClick={(e) => handleNavigate(e, "/work")} className="hover:text-white transition-colors">Projects</a>
+              <span className="text-white/30">•</span>
+              <a href="/process" onClick={(e) => handleNavigate(e, "/process")} className="hover:text-white transition-colors">Our Process</a>
+              <span className="text-white/30">•</span>
+              <a href="/privacy" onClick={(e) => handleNavigate(e, "/privacy")} className="hover:text-white transition-colors">Privacy Policy</a>
+              <span className="text-white/30">•</span>
+              <a href="/resources/faq" onClick={(e) => handleNavigate(e, "/resources/faq")} className="hover:text-white transition-colors">FAQ</a>
+              <span className="text-white/30">•</span>
+              <a href="https://app.buildern.com/signin?key=0d059222-2c59-41f0-b0a2-1f280b52ba40" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Client Portal</a>
+            </div>
+
+            {/* COMPLETE 7-ICON SOCIAL MEDIA BAR */}
+            <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-4 pt-2 pb-2 text-[#CDAE72]">
+              <a 
+                href="https://www.facebook.com/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Facebook"
+                title="Facebook"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <FacebookIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.instagram.com/havenridgebuild/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Instagram"
+                title="Instagram"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <InstagramIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.tiktok.com/@havenridge.build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="TikTok"
+                title="TikTok"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <TiktokIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.youtube.com/@Havenridgebuild" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="YouTube"
+                title="YouTube"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm"
+              >
+                <YoutubeIcon className="w-4 h-4" />
+              </a>
+              <a 
+                href="https://www.houzz.com/pro/havenridgebuild/__public" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Houzz"
+                title="Houzz"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm p-1.5"
+              >
+                <img src="/houzz.avif" className="w-full h-full object-contain" alt="Houzz" />
+              </a>
+              <a 
+                href="https://www.yelp.ca/biz/havenridge-build-cambridge?osq=Havenridge+Build" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                aria-label="Yelp"
+                title="Yelp"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:scale-110 transition-transform shadow-sm overflow-hidden p-0.5"
+              >
+                <img src="/yelp_custom.png" className="w-full h-full object-contain rounded-full" alt="Yelp" />
+              </a>
+              <a href="/reviews" onClick={(e) => handleNavigate(e, "/reviews")} aria-label="Client Reviews"
+                title="Verified Client Reviews"
+                className="w-9 h-9 rounded-full bg-[#17365D] border border-[#CDAE72]/30 flex items-center justify-center hover:bg-[#CDAE72] hover:text-[#0B2638] transition-all shadow-sm text-[#CDAE72] hover:text-[#0B2638] font-bold text-sm"
+              >
+                ★
+              </a>
+            </div>
+
+            <div className="border-t border-white/10 pt-4 space-y-1">
+              <p className="text-white/50 text-[11px]">© 2026 Carpenters On The Go Inc., operating as Havenridge Build. All rights reserved.</p>
+              <p className="text-white/40 text-[11px]">Developed by <a href="https://boostmyleads.ca" target="_blank" rel="noopener noreferrer" className="text-[#CDAE72] font-semibold hover:underline">BoostMyLeads</a></p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    );
+  }
+
+
+  // Home Page View
   return (
     <div ref={compRef} className="min-h-screen bg-[#F4F2EE] text-[#24313A] font-sans antialiased selection:bg-[#CDAE72] selection:text-[#0B2638]">
       
@@ -7699,7 +8838,7 @@ The exterior envelope and surrounding property were entirely reborn to match the
               <img src="bta-certified.png" alt="Breakthrough Academy Member" width="180" className="h-26 w-auto object-contain opacity-90 group-hover:opacity-100 transition-opacity " />
             </a>
             <a 
-              href="https://renomark.ca/renovator/carpenters-on-the-go-inc/" 
+              href="https://renomark.ca/renovator/havenridge-build/" 
               target="_blank" 
               rel="noopener noreferrer" 
               title="RenoMark Certified Renovator"
@@ -7984,7 +9123,8 @@ The exterior envelope and surrounding property were entirely reborn to match the
 export default function App() {
   const [seoData, setSeoData] = useState({
     title: "Havenridge Build | Design-Build Renovations, Additions & Transformations",
-    desc: "Havenridge Build is Cambridge & Waterloo Region's premier design-build contractor. Specializing in whole-home renovations, additions, kitchens, and architectural transformations."
+    desc: "Havenridge Build is Cambridge & Waterloo Region's premier design-build contractor. Specializing in whole-home renovations, additions, kitchens, and architectural transformations.",
+    canonical: "https://www.havenridgebuild.com/"
   });
 
   return (
@@ -7996,6 +9136,7 @@ export default function App() {
         <meta property="og:description" content={seoData.desc} />
         <meta name="twitter:title" content={seoData.title} />
         <meta name="twitter:description" content={seoData.desc} />
+        <link rel="canonical" href={seoData.canonical} />
       </Helmet>
       <AppContent setSeoData={setSeoData} />
     </>
